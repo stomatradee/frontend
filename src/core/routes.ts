@@ -1,9 +1,9 @@
 const COLLECTOR = {
-    HOME: "/features/collector/home",
+    HOME: "/collector/home",
 }
 
 const INVESTOR = {
-    HOME: "/features/investor/home",
+    HOME: "/investor/home",
 }
 
 export const routes = {

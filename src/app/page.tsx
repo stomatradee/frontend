@@ -1,5 +1,4 @@
-import Image from "next/image";
-import LandingPage from "./features/landing-page/page";
+import LandingPageView from "@/features/landing-page/landing-page-view";
 
 export default function Home() {
   // return (
@@ -64,5 +63,5 @@ export default function Home() {
   //   </div>
   // );
 
-  return <LandingPage/> 
+  return <LandingPageView/> 
 }
