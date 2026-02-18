@@ -1,13 +1,35 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Background Colors */
+  --bg-colors: #0A0A0A;
+  --secondary-bg-colors: #171717;
+  --third-bg-colors: rgb(61, 61, 61);
+
+  /* Primary Colors */
+  --primary-colors: #2CFF9E;
+  --secondary-colors: #00C427;
+  --third-colors: #4CFDB3;
+  --four-green-colors: #006923;
+
+  /* Neutral */
+  --white: #FFFFFF;
+  --skeleton-loading-color: #EDECF4;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-background: var(--bg-colors);
+  --color-background-secondary: var(--secondary-bg-colors);
+  --color-background-third: var(--third-bg-colors);
+
+  --color-primary: var(--primary-colors);
+  --color-primary-secondary: var(--secondary-colors);
+  --color-primary-third: var(--third-colors);
+  --color-primary-dark: var(--four-green-colors);
+
+  --color-foreground: var(--white);
+  --color-skeleton: var(--skeleton-loading-color);
+
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
@@ -20,7 +42,7 @@
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg-colors);
+  color: var(--white);
+  font-family: 'Poppins', sans-serif;
 }
