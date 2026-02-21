@@ -1,4 +1,8 @@
+"use client";
+
 import Image from "next/image";
+import { Box, Typography, Button } from "@mui/material";
+import NorthEastIcon from "@mui/icons-material/NorthEast";
 
 interface StatCardProps {
     title: string;
@@ -21,57 +25,127 @@ export default function StatCard({
 }: StatCardProps) {
     if (variant === "featured") {
         return (
-            <div className="relative flex flex-col justify-between overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-[var(--four-green-colors)]/30 to-[#0A0A0A] p-6 min-h-[180px]">
+            <Box
+                sx={{
+                    position: "relative",
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "space-between",
+                    overflow: "hidden",
+                    borderRadius: "1rem",
+                    border: "1px solid rgba(255,255,255,0.1)",
+                    background: "linear-gradient(to bottom right, rgba(0,105,35,0.3), #0A0A0A)",
+                    p: 3,
+                    minHeight: 180,
+                }}
+            >
                 {/* Background Image */}
                 {ctaImage && (
                     <Image
                         src={ctaImage}
                         alt={title}
                         fill
-                        className="object-cover object-right-bottom opacity-50 z-0"
+                        style={{
+                            objectFit: "cover",
+                            objectPosition: "right bottom",
+                            opacity: 0.5,
+                            zIndex: 0,
+                        }}
                         sizes="(max-width: 768px) 100vw, 33vw"
                     />
                 )}
 
-                <div className="relative z-10 flex flex-col gap-3">
-                    <h3 className="text-lg sm:text-xl font-bold text-[var(--primary-colors)] leading-snug">
+                <Box sx={{ position: "relative", zIndex: 10, display: "flex", flexDirection: "column", gap: 1.5 }}>
+                    <Typography
+                        variant="h6"
+                        sx={{
+                            fontSize: { xs: "1.125rem", sm: "1.25rem" },
+                            fontWeight: 700,
+                            color: "var(--primary-colors)",
+                            lineHeight: 1.3,
+                        }}
+                    >
                         {title}
-                    </h3>
+                    </Typography>
 
                     {ctaLabel && (
-                        <button
+                        <Button
                             onClick={onCtaClick}
-                            className="group flex w-fit items-center gap-2 rounded-full border border-white/20 bg-white/5 px-4 py-1.5 text-xs font-medium text-white hover:bg-white/10 transition-all duration-300 cursor-pointer"
+                            variant="outlined"
+                            endIcon={<NorthEastIcon sx={{ fontSize: 12 }} />}
+                            size="small"
+                            sx={{
+                                width: "fit-content",
+                                borderRadius: "9999px",
+                                borderColor: "rgba(255,255,255,0.2)",
+                                backgroundColor: "rgba(255,255,255,0.05)",
+                                color: "white",
+                                fontWeight: 500,
+                                fontSize: "0.75rem",
+                                textTransform: "none",
+                                px: 2,
+                                py: 0.5,
+                                "&:hover": {
+                                    backgroundColor: "rgba(255,255,255,0.1)",
+                                    borderColor: "rgba(255,255,255,0.3)",
+                                },
+                                transition: "all 0.3s",
+                            }}
                         >
                             {ctaLabel}
-                            <svg
-                                className="w-3 h-3 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24"
-                            >
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 17L17 7M17 7H7M17 7v10" />
-                            </svg>
-                        </button>
+                        </Button>
                     )}
-                </div>
-            </div>
+                </Box>
+            </Box>
         );
     }
 
     return (
-        <div className="flex flex-col justify-center gap-2 rounded-2xl border border-white/10 bg-[var(--secondary-bg-colors)] p-6 min-h-[180px]">
-            <span className="text-xs text-white/40 uppercase tracking-wider font-medium">
+        <Box
+            sx={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                gap: 1,
+                borderRadius: "1rem",
+                border: "1px solid rgba(255,255,255,0.1)",
+                backgroundColor: "var(--secondary-bg-colors)",
+                p: 3,
+                minHeight: 180,
+            }}
+        >
+            <Typography
+                variant="overline"
+                sx={{
+                    color: "rgba(255,255,255,0.4)",
+                    fontSize: "0.75rem",
+                    letterSpacing: "0.08em",
+                    fontWeight: 500,
+                }}
+            >
                 {title}
-            </span>
-            <div className="flex items-baseline gap-2">
-                <span className="text-3xl sm:text-4xl font-bold text-[var(--primary-colors)]">
+            </Typography>
+            <Box sx={{ display: "flex", alignItems: "baseline", gap: 1 }}>
+                <Typography
+                    variant="h3"
+                    sx={{
+                        fontSize: { xs: "1.875rem", sm: "2.25rem" },
+                        fontWeight: 700,
+                        color: "var(--primary-colors)",
+                    }}
+                >
                     {value}
-                </span>
-                <span className="text-sm text-white/60 font-light">
+                </Typography>
+                <Typography
+                    variant="body2"
+                    sx={{
+                        color: "rgba(255,255,255,0.6)",
+                        fontWeight: 300,
+                    }}
+                >
                     {description}
-                </span>
-            </div>
-        </div>
+                </Typography>
+            </Box>
+        </Box>
     );
 }
