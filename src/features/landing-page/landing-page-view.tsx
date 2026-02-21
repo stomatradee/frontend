@@ -1,5 +1,6 @@
 "use client";
 
+import { Box, Grid } from "@mui/material";
 import { useLandingPage } from "./hooks/use-landing-page";
 import Navbar from "./component/navbar";
 import HeroBanner from "./component/hero-banner";
@@ -18,7 +19,7 @@ export default function LandingPageView() {
     } = useLandingPage();
 
     return (
-        <div className="relative min-h-screen bg-[var(--bg-colors)]">
+        <Box sx={{ position: "relative", minHeight: "100vh", backgroundColor: "var(--bg-colors)" }}>
             {/* Navbar */}
             <Navbar
                 logoSrc={logoSrc}
@@ -45,26 +46,40 @@ export default function LandingPageView() {
             />
 
             {/* Stats Section */}
-            <section className="relative z-10 -mt-16 px-6 lg:px-16 pb-16">
-                <div className="mx-auto grid max-w-6xl grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            <Box
+                component="section"
+                sx={{
+                    position: "relative",
+                    zIndex: 10,
+                    mt: -8,
+                    px: { xs: 3, lg: 8 },
+                    pb: 8,
+                }}
+            >
+                <Grid
+                    container
+                    spacing={2}
+                    sx={{ maxWidth: "72rem", mx: "auto" }}
+                >
                     {statCards.map((card) => (
-                        <StatCard
-                            key={card.title}
-                            title={card.title}
-                            value={card.value}
-                            description={card.description}
-                            variant={card.variant}
-                            ctaLabel={card.ctaLabel}
-                            ctaImage={card.ctaImage}
-                            onCtaClick={
-                                card.variant === "featured"
-                                    ? handleSustainabilityClick
-                                    : undefined
-                            }
-                        />
+                        <Grid key={card.title} size={{ xs: 12, sm: 6, lg: 4 }}>
+                            <StatCard
+                                title={card.title}
+                                value={card.value}
+                                description={card.description}
+                                variant={card.variant}
+                                ctaLabel={card.ctaLabel}
+                                ctaImage={card.ctaImage}
+                                onCtaClick={
+                                    card.variant === "featured"
+                                        ? handleSustainabilityClick
+                                        : undefined
+                                }
+                            />
+                        </Grid>
                     ))}
-                </div>
-            </section>
-        </div>
+                </Grid>
+            </Box>
+        </Box>
     );
 }

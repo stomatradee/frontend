@@ -1,4 +1,7 @@
+"use client";
+
 import Image from "next/image";
+import { AppBar, Toolbar, Box, Button, Stack } from "@mui/material";
 
 interface NavItem {
     label: string;
@@ -21,40 +24,88 @@ export default function Navbar({
     onNavItemClick,
 }: NavbarProps) {
     return (
-        <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 py-4 lg:px-16 backdrop-blur-md bg-[#0A0A0A]/70 border-b border-white/5">
-            {/* Logo */}
-            <div className="flex items-center gap-2 cursor-pointer" onClick={() => onNavItemClick("/")}>
-                <Image
-                    src={logoSrc}
-                    alt="Stomatrade Logo"
-                    width={160}
-                    height={40}
-                    priority
-                    className="h-8 w-auto object-contain"
-                />
-            </div>
+        <AppBar
+            position="fixed"
+            elevation={0}
+            sx={{
+                backgroundColor: "rgba(10, 10, 10, 0.7)",
+                backdropFilter: "blur(12px)",
+                borderBottom: "1px solid rgba(255, 255, 255, 0.05)",
+            }}
+        >
+            <Toolbar
+                sx={{
+                    justifyContent: "space-between",
+                    px: { xs: 3, lg: 8 },
+                    py: 1,
+                }}
+            >
+                {/* Logo */}
+                <Box
+                    onClick={() => onNavItemClick("/")}
+                    sx={{ cursor: "pointer", display: "flex", alignItems: "center" }}
+                >
+                    <Image
+                        src={logoSrc}
+                        alt="Stomatrade Logo"
+                        width={160}
+                        height={40}
+                        priority
+                        style={{ height: 32, width: "auto", objectFit: "contain" }}
+                    />
+                </Box>
 
-            {/* Navigation Links */}
-            <ul className="hidden md:flex items-center gap-8">
-                {navItems.map((item) => (
-                    <li key={item.href}>
-                        <button
+                {/* Navigation Links */}
+                <Stack
+                    direction="row"
+                    spacing={4}
+                    sx={{ display: { xs: "none", md: "flex" } }}
+                >
+                    {navItems.map((item) => (
+                        <Button
+                            key={item.href}
                             onClick={() => onNavItemClick(item.href)}
-                            className="text-sm text-white/70 hover:text-[var(--primary-colors)] transition-colors duration-300 cursor-pointer font-medium"
+                            sx={{
+                                color: "rgba(255, 255, 255, 0.7)",
+                                fontSize: "0.875rem",
+                                fontWeight: 500,
+                                textTransform: "none",
+                                "&:hover": {
+                                    color: "var(--primary-colors)",
+                                    backgroundColor: "transparent",
+                                },
+                                transition: "color 0.3s",
+                            }}
                         >
                             {item.label}
-                        </button>
-                    </li>
-                ))}
-            </ul>
+                        </Button>
+                    ))}
+                </Stack>
 
-            {/* CTA Button */}
-            <button
-                onClick={onCtaClick}
-                className="rounded-full border border-[var(--primary-colors)] bg-transparent px-6 py-2 text-sm font-semibold text-[var(--primary-colors)] hover:bg-[var(--primary-colors)] hover:text-[#0A0A0A] transition-all duration-300 cursor-pointer"
-            >
-                {ctaLabel}
-            </button>
-        </nav>
+                {/* CTA Button */}
+                <Button
+                    onClick={onCtaClick}
+                    variant="outlined"
+                    sx={{
+                        borderRadius: "9999px",
+                        borderColor: "var(--primary-colors)",
+                        color: "var(--primary-colors)",
+                        fontWeight: 600,
+                        fontSize: "0.875rem",
+                        textTransform: "none",
+                        px: 3,
+                        py: 0.75,
+                        "&:hover": {
+                            backgroundColor: "var(--primary-colors)",
+                            borderColor: "var(--primary-colors)",
+                            color: "#0A0A0A",
+                        },
+                        transition: "all 0.3s",
+                    }}
+                >
+                    {ctaLabel}
+                </Button>
+            </Toolbar>
+        </AppBar>
     );
 }

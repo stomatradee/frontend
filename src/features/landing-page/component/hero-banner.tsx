@@ -1,4 +1,8 @@
+"use client";
+
 import Image from "next/image";
+import { Box, Typography, Button, Stack, Chip } from "@mui/material";
+import NorthEastIcon from "@mui/icons-material/NorthEast";
 
 interface ButtonConfig {
     label: string;
@@ -23,66 +27,166 @@ export default function HeroBanner({
     secondaryButton,
 }: HeroBannerProps) {
     return (
-        <section className="relative w-full min-h-screen flex flex-col items-center justify-center overflow-hidden">
+        <Box
+            component="section"
+            sx={{
+                position: "relative",
+                width: "100%",
+                minHeight: "100vh",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+                overflow: "hidden",
+            }}
+        >
             {/* Background Image */}
             <Image
                 src={backgroundImage}
                 alt="Banner Background"
                 fill
                 priority
-                className="object-cover object-center z-0"
+                style={{ objectFit: "cover", objectPosition: "center", zIndex: 0 }}
                 sizes="100vw"
             />
 
             {/* Gradient Overlay */}
-            <div className="absolute inset-0 z-[1] bg-gradient-to-b from-[#0A0A0A]/40 via-transparent to-[#0A0A0A]" />
+            <Box
+                sx={{
+                    position: "absolute",
+                    inset: 0,
+                    zIndex: 1,
+                    background: "linear-gradient(to bottom, rgba(10,10,10,0.4), transparent, #0A0A0A)",
+                }}
+            />
 
             {/* Content */}
-            <div className="relative z-10 flex flex-col items-center text-center px-6 pt-24 pb-16 max-w-4xl mx-auto gap-6">
+            <Stack
+                alignItems="center"
+                spacing={3}
+                sx={{
+                    position: "relative",
+                    zIndex: 10,
+                    textAlign: "center",
+                    px: 3,
+                    pt: 12,
+                    pb: 8,
+                    maxWidth: "56rem",
+                    mx: "auto",
+                }}
+            >
                 {/* Announcement Badge */}
-                <div className="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm px-5 py-2">
-                    <span className="rounded-full bg-[var(--primary-colors)] px-2.5 py-0.5 text-[10px] font-bold uppercase text-[#0A0A0A] tracking-wider">
-                        NOW
-                    </span>
-                    <span className="text-sm text-white/80 font-medium">
+                <Box
+                    sx={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: 1,
+                        borderRadius: "9999px",
+                        border: "1px solid rgba(255,255,255,0.1)",
+                        backgroundColor: "rgba(255,255,255,0.05)",
+                        backdropFilter: "blur(4px)",
+                        px: 2.5,
+                        py: 1,
+                    }}
+                >
+                    <Chip
+                        label="NOW"
+                        size="small"
+                        sx={{
+                            backgroundColor: "var(--primary-colors)",
+                            color: "#0A0A0A",
+                            fontWeight: 700,
+                            fontSize: "10px",
+                            height: "auto",
+                            letterSpacing: "0.05em",
+                            "& .MuiChip-label": { px: 1, py: 0.25 },
+                        }}
+                    />
+                    <Typography
+                        variant="body2"
+                        sx={{ color: "rgba(255,255,255,0.8)", fontWeight: 500 }}
+                    >
                         {badgeText}
-                    </span>
-                </div>
+                    </Typography>
+                </Box>
 
                 {/* Main Heading */}
-                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight tracking-tight text-white">
+                <Typography
+                    variant="h1"
+                    sx={{
+                        fontSize: { xs: "2.25rem", sm: "3rem", lg: "3.75rem" },
+                        fontWeight: 700,
+                        lineHeight: 1.1,
+                        letterSpacing: "-0.02em",
+                        color: "white",
+                    }}
+                >
                     {heading}
-                </h1>
+                </Typography>
 
                 {/* Subheading */}
-                <p className="text-base sm:text-lg text-white/50 max-w-xl font-light">
+                <Typography
+                    variant="body1"
+                    sx={{
+                        fontSize: { xs: "1rem", sm: "1.125rem" },
+                        color: "rgba(255,255,255,0.5)",
+                        maxWidth: "36rem",
+                        fontWeight: 300,
+                    }}
+                >
                     {subheading}
-                </p>
+                </Typography>
 
                 {/* CTA Buttons */}
-                <div className="flex items-center gap-4 mt-4">
-                    <button
+                <Stack direction="row" spacing={2} sx={{ mt: 2 }}>
+                    <Button
                         onClick={primaryButton.onClick}
-                        className="group flex items-center gap-2 rounded-full border border-[var(--primary-colors)] bg-[var(--primary-colors)]/10 px-7 py-3 text-sm font-semibold text-[var(--primary-colors)] hover:bg-[var(--primary-colors)] hover:text-[#0A0A0A] transition-all duration-300 cursor-pointer"
+                        variant="outlined"
+                        endIcon={<NorthEastIcon sx={{ fontSize: 16 }} />}
+                        sx={{
+                            borderRadius: "9999px",
+                            borderColor: "var(--primary-colors)",
+                            backgroundColor: "rgba(44,255,158,0.1)",
+                            color: "var(--primary-colors)",
+                            fontWeight: 600,
+                            fontSize: "0.875rem",
+                            textTransform: "none",
+                            px: 3.5,
+                            py: 1.25,
+                            "&:hover": {
+                                backgroundColor: "var(--primary-colors)",
+                                borderColor: "var(--primary-colors)",
+                                color: "#0A0A0A",
+                            },
+                            transition: "all 0.3s",
+                        }}
                     >
                         {primaryButton.label}
-                        <svg
-                            className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                        >
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 17L17 7M17 7H7M17 7v10" />
-                        </svg>
-                    </button>
-                    <button
+                    </Button>
+                    <Button
                         onClick={secondaryButton.onClick}
-                        className="rounded-full border border-white/20 bg-white/5 px-7 py-3 text-sm font-semibold text-white hover:bg-white/10 transition-all duration-300 cursor-pointer"
+                        variant="outlined"
+                        sx={{
+                            borderRadius: "9999px",
+                            borderColor: "rgba(255,255,255,0.2)",
+                            backgroundColor: "rgba(255,255,255,0.05)",
+                            color: "white",
+                            fontWeight: 600,
+                            fontSize: "0.875rem",
+                            textTransform: "none",
+                            px: 3.5,
+                            py: 1.25,
+                            "&:hover": {
+                                backgroundColor: "rgba(255,255,255,0.1)",
+                                borderColor: "rgba(255,255,255,0.3)",
+                            },
+                            transition: "all 0.3s",
+                        }}
                     >
                         {secondaryButton.label}
-                    </button>
-                </div>
-            </div>
-        </section>
+                    </Button>
+                </Stack>
+            </Stack>
+        </Box>
     );
 }
