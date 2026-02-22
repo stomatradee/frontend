@@ -8,6 +8,7 @@ import StatCard from "./component/stat-card";
 import SectionHeader from "./component/section-header";
 import BentoCard from "./component/bento-card";
 import CtaBanner from "./component/cta-banner";
+import GreenFutureBanner from "./component/green-future-banner";
 
 export default function LandingPageView() {
     const {
@@ -16,12 +17,14 @@ export default function LandingPageView() {
         heroBannerData,
         solvingProblemData,
         growthData,
+        greenFutureData,
         logoSrc,
         handleNavItemClick,
         handleGetStom,
         handleLearnMore,
         handleSustainabilityClick,
         handleWhatIsStomatrade,
+        handleLearnAboutStomatrade,
     } = useLandingPage();
 
     return (
@@ -140,6 +143,19 @@ export default function LandingPageView() {
                     }}
                 />
             </Box>
+
+            {/* Green Future in Every Way Section */}
+            {/* <Box component="section" id="green-future-in-every-way">
+                <GreenFutureBanner
+                    heading={greenFutureData.heading}
+                    description={greenFutureData.description}
+                    backgroundImage={greenFutureData.backgroundImage}
+                    ctaButton={{
+                        label: "Learn about Stomatrade",
+                        onClick: handleLearnAboutStomatrade,
+                    }}
+                />
+            </Box> */}
         </Box>
     );
 }

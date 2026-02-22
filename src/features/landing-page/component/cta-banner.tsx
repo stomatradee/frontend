@@ -33,7 +33,11 @@ export default function CtaBanner({
                 position: "relative",
                 width: "100%",
                 overflow: "hidden",
-                py: { xs: 12, lg: 18 },
+                // aspectRatio: { xs: "auto", md: "2.75 / 1" },
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                py: { xs: 12, lg: 48 },
                 px: { xs: 3, lg: 8 },
             }}
         >
@@ -44,7 +48,7 @@ export default function CtaBanner({
                     alt=""
                     fill
                     style={{
-                        objectFit: "cover",
+                        // objectFit: "cover",
                         objectPosition: "center",
                         zIndex: 0,
                     }}
@@ -54,14 +58,14 @@ export default function CtaBanner({
             )}
 
             {/* Dark overlay */}
-            <Box
+            {/* <Box
                 sx={{
                     position: "absolute",
                     inset: 0,
                     zIndex: 1,
                     backgroundColor: "rgba(10,10,10,0.6)",
                 }}
-            />
+            /> */}
 
             {/* Content */}
             <Stack
