@@ -136,7 +136,8 @@ export default function LandingPageView() {
                     badgeText={growthData.badgeText}
                     heading={growthData.heading}
                     description={growthData.description}
-                    backgroundImage={growthData.backgroundImage}
+                    mobileBackgroundImage={growthData.mobileBackgroundImage}
+                    desktopBackgroundImage={growthData.desktopBackgroundImage}
                     primaryButton={{
                         label: "Get STOM",
                         onClick: handleGetStom,

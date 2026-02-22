@@ -132,7 +132,8 @@ export function useLandingPage() {
         badgeText: "The Stomatrade Token",
         heading: "Growth with STOMATRADE",
         description: "By utilizing Real-World Asset Tokenization (RWA) and NFTs, we establish full traceability and verification, ensuring easier financial access and a sustainable supply chain for farmers, collectors, and buyers.",
-        backgroundImage: imageConfig.background.desktop.bgDesktop,
+        mobileBackgroundImage: imageConfig.background.mobile.bgMobile,
+        desktopBackgroundImage: imageConfig.background.desktop.bgDesktop,
     }), []);
 
     // --- Green Future section data ---
