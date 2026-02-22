@@ -7,6 +7,7 @@ import HeroBanner from "./component/hero-banner";
 import StatCard from "./component/stat-card";
 import SectionHeader from "./component/section-header";
 import BentoCard from "./component/bento-card";
+import CtaBanner from "./component/cta-banner";
 
 export default function LandingPageView() {
     const {
@@ -14,11 +15,13 @@ export default function LandingPageView() {
         statCards,
         heroBannerData,
         solvingProblemData,
+        growthData,
         logoSrc,
         handleNavItemClick,
         handleGetStom,
         handleLearnMore,
         handleSustainabilityClick,
+        handleWhatIsStomatrade,
     } = useLandingPage();
 
     return (
@@ -119,6 +122,25 @@ export default function LandingPageView() {
                     </Grid>
                 </Box>
             </Box>
+
+            {/* Growth with Stomatrade Section */}
+            <Box component="section" id="growth-with-stomatrade">
+                <CtaBanner
+                    badgeText={growthData.badgeText}
+                    heading={growthData.heading}
+                    description={growthData.description}
+                    backgroundImage={growthData.backgroundImage}
+                    primaryButton={{
+                        label: "Get STOM",
+                        onClick: handleGetStom,
+                    }}
+                    secondaryButton={{
+                        label: "What is Stomatrade",
+                        onClick: handleWhatIsStomatrade,
+                    }}
+                />
+            </Box>
         </Box>
     );
 }
+
