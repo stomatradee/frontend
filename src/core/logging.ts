@@ -1,3 +1,3 @@
-export function logging(logText: String) {
+export function logging(logText: string) {
     console.log(logText);
 }
