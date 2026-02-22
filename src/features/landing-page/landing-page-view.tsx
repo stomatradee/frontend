@@ -5,12 +5,15 @@ import { useLandingPage } from "./hooks/use-landing-page";
 import Navbar from "./component/navbar";
 import HeroBanner from "./component/hero-banner";
 import StatCard from "./component/stat-card";
+import SectionHeader from "./component/section-header";
+import BentoCard from "./component/bento-card";
 
 export default function LandingPageView() {
     const {
         navItems,
         statCards,
         heroBannerData,
+        solvingProblemData,
         logoSrc,
         handleNavItemClick,
         handleGetStom,
@@ -76,6 +79,40 @@ export default function LandingPageView() {
                                             ? handleSustainabilityClick
                                             : undefined
                                     }
+                                />
+                            </Grid>
+                        ))}
+                    </Grid>
+                </Box>
+            </Box>
+
+            {/* Solving Problem Section */}
+            <Box
+                component="section"
+                id="solving-problem"
+                sx={{
+                    px: { xs: 3, lg: 8 },
+                    py: { xs: 8, lg: 12 },
+                }}
+            >
+                <Box sx={{ maxWidth: "72rem", mx: "auto" }}>
+                    {/* Section Header */}
+                    <SectionHeader
+                        logoSrc={solvingProblemData.header.logoSrc}
+                        heading={solvingProblemData.header.heading}
+                        subheading={solvingProblemData.header.subheading}
+                    />
+
+                    {/* Bento Grid */}
+                    <Grid container spacing={2}>
+                        {solvingProblemData.bentoCards.map((card) => (
+                            <Grid key={card.id} size={card.gridSize}>
+                                <BentoCard
+                                    title={card.title}
+                                    description={card.description}
+                                    imageSrc={card.imageSrc}
+                                    badgeText={card.badgeText}
+                                    // size={card.size}
                                 />
                             </Grid>
                         ))}
