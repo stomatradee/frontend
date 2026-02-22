@@ -41,7 +41,8 @@ export function useLandingPage() {
         badgeText: "Join the Green Future Growth Program",
         heading: "Traceable Agriculture Supply Through Real-World Asset Tokenization",
         subheading: "RWA-Fi for a Faster Agriculture Economy",
-        backgroundImage: imageConfig.background.desktop.bgBannerDesktop,
+        mobileBackgroundImage: imageConfig.background.mobile.bgBannerMobile,
+        desktopBackgroundImage: imageConfig.background.desktop.bgBannerDesktop,
     }), []);
 
     // --- Solving problem section data ---
@@ -131,7 +132,8 @@ export function useLandingPage() {
         badgeText: "The Stomatrade Token",
         heading: "Growth with STOMATRADE",
         description: "By utilizing Real-World Asset Tokenization (RWA) and NFTs, we establish full traceability and verification, ensuring easier financial access and a sustainable supply chain for farmers, collectors, and buyers.",
-        backgroundImage: imageConfig.background.desktop.bgDesktop,
+        mobileBackgroundImage: imageConfig.background.mobile.bgMobile,
+        desktopBackgroundImage: imageConfig.background.desktop.bgDesktop,
     }), []);
 
     // --- Green Future section data ---

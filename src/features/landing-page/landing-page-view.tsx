@@ -48,7 +48,8 @@ export default function LandingPageView() {
                     badgeText={heroBannerData.badgeText}
                     heading={heroBannerData.heading}
                     subheading={heroBannerData.subheading}
-                    backgroundImage={heroBannerData.backgroundImage}
+                    mobileBackgroundImage={heroBannerData.mobileBackgroundImage}
+                    desktopBackgroundImage={heroBannerData.desktopBackgroundImage}
                     primaryButton={{
                         label: "Learn More",
                         onClick: handleLearnMore,
@@ -135,7 +136,8 @@ export default function LandingPageView() {
                     badgeText={growthData.badgeText}
                     heading={growthData.heading}
                     description={growthData.description}
-                    backgroundImage={growthData.backgroundImage}
+                    mobileBackgroundImage={growthData.mobileBackgroundImage}
+                    desktopBackgroundImage={growthData.desktopBackgroundImage}
                     primaryButton={{
                         label: "Get STOM",
                         onClick: handleGetStom,

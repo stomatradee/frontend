@@ -8,7 +8,8 @@ interface CtaBannerProps {
     badgeText?: string;
     heading: string;
     description?: string;
-    backgroundImage?: string;
+    mobileBackgroundImage?: string;
+    desktopBackgroundImage?: string;
     primaryButton?: {
         label: string;
         onClick: () => void;
@@ -23,7 +24,8 @@ export default function CtaBanner({
     badgeText,
     heading,
     description,
-    backgroundImage,
+    mobileBackgroundImage,
+    desktopBackgroundImage,
     primaryButton,
     secondaryButton,
 }: CtaBannerProps) {
@@ -41,20 +43,30 @@ export default function CtaBanner({
                 px: { xs: 3, lg: 8 },
             }}
         >
-            {/* Background Image */}
-            {backgroundImage && (
-                <Image
-                    src={backgroundImage}
-                    alt=""
-                    fill
-                    style={{
-                        // objectFit: "cover",
-                        objectPosition: "center",
-                        zIndex: 0,
-                    }}
-                    sizes="100vw"
-                    priority={false}
-                />
+            {/* Background Image - Mobile */}
+            {mobileBackgroundImage && (
+                <Box sx={{ display: { xs: "block", md: "none" }, position: "absolute", inset: 0, zIndex: 0 }}>
+                    <Image
+                        src={mobileBackgroundImage}
+                        alt=""
+                        fill
+                        style={{ objectPosition: "center" }}
+                        sizes="100vw"
+                    />
+                </Box>
+            )}
+
+            {/* Background Image - Desktop */}
+            {desktopBackgroundImage && (
+                <Box sx={{ display: { xs: "none", md: "block" }, position: "absolute", inset: 0, zIndex: 0 }}>
+                    <Image
+                        src={desktopBackgroundImage}
+                        alt=""
+                        fill
+                        style={{ objectPosition: "center" }}
+                        sizes="100vw"
+                    />
+                </Box>
             )}
 
             {/* Dark overlay */}
