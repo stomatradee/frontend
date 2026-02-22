@@ -141,6 +141,64 @@ export function useLandingPage() {
         backgroundImage: imageConfig.background.earthglobeBg,
     }), []);
 
+    // --- Footer section data ---
+    const footerData = useMemo(() => ({
+        newsletter: {
+            heading: "Let's connect and create a positive impact together.",
+            privacyText: "At Stomatrade, we are deeply committed to protecting your privacy. Your personal information will never be shared without your consent. For more information, check out our Privacy Policy.",
+            bgImage: imageConfig.background.desktop.footerBgDesktop,
+        },
+        brand: {
+            description: "Our holistic approach integrates technology, sustainability, and community to create a future where agriculture works hand-in-hand with nature.",
+        },
+        socialLinks: [
+            { icon: "discord", href: "#", label: "Discord" },
+            { icon: "instagram", href: "#", label: "Instagram" },
+            { icon: "telegram", href: "#", label: "Telegram" },
+            { icon: "x", href: "#", label: "X" },
+            { icon: "linkedin", href: "#", label: "LinkedIn" },
+        ],
+        linkColumns: [
+            {
+                title: "Discover",
+                links: [
+                    { label: "About us", href: "#" },
+                    { label: "Features", href: "#" },
+                    { label: "Community", href: "#" },
+                    { label: "Ecosystem", href: "#" },
+                ],
+            },
+            {
+                title: "Resources",
+                links: [
+                    { label: "Whitepaper", href: "#" },
+                    { label: "Staking", href: "#" },
+                    { label: "Token Stomata", href: "#" },
+                    { label: "Partners", href: "#" },
+                ],
+            },
+            {
+                title: "Our Communities",
+                links: [
+                    { label: "Become a Validator", href: "#" },
+                    { label: "Event", href: "#" },
+                    { label: "FAQ", href: "#" },
+                ],
+            },
+        ],
+        contactItems: [
+            { icon: "phone", label: "+123 456 7890", href: "tel:+1234567890" },
+            { icon: "email", label: "stomatrade@gmail.com", href: "mailto:stomatrade@gmail.com" },
+        ],
+        copyrightText: "© 2025 Stomatrade. All rights reserved.",
+        legalLinks: [
+            { label: "Privacy Policy", href: "#" },
+            { label: "Terms of Use", href: "#" },
+            { label: "Legal", href: "#" },
+            { label: "Site Map", href: "#" },
+        ],
+    }), []);
+
     // --- Handler functions ---
     const handleNavItemClick = useCallback((href: string) => {
         const element = document.querySelector(href);
@@ -176,6 +234,11 @@ export function useLandingPage() {
         console.log("Learn about Stomatrade clicked");
     }, []);
 
+    const handleSignUp = useCallback((email: string) => {
+        // TODO: Implement newsletter sign-up
+        console.log("Sign up with email:", email);
+    }, []);
+
     return {
         // Data
         navItems,
@@ -184,6 +247,7 @@ export function useLandingPage() {
         solvingProblemData,
         growthData,
         greenFutureData,
+        footerData,
         logoSrc: imageConfig.logo.stomatradeLogo,
 
         // Handlers
@@ -193,5 +257,6 @@ export function useLandingPage() {
         handleSustainabilityClick,
         handleWhatIsStomatrade,
         handleLearnAboutStomatrade,
+        handleSignUp,
     };
 }
