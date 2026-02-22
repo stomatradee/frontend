@@ -33,7 +33,7 @@ export default function CtaBanner({
                 position: "relative",
                 width: "100%",
                 overflow: "hidden",
-                py: { xs: 10, lg: 14 },
+                py: { xs: 12, lg: 18 },
                 px: { xs: 3, lg: 8 },
             }}
         >
