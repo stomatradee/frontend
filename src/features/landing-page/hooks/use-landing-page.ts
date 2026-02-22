@@ -126,6 +126,14 @@ export function useLandingPage() {
         ],
     }), []);
 
+    // --- Growth with Stomatrade section data ---
+    const growthData = useMemo(() => ({
+        badgeText: "The Stomatrade Token",
+        heading: "Growth with STOMATRADE",
+        description: "By utilizing Real-World Asset Tokenization (RWA) and NFTs, we establish full traceability and verification, ensuring easier financial access and a sustainable supply chain for farmers, collectors, and buyers.",
+        backgroundImage: imageConfig.background.desktop.bgDesktop,
+    }), []);
+
     // --- Handler functions ---
     const handleNavItemClick = useCallback((href: string) => {
         const element = document.querySelector(href);
@@ -151,12 +159,18 @@ export function useLandingPage() {
         console.log("Sustainability clicked");
     }, []);
 
+    const handleWhatIsStomatrade = useCallback(() => {
+        // TODO: Navigate to about/whitepaper page
+        console.log("What is Stomatrade clicked");
+    }, []);
+
     return {
         // Data
         navItems,
         statCards,
         heroBannerData,
         solvingProblemData,
+        growthData,
         logoSrc: imageConfig.logo.stomatradeLogo,
 
         // Handlers
@@ -164,5 +178,6 @@ export function useLandingPage() {
         handleGetStom,
         handleLearnMore,
         handleSustainabilityClick,
+        handleWhatIsStomatrade,
     };
 }
