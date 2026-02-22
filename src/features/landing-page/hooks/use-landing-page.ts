@@ -32,7 +32,7 @@ export function useLandingPage() {
             description: "",
             variant: "featured" as const,
             ctaLabel: "Sustainability",
-            ctaImage: imageConfig.background.earthglobeBg,
+            ctaImage: imageConfig.background.globeBg,
         },
     ], []);
 
