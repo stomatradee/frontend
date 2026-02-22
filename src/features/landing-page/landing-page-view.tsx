@@ -9,6 +9,7 @@ import SectionHeader from "./component/section-header";
 import BentoCard from "./component/bento-card";
 import CtaBanner from "./component/cta-banner";
 import GreenFutureBanner from "./component/green-future-banner";
+import Footer from "./component/footer";
 
 export default function LandingPageView() {
     const {
@@ -18,6 +19,7 @@ export default function LandingPageView() {
         solvingProblemData,
         growthData,
         greenFutureData,
+        footerData,
         logoSrc,
         handleNavItemClick,
         handleGetStom,
@@ -25,6 +27,7 @@ export default function LandingPageView() {
         handleSustainabilityClick,
         handleWhatIsStomatrade,
         handleLearnAboutStomatrade,
+        handleSignUp,
     } = useLandingPage();
 
     return (
@@ -156,7 +159,23 @@ export default function LandingPageView() {
                     }}
                 />
             </Box> */}
+
+            {/* Footer Section */}
+            <Box component="section" id="footer">
+                <Footer
+                    newsletterHeading={footerData.newsletter.heading}
+                    newsletterPrivacyText={footerData.newsletter.privacyText}
+                    newsletterBgImage={footerData.newsletter.bgImage}
+                    onSignUp={handleSignUp}
+                    logoSrc={logoSrc}
+                    brandDescription={footerData.brand.description}
+                    socialLinks={footerData.socialLinks}
+                    linkColumns={footerData.linkColumns}
+                    contactItems={footerData.contactItems}
+                    copyrightText={footerData.copyrightText}
+                    legalLinks={footerData.legalLinks}
+                />
+            </Box>
         </Box>
     );
 }
-
