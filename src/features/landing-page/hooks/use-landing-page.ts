@@ -134,6 +134,13 @@ export function useLandingPage() {
         backgroundImage: imageConfig.background.desktop.bgDesktop,
     }), []);
 
+    // --- Green Future section data ---
+    const greenFutureData = useMemo(() => ({
+        heading: "Green Future\nin Every Way",
+        description: "Stomatrade is a pioneering RWA-Fi platform that secures transparent and equitable funding for agriculture SMEs.",
+        backgroundImage: imageConfig.background.earthglobeBg,
+    }), []);
+
     // --- Handler functions ---
     const handleNavItemClick = useCallback((href: string) => {
         const element = document.querySelector(href);
@@ -164,6 +171,11 @@ export function useLandingPage() {
         console.log("What is Stomatrade clicked");
     }, []);
 
+    const handleLearnAboutStomatrade = useCallback(() => {
+        // TODO: Navigate to about page
+        console.log("Learn about Stomatrade clicked");
+    }, []);
+
     return {
         // Data
         navItems,
@@ -171,6 +183,7 @@ export function useLandingPage() {
         heroBannerData,
         solvingProblemData,
         growthData,
+        greenFutureData,
         logoSrc: imageConfig.logo.stomatradeLogo,
 
         // Handlers
@@ -179,5 +192,6 @@ export function useLandingPage() {
         handleLearnMore,
         handleSustainabilityClick,
         handleWhatIsStomatrade,
+        handleLearnAboutStomatrade,
     };
 }
