@@ -13,7 +13,8 @@ interface HeroBannerProps {
     badgeText: string;
     heading: string;
     subheading: string;
-    backgroundImage: string;
+    mobileBackgroundImage: string;
+    desktopBackgroundImage: string;
     primaryButton: ButtonConfig;
     secondaryButton: ButtonConfig;
 }
@@ -22,7 +23,8 @@ export default function HeroBanner({
     badgeText,
     heading,
     subheading,
-    backgroundImage,
+    mobileBackgroundImage,
+    desktopBackgroundImage,
     primaryButton,
     secondaryButton,
 }: HeroBannerProps) {
@@ -40,15 +42,29 @@ export default function HeroBanner({
                 overflow: "hidden",
             }}
         >
-            {/* Background Image */}
-            <Image
-                src={backgroundImage}
-                alt="Banner Background"
-                fill
-                priority
-                style={{ objectFit: "cover", objectPosition: "center", zIndex: 0 }}
-                sizes="100vw"
-            />
+            {/* Background Image - Mobile */}
+            <Box sx={{ display: { xs: "block", md: "none" }, position: "absolute", inset: 0, zIndex: 0 }}>
+                <Image
+                    src={mobileBackgroundImage}
+                    alt="Banner Background"
+                    fill
+                    priority
+                    style={{ objectPosition: "center" }}
+                    sizes="100vw"
+                />
+            </Box>
+
+            {/* Background Image - Desktop */}
+            <Box sx={{ display: { xs: "none", md: "block" }, position: "absolute", inset: 0, zIndex: 0 }}>
+                <Image
+                    src={desktopBackgroundImage}
+                    alt="Banner Background"
+                    fill
+                    priority
+                    style={{ objectFit: "cover", objectPosition: "center" }}
+                    sizes="100vw"
+                />
+            </Box>
 
             {/* Gradient Overlay */}
             <Box

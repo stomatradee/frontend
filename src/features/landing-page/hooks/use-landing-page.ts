@@ -41,7 +41,8 @@ export function useLandingPage() {
         badgeText: "Join the Green Future Growth Program",
         heading: "Traceable Agriculture Supply Through Real-World Asset Tokenization",
         subheading: "RWA-Fi for a Faster Agriculture Economy",
-        backgroundImage: imageConfig.background.desktop.bgBannerDesktop,
+        mobileBackgroundImage: imageConfig.background.mobile.bgBannerMobile,
+        desktopBackgroundImage: imageConfig.background.desktop.bgBannerDesktop,
     }), []);
 
     // --- Solving problem section data ---

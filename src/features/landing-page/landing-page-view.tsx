@@ -48,7 +48,8 @@ export default function LandingPageView() {
                     badgeText={heroBannerData.badgeText}
                     heading={heroBannerData.heading}
                     subheading={heroBannerData.subheading}
-                    backgroundImage={heroBannerData.backgroundImage}
+                    mobileBackgroundImage={heroBannerData.mobileBackgroundImage}
+                    desktopBackgroundImage={heroBannerData.desktopBackgroundImage}
                     primaryButton={{
                         label: "Learn More",
                         onClick: handleLearnMore,
