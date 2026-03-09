@@ -1,5 +1,6 @@
 const COLLECTOR = {
-    HOME: "/collector/home",
+    LOGIN: "/collector/login-page-view",
+    DASHBOARD: "/collector/dashboard",
 }
 
 const INVESTOR = {
@@ -9,7 +10,8 @@ const INVESTOR = {
 export const routes = {
     landingPage: () => "/",
     collector: {
-        home: () => COLLECTOR.HOME,
+        dashboard: () => COLLECTOR.DASHBOARD,
+        login: () => COLLECTOR.LOGIN,
         detail: (id: string | number) => `/products/${id}`,
     },
     investor: {
