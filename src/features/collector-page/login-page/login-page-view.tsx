@@ -1,18 +1,20 @@
-import { Box } from "@mui/material";
-import { imageConfig } from "@/core/images-config";
+"use client";
+
+import LoginPageComponent from "@/core/component/login-page-component";
+import { useLoginPage } from "./hooks/use-login-page";
 
 export default function LoginPageView() {
+    const {
+        handleTermsClick,
+        handlePrivacyClick,
+        handleConnectWallet
+    } = useLoginPage();
+
     return (
-        <Box
-            sx={{
-                minHeight: '100vh',
-                backgroundImage: `url(${imageConfig.background.desktop.bgLoginDesktop})`,
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-                backgroundRepeat: 'no-repeat'
-            }}
-        >
-            
-        </Box>
+        <LoginPageComponent
+            onConnectWalletClick={handleConnectWallet}
+            onTermsClick={handleTermsClick}
+            onPrivacyClick={handlePrivacyClick}
+        />
     )
 }
