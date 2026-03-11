@@ -1,5 +1,5 @@
 const COLLECTOR = {
-    LOGIN: "/collector/login-page-view",
+    LOGIN: "/collector/login-page-collector-view",
     DASHBOARD: "/collector/dashboard",
 }
 

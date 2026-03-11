@@ -1,7 +1,7 @@
 "use client";
 
 import LoginPageComponent from "@/core/component/login-page-component";
-import { useLoginPage } from "./hooks/use-login-page";
+import { useLoginPage } from "./hooks/use-login-page-collector";
 
 export default function LoginPageView() {
     const {
