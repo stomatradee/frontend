@@ -105,29 +105,6 @@ export default function LoginPageComponent({
                                         {pageMemo.authDesc}
                                     </Typography>
                                     <Box height={{ xs: 28, md: 46 }} />
-                                    {/* <Button
-                                        onClick={onConnectWalletClick}
-                                        fullWidth
-                                        variant="outlined"
-                                        endIcon={<NorthEastIcon sx={{ fontSize: { xs: 14, md: 16 } }} />}
-                                        sx={{
-                                            borderRadius: "9999px",
-                                            borderColor: "var(--primary-colors)",
-                                            color: "var(--primary-colors)",
-                                            fontWeight: 600,
-                                            textTransform: "none",
-                                            fontSize: { xs: '0.85rem', md: '0.95rem' },
-                                            py: { xs: '8px', md: '9px' },
-                                            "&:hover": {
-                                                backgroundColor: "var(--primary-colors)",
-                                                borderColor: "var(--primary-colors)",
-                                                color: "#0A0A0A",
-                                            },
-                                            transition: "all 0.3s",
-                                        }}
-                                    >
-                                        {pageMemo.connectWalletButtonText}
-                                    </Button> */}
                                     <ConnectButton.Custom>
                                         {({ openConnectModal, }) => {
                                             return (
