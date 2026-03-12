@@ -7,6 +7,7 @@ export const imageConfig = {
             footerBgDesktop: "/background/desktop/footer-bg-desktop.png",
             bgDesktop: "/background/desktop/bg-desktop.png",
             bgDesktopSecondary: "/background/desktop/bg-secondary-desktop.png",
+            bgLoginDesktop: "/background/desktop/bg-login-desktop.png",
         },
         mobile: {
             bgBannerMobile: "/background/mobile/bg-banner-mobile.png",

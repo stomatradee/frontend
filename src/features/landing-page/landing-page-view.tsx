@@ -8,8 +8,8 @@ import StatCard from "./component/stat-card";
 import SectionHeader from "./component/section-header";
 import BentoCard from "./component/bento-card";
 import CtaBanner from "./component/cta-banner";
-import GreenFutureBanner from "./component/green-future-banner";
 import Footer from "./component/footer";
+import RoleDialog from "./component/role-dialog";
 
 export default function LandingPageView() {
     const {
@@ -18,16 +18,19 @@ export default function LandingPageView() {
         heroBannerData,
         solvingProblemData,
         growthData,
-        greenFutureData,
+
         footerData,
         logoSrc,
         handleNavItemClick,
-        handleGetStom,
+        handleConnectWallet,
         handleLearnMore,
         handleSustainabilityClick,
         handleWhatIsStomatrade,
-        handleLearnAboutStomatrade,
+
         handleSignUp,
+        open,
+        handleCloseRoleDialog,
+        handleRoleSelected,
     } = useLandingPage();
 
     return (
@@ -38,8 +41,8 @@ export default function LandingPageView() {
                 <Navbar
                     logoSrc={logoSrc}
                     navItems={navItems}
-                    ctaLabel="Get STOM"
-                    onCtaClick={handleGetStom}
+                    ctaLabel="Connect Wallet"
+                    onCtaClick={handleConnectWallet}
                     onNavItemClick={handleNavItemClick}
                 />
 
@@ -51,12 +54,12 @@ export default function LandingPageView() {
                     mobileBackgroundImage={heroBannerData.mobileBackgroundImage}
                     desktopBackgroundImage={heroBannerData.desktopBackgroundImage}
                     primaryButton={{
-                        label: "Learn More",
-                        onClick: handleLearnMore,
+                        label: "Connect Wallet",
+                        onClick: handleConnectWallet,
                     }}
                     secondaryButton={{
-                        label: "Get STOM",
-                        onClick: handleGetStom,
+                        label: "Learn More",
+                        onClick: handleLearnMore,
                     }}
                 />
 
@@ -139,8 +142,8 @@ export default function LandingPageView() {
                     mobileBackgroundImage={growthData.mobileBackgroundImage}
                     desktopBackgroundImage={growthData.desktopBackgroundImage}
                     primaryButton={{
-                        label: "Get STOM",
-                        onClick: handleGetStom,
+                        label: "Connect Wallet",
+                        onClick: handleConnectWallet,
                     }}
                     secondaryButton={{
                         label: "What is Stomatrade",
@@ -178,6 +181,12 @@ export default function LandingPageView() {
                     legalLinks={footerData.legalLinks}
                 />
             </Box>
+
+            <RoleDialog 
+                open={open} 
+                onClose={handleCloseRoleDialog} 
+                onSelected={handleRoleSelected} 
+            />
         </Box>
     );
 }

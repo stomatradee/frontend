@@ -1,7 +1,9 @@
 "use client";
 
-import { useCallback, useMemo } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { imageConfig } from "@/core/images-config";
+import { useNavigationUtils } from "@/core/hooks/use-navigation-utils";
+import { routes } from "@/core/routes";
 
 export function useLandingPage() {
     // --- Navigation data ---
@@ -201,6 +203,10 @@ export function useLandingPage() {
         ],
     }), []);
 
+
+    const [open, setOpen] = useState(false);
+    const { pushRoute } = useNavigationUtils();
+
     // --- Handler functions ---
     const handleNavItemClick = useCallback((href: string) => {
         const element = document.querySelector(href);
@@ -209,10 +215,26 @@ export function useLandingPage() {
         }
     }, []);
 
-    const handleGetStom = useCallback(() => {
-        // TODO: Implement Get STOM action (e.g., navigate to token page)
-        console.log("Get STOM clicked");
+    const handleConnectWallet = useCallback(() => {
+        setOpen(true);
+        console.log("Connect Wallet clicked");
     }, []);
+
+    const handleCloseRoleDialog = useCallback(() => {
+        setOpen(false);
+    }, []);
+
+    const handleRoleSelected = useCallback((role: "collector" | "investor") => {
+        console.log("Selected role:", role);
+        setOpen(false);
+
+        if (role == "collector") {
+            pushRoute(routes.collector.login)
+        } else {
+            // pushRoute(routes.investor.login)
+        }
+        // TODO: Implement wallet connection or redirection based on role
+    }, [pushRoute]);
 
     const handleLearnMore = useCallback(() => {
         const discoverSection = document.querySelector("#discover");
@@ -251,10 +273,13 @@ export function useLandingPage() {
         greenFutureData,
         footerData,
         logoSrc: imageConfig.logo.stomatradeLogo,
+        open,
 
         // Handlers
         handleNavItemClick,
-        handleGetStom,
+        handleConnectWallet,
+        handleCloseRoleDialog,
+        handleRoleSelected,
         handleLearnMore,
         handleSustainabilityClick,
         handleWhatIsStomatrade,
