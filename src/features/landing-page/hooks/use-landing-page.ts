@@ -234,7 +234,7 @@ export function useLandingPage() {
             // pushRoute(routes.investor.login)
         }
         // TODO: Implement wallet connection or redirection based on role
-    }, []);
+    }, [pushRoute]);
 
     const handleLearnMore = useCallback(() => {
         const discoverSection = document.querySelector("#discover");

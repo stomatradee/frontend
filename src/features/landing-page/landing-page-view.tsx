@@ -8,7 +8,6 @@ import StatCard from "./component/stat-card";
 import SectionHeader from "./component/section-header";
 import BentoCard from "./component/bento-card";
 import CtaBanner from "./component/cta-banner";
-import GreenFutureBanner from "./component/green-future-banner";
 import Footer from "./component/footer";
 import RoleDialog from "./component/role-dialog";
 
@@ -19,7 +18,7 @@ export default function LandingPageView() {
         heroBannerData,
         solvingProblemData,
         growthData,
-        greenFutureData,
+
         footerData,
         logoSrc,
         handleNavItemClick,
@@ -27,7 +26,7 @@ export default function LandingPageView() {
         handleLearnMore,
         handleSustainabilityClick,
         handleWhatIsStomatrade,
-        handleLearnAboutStomatrade,
+
         handleSignUp,
         open,
         handleCloseRoleDialog,

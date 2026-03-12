@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import { Box, Typography, Button, Stack, TextField, Grid, IconButton } from "@mui/material";
-import NorthEastIcon from "@mui/icons-material/NorthEast";
 
 // --- Type definitions ---
 interface FooterLinkColumn {
