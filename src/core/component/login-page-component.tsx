@@ -1,11 +1,12 @@
 "use client";
 
-import React, { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { Box, Typography, Button, Stack, Container, Card, Link } from "@mui/material";
 import { imageConfig } from "@/core/images-config";
 import { themeConfig } from "../theme-config";
 import NorthEastIcon from "@mui/icons-material/NorthEast";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
+import { useAccount } from "wagmi";
 
 export interface LoginPageComponentProps {
     onConnectWalletClick: () => void;
@@ -19,6 +20,14 @@ export default function LoginPageComponent({
     onPrivacyClick,
 }: LoginPageComponentProps) {
     const theme = themeConfig;
+
+    const { isConnected } = useAccount();
+    
+    useEffect(() => {
+        if (isConnected) {
+            onConnectWalletClick();
+        }
+    }, [isConnected]);
 
     const pageMemo = useMemo(() => ({
         bgImageDesktop: imageConfig.background.desktop.bgLoginDesktop,

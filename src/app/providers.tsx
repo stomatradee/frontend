@@ -4,7 +4,9 @@ import '@rainbow-me/rainbowkit/styles.css'
 
 import {
   RainbowKitProvider,
-  getDefaultConfig
+  darkTheme,
+  getDefaultConfig,
+  midnightTheme
 } from '@rainbow-me/rainbowkit'
 
 import {
@@ -26,12 +28,16 @@ const config = getDefaultConfig({
 
 const queryClient = new QueryClient()
 
+const myTheme = midnightTheme({
+  accentColor: "var(--third-bg-colors)",
+})
+
 export function Providers({ children }: { children: React.ReactNode }) {
 
   return (
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
-        <RainbowKitProvider>
+        <RainbowKitProvider theme={myTheme}>
           {children}
         </RainbowKitProvider>
       </QueryClientProvider>
