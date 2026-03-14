@@ -128,7 +128,7 @@ export default function CollectorSidebar({
           <Typography
             variant="caption"
             noWrap
-            sx={{ color: theme.colors.thirdBgColors, fontSize: 11, width: "100%", display: "block"  }}
+            sx={{ color: theme.colors.white, fontSize: 11, width: "100%", display: "block"  }}
           >
             {address}
           </Typography>
