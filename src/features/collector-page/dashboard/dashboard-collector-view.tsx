@@ -1,6 +1,6 @@
 "use client";
 
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 import { themeConfig } from "@/core/theme-config";
 import CollectorSidebar from "./component/collector-sidebar";
 import CollectorNavbar from "./component/collector-navbar";
