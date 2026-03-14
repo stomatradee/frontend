@@ -8,7 +8,7 @@ export function useDashboardCollector() {
     const handleDisconnectWallet = useCallback(() => {
         console.log("Continue with X clicked");
 
-        replaceRoute(routes.collector.login)
+        replaceRoute(routes.landingPage)
     }, [replaceRoute]);
 
 
