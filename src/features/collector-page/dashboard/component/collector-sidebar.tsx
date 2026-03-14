@@ -18,49 +18,44 @@ import BusinessIcon from "@mui/icons-material/Business";
 import { themeConfig } from "@/core/theme-config";
 import { imageConfig } from "@/core/images-config";
 import { useAccount } from "wagmi";
+import { usePathname, useRouter } from "next/navigation";
+import { routes } from "@/core/routes";
 
 export const SIDEBAR_WIDTH = 220;
 
 interface NavItem {
   label: string;
   icon: React.ReactNode;
-  segment: string;
+  path: string;
 }
 
-interface CollectorSidebarProps {
-  activeSegment?: string;
-  onNavigate?: (segment: string) => void;
-}
-
-export default function CollectorSidebar({
-  activeSegment = "my-project",
-  onNavigate,
-}: CollectorSidebarProps) {
+export default function CollectorSidebar() {
   const theme = themeConfig;
-
   const { address } = useAccount();
+  const pathname = usePathname();
+  const router = useRouter();
 
   const navItems: NavItem[] = useMemo(
     () => [
       { 
         label: "Home", 
         icon: <HomeIcon />, 
-        segment: "home" 
+        path: routes.collector.home() 
       },
       {
         label: "Add Project",
         icon: <AddCircleOutlineIcon />,
-        segment: "add-project",
+        path: routes.collector.addProject(),
       },
       {
         label: "My Project",
         icon: <FolderOutlinedIcon />,
-        segment: "my-project",
+        path: routes.collector.myProject(),
       },
       {
         label: "Company Profile",
         icon: <BusinessIcon />,
-        segment: "company-profile",
+        path: routes.collector.userProfile(),
       },
     ],
     []
@@ -142,11 +137,14 @@ export default function CollectorSidebar({
       {/* Navigation Items */}
       <List sx={{ px: 1 }}>
         {navItems.map((item) => {
-          const isActive = item.segment === activeSegment;
+          // Check if current pathname starts with item path
+          // Using exact match for generic paths, or startsWith for nested paths
+          const isActive = pathname === item.path || (pathname?.startsWith(item.path + '/') ?? false);
+          
           return (
             <ListItemButton
-              key={item.segment}
-              onClick={() => onNavigate?.(item.segment)}
+              key={item.path}
+              onClick={() => router.push(item.path)}
               sx={{
                 borderRadius: "8px",
                 mb: 0.5,

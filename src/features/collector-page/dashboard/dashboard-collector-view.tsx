@@ -6,7 +6,7 @@ import CollectorSidebar from "./component/collector-sidebar";
 import CollectorNavbar from "./component/collector-navbar";
 import { useDashboardCollector } from "./hooks/use-dashboard-collector";
 
-export default function DashboardCollectorView() {
+export default function DashboardCollectorView({ children }: { children: React.ReactNode }) {
   const theme = themeConfig;
 
   const { handleDisconnectWallet } = useDashboardCollector();
@@ -14,7 +14,7 @@ export default function DashboardCollectorView() {
   return (
     <Box sx={{ display: "flex", minHeight: "100vh" }}>
       {/* Sidebar */}
-      <CollectorSidebar activeSegment="my-project" />
+      <CollectorSidebar />
 
       {/* Main Content Area */}
       <Box
@@ -29,14 +29,8 @@ export default function DashboardCollectorView() {
         <CollectorNavbar handleDisconnect={handleDisconnectWallet}/>
 
         {/* Page Content */}
-        <Box sx={{ pt: "82px", px: "32px", pb: 3 }}>
-          <Typography
-            variant="h5"
-            fontWeight={700}
-            sx={{ color: theme.colors.white }}
-          >
-            My Project
-          </Typography>
+        <Box sx={{ pt: "82px", px: "32px", pb: 3, color: theme.colors.white }}>
+          {children}
         </Box>
       </Box>
     </Box>
