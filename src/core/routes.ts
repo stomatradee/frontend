@@ -1,6 +1,10 @@
 const COLLECTOR = {
     LOGIN: "/collector/login-collector",
     DASHBOARD: "/collector/dashboard-collector",
+    ADD_PROJECT: "/collector/add-project-collector",
+    MY_PROJECT: "/collector/my-project-collector",
+    USER_PROFILE: "/collector/user-profile-collector",
+    HOME: "/collector/home-collector",
 }
 
 const INVESTOR = {
@@ -12,6 +16,10 @@ export const routes = {
     collector: {
         dashboard: () => COLLECTOR.DASHBOARD,
         login: () => COLLECTOR.LOGIN,
+        addProject: () => COLLECTOR.ADD_PROJECT,
+        myProject: () => COLLECTOR.MY_PROJECT,
+        userProfile: () => COLLECTOR.USER_PROFILE,
+        home: () => COLLECTOR.HOME,
         detail: (id: string | number) => `/products/${id}`,
     },
     investor: {

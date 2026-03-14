@@ -42,7 +42,11 @@ export default function CollectorSidebar({
 
   const navItems: NavItem[] = useMemo(
     () => [
-      { label: "Home", icon: <HomeIcon />, segment: "home" },
+      { 
+        label: "Home", 
+        icon: <HomeIcon />, 
+        segment: "home" 
+      },
       {
         label: "Add Project",
         icon: <AddCircleOutlineIcon />,
