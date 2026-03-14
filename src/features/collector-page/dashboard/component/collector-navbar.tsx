@@ -4,7 +4,7 @@ import { AppBar, Toolbar, Button, Box } from "@mui/material";
 import { themeConfig } from "@/core/theme-config";
 import { SIDEBAR_WIDTH } from "./collector-sidebar";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
-import { useAccount, useDisconnect } from "wagmi";
+import { useAccount } from "wagmi";
 import { useEffect } from "react";
 
 export interface CollectorNavbarProps {
@@ -20,7 +20,7 @@ export default function CollectorNavbar({ handleDisconnect }: CollectorNavbarPro
     if(isDisconnected) {
       handleDisconnect()
     }
-  }, [isDisconnected])
+  }, [isDisconnected, handleDisconnect])
 
   return (
     <AppBar

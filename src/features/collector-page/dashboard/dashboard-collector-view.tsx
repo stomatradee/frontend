@@ -2,9 +2,7 @@
 
 import { Box, Typography } from "@mui/material";
 import { themeConfig } from "@/core/theme-config";
-import CollectorSidebar, {
-  SIDEBAR_WIDTH,
-} from "./component/collector-sidebar";
+import CollectorSidebar from "./component/collector-sidebar";
 import CollectorNavbar from "./component/collector-navbar";
 import { useDashboardCollector } from "./hooks/use-dashboard-collector";
 

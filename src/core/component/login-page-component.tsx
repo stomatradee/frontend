@@ -27,7 +27,7 @@ export default function LoginPageComponent({
         if (isConnected) {
             onConnectWalletClick();
         }
-    }, [isConnected]);
+    }, [isConnected, onConnectWalletClick]);
 
     const pageMemo = useMemo(() => ({
         bgImageDesktop: imageConfig.background.desktop.bgLoginDesktop,
