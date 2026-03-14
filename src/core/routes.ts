@@ -1,6 +1,6 @@
 const COLLECTOR = {
-    LOGIN: "/collector/login-page-collector-view",
-    DASHBOARD: "/collector/dashboard",
+    LOGIN: "/collector/login-collector",
+    DASHBOARD: "/collector/dashboard-collector",
 }
 
 const INVESTOR = {

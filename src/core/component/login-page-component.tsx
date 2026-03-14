@@ -1,10 +1,12 @@
 "use client";
 
-import React, { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { Box, Typography, Button, Stack, Container, Card, Link } from "@mui/material";
 import { imageConfig } from "@/core/images-config";
 import { themeConfig } from "../theme-config";
 import NorthEastIcon from "@mui/icons-material/NorthEast";
+import { ConnectButton } from "@rainbow-me/rainbowkit";
+import { useAccount } from "wagmi";
 
 export interface LoginPageComponentProps {
     onConnectWalletClick: () => void;
@@ -18,6 +20,14 @@ export default function LoginPageComponent({
     onPrivacyClick,
 }: LoginPageComponentProps) {
     const theme = themeConfig;
+
+    const { isConnected } = useAccount();
+    
+    useEffect(() => {
+        if (isConnected) {
+            onConnectWalletClick();
+        }
+    }, [isConnected, onConnectWalletClick]);
 
     const pageMemo = useMemo(() => ({
         bgImageDesktop: imageConfig.background.desktop.bgLoginDesktop,
@@ -104,29 +114,35 @@ export default function LoginPageComponent({
                                         {pageMemo.authDesc}
                                     </Typography>
                                     <Box height={{ xs: 28, md: 46 }} />
-                                    <Button
-                                        onClick={onConnectWalletClick}
-                                        fullWidth
-                                        variant="outlined"
-                                        endIcon={<NorthEastIcon sx={{ fontSize: { xs: 14, md: 16 } }} />}
-                                        sx={{
-                                            borderRadius: "9999px",
-                                            borderColor: "var(--primary-colors)",
-                                            color: "var(--primary-colors)",
-                                            fontWeight: 600,
-                                            textTransform: "none",
-                                            fontSize: { xs: '0.85rem', md: '0.95rem' },
-                                            py: { xs: '8px', md: '9px' },
-                                            "&:hover": {
-                                                backgroundColor: "var(--primary-colors)",
-                                                borderColor: "var(--primary-colors)",
-                                                color: "#0A0A0A",
-                                            },
-                                            transition: "all 0.3s",
+                                    <ConnectButton.Custom>
+                                        {({ openConnectModal, }) => {
+                                            return (
+                                                <Button
+                                                    onClick={openConnectModal}
+                                                    fullWidth
+                                                    variant="outlined"
+                                                    endIcon={<NorthEastIcon sx={{ fontSize: { xs: 14, md: 16 } }} />}
+                                                    sx={{
+                                                        borderRadius: "9999px",
+                                                        borderColor: "var(--primary-colors)",
+                                                        color: "var(--primary-colors)",
+                                                        fontWeight: 600,
+                                                        textTransform: "none",
+                                                        fontSize: { xs: '0.85rem', md: '0.95rem' },
+                                                        py: { xs: '8px', md: '9px' },
+                                                        "&:hover": {
+                                                            backgroundColor: "var(--primary-colors)",
+                                                            borderColor: "var(--primary-colors)",
+                                                            color: "#0A0A0A",
+                                                        },
+                                                        transition: "all 0.3s",
+                                                    }}
+                                                >
+                                                    {pageMemo.connectWalletButtonText}
+                                                </Button>
+                                            )
                                         }}
-                                    >
-                                        {pageMemo.connectWalletButtonText}
-                                    </Button>
+                                    </ConnectButton.Custom>
                                     <Box height={{ xs: 12, md: 20 }} />
                                 </Box>
                                 
