@@ -2,17 +2,37 @@
 
 import { useNavigationUtils } from "@/core/hooks/use-navigation-utils";
 import { routes } from "@/core/config/routes";
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
+import { GetProfileRepository } from "@/repository/profile/profile-repository";
+import { ProfileRequestModel } from "@/repository/profile/model/profile-request-model";
 
 export function useLoginPage() {
   const { pushRoute } = useNavigationUtils();
+  const [isLoading, setLoading] = useState(false);
 
-  const handleConnectWallet = useCallback(() => {
-    console.log("Continue with X clicked");
+  const handleConnectWallet = useCallback(
+    async (address: string) => {
+      setLoading(true);
 
-    // pushRoute(routes.collector.dashboard)
-    pushRoute(routes.collector.registerProfile);
-  }, [pushRoute]);
+      const data: ProfileRequestModel = {
+        contractAddress: address,
+        role: "collector",
+      };
+
+      const result = await GetProfileRepository(data);
+
+      console.log("result: ", result);
+
+      if (result !== null) {
+        pushRoute(routes.collector.dashboard);
+      } else {
+        pushRoute(routes.collector.registerProfile);
+      }
+
+      setLoading(false);
+    },
+    [pushRoute],
+  );
 
   const handleTermsClick = useCallback(() => {
     console.log("Terms clicked");
@@ -26,5 +46,6 @@ export function useLoginPage() {
     handleTermsClick,
     handleConnectWallet,
     handlePrivacyClick,
+    isLoading,
   };
 }

@@ -4,7 +4,11 @@ import { addDoc, collection } from "firebase/firestore";
 
 export async function RegisterCollectorRepository(data: RegisterModel) {
     try {
-        const docRef = await addDoc(collection(db, "collectors"), data);
+        const payload = {
+            ...data,
+            contractAddress: data.contractAddress.trim().toLowerCase()
+        };
+        const docRef = await addDoc(collection(db, "collectors"), payload);
 
         console.log("Document written with ID: ", docRef.id);
 

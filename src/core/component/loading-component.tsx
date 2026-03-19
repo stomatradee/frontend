@@ -34,12 +34,13 @@ export function LoadingScreen({
         {slots?.progress ?? (
           <LinearProgress
             sx={[
-              { 
-                width: 1, 
+              {
+                width: 1,
                 maxWidth: 360,
+                backgroundColor: themeConfig.colors.secondaryBgColors,
                 "& .MuiLinearProgress-bar": {
                   backgroundColor: themeConfig.colors.primaryColors,
-                }
+                },
               },
               ...(Array.isArray(slotsProps?.progress?.sx)
                 ? slotsProps.progress.sx
