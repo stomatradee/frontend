@@ -10,6 +10,7 @@ import { themeConfig } from "@/core/config/theme-config";
 
 export type LoadingScreenProps = React.ComponentProps<"div"> & {
   portal?: boolean;
+  primaryBgActive?: boolean;
   sx?: SxProps<Theme>;
   slots?: {
     progress?: React.ReactNode;
@@ -24,6 +25,7 @@ export function LoadingScreen({
   slots,
   slotsProps,
   sx,
+  primaryBgActive,
   ...other
 }: LoadingScreenProps) {
   const PortalWrapper = portal ? Portal : Fragment;
@@ -37,7 +39,9 @@ export function LoadingScreen({
               {
                 width: 1,
                 maxWidth: 360,
-                backgroundColor: themeConfig.colors.secondaryBgColors,
+                backgroundColor: primaryBgActive
+                  ? themeConfig.colors.bgColors
+                  : themeConfig.colors.secondaryBgColors,
                 "& .MuiLinearProgress-bar": {
                   backgroundColor: themeConfig.colors.primaryColors,
                 },

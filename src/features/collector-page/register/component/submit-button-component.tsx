@@ -28,6 +28,7 @@ export default function SubmitButtonComponent({
     >
       {isLoading === true ? (
         <LoadingScreen
+          primaryBgActive={true}
           sx={{
             paddingTop: "20px",
             paddingBottom: "20px",
