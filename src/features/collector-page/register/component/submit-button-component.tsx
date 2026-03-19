@@ -18,16 +18,23 @@ export default function SubmitButtonComponent({
         borderRadius: "30px",
         border: "1px solid",
         borderColor: theme.colors.thirdBgColors,
-        minWidth: { xs: "90vw", sm: "1000px" },
-        padding: "35px",
+        width: "100%",
+        maxWidth: "1000px",
+        padding: { xs: "25px 20px", sm: "35px" },
       }}
     >
-      <Box display="flex" flexDirection="row">
+      <Box
+        display="flex"
+        flexDirection={{ xs: "column", sm: "row" }}
+        alignItems={{ xs: "flex-start", sm: "center" }}
+        gap={{ xs: 3, sm: 0 }}
+      >
         <Box
           display="flex"
           flexDirection="column"
           sx={{
             flexGrow: 1,
+            width: "100%",
           }}
         >
           <Typography
@@ -53,7 +60,7 @@ export default function SubmitButtonComponent({
           variant="outlined"
           disabled={disabled ?? false}
           sx={{
-            width: "200px",
+            width: { xs: "100%", sm: "200px" },
             borderRadius: "9999px",
             borderColor: "var(--primary-colors)",
             color: "var(--primary-colors)",

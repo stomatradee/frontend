@@ -63,7 +63,10 @@ export default function RegisterCollectorView() {
           justifyContent="center"
           alignItems="center"
           minHeight="100vh"
-          padding="121px"
+          padding={{ xs: "100px 20px 40px", md: "121px" }}
+          width="100%"
+          maxWidth="1200px"
+          margin="0 auto"
         >
           <Typography
             variant="h1"

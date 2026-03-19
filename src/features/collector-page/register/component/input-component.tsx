@@ -30,8 +30,9 @@ export default function InputComponent({
         borderRadius: "30px",
         border: "1px solid",
         borderColor: theme.colors.thirdBgColors,
-        minWidth: { xs: "90vw", sm: "1000px" },
-        padding: "35px",
+        width: "100%",
+        maxWidth: "1000px",
+        padding: { xs: "25px 20px", sm: "35px" },
       }}
     >
       <Typography
