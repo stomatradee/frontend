@@ -1,5 +1,5 @@
 import { useNavigationUtils } from "@/core/hooks/use-navigation-utils";
-import { routes } from "@/core/routes";
+import { routes } from "@/core/config/routes";
 import { useCallback } from "react";
 
 export function useDashboardCollector() {

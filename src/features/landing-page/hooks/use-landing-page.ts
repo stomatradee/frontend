@@ -1,9 +1,9 @@
 "use client";
 
 import { useCallback, useMemo, useState } from "react";
-import { imageConfig } from "@/core/images-config";
+import { imageConfig } from "@/core/config/images-config";
 import { useNavigationUtils } from "@/core/hooks/use-navigation-utils";
-import { routes } from "@/core/routes";
+import { routes } from "@/core/config/routes";
 
 export function useLandingPage() {
     // --- Navigation data ---

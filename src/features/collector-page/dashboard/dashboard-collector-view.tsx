@@ -1,12 +1,16 @@
 "use client";
 
 import { Box } from "@mui/material";
-import { themeConfig } from "@/core/theme-config";
+import { themeConfig } from "@/core/config/theme-config";
 import CollectorSidebar from "./component/collector-sidebar";
 import CollectorNavbar from "./component/collector-navbar";
 import { useDashboardCollector } from "./hooks/use-dashboard-collector";
 
-export default function DashboardCollectorView({ children }: { children: React.ReactNode }) {
+export default function DashboardCollectorView({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const theme = themeConfig;
 
   const { handleDisconnectWallet } = useDashboardCollector();
@@ -26,7 +30,7 @@ export default function DashboardCollectorView({ children }: { children: React.R
         }}
       >
         {/* Navbar */}
-        <CollectorNavbar handleDisconnect={handleDisconnectWallet}/>
+        <CollectorNavbar handleDisconnect={handleDisconnectWallet} />
 
         {/* Page Content */}
         <Box sx={{ pt: "82px", px: "32px", pb: 3, color: theme.colors.white }}>

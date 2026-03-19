@@ -1,4 +1,4 @@
-import { themeConfig } from "@/core/theme-config";
+import { themeConfig } from "@/core/config/theme-config";
 import { Box, Card, TextField, Typography } from "@mui/material";
 import { HTMLInputTypeAttribute } from "react";
 

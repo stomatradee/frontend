@@ -2,10 +2,10 @@
 
 import { AppBar, Box, Typography } from "@mui/material";
 import InputComponent from "./component/input-component";
-import { themeConfig } from "@/core/theme-config";
+import { themeConfig } from "@/core/config/theme-config";
 import { useState } from "react";
 import z from "zod";
-import { imageConfig } from "@/core/images-config";
+import { imageConfig } from "@/core/config/images-config";
 import SubmitButtonComponent from "./component/submit-button-component";
 import useRegisterCollector from "./hook/use-register-collector";
 import { Form } from "@/core/component/form-provider";

@@ -15,11 +15,11 @@ import HomeIcon from "@mui/icons-material/Home";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import FolderOutlinedIcon from "@mui/icons-material/FolderOutlined";
 import BusinessIcon from "@mui/icons-material/Business";
-import { themeConfig } from "@/core/theme-config";
-import { imageConfig } from "@/core/images-config";
+import { themeConfig } from "@/core/config/theme-config";
+import { imageConfig } from "@/core/config/images-config";
 import { useAccount } from "wagmi";
 import { usePathname, useRouter } from "next/navigation";
-import { routes } from "@/core/routes";
+import { routes } from "@/core/config/routes";
 
 export const SIDEBAR_WIDTH = 220;
 
@@ -37,10 +37,10 @@ export default function CollectorSidebar() {
 
   const navItems: NavItem[] = useMemo(
     () => [
-      { 
-        label: "Home", 
-        icon: <HomeIcon />, 
-        path: routes.collector.home() 
+      {
+        label: "Home",
+        icon: <HomeIcon />,
+        path: routes.collector.home(),
       },
       {
         label: "Add Project",
@@ -58,7 +58,7 @@ export default function CollectorSidebar() {
         path: routes.collector.userProfile(),
       },
     ],
-    []
+    [],
   );
 
   return (
@@ -93,7 +93,8 @@ export default function CollectorSidebar() {
           sx={{
             width: "auto",
             height: "auto",
-          }}/>
+          }}
+        />
       </Box>
 
       {/* User Info */}
@@ -127,7 +128,12 @@ export default function CollectorSidebar() {
           <Typography
             variant="caption"
             noWrap
-            sx={{ color: theme.colors.white, fontSize: 11, width: "100%", display: "block"  }}
+            sx={{
+              color: theme.colors.white,
+              fontSize: 11,
+              width: "100%",
+              display: "block",
+            }}
           >
             {address}
           </Typography>
@@ -139,8 +145,10 @@ export default function CollectorSidebar() {
         {navItems.map((item) => {
           // Check if current pathname starts with item path
           // Using exact match for generic paths, or startsWith for nested paths
-          const isActive = pathname === item.path || (pathname?.startsWith(item.path + '/') ?? false);
-          
+          const isActive =
+            pathname === item.path ||
+            (pathname?.startsWith(item.path + "/") ?? false);
+
           return (
             <ListItemButton
               key={item.path}

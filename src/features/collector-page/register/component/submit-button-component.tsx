@@ -1,5 +1,5 @@
 import { Box, Button, Card, Typography } from "@mui/material";
-import { themeConfig } from "@/core/theme-config";
+import { themeConfig } from "@/core/config/theme-config";
 
 type SubmitButtonComponentProps = {
   onSubmit: () => void;

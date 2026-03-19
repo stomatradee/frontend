@@ -1,7 +1,7 @@
 "use client";
 
 import { AppBar, Toolbar, Button, Box } from "@mui/material";
-import { themeConfig } from "@/core/theme-config";
+import { themeConfig } from "@/core/config/theme-config";
 import { SIDEBAR_WIDTH } from "./collector-sidebar";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { useAccount } from "wagmi";
@@ -11,16 +11,18 @@ export interface CollectorNavbarProps {
   handleDisconnect: () => void;
 }
 
-export default function CollectorNavbar({ handleDisconnect }: CollectorNavbarProps) {
+export default function CollectorNavbar({
+  handleDisconnect,
+}: CollectorNavbarProps) {
   const theme = themeConfig;
 
   const { isDisconnected } = useAccount();
 
   useEffect(() => {
-    if(isDisconnected) {
-      handleDisconnect()
+    if (isDisconnected) {
+      handleDisconnect();
     }
-  }, [isDisconnected, handleDisconnect])
+  }, [isDisconnected, handleDisconnect]);
 
   return (
     <AppBar
@@ -33,9 +35,17 @@ export default function CollectorNavbar({ handleDisconnect }: CollectorNavbarPro
         borderBottom: `1px solid ${theme.colors.secondaryBgColors}`,
       }}
     >
-      <Toolbar sx={{ justifyContent: "flex-end", minHeight: "56px !important" }}>
+      <Toolbar
+        sx={{ justifyContent: "flex-end", minHeight: "56px !important" }}
+      >
         <ConnectButton.Custom>
-          {({ openConnectModal, account, chain, mounted, openAccountModal }) => {
+          {({
+            openConnectModal,
+            account,
+            chain,
+            mounted,
+            openAccountModal,
+          }) => {
             const connected = mounted && account && chain;
 
             return (
