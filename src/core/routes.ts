@@ -4,6 +4,7 @@ const COLLECTOR = {
     ADD_PROJECT: "/collector/add-project-collector",
     MY_PROJECT: "/collector/my-project-collector",
     USER_PROFILE: "/collector/user-profile-collector",
+    REGISTER_PROFILE: "/collector/register-collector",
     HOME: "/collector/home-collector",
 }
 
@@ -20,6 +21,7 @@ export const routes = {
         myProject: () => COLLECTOR.MY_PROJECT,
         userProfile: () => COLLECTOR.USER_PROFILE,
         home: () => COLLECTOR.HOME,
+        registerProfile: () => COLLECTOR.REGISTER_PROFILE,
         detail: (id: string | number) => `/products/${id}`,
     },
     investor: {

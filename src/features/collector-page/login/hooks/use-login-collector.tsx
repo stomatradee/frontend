@@ -11,7 +11,8 @@ export function useLoginPage() {
     const handleConnectWallet = useCallback(() => {
         console.log("Continue with X clicked");
 
-        pushRoute(routes.collector.dashboard)
+        // pushRoute(routes.collector.dashboard)
+        pushRoute(routes.collector.registerProfile)
     }, [pushRoute]);
 
     const handleTermsClick = useCallback(() => {
