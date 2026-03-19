@@ -3,7 +3,7 @@
 import { AppBar, Box, Typography } from "@mui/material";
 import InputComponent from "./component/input-component";
 import { themeConfig } from "@/core/config/theme-config";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import z from "zod";
 import { imageConfig } from "@/core/config/images-config";
 import SubmitButtonComponent from "./component/submit-button-component";
@@ -11,6 +11,7 @@ import useRegisterCollector from "./hook/use-register-collector";
 import { Form } from "@/core/component/form-provider";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { RegisterModel } from "@/repository/register/model/register-model";
 
 export default function RegisterCollectorView() {
   const theme = themeConfig;
@@ -21,7 +22,7 @@ export default function RegisterCollectorView() {
   const [companyName, setCompanyName] = useState<string>("");
   const [companyAddress, setCompanyAddress] = useState<string>("");
 
-  const { handleSubmit } = useRegisterCollector();
+  const { handleSubmit, isLoading } = useRegisterCollector();
 
   const RegisterCollectorSchema = z.object({
     fullname: z.string().min(1, "Fullname is required"),
@@ -42,6 +43,20 @@ export default function RegisterCollectorView() {
     },
   });
 
+  const onSubmit = useCallback(() => {
+    const data: RegisterModel = {
+      contractAddress: "",
+      role: "collector",
+      fullname: methods.getValues("fullname"),
+      phoneNumber: methods.getValues("phoneNumber"),
+      residenceId: methods.getValues("residenceId"),
+      companyName: methods.getValues("companyName"),
+      companyAddress: methods.getValues("companyAddress"),
+    };
+
+    handleSubmit(data);
+  }, [handleSubmit, methods]);
+
   return (
     <>
       <AppBar
@@ -56,7 +71,7 @@ export default function RegisterCollectorView() {
           style={{ width: "200px" }}
         />
       </AppBar>
-      <Form methods={methods} onSubmit={handleSubmit}>
+      <Form methods={methods} onSubmit={onSubmit}>
         <Box
           display="flex"
           flexDirection="column"
@@ -151,8 +166,9 @@ export default function RegisterCollectorView() {
           />
           <Box height={30} />
           <SubmitButtonComponent
-            onSubmit={handleSubmit}
+            onSubmit={onSubmit}
             disabled={!methods.formState.isValid}
+            isLoading={isLoading}
           />
         </Box>
       </Form>

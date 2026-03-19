@@ -1,14 +1,17 @@
 import { Box, Button, Card, Typography } from "@mui/material";
 import { themeConfig } from "@/core/config/theme-config";
+import { LoadingScreen } from "@/core/component/loading-component";
 
 type SubmitButtonComponentProps = {
-  onSubmit: () => void;
+  onSubmit?: () => void;
   disabled?: boolean;
+  isLoading?: boolean;
 };
 
 export default function SubmitButtonComponent({
   onSubmit,
   disabled,
+  isLoading,
 }: SubmitButtonComponentProps) {
   const theme = themeConfig;
   return (
@@ -23,66 +26,75 @@ export default function SubmitButtonComponent({
         padding: { xs: "25px 20px", sm: "35px" },
       }}
     >
-      <Box
-        display="flex"
-        flexDirection={{ xs: "column", sm: "row" }}
-        alignItems={{ xs: "flex-start", sm: "center" }}
-        gap={{ xs: 3, sm: 0 }}
-      >
+      {isLoading === true ? (
+        <LoadingScreen
+          sx={{
+            paddingTop: "20px",
+            paddingBottom: "20px",
+          }}
+        />
+      ) : (
         <Box
           display="flex"
-          flexDirection="column"
-          sx={{
-            flexGrow: 1,
-            width: "100%",
-          }}
+          flexDirection={{ xs: "column", sm: "row" }}
+          alignItems={{ xs: "flex-start", sm: "center" }}
+          gap={{ xs: 3, sm: 0 }}
         >
-          <Typography
-            variant="h3"
-            color={theme.colors.white}
-            fontWeight={600}
-            sx={{ fontSize: { xs: 16, sm: 18, md: 20 } }}
+          <Box
+            display="flex"
+            flexDirection="column"
+            sx={{
+              flexGrow: 1,
+              width: "100%",
+            }}
           >
-            Submit Your Profile?
-          </Typography>
-          <Box height={10} />
-          <Typography
-            variant="body1"
-            color={theme.colors.thirdBgColors}
-            fontWeight={600}
-            sx={{ fontSize: { xs: 16, sm: 18, md: 15 } }}
-          >
-            Press the right button to submit your profile
-          </Typography>
-        </Box>
-        <Button
-          onClick={onSubmit}
-          variant="outlined"
-          disabled={disabled ?? false}
-          sx={{
-            width: { xs: "100%", sm: "200px" },
-            borderRadius: "9999px",
-            borderColor: "var(--primary-colors)",
-            color: "var(--primary-colors)",
-            fontWeight: 600,
-            textTransform: "none",
-            fontSize: { xs: "0.85rem", md: "0.95rem" },
-            py: { xs: "8px", md: "9px" },
-            "&:hover": {
-              backgroundColor: "var(--primary-colors)",
+            <Typography
+              variant="h3"
+              color={theme.colors.white}
+              fontWeight={600}
+              sx={{ fontSize: { xs: 16, sm: 18, md: 20 } }}
+            >
+              Submit Your Profile?
+            </Typography>
+            <Box height={10} />
+            <Typography
+              variant="body1"
+              color={theme.colors.thirdBgColors}
+              fontWeight={600}
+              sx={{ fontSize: { xs: 16, sm: 18, md: 15 } }}
+            >
+              Press the right button to submit your profile
+            </Typography>
+          </Box>
+          <Button
+            onClick={onSubmit}
+            variant="outlined"
+            disabled={disabled ?? false}
+            sx={{
+              width: { xs: "100%", sm: "200px" },
+              borderRadius: "9999px",
               borderColor: "var(--primary-colors)",
-              color: "#0A0A0A",
-            },
-            "&.Mui-disabled": {
-              color: theme.colors.thirdBgColors,
-              borderColor: theme.colors.thirdBgColors,
-            },
-            transition: "all 0.3s",
-          }}
-        >
-          Submit
-        </Button>
-      </Box>
+              color: "var(--primary-colors)",
+              fontWeight: 600,
+              textTransform: "none",
+              fontSize: { xs: "0.85rem", md: "0.95rem" },
+              py: { xs: "8px", md: "9px" },
+              "&:hover": {
+                backgroundColor: "var(--primary-colors)",
+                borderColor: "var(--primary-colors)",
+                color: "#0A0A0A",
+              },
+              "&.Mui-disabled": {
+                color: theme.colors.thirdBgColors,
+                borderColor: theme.colors.thirdBgColors,
+              },
+              transition: "all 0.3s",
+            }}
+          >
+            Submit
+          </Button>
+        </Box>
+      )}
     </Card>
   );
 }
