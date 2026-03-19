@@ -37,10 +37,15 @@ export default function CollectorSidebar() {
 
   const navItems: NavItem[] = useMemo(
     () => [
+      // {
+      //   label: "Home",
+      //   icon: <HomeIcon />,
+      //   path: routes.collector.home(),
+      // },
       {
-        label: "Home",
-        icon: <HomeIcon />,
-        path: routes.collector.home(),
+        label: "My Project",
+        icon: <FolderOutlinedIcon />,
+        path: routes.collector.myProject(),
       },
       {
         label: "Add Project",
@@ -48,12 +53,7 @@ export default function CollectorSidebar() {
         path: routes.collector.addProject(),
       },
       {
-        label: "My Project",
-        icon: <FolderOutlinedIcon />,
-        path: routes.collector.myProject(),
-      },
-      {
-        label: "Company Profile",
+        label: "User Profile",
         icon: <BusinessIcon />,
         path: routes.collector.userProfile(),
       },
