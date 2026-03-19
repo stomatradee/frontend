@@ -3,10 +3,12 @@ import { themeConfig } from "@/core/theme-config";
 
 type SubmitButtonComponentProps = {
   onSubmit: () => void;
+  disabled?: boolean;
 };
 
 export default function SubmitButtonComponent({
   onSubmit,
+  disabled,
 }: SubmitButtonComponentProps) {
   const theme = themeConfig;
   return (
@@ -49,6 +51,7 @@ export default function SubmitButtonComponent({
         <Button
           onClick={onSubmit}
           variant="outlined"
+          disabled={disabled ?? false}
           sx={{
             width: "200px",
             borderRadius: "9999px",
@@ -62,6 +65,10 @@ export default function SubmitButtonComponent({
               backgroundColor: "var(--primary-colors)",
               borderColor: "var(--primary-colors)",
               color: "#0A0A0A",
+            },
+            "&.Mui-disabled": {
+              color: theme.colors.thirdBgColors,
+              borderColor: theme.colors.thirdBgColors,
             },
             transition: "all 0.3s",
           }}

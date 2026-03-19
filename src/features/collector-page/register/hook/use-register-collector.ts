@@ -8,7 +8,7 @@ export default function useRegisterCollector() {
     const handleSubmit = useCallback(() => {
         console.log("Submit");
         replaceRoute(routes.collector.dashboard)
-    }, []);
+    }, [replaceRoute]);
 
     return {
         handleSubmit
