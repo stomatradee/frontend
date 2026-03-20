@@ -11,7 +11,6 @@ import {
   Typography,
   Avatar,
 } from "@mui/material";
-import HomeIcon from "@mui/icons-material/Home";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import FolderOutlinedIcon from "@mui/icons-material/FolderOutlined";
 import BusinessIcon from "@mui/icons-material/Business";

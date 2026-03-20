@@ -1,6 +1,7 @@
 "use client";
 
 import { Box, Card, Typography } from "@mui/material";
+import Image from "next/image";
 import { themeConfig } from "@/core/config/theme-config";
 import useUserProfile from "./hook/use-user-profile";
 import { LoadingScreen } from "@/core/component/loading-component";
@@ -56,8 +57,9 @@ export default function UserProfileCollectorView() {
           alignItems="center"
           margin="0 auto"
         >
-          <img
+          <Image
             src={imageConfig.icon.profileIcon}
+            alt="Profile Icon"
             width={150}
             height={150}
             style={{ borderRadius: "50%" }}

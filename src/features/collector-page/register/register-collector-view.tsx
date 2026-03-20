@@ -1,6 +1,7 @@
 "use client";
 
 import { AppBar, Box, Typography } from "@mui/material";
+import Image from "next/image";
 import InputComponent from "./component/input-component";
 import { themeConfig } from "@/core/config/theme-config";
 import { useCallback, useState } from "react";
@@ -65,10 +66,12 @@ export default function RegisterCollectorView() {
           padding: "20px 30px",
         }}
       >
-        <img
+        <Image
           src={imageConfig.logo.stomatradeLogo}
           alt="Stomatrade"
-          style={{ width: "200px" }}
+          width={200}
+          height={60}
+          style={{ width: "200px", height: "auto" }}
         />
       </AppBar>
       <Form methods={methods} onSubmit={onSubmit}>
@@ -98,7 +101,7 @@ export default function RegisterCollectorView() {
             fontWeight={600}
             sx={{ fontSize: { xs: 16, sm: 18, md: 15 } }}
           >
-            Please complete your profile to get started collector's platform
+            Please complete your profile to get started collector&apos;s platform
           </Typography>
           <Box height={30} />
           <InputComponent

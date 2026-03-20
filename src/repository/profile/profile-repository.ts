@@ -1,12 +1,9 @@
-import { collection, doc, getDoc, getDocs, query, where } from "firebase/firestore";
+import { collection, getDocs, query, where } from "firebase/firestore";
 import { ProfileRequestModel, ProfileResponseModel } from "./model/profile-request-model";
 import { db } from "@/core/config/firebase-config";
-import { da } from "zod/v4/locales";
 
 export async function GetCollectorProfileRepository(data: ProfileRequestModel): Promise<ProfileResponseModel | null> {
     try {
-        console.log("profile req: ", data)
-
         const normalizedAddress = data.contractAddress.trim().toLowerCase();
 
         const docRef = query(

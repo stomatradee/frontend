@@ -57,11 +57,12 @@ export default function useUserProfile() {
         }
 
         setLoading(false)
-    }, [])
+    }, [address])
 
     useEffect(() => {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         getUserProfile()
-    }, [])
+    }, [getUserProfile])
 
     const openQrCode = useCallback(() => {
         setIsQrOpen(true)
