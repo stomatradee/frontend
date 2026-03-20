@@ -10,29 +10,26 @@ export function useLoginPage() {
   const { pushRoute } = useNavigationUtils();
   const [isLoading, setLoading] = useState(false);
 
-  const handleConnectWallet = useCallback(
-    async (address: string) => {
-      setLoading(true);
+  const handleConnectWallet = useCallback(async (address: string) => {
+    setLoading(true);
 
-      const data: ProfileRequestModel = {
-        contractAddress: address,
-        role: "collector",
-      };
+    const data: ProfileRequestModel = {
+      contractAddress: address,
+      role: "collector",
+    };
 
-      const result = await GetCollectorProfileRepository(data);
+    const result = await GetCollectorProfileRepository(data);
 
-      console.log("result: ", result);
+    console.log("result: ", result);
 
-      if (result !== null) {
-        pushRoute(routes.collector.dashboard);
-      } else {
-        pushRoute(routes.collector.registerProfile);
-      }
+    if (result !== null) {
+      pushRoute(routes.collector.dashboard);
+    } else {
+      pushRoute(routes.collector.registerProfile);
+    }
 
-      setLoading(false);
-    },
-    [pushRoute],
-  );
+    setLoading(false);
+  }, []);
 
   const handleTermsClick = useCallback(() => {
     console.log("Terms clicked");
