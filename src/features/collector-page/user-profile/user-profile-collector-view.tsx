@@ -5,11 +5,14 @@ import { themeConfig } from "@/core/config/theme-config";
 import useUserProfile from "./hook/use-user-profile";
 import { LoadingScreen } from "@/core/component/loading-component";
 import { imageConfig } from "@/core/config/images-config";
+import { Icon } from "@iconify/react";
+import QrDialog from "./component/qr-dialog";
 
 export default function UserProfileCollectorView() {
   const theme = themeConfig;
 
-  const { userData, isLoading, address, ensAvatar } = useUserProfile();
+  const { userData, isLoading, address, isQrOpen, openQrCode, closeQrCode } =
+    useUserProfile();
 
   if (isLoading) {
     return <LoadingScreen />;
@@ -62,7 +65,7 @@ export default function UserProfileCollectorView() {
 
           <Box width={30} />
 
-          <Box display="flex" flexDirection="column">
+          <Box display="flex" flexDirection="column" flexGrow={1}>
             <Typography
               variant="body1"
               color={theme.colors.white}
@@ -74,15 +77,41 @@ export default function UserProfileCollectorView() {
 
             <Typography
               variant="body1"
-              color={theme.colors.thirdBgColors}
+              color={theme.colors.primaryColors}
               fontWeight={500}
               sx={{ fontSize: { xs: 16, sm: 18, md: 15 } }}
             >
               {userData?.contractAddress}
             </Typography>
           </Box>
+
+          <Box
+            onClick={openQrCode}
+            sx={{
+              background: theme.colors.bgColors,
+              borderRadius: "50%",
+              padding: "20px",
+              cursor: "pointer",
+              transition: "all 0.2s",
+              "&:active": {
+                transform: "scale(0.95)",
+              },
+            }}
+          >
+            <Icon
+              icon="ic:baseline-qrcode"
+              width={24}
+              color={theme.colors.white}
+            />
+          </Box>
         </Box>
       </Card>
+
+      <QrDialog
+        walletAddress={address ?? ""}
+        open={isQrOpen}
+        onClose={closeQrCode}
+      />
     </Box>
   );
 }

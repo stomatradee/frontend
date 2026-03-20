@@ -8,6 +8,7 @@ import { useAccount, useEnsAvatar, useEnsName } from "wagmi";
 
 export default function useUserProfile() {
     const [isLoading, setLoading] = useState(false)
+    const [isQrOpen, setIsQrOpen] = useState(false)
     const [userData, setUserData] = useState<ProfileResponseModel | null>(null)
 
     const { address } = useAccount();
@@ -62,10 +63,21 @@ export default function useUserProfile() {
         getUserProfile()
     }, [])
 
+    const openQrCode = useCallback(() => {
+        setIsQrOpen(true)
+    }, [])
+
+    const closeQrCode = useCallback(() => {
+        setIsQrOpen(false)
+    }, [])
+
     return {
         userData,
         isLoading,
         address,
         ensAvatar,
+        isQrOpen,
+        openQrCode,
+        closeQrCode,
     }
 }
