@@ -1,8 +1,8 @@
 import { db } from "@/core/config/firebase-config";
-import { RegisterModel } from "./model/register-model";
+import { RegisterRequestModel } from "./model/register-request-model";
 import { addDoc, collection } from "firebase/firestore";
 
-export async function RegisterCollectorRepository(data: RegisterModel) {
+export async function RegisterCollectorRepository(data: RegisterRequestModel) {
     try {
         const payload = {
             ...data,

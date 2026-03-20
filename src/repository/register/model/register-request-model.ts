@@ -1,4 +1,4 @@
-export type RegisterModel = {
+export type RegisterRequestModel = {
     contractAddress: string,
     role: "collector" | "investor",
     fullname: string,

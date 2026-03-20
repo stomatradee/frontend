@@ -1,7 +1,7 @@
 import { useNavigationUtils } from "@/core/hooks/use-navigation-utils";
 import { routes } from "@/core/config/routes";
 import { useCallback, useState } from "react";
-import { RegisterModel } from "@/repository/register/model/register-model";
+import { RegisterRequestModel } from "@/repository/register/model/register-request-model";
 import { RegisterCollectorRepository } from "@/repository/register/register-repository";
 import { toast } from 'sonner';
 import { useAccount } from "wagmi";
@@ -12,7 +12,7 @@ export default function useRegisterCollector() {
 
     const [isLoading, setLoading] = useState(false);
 
-    const handleSubmit = useCallback(async (data: RegisterModel) => {
+    const handleSubmit = useCallback(async (data: RegisterRequestModel) => {
         setLoading(true);
 
         data.contractAddress = address ?? "";

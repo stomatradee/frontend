@@ -3,7 +3,7 @@
 import { useNavigationUtils } from "@/core/hooks/use-navigation-utils";
 import { routes } from "@/core/config/routes";
 import { useCallback, useState } from "react";
-import { GetProfileRepository } from "@/repository/profile/profile-repository";
+import { GetCollectorProfileRepository } from "@/repository/profile/profile-repository";
 import { ProfileRequestModel } from "@/repository/profile/model/profile-request-model";
 
 export function useLoginPage() {
@@ -19,7 +19,7 @@ export function useLoginPage() {
         role: "collector",
       };
 
-      const result = await GetProfileRepository(data);
+      const result = await GetCollectorProfileRepository(data);
 
       console.log("result: ", result);
 

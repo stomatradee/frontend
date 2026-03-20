@@ -3,14 +3,14 @@ import { ProfileRequestModel, ProfileResponseModel } from "./model/profile-reque
 import { db } from "@/core/config/firebase-config";
 import { da } from "zod/v4/locales";
 
-export async function GetProfileRepository(data: ProfileRequestModel): Promise<ProfileResponseModel | null> {
+export async function GetCollectorProfileRepository(data: ProfileRequestModel): Promise<ProfileResponseModel | null> {
     try {
         console.log("profile req: ", data)
 
         const normalizedAddress = data.contractAddress.trim().toLowerCase();
 
         const docRef = query(
-            collection(db, "collectors"), // ganti sesuai collection kamu
+            collection(db, "collectors"),
             where("contractAddress", "==", normalizedAddress)
         );
 

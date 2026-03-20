@@ -11,7 +11,7 @@ import useRegisterCollector from "./hook/use-register-collector";
 import { Form } from "@/core/component/form-provider";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { RegisterModel } from "@/repository/register/model/register-model";
+import { RegisterRequestModel } from "@/repository/register/model/register-request-model";
 
 export default function RegisterCollectorView() {
   const theme = themeConfig;
@@ -44,7 +44,7 @@ export default function RegisterCollectorView() {
   });
 
   const onSubmit = useCallback(() => {
-    const data: RegisterModel = {
+    const data: RegisterRequestModel = {
       contractAddress: "",
       role: "collector",
       fullname: methods.getValues("fullname"),

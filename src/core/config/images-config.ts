@@ -27,6 +27,7 @@ export const imageConfig = {
         rwaIcon: "/icon/rwa-icon.webp",
         traceabilityIcon: "/icon/traceability-icon.webp",
         flowerIcon: "/icon/flower-icon.webp",
+        profileIcon: "/icon/profile.webp",
     },
     logo: {
         stomatradeLogo: "/logo/stomatrade-logo.webp",
