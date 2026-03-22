@@ -2,7 +2,9 @@
 
 import { themeConfig } from "@/core/config/theme-config";
 import { Box, Card, MenuItem, TextField, Typography } from "@mui/material";
-import { on } from "events";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { HTMLInputTypeAttribute } from "react";
 
 type InputProjectInformationComponentProps = {
@@ -121,7 +123,7 @@ export default function InputProjectInformationComponent({
               "& .MuiInputLabel-root.Mui-focused": {
                 color: theme.colors.white,
               },
-              "& .MuiInputBase-input": {
+              "& .MuiInputBase-input,  & input": {
                 color: theme.colors.white,
               },
               "& .MuiSelect-icon": {
@@ -184,6 +186,62 @@ export default function InputProjectInformationComponent({
           />
         </Box>
       </Box>
+      <Box height={30} />
+      <Typography
+        variant="body1"
+        color={theme.colors.white}
+        fontWeight={600}
+        sx={{ fontSize: { xs: 16, sm: 18, md: 15 } }}
+      >
+        Delivery Date
+      </Typography>
+      <Box height={20} />
+      <LocalizationProvider dateAdapter={AdapterDayjs}>
+        <DatePicker
+          label="Select Date"
+          slotProps={{
+            textField: {
+              fullWidth: true,
+              variant: "outlined",
+              sx: {
+                backgroundColor: theme.colors.bgColors,
+                borderRadius: "25px",
+                "& .MuiOutlinedInput-root": {
+                  borderRadius: "25px",
+                  backgroundColor: theme.colors.bgColors,
+
+                  "& fieldset": {
+                    borderColor: theme.colors.thirdBgColors,
+                    borderRadius: "25px",
+                  },
+                  "&:hover fieldset": {
+                    borderColor: theme.colors.primaryColors,
+                  },
+                  "&.Mui-focused fieldset": {
+                    borderColor: theme.colors.primaryColors,
+                  },
+                },
+
+                "& .MuiInputLabel-root": {
+                  color: "gray",
+                },
+                "& .MuiInputLabel-root.Mui-focused": {
+                  color: theme.colors.white,
+                },
+
+                "& .MuiInputBase-input": {
+                  color: theme.colors.white,
+                  WebkitTextFillColor: theme.colors.white,
+                },
+
+                "& .MuiSvgIcon-root": {
+                  color: theme.colors.white,
+                },
+              },
+            },
+          }}
+        />
+      </LocalizationProvider>
     </Card>
   );
 }
