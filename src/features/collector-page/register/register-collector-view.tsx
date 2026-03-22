@@ -2,12 +2,12 @@
 
 import { AppBar, Box, Typography } from "@mui/material";
 import Image from "next/image";
-import InputComponent from "./component/input-component";
+import InputComponent from "../../../core/component/input-component";
 import { themeConfig } from "@/core/config/theme-config";
 import { useCallback, useState } from "react";
 import z from "zod";
 import { imageConfig } from "@/core/config/images-config";
-import SubmitButtonComponent from "./component/submit-button-component";
+import SubmitButtonComponent from "../../../core/component/submit-button-component";
 import useRegisterCollector from "./hook/use-register-collector";
 import { Form } from "@/core/component/form-provider";
 import { useForm } from "react-hook-form";

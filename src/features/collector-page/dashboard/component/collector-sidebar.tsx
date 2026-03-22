@@ -42,12 +42,12 @@ export default function CollectorSidebar() {
       //   path: routes.collector.home(),
       // },
       {
-        label: "My Project",
+        label: "My Asset",
         icon: <FolderOutlinedIcon />,
         path: routes.collector.myProject(),
       },
       {
-        label: "Add Project",
+        label: "Tokenize Asset",
         icon: <AddCircleOutlineIcon />,
         path: routes.collector.addProject(),
       },
