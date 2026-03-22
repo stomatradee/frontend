@@ -7,6 +7,8 @@ import Image from "next/image";
 import useAddProjectCollectorForm from "./hooks/use-add-project-collector-form";
 import { Form } from "@/core/component/form-provider";
 import InputComponent from "@/core/component/input-component";
+import UploadFileComponent from "@/core/component/upload-file-component";
+import InputProjectInformationComponent from "./component/input-project-information-component";
 
 export default function AddProjectCollectorFormView() {
   const { methods, assetName, setAssetName } = useAddProjectCollectorForm();
@@ -67,6 +69,26 @@ export default function AddProjectCollectorFormView() {
             onChange={(value) => {
               setAssetName(value);
               methods.setValue("assetName", value, { shouldValidate: true });
+            }}
+          />
+          <Box height={30} />
+          <UploadFileComponent
+            title={"Asset Imagery"}
+            description={"Please add the file image for new asset"}
+          />
+          <Box height={30} />
+          <InputProjectInformationComponent
+            title={"Asset Information"}
+            description={"Please add the information for new asset"}
+            onCategoryChange={(value) => {
+              methods.setValue("assetCategory", value, {
+                shouldValidate: true,
+              });
+            }}
+            onQuantityChange={(value) => {
+              methods.setValue("quantity", value, {
+                shouldValidate: true,
+              });
             }}
           />
         </Box>
