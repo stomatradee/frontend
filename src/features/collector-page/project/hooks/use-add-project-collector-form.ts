@@ -19,9 +19,10 @@ export default function useAddProjectCollectorForm() {
         assetCategory: z.string().min(1, "Asset Category is required"),
         assetLocation: z.string().min(1, "Asset Location is required"),
         deliveryDate: z.custom<IDatePickerControl>(),
-        price: z.string().min(1, "Price is required"),
-        openFundingPrice: z.string().min(1, "Open Funding Price is required"),
+        assetPrice: z.string().min(1, "Asset Price is required"),
+        fundingPrice: z.string().min(1, "Funding Price is required"),
         returnRate: z.string().min(1, "Return Rate is required"),
+        tokenCode: z.string().min(1, "Token Code is required"),
         investmentStatus: z.boolean().default(false),
 
     });

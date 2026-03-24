@@ -17,7 +17,7 @@ export default function AddProjectCollectorFormView() {
   const { methods } = useAddProjectCollectorForm();
 
   const [assetName, setAssetName] = useState<string>("");
-  const [assetCategory, setAssetCategory] = useState<string>("");
+  const [rateInvestment, setRateInvestment] = useState<string>("");
   const [quantity, setQuantity] = useState<string>("");
   const [assetPrice, setAssetPrice] = useState<string>("");
   const [fundingPrice, setFundingPrice] = useState<string>("");
@@ -92,7 +92,6 @@ export default function AddProjectCollectorFormView() {
             description={"Please add the information for new asset"}
             quantityValue={quantity}
             onCategoryChange={(category) => {
-              setAssetCategory(category);
               methods.setValue("assetCategory", category, {
                 shouldValidate: true,
               });
@@ -110,7 +109,41 @@ export default function AddProjectCollectorFormView() {
             }}
           />
           <Box height={30} />
-          <FinancialInformationComponent />
+          <FinancialInformationComponent
+            assetPriceValue={assetPrice}
+            fundingPriceValue={fundingPrice}
+            investmentStatus={investmentStatus}
+            rateValue={rateInvestment}
+            onAssetPriceChange={(assetPrice) => {
+              setAssetPrice(assetPrice);
+              methods.setValue("assetPrice", assetPrice, {
+                shouldValidate: true,
+              });
+            }}
+            onFundingPriceChange={(fundingPrice) => {
+              setFundingPrice(fundingPrice);
+              methods.setValue("fundingPrice", fundingPrice, {
+                shouldValidate: true,
+              });
+            }}
+            onInvestmentStatusChange={(investmentStatus) => {
+              setInvestmentStatus(investmentStatus);
+              methods.setValue("investmentStatus", investmentStatus, {
+                shouldValidate: true,
+              });
+            }}
+            onTokenCodeChange={(tokenCode) => {
+              methods.setValue("tokenCode", tokenCode, {
+                shouldValidate: true,
+              });
+            }}
+            onRateValueChange={(rateValue) => {
+              setRateInvestment(rateValue);
+              methods.setValue("returnRate", rateValue, {
+                shouldValidate: true,
+              });
+            }}
+          />
           <Box height={30} />
           <SubmitButtonComponent
             title={"Submit Your Asset?"}

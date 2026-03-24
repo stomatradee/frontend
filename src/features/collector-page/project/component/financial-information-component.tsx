@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Box,
   Card,
@@ -8,11 +10,34 @@ import {
   Typography,
 } from "@mui/material";
 import { themeConfig } from "@/core/config/theme-config";
+import { useState } from "react";
 
-export default function FinancialInformationComponent() {
+type FinancialInformationComponentProps = {
+  assetPriceValue?: string;
+  fundingPriceValue?: string;
+  investmentStatus?: boolean;
+  rateValue?: string;
+  onAssetPriceChange?: (value: string) => void;
+  onFundingPriceChange?: (value: string) => void;
+  onInvestmentStatusChange?: (value: boolean) => void;
+  onRateValueChange?: (value: string) => void;
+  onTokenCodeChange?: (value: string) => void;
+};
+
+export default function FinancialInformationComponent({
+  assetPriceValue,
+  fundingPriceValue,
+  investmentStatus,
+  rateValue,
+  onAssetPriceChange,
+  onFundingPriceChange,
+  onInvestmentStatusChange,
+  onRateValueChange,
+  onTokenCodeChange,
+}: FinancialInformationComponentProps) {
   const theme = themeConfig;
 
-  const token = [
+  const tokenCodeList = [
     {
       value: "USDT",
       label: "USDT",
@@ -22,6 +47,8 @@ export default function FinancialInformationComponent() {
       label: "USDC",
     },
   ];
+
+  const [tokenCode, setTokenCode] = useState("USDT");
 
   return (
     <Card
@@ -65,11 +92,14 @@ export default function FinancialInformationComponent() {
         </Typography>
         <Box height={20} />
         <TextField
-          id="category"
+          id="token-code"
           select
           defaultValue="USDT"
           variant="outlined"
-          onChange={(e) => {}}
+          onChange={(e) => {
+            setTokenCode(e.target.value);
+            onTokenCodeChange?.(e.target.value);
+          }}
           fullWidth
           SelectProps={{
             MenuProps: {
@@ -106,7 +136,7 @@ export default function FinancialInformationComponent() {
             },
           }}
         >
-          {token.map((data) => (
+          {tokenCodeList.map((data) => (
             <MenuItem
               key={data.value}
               value={data.value}
@@ -153,8 +183,8 @@ export default function FinancialInformationComponent() {
             id="asset-price"
             type="number"
             placeholder="Input Asset Price"
-            value={""}
-            onChange={(e) => {}}
+            value={assetPriceValue ?? ""}
+            onChange={(e) => onAssetPriceChange?.(e.target.value)}
             variant="outlined"
             fullWidth
             slotProps={{
@@ -166,7 +196,7 @@ export default function FinancialInformationComponent() {
                       "& .MuiTypography-root": { color: theme.colors.white },
                     }}
                   >
-                    USDC
+                    {tokenCode}
                   </InputAdornment>
                 ),
               },
@@ -213,8 +243,8 @@ export default function FinancialInformationComponent() {
             id="funding-price"
             type="number"
             placeholder="Input Funding Price"
-            value={""}
-            onChange={(e) => {}}
+            value={fundingPriceValue ?? ""}
+            onChange={(e) => onFundingPriceChange?.(e.target.value)}
             variant="outlined"
             fullWidth
             slotProps={{
@@ -226,7 +256,7 @@ export default function FinancialInformationComponent() {
                       "& .MuiTypography-root": { color: theme.colors.white },
                     }}
                   >
-                    USDC
+                    {tokenCode}
                   </InputAdornment>
                 ),
               },
@@ -282,8 +312,8 @@ export default function FinancialInformationComponent() {
             id="return-rate"
             type="number"
             placeholder="Input Return Rate"
-            value={""}
-            onChange={(e) => {}}
+            value={rateValue ?? ""}
+            onChange={(e) => onRateValueChange?.(e.target.value)}
             variant="outlined"
             fullWidth
             slotProps={{
@@ -339,7 +369,8 @@ export default function FinancialInformationComponent() {
           </Typography>
           <Box height={20} />
           <Switch
-            defaultChecked
+            checked={investmentStatus ?? false}
+            onChange={(e) => onInvestmentStatusChange?.(e.target.checked)}
             sx={{
               "& .MuiSwitch-switchBase.Mui-checked": {
                 color: theme.colors.primaryColors,
