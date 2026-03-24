@@ -36,12 +36,8 @@ export default function useAddProjectCollectorForm() {
         },
     });
 
-    const [assetName, setAssetName] = useState<string>("");
-
 
     return {
         methods,
-        assetName,
-        setAssetName
     }
 }

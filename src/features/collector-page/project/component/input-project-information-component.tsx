@@ -101,11 +101,20 @@ export default function InputProjectInformationComponent({
           <TextField
             id="category"
             select
-            label="Select"
             defaultValue="coffee"
             variant="outlined"
             onChange={(e) => onCategoryChange(e.target.value)}
             fullWidth
+            SelectProps={{
+              MenuProps: {
+                PaperProps: {
+                  sx: {
+                    backgroundColor: theme.colors.secondaryBgColors,
+                    borderRadius: "15px",
+                  },
+                },
+              },
+            }}
             sx={{
               "& .MuiOutlinedInput-root": {
                 backgroundColor: theme.colors.bgColors,
@@ -132,7 +141,23 @@ export default function InputProjectInformationComponent({
             }}
           >
             {category.map((data) => (
-              <MenuItem key={data.value} value={data.value}>
+              <MenuItem
+                key={data.value}
+                value={data.value}
+                sx={{
+                  color: theme.colors.white,
+                  "&:hover": {
+                    backgroundColor: theme.colors.thirdBgColors,
+                  },
+                  "&.Mui-selected": {
+                    backgroundColor: theme.colors.primaryColors + "08",
+                    color: theme.colors.primaryColors,
+                    "&:hover": {
+                      backgroundColor: theme.colors.primaryColors + "14",
+                    },
+                  },
+                }}
+              >
                 {data.label}
               </MenuItem>
             ))}
@@ -186,7 +211,7 @@ export default function InputProjectInformationComponent({
           />
         </Box>
       </Box>
-      <Box height={30} />
+      <Box height={50} />
       <Typography
         variant="body1"
         color={theme.colors.white}

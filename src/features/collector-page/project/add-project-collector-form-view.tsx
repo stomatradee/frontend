@@ -9,9 +9,19 @@ import { Form } from "@/core/component/form-provider";
 import InputComponent from "@/core/component/input-component";
 import UploadFileComponent from "@/core/component/upload-file-component";
 import InputProjectInformationComponent from "./component/input-project-information-component";
+import FinancialInformationComponent from "./component/financial-information-component";
+import SubmitButtonComponent from "@/core/component/submit-button-component";
+import { useState } from "react";
 
 export default function AddProjectCollectorFormView() {
-  const { methods, assetName, setAssetName } = useAddProjectCollectorForm();
+  const { methods } = useAddProjectCollectorForm();
+
+  const [assetName, setAssetName] = useState<string>("");
+  const [assetCategory, setAssetCategory] = useState<string>("");
+  const [quantity, setQuantity] = useState<string>("");
+  const [assetPrice, setAssetPrice] = useState<string>("");
+  const [fundingPrice, setFundingPrice] = useState<string>("");
+  const [investmentStatus, setInvestmentStatus] = useState<boolean>(false);
 
   return (
     <>
@@ -90,6 +100,13 @@ export default function AddProjectCollectorFormView() {
                 shouldValidate: true,
               });
             }}
+          />
+          <Box height={30} />
+          <FinancialInformationComponent />
+          <Box height={30} />
+          <SubmitButtonComponent
+            title={"Submit Your Asset?"}
+            description={"Press the right button to submit your Asset"}
           />
         </Box>
       </Form>

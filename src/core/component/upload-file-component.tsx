@@ -129,7 +129,12 @@ export default function UploadFileComponent({
 
           {/* Preview */}
           {file && (
-            <Box mt={3}>
+            <Box
+              mt={3}
+              display="flex"
+              flexDirection="column"
+              alignItems="center"
+            >
               <Typography variant="body2">{file.name}</Typography>
               <img
                 src={URL.createObjectURL(file)}

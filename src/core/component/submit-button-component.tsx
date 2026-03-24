@@ -3,12 +3,16 @@ import { themeConfig } from "@/core/config/theme-config";
 import { LoadingScreen } from "@/core/component/loading-component";
 
 type SubmitButtonComponentProps = {
+  title?: string;
+  description?: string;
   onSubmit?: () => void;
   disabled?: boolean;
   isLoading?: boolean;
 };
 
 export default function SubmitButtonComponent({
+  title,
+  description,
   onSubmit,
   disabled,
   isLoading,
@@ -55,7 +59,7 @@ export default function SubmitButtonComponent({
               fontWeight={600}
               sx={{ fontSize: { xs: 16, sm: 18, md: 20 } }}
             >
-              Submit Your Profile?
+              {title ?? "Submit Your Profile?"}
             </Typography>
             <Box height={10} />
             <Typography
@@ -64,7 +68,7 @@ export default function SubmitButtonComponent({
               fontWeight={600}
               sx={{ fontSize: { xs: 16, sm: 18, md: 15 } }}
             >
-              Press the right button to submit your profile
+              {description ?? "Press the right button to submit your profile"}
             </Typography>
           </Box>
           <Button
