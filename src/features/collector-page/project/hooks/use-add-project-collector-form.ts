@@ -17,14 +17,13 @@ export default function useAddProjectCollectorForm() {
         assetImage: z.string().min(1, "Asset Image is required"),
         quantity: z.string().min(1, "Quantity is required"),
         assetCategory: z.string().min(1, "Asset Category is required"),
-        assetLocation: z.string().min(1, "Asset Location is required"),
         deliveryDate: z.custom<IDatePickerControl>(),
         assetPrice: z.string().min(1, "Asset Price is required"),
         fundingPrice: z.string().min(1, "Funding Price is required"),
         returnRate: z.string().min(1, "Return Rate is required"),
         tokenCode: z.string().min(1, "Token Code is required"),
         investmentStatus: z.boolean().default(false),
-
+        currentFundingPrice: z.string().default("0"),
     });
 
     const methods = useForm({
@@ -35,6 +34,17 @@ export default function useAddProjectCollectorForm() {
             residenceId: "",
             companyName: "",
             companyAddress: "",
+            assetName: "",
+            assetImage: "",
+            quantity: "",
+            assetCategory: "",
+            deliveryDate: null,
+            assetPrice: "",
+            fundingPrice: "",
+            returnRate: "",
+            tokenCode: "",
+            investmentStatus: false,
+            currentFundingPrice: "0",
         },
     });
 
