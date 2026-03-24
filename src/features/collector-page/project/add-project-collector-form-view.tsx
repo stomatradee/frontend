@@ -14,7 +14,7 @@ import SubmitButtonComponent from "@/core/component/submit-button-component";
 import { useState } from "react";
 
 export default function AddProjectCollectorFormView() {
-  const { methods } = useAddProjectCollectorForm();
+  const { methods, isLoading } = useAddProjectCollectorForm();
 
   const [assetName, setAssetName] = useState<string>("");
   const [rateInvestment, setRateInvestment] = useState<string>("");
@@ -148,6 +148,8 @@ export default function AddProjectCollectorFormView() {
           <SubmitButtonComponent
             title={"Submit Your Asset?"}
             description={"Press the right button to submit your Asset"}
+            disabled={!methods.formState.isValid}
+            isLoading={isLoading}
           />
         </Box>
       </Form>

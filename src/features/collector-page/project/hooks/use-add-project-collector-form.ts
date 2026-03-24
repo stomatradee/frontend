@@ -5,6 +5,8 @@ import z from "zod/v3";
 import { IDatePickerControl } from "@/core/types/common";
 
 export default function useAddProjectCollectorForm() {
+    const [isLoading, setLoading] = useState(false);
+
     const RegisterCollectorSchema = z.object({
         contractAddress: z.string().min(1, "Contract Address is required"),
         role: z.string().min(1, "Role is required"),
@@ -51,5 +53,6 @@ export default function useAddProjectCollectorForm() {
 
     return {
         methods,
+        isLoading,
     }
 }
