@@ -1,4 +1,3 @@
-"use client";
 
 import Image from "next/image";
 import { Box, Typography, Chip } from "@mui/material";

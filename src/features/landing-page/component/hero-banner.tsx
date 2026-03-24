@@ -4,20 +4,17 @@ import Image from "next/image";
 import { Box, Typography, Button, Stack, Chip } from "@mui/material";
 import NorthEastIcon from "@mui/icons-material/NorthEast";
 
-interface ButtonConfig {
-    label: string;
-    onClick: () => void;
-}
-
 interface HeroBannerProps {
     badgeText: string;
     heading: string;
     subheading: string;
     mobileBackgroundImage: string;
     desktopBackgroundImage: string;
-    primaryButton: ButtonConfig;
-    secondaryButton: ButtonConfig;
+    primaryButtonLabel: string;
+    secondaryButtonLabel: string;
 }
+
+import { useLandingPageActions } from "../context/landing-page-context";
 
 export default function HeroBanner({
     badgeText,
@@ -25,9 +22,10 @@ export default function HeroBanner({
     subheading,
     mobileBackgroundImage,
     desktopBackgroundImage,
-    primaryButton,
-    secondaryButton,
+    primaryButtonLabel,
+    secondaryButtonLabel,
 }: HeroBannerProps) {
+    const { handleConnectWallet, handleLearnMore } = useLandingPageActions();
     return (
         <Box
             component="section"
@@ -156,7 +154,7 @@ export default function HeroBanner({
                 {/* CTA Buttons */}
                 <Stack direction="row" spacing={2} sx={{ mt: 2 }}>
                     <Button
-                        onClick={primaryButton.onClick}
+                        onClick={handleConnectWallet}
                         variant="outlined"
                         endIcon={<NorthEastIcon sx={{ fontSize: 16 }} />}
                         sx={{
@@ -177,10 +175,10 @@ export default function HeroBanner({
                             transition: "all 0.3s",
                         }}
                     >
-                        {primaryButton.label}
+                        {primaryButtonLabel}
                     </Button>
                     <Button
-                        onClick={secondaryButton.onClick}
+                        onClick={handleLearnMore}
                         variant="outlined"
                         sx={{
                             borderRadius: "9999px",
@@ -199,7 +197,7 @@ export default function HeroBanner({
                             transition: "all 0.3s",
                         }}
                     >
-                        {secondaryButton.label}
+                        {secondaryButtonLabel}
                     </Button>
                 </Stack>
             </Stack>

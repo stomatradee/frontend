@@ -11,8 +11,9 @@ interface StatCardProps {
     variant?: "default" | "featured";
     ctaLabel?: string;
     ctaImage?: string;
-    onCtaClick?: () => void;
 }
+
+import { useLandingPageActions } from "../context/landing-page-context";
 
 export default function StatCard({
     title,
@@ -21,8 +22,8 @@ export default function StatCard({
     variant = "default",
     ctaLabel,
     ctaImage,
-    onCtaClick,
 }: StatCardProps) {
+    const { handleSustainabilityClick } = useLandingPageActions();
     if (variant === "featured") {
         return (
             <Box
@@ -70,7 +71,7 @@ export default function StatCard({
 
                     {ctaLabel && (
                         <Button
-                            onClick={onCtaClick}
+                            onClick={handleSustainabilityClick}
                             variant="outlined"
                             endIcon={<NorthEastIcon sx={{ fontSize: 12 }} />}
                             size="small"

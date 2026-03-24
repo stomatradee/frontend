@@ -1,16 +1,13 @@
+"use client";
 import { Dialog, DialogContent, DialogContentText, DialogTitle, List, ListItemButton, ListItemText } from "@mui/material";
+import { useLandingPageActions } from "../context/landing-page-context";
 
-export interface RoleDialogProps {
-    open: boolean;
-    onClose: () => void;
-    onSelected: (role: "collector" | "investor") => void;
-}
-
-export default function RoleDialog({ open, onClose, onSelected }: RoleDialogProps) {
+export default function RoleDialog() {
+    const { open, handleCloseRoleDialog, handleRoleSelected } = useLandingPageActions();
     return (
         <Dialog 
             open={open} 
-            onClose={onClose}
+            onClose={handleCloseRoleDialog}
             PaperProps={{
                 sx: {
                     bgcolor: 'var(--secondary-bg-colors)',
@@ -31,7 +28,7 @@ export default function RoleDialog({ open, onClose, onSelected }: RoleDialogProp
                 
                 <List sx={{ pt: 0, display: 'flex', flexDirection: 'column', gap: 1.5 }}>
                     <ListItemButton 
-                        onClick={() => onSelected("collector")}
+                        onClick={() => handleRoleSelected("collector")}
                         sx={{
                             bgcolor: 'var(--bg-colors)',
                             border: '1px solid var(--third-bg-colors)',
@@ -51,7 +48,7 @@ export default function RoleDialog({ open, onClose, onSelected }: RoleDialogProp
                         />
                     </ListItemButton>
                     <ListItemButton 
-                        onClick={() => onSelected("investor")}
+                        onClick={() => handleRoleSelected("investor")}
                         sx={{
                             bgcolor: 'var(--bg-colors)',
                             border: '1px solid var(--third-bg-colors)',

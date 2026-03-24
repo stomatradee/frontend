@@ -26,7 +26,6 @@ interface FooterProps {
     newsletterHeading: string;
     newsletterPrivacyText: string;
     newsletterBgImage: string;
-    onSignUp: (email: string) => void;
 
     // Brand
     logoSrc: string;
@@ -71,11 +70,12 @@ const socialIcons: Record<string, React.ReactNode> = {
     ),
 };
 
+import { useLandingPageActions } from "../context/landing-page-context";
+
 export default function Footer({
     newsletterHeading,
     newsletterPrivacyText,
     newsletterBgImage,
-    onSignUp,
     logoSrc,
     brandDescription,
     socialLinks,
@@ -84,12 +84,14 @@ export default function Footer({
     copyrightText,
     legalLinks,
 }: FooterProps) {
+    const { handleSignUp } = useLandingPageActions();
+
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const form = e.currentTarget;
         const emailInput = form.elements.namedItem("email") as HTMLInputElement;
         if (emailInput?.value) {
-            onSignUp(emailInput.value);
+            handleSignUp(emailInput.value);
             emailInput.value = "";
         }
     };

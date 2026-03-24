@@ -12,17 +12,16 @@ interface NavbarProps {
     logoSrc: string;
     navItems: NavItem[];
     ctaLabel: string;
-    onCtaClick: () => void;
-    onNavItemClick: (href: string) => void;
 }
+
+import { useLandingPageActions } from "../context/landing-page-context";
 
 export default function Navbar({
     logoSrc,
     navItems,
     ctaLabel,
-    onCtaClick,
-    onNavItemClick,
 }: NavbarProps) {
+    const { handleConnectWallet, handleNavItemClick } = useLandingPageActions();
     return (
         <AppBar
             position="fixed"
@@ -42,7 +41,7 @@ export default function Navbar({
             >
                 {/* Logo */}
                 <Box
-                    onClick={() => onNavItemClick("/")}
+                    onClick={() => handleNavItemClick("/")}
                     sx={{ cursor: "pointer", display: "flex", alignItems: "center" }}
                 >
                     <Image
@@ -64,7 +63,7 @@ export default function Navbar({
                     {navItems.map((item) => (
                         <Button
                             key={item.href}
-                            onClick={() => onNavItemClick(item.href)}
+                            onClick={() => handleNavItemClick(item.href)}
                             sx={{
                                 color: "rgba(255, 255, 255, 0.7)",
                                 fontSize: "0.875rem",
@@ -84,7 +83,7 @@ export default function Navbar({
 
                 {/* CTA Button */}
                 <Button
-                    onClick={onCtaClick}
+                    onClick={handleConnectWallet}
                     variant="outlined"
                     sx={{
                         borderRadius: "9999px",

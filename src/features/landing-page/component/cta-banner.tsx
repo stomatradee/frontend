@@ -10,15 +10,11 @@ interface CtaBannerProps {
     description?: string;
     mobileBackgroundImage?: string;
     desktopBackgroundImage?: string;
-    primaryButton?: {
-        label: string;
-        onClick: () => void;
-    };
-    secondaryButton?: {
-        label: string;
-        onClick: () => void;
-    };
+    primaryButtonLabel?: string;
+    secondaryButtonLabel?: string;
 }
+
+import { useLandingPageActions } from "../context/landing-page-context";
 
 export default function CtaBanner({
     badgeText,
@@ -26,9 +22,10 @@ export default function CtaBanner({
     description,
     mobileBackgroundImage,
     desktopBackgroundImage,
-    primaryButton,
-    secondaryButton,
+    primaryButtonLabel,
+    secondaryButtonLabel,
 }: CtaBannerProps) {
+    const { handleConnectWallet, handleWhatIsStomatrade } = useLandingPageActions();
     return (
         <Box
             sx={{
@@ -138,16 +135,16 @@ export default function CtaBanner({
                 )}
 
                 {/* CTA Buttons */}
-                {(primaryButton || secondaryButton) && (
+                {(primaryButtonLabel || secondaryButtonLabel) && (
                     <Stack
                         direction={{ xs: "column", sm: "row" }}
                         spacing={2}
                         sx={{ pt: 1 }}
                     >
-                        {primaryButton && (
+                        {primaryButtonLabel && (
                             <Button
                                 variant="contained"
-                                onClick={primaryButton.onClick}
+                                onClick={handleConnectWallet}
                                 sx={{
                                     backgroundColor: "var(--primary-colors)",
                                     color: "#0A0A0A",
@@ -162,14 +159,14 @@ export default function CtaBanner({
                                     },
                                 }}
                             >
-                                {primaryButton.label}
+                                {primaryButtonLabel}
                             </Button>
                         )}
 
-                        {secondaryButton && (
+                        {secondaryButtonLabel && (
                             <Button
                                 variant="outlined"
-                                onClick={secondaryButton.onClick}
+                                onClick={handleWhatIsStomatrade}
                                 endIcon={<NorthEastIcon sx={{ fontSize: 16 }} />}
                                 sx={{
                                     borderColor: "rgba(255,255,255,0.3)",
@@ -186,7 +183,7 @@ export default function CtaBanner({
                                     },
                                 }}
                             >
-                                {secondaryButton.label}
+                                {secondaryButtonLabel}
                             </Button>
                         )}
                     </Stack>
