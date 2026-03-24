@@ -6,16 +6,17 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { HTMLInputTypeAttribute } from "react";
+import { IDatePickerControl } from "@/core/types/common";
 
 type InputProjectInformationComponentProps = {
   title?: string;
   description?: string;
   label?: string;
   placeholder?: string;
-  value?: string;
-  inputType?: HTMLInputTypeAttribute | undefined;
+  quantityValue?: string;
   onCategoryChange: (value: string) => void;
   onQuantityChange: (value: string) => void;
+  onDeliveryDateChange: (date: IDatePickerControl) => void;
 };
 
 export default function InputProjectInformationComponent({
@@ -23,10 +24,10 @@ export default function InputProjectInformationComponent({
   description,
   label,
   placeholder,
-  value,
-  inputType,
+  quantityValue,
   onCategoryChange,
   onQuantityChange,
+  onDeliveryDateChange,
 }: InputProjectInformationComponentProps) {
   const theme = themeConfig;
 
@@ -180,7 +181,7 @@ export default function InputProjectInformationComponent({
             type="number"
             label="Quantity"
             placeholder="Input Quantity"
-            value={value ?? ""}
+            value={quantityValue ?? ""}
             onChange={(e) => onQuantityChange(e.target.value)}
             variant="outlined"
             fullWidth
@@ -224,6 +225,7 @@ export default function InputProjectInformationComponent({
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <DatePicker
           label="Select Date"
+          onChange={(date) => onDeliveryDateChange(date)}
           slotProps={{
             textField: {
               fullWidth: true,

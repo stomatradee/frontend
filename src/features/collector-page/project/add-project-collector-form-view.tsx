@@ -90,13 +90,21 @@ export default function AddProjectCollectorFormView() {
           <InputProjectInformationComponent
             title={"Asset Information"}
             description={"Please add the information for new asset"}
-            onCategoryChange={(value) => {
-              methods.setValue("assetCategory", value, {
+            quantityValue={quantity}
+            onCategoryChange={(category) => {
+              setAssetCategory(category);
+              methods.setValue("assetCategory", category, {
                 shouldValidate: true,
               });
             }}
-            onQuantityChange={(value) => {
-              methods.setValue("quantity", value, {
+            onQuantityChange={(quantity) => {
+              setQuantity(quantity);
+              methods.setValue("quantity", quantity, {
+                shouldValidate: true,
+              });
+            }}
+            onDeliveryDateChange={(date) => {
+              methods.setValue("deliveryDate", date, {
                 shouldValidate: true,
               });
             }}

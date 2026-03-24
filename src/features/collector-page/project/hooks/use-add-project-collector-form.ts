@@ -2,6 +2,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import z from "zod/v3";
+import { IDatePickerControl } from "@/core/types/common";
 
 export default function useAddProjectCollectorForm() {
     const RegisterCollectorSchema = z.object({
@@ -17,7 +18,7 @@ export default function useAddProjectCollectorForm() {
         quantity: z.string().min(1, "Quantity is required"),
         assetCategory: z.string().min(1, "Asset Category is required"),
         assetLocation: z.string().min(1, "Asset Location is required"),
-        deliveryDate: z.string().min(1, "Delivery Date is required"),
+        deliveryDate: z.custom<IDatePickerControl>(),
         price: z.string().min(1, "Price is required"),
         openFundingPrice: z.string().min(1, "Open Funding Price is required"),
         returnRate: z.string().min(1, "Return Rate is required"),
