@@ -76,7 +76,7 @@ export default function LoginPageComponent({
         <Box
           display="flex"
           flexDirection={{ xs: "column", md: "row" }}
-          justifyContent="space-between"
+          justifyContent={{ xs: "center", md: "space-between" }}
           alignItems={{ xs: "center", md: "center" }}
           sx={{ flexGrow: 1, py: { xs: 3, sm: 4, md: 10 } }}
         >
@@ -228,7 +228,7 @@ export default function LoginPageComponent({
             flex={{ xs: "none", md: 0.5 }}
             width={{ xs: "100%", md: "auto" }}
             minWidth={{ xs: "unset", md: "500px" }}
-            display="flex"
+            display={{ xs: "none", md: "flex" }}
             flexDirection="column"
             justifyContent="flex-end"
             order={{ xs: 2, md: 2 }}
