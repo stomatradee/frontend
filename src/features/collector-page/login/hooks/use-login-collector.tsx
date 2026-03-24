@@ -29,7 +29,7 @@ export function useLoginPage() {
     }
 
     setLoading(false);
-  }, []);
+  }, [pushRoute]);
 
   const handleTermsClick = useCallback(() => {
     console.log("Terms clicked");

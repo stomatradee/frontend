@@ -7,7 +7,7 @@ export default function useAddProjectCollector() {
 
     const onAddProject = useCallback(() => {
         pushRoute(routes.collector.addProjectForm);
-    }, [])
+    }, [pushRoute])
 
     return {
         onAddProject

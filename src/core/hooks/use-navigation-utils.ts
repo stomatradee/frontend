@@ -1,23 +1,24 @@
 "use client"
 
 import { useRouter } from "next/navigation"
+import { useCallback } from "react"
 
 export function useNavigationUtils() {
     const router = useRouter()
 
-    function pushRoute<T extends unknown[]>(
+    const pushRoute = useCallback(<T extends unknown[]>(
         route: (...args: T) => string,
         ...args: T
-    ) {
+    ) => {
         router.push(route(...args))
-    }
+    }, [router]);
 
-    function replaceRoute<T extends unknown[]>(
+    const replaceRoute = useCallback(<T extends unknown[]>(
         route: (...args: T) => string,
         ...args: T
-    ) {
+    ) => {
         router.replace(route(...args))
-    }
+    }, [router]);
 
     return {
         pushRoute,

@@ -35,7 +35,7 @@ export default function useRegisterCollector() {
         }
 
         setLoading(false);
-    }, [address]);
+    }, [address, replaceRoute]);
 
     return {
         handleSubmit,
