@@ -16,11 +16,6 @@ type UploadFileComponentProps = {
 export default function UploadFileComponent({
   title,
   description,
-  label,
-  placeholder,
-  value,
-  inputType,
-  onChange,
 }: UploadFileComponentProps) {
   const theme = themeConfig;
 
@@ -136,6 +131,7 @@ export default function UploadFileComponent({
               alignItems="center"
             >
               <Typography variant="body2">{file.name}</Typography>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={URL.createObjectURL(file)}
                 alt="preview"

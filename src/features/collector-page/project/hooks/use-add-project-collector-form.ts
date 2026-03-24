@@ -3,7 +3,7 @@ import { useCallback, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import z from "zod/v3";
 import { IDatePickerControl } from "@/core/types/common";
-import { ProfileRequestModel, ProfileResponseModel } from "@/repository/profile/model/profile-request-model";
+import { ProfileRequestModel } from "@/repository/profile/model/profile-request-model";
 import { useAccount } from "wagmi";
 import { GetCollectorProfileRepository } from "@/repository/profile/profile-repository";
 import { toast } from "sonner";
@@ -104,10 +104,11 @@ export default function useAddProjectCollectorForm() {
         }
 
         setLoading(false)
-    }, [address])
+    }, [address, methods])
 
     useEffect(() => {
         getUserProfile()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
 

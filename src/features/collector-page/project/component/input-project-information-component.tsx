@@ -5,7 +5,6 @@ import { Box, Card, MenuItem, TextField, Typography } from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { HTMLInputTypeAttribute } from "react";
 import { IDatePickerControl } from "@/core/types/common";
 
 type InputProjectInformationComponentProps = {
@@ -23,7 +22,6 @@ export default function InputProjectInformationComponent({
   title,
   description,
   label,
-  placeholder,
   quantityValue,
   onCategoryChange,
   onQuantityChange,

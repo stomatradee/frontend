@@ -60,8 +60,8 @@ export default function useUserProfile() {
     }, [address])
 
     useEffect(() => {
-        // eslint-disable-next-line react-hooks/set-state-in-effect
         getUserProfile()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     const openQrCode = useCallback(() => {
