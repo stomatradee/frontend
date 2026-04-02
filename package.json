@@ -30,8 +30,8 @@
     "react-dom": "19.2.3",
     "react-hook-form": "^7.71.2",
     "sonner": "^2.0.7",
-    "viem": "^2.47.2",
-    "wagmi": "^3.5.0",
+    "viem": "^2.47.6",
+    "wagmi": "^3.6.0",
     "zod": "^4.3.6"
   },
   "devDependencies": {

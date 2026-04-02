@@ -12,7 +12,7 @@ import useRegisterCollector from "./hook/use-register-collector";
 import { Form } from "@/core/component/form-provider";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { RegisterRequestModel } from "@/repository/register/model/register-request-model";
+import { RegisterRequestModel } from "@/repository/register/model/register-model";
 
 export default function RegisterCollectorView() {
   const theme = themeConfig;
@@ -101,7 +101,8 @@ export default function RegisterCollectorView() {
             fontWeight={600}
             sx={{ fontSize: { xs: 16, sm: 18, md: 15 } }}
           >
-            Please complete your profile to get started collector&apos;s platform
+            Please complete your profile to get started collector&apos;s
+            platform
           </Typography>
           <Box height={30} />
           <InputComponent

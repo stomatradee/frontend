@@ -1799,15 +1799,15 @@
   resolved "https://registry.npmjs.org/@vanilla-extract/sprinkles/-/sprinkles-1.6.4.tgz"
   integrity sha512-lW3MuIcdIeHKX81DzhTnw68YJdL1ial05exiuvTLJMdHXQLKcVB93AncLPajMM6mUhaVVx5ALZzNHMTrq/U9Hg==
 
-"@wagmi/connectors@7.2.1":
-  version "7.2.1"
-  resolved "https://registry.npmjs.org/@wagmi/connectors/-/connectors-7.2.1.tgz"
-  integrity sha512-/tyDepUMDM8eNzNX3ofjqHNRFZ6XcZ3u0+cQp5x0/LHCpMA8tRh7A1/e7dTrYiIJeL7iLgHzfHUXCsU02OKMLQ==
+"@wagmi/connectors@8.0.0":
+  version "8.0.0"
+  resolved "https://registry.yarnpkg.com/@wagmi/connectors/-/connectors-8.0.0.tgz#1fe988639a97d1bbbfd2354d4b6cfd9ce234d0d9"
+  integrity sha512-Uvo1Y75o7/5ShuVJdmNPpAreGKHTLongAn2CO1pwPhVvaInt9FqR8bHjIraUp8aHjE1Xk81drc7K62khKVMg+Q==
 
-"@wagmi/core@3.4.0":
-  version "3.4.0"
-  resolved "https://registry.npmjs.org/@wagmi/core/-/core-3.4.0.tgz"
-  integrity sha512-EU5gDsUp5t7+cuLv12/L8hfyWfCIKsBNiiBqpOqxZJxvAcAiQk4xFe2jMgaQPqApc3Omvxrk032M8AQ4N0cQeg==
+"@wagmi/core@3.4.1":
+  version "3.4.1"
+  resolved "https://registry.yarnpkg.com/@wagmi/core/-/core-3.4.1.tgz#444c4cad1e4969e8388854bd443751d3f9bfd425"
+  integrity sha512-sEiwTERUmmxYwcvTEmKfN8ERDftt7JwutSAwa8RRAjmtJblUNBJp5VcPEzgQ+NPfnSO9Kq05OBSKSiocLNhhOQ==
   dependencies:
     eventemitter3 "5.0.1"
     mipd "0.0.7"
@@ -3796,10 +3796,10 @@ own-keys@^1.0.1:
     object-keys "^1.1.1"
     safe-push-apply "^1.0.0"
 
-ox@0.14.0:
-  version "0.14.0"
-  resolved "https://registry.npmjs.org/ox/-/ox-0.14.0.tgz"
-  integrity sha512-WLOB7IKnmI3Ol6RAqY7CJdZKl8QaI44LN91OGF1061YIeN6bL5IsFcdp7+oQShRyamE/8fW/CBRWhJAOzI35Dw==
+ox@0.14.7:
+  version "0.14.7"
+  resolved "https://registry.yarnpkg.com/ox/-/ox-0.14.7.tgz#efe6770f7a138f823fb2df26001b679c2565b0a4"
+  integrity sha512-zSQ/cfBdolj7U4++NAvH7sI+VG0T3pEohITCgcQj8KlawvTDY4vGVhDT64Atsm0d6adWfIYHDpu88iUBMMp+AQ==
   dependencies:
     "@adraffy/ens-normalize" "^1.11.0"
     "@noble/ciphers" "^1.3.0"
@@ -4653,10 +4653,10 @@ use-sync-external-store@^1.6.0:
   resolved "https://registry.npmjs.org/use-sync-external-store/-/use-sync-external-store-1.6.0.tgz"
   integrity sha512-Pp6GSwGP/NrPIrxVFAIkOQeyw8lFenOHijQWkUTrDvrF4ALqylP2C/KCkeS9dpUM3KvYRQhna5vt7IL95+ZQ9w==
 
-viem@^2.47.2:
-  version "2.47.2"
-  resolved "https://registry.npmjs.org/viem/-/viem-2.47.2.tgz"
-  integrity sha512-etDIwDgmDiGaPg8rUbJtUFuC3/nAJCbhMYyfh5dOcqNNkzBWTNcS2VluPSM5JVo+9U3b2hle2RkBEq3+xyvlvg==
+viem@^2.47.6:
+  version "2.47.6"
+  resolved "https://registry.yarnpkg.com/viem/-/viem-2.47.6.tgz#0249c166d5e0555074ffd3d320f2be2057551796"
+  integrity sha512-zExmbI99NGvMdYa7fmqSTLgkwh48dmhgEqFrUgkpL4kfG4XkVefZ8dZqIKVUhZo6Uhf0FrrEXOsHm9LUyIvI2Q==
   dependencies:
     "@noble/curves" "1.9.1"
     "@noble/hashes" "1.8.0"
@@ -4664,16 +4664,16 @@ viem@^2.47.2:
     "@scure/bip39" "1.6.0"
     abitype "1.2.3"
     isows "1.0.7"
-    ox "0.14.0"
+    ox "0.14.7"
     ws "8.18.3"
 
-wagmi@^3.5.0:
-  version "3.5.0"
-  resolved "https://registry.npmjs.org/wagmi/-/wagmi-3.5.0.tgz"
-  integrity sha512-39uiY6Vkc28NiAHrxJzVTodoRgSVGG97EewwUxRf+jcFMTe8toAnaM8pJZA3Zw/6snMg4tSgWLJAtMnOacLe7w==
+wagmi@^3.6.0:
+  version "3.6.0"
+  resolved "https://registry.yarnpkg.com/wagmi/-/wagmi-3.6.0.tgz#13d59026d5bba637dcf58ab5c3d495fed266748a"
+  integrity sha512-PIpihH3N4tDbtiJNmH4uExPjE4nwL7zU+y+DlUBoSGPw92bXl11mU6NXlruSCx+JKG+/ThAYeJivh+ByTpPQrw==
   dependencies:
-    "@wagmi/connectors" "7.2.1"
-    "@wagmi/core" "3.4.0"
+    "@wagmi/connectors" "8.0.0"
+    "@wagmi/core" "3.4.1"
     use-sync-external-store "1.4.0"
 
 web-vitals@^4.2.4:

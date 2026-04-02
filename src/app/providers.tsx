@@ -28,14 +28,14 @@ import { WagmiProvider } from "wagmi";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
-import { arbitrum, mainnet, sepolia } from "wagmi/chains";
+import { arbitrumSepolia } from "wagmi/chains";
 
 import { cookieStorage, createStorage } from "wagmi";
 
-const config = getDefaultConfig({
+export const config = getDefaultConfig({
   appName: "Stomatrade",
-  projectId: `${process.env.REOWN_PROJECT_ID}`,
-  chains: [mainnet, arbitrum, sepolia],
+  projectId: `${process.env.NEXT_PUBLIC_REOWN_PROJECT_ID}`,
+  chains: [arbitrumSepolia],
   ssr: true,
   storage: createStorage({
     storage: cookieStorage,
