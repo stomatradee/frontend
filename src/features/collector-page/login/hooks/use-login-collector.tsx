@@ -7,7 +7,7 @@ import { RegisterStatusRequestModel } from "@/repository/register/model/register
 import { GetRegisterProfilStatus } from "@/repository/register/register-repository";
 
 export function useLoginPage() {
-  const { pushRoute } = useNavigationUtils();
+  const { replaceRoute } = useNavigationUtils();
   const [isLoading, setLoading] = useState(false);
 
   const handleConnectWallet = useCallback(
@@ -23,14 +23,14 @@ export function useLoginPage() {
       console.log("result: ", result);
 
       if (result === true) {
-        pushRoute(routes.collector.dashboard);
+        replaceRoute(routes.collector.dashboard);
       } else {
-        pushRoute(routes.collector.registerProfile);
+        replaceRoute(routes.collector.registerProfile);
       }
 
       setLoading(false);
     },
-    [pushRoute],
+    [replaceRoute],
   );
 
   const handleTermsClick = useCallback(() => {

@@ -5,7 +5,7 @@ import { themeConfig } from "@/core/config/theme-config";
 import { SIDEBAR_WIDTH } from "./collector-sidebar";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { useAccount } from "wagmi";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 export interface CollectorNavbarProps {
   handleDisconnect: () => void;
@@ -16,13 +16,19 @@ export default function CollectorNavbar({
 }: CollectorNavbarProps) {
   const theme = themeConfig;
 
-  const { isDisconnected } = useAccount();
+  const { status } = useAccount();
+  const wasConnected = useRef(false);
 
   useEffect(() => {
-    if (isDisconnected) {
+    if (status === "connected") {
+      wasConnected.current = true;
+    }
+
+    if (status === "disconnected" && wasConnected.current) {
+      wasConnected.current = false;
       handleDisconnect();
     }
-  }, [isDisconnected, handleDisconnect]);
+  }, [status, handleDisconnect]);
 
   return (
     <AppBar
