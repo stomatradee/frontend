@@ -19,6 +19,7 @@ import { imageConfig } from "@/core/config/images-config";
 import { useAccount } from "wagmi";
 import { usePathname, useRouter } from "next/navigation";
 import { routes } from "@/core/config/routes";
+import Image from "next/image";
 
 export const SIDEBAR_WIDTH = 220;
 
@@ -97,45 +98,55 @@ export default function CollectorSidebar() {
       </Box>
 
       {/* User Info */}
-      <Box
-        sx={{
-          display: "flex",
-          alignItems: "center",
-          gap: 1.5,
-          px: 2,
-          pb: 3,
-        }}
-      >
-        <Avatar
+      <Box display="flex" flexDirection="column" alignItems="center">
+        <Image
+          src={imageConfig.icon.profileIcon}
+          alt="Profile Icon"
+          width={150}
+          height={150}
+          style={{ borderRadius: "20%" }}
+        />
+        <Box height={20} />
+        <Box
           sx={{
-            width: 36,
-            height: 36,
-            bgcolor: theme.colors.secondaryBgColors,
-            fontSize: 14,
+            display: "flex",
+            alignItems: "center",
+            gap: 1.5,
+            px: 2,
+            pb: 3,
           }}
         >
-          CP
-        </Avatar>
-        <Box width={120}>
-          <Typography
-            variant="body2"
-            fontWeight={600}
-            sx={{ color: theme.colors.white, fontSize: 13, lineHeight: 1.3 }}
-          >
-            Collector Pro
-          </Typography>
-          <Typography
-            variant="caption"
-            noWrap
+          <Avatar
             sx={{
-              color: theme.colors.white,
-              fontSize: 11,
-              width: "100%",
-              display: "block",
+              width: 36,
+              height: 36,
+              bgcolor: theme.colors.secondaryBgColors,
+              fontSize: 14,
             }}
           >
-            {address}
-          </Typography>
+            CP
+          </Avatar>
+          <Box width={120}>
+            <Typography
+              variant="body2"
+              fontWeight={600}
+              sx={{ color: theme.colors.white, fontSize: 13, lineHeight: 1.3 }}
+            >
+              Collector Pro
+            </Typography>
+            <Typography
+              variant="caption"
+              noWrap
+              sx={{
+                color: theme.colors.white,
+                fontSize: 11,
+                width: "100%",
+                display: "block",
+              }}
+            >
+              {address}
+            </Typography>
+          </Box>
         </Box>
       </Box>
 

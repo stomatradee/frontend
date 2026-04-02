@@ -71,7 +71,7 @@ export default function UserProfileCollectorView() {
             alt="Profile Icon"
             width={150}
             height={150}
-            style={{ borderRadius: "50%" }}
+            style={{ borderRadius: "20%" }}
           />
 
           <Box width={30} />
