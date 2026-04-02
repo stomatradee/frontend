@@ -217,7 +217,6 @@ export function useLandingPage() {
 
     const handleConnectWallet = useCallback(() => {
         setOpen(true);
-        console.log("Connect Wallet clicked");
     }, []);
 
     const handleCloseRoleDialog = useCallback(() => {
@@ -225,7 +224,6 @@ export function useLandingPage() {
     }, []);
 
     const handleRoleSelected = useCallback((role: "collector" | "investor") => {
-        console.log("Selected role:", role);
         setOpen(false);
 
         if (role == "collector") {

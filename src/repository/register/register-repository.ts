@@ -12,8 +12,6 @@ export async function RegisterCollectorRepository(data: RegisterRequestModel) {
     try {
         const result = await uploadDataToPinata(data);
 
-        console.log("result CID: ", result?.cid)
-
         return await writeContract(config, {
             address: ACCESS_REGISTRY_CONTRACT_ADDRESS,
             abi: ACCESS_REGISTRY_ABI,
@@ -36,7 +34,6 @@ async function uploadDataToPinata(data: RegisterRequestModel) {
 
         const result = await pinata.upload.public.json(data).url(url);
 
-        console.log("data pinata: ", result)
         return result;
     } catch (error) {
         console.error("Error uploading data to Pinata: ", error);
@@ -46,7 +43,6 @@ async function uploadDataToPinata(data: RegisterRequestModel) {
 }
 
 export async function GetRegisterProfilStatus(data: RegisterStatusRequestModel) {
-    console.log("data register status: ", data)
 
     try {
         const result = await readContract(config, {
@@ -55,8 +51,6 @@ export async function GetRegisterProfilStatus(data: RegisterStatusRequestModel) 
             functionName: "isRegisteredCollector",
             args: [data.contractAddress]
         })
-
-        console.log("result register status: ", result)
 
         return result as boolean;
     } catch (error) {

@@ -1,5 +1,5 @@
 export type ProfileRequestModel = {
-    contractAddress: string,
+    contractAddress: `0x${string}`,
     role: "collector" | "investor",
 }
 
