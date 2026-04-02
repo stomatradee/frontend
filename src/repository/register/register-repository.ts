@@ -10,7 +10,7 @@ import { RegisterStatusRequestModel } from "./model/register-status-model";
 
 export async function RegisterCollectorRepository(data: RegisterRequestModel) {
     try {
-        var result = await uploadDataToPinata(data);
+        const result = await uploadDataToPinata(data);
 
         console.log("result CID: ", result?.cid)
 
