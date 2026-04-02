@@ -5,22 +5,6 @@ import { config } from "@/app/providers";
 
 export async function GetCollectorProfileRepository(data: ProfileRequestModel): Promise<ProfileResponseModel | null> {
     try {
-        // const normalizedAddress = data.contractAddress.trim().toLowerCase();
-
-        // const docRef = query(
-        //     collection(db, "collectors"),
-        //     where("contractAddress", "==", normalizedAddress)
-        // );
-
-        // const docSnap = await getDocs(docRef);
-
-        // if (!docSnap.empty) {
-        //     const result = docSnap.docs[0].data();
-
-        //     return result as ProfileResponseModel;
-        // }
-
-        // return null;
 
         const temp = await readContract(config, {
             address: ACCESS_REGISTRY_CONTRACT_ADDRESS,
