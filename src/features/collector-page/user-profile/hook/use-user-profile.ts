@@ -20,7 +20,7 @@ export default function useUserProfile() {
 
         try {
             const data: ProfileRequestModel = {
-                contractAddress: address ?? "",
+                contractAddress: address ?? "0x0",
                 role: "collector",
             };
 

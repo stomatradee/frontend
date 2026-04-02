@@ -60,7 +60,7 @@ export default function useAddProjectCollectorForm() {
 
         try {
             const data: ProfileRequestModel = {
-                contractAddress: address ?? "",
+                contractAddress: address ?? "0x0",
                 role: "collector",
             };
 
