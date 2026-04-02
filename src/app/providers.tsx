@@ -34,7 +34,7 @@ import { cookieStorage, createStorage } from "wagmi";
 
 export const config = getDefaultConfig({
   appName: "Stomatrade",
-  projectId: `${process.env.NEXT_PUBLIC_REOWN_PROJECT_ID}`,
+  projectId: `${process.env.REOWN_PROJECT_ID}`,
   chains: [arbitrumSepolia],
   ssr: true,
   storage: createStorage({
