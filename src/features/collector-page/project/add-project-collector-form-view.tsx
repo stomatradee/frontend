@@ -85,6 +85,9 @@ export default function AddProjectCollectorFormView() {
           <UploadFileComponent
             title={"Asset Imagery"}
             description={"Please add the file image for new asset"}
+            onCIDChange={(cid) => {
+              methods.setValue("assetImageCid", cid, { shouldValidate: true });
+            }}
           />
           <Box height={30} />
           <InputProjectInformationComponent

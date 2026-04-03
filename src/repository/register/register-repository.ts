@@ -6,7 +6,20 @@ import { config } from "@/app/providers";
 import { ACCESS_REGISTRY_ABI, ACCESS_REGISTRY_CONTRACT_ADDRESS } from "@/core/config/abi/access-registry-abi";
 import { RegisterStatusRequestModel } from "./model/register-status-model";
 
+async function uploadDataToPinata(data: RegisterRequestModel) {
+    try {
+        const res = await fetch("/api/pinata-url");
+        const { url } = await res.json();
 
+        const result = await pinata.upload.public.json(data).url(url);
+
+        return result;
+    } catch (error) {
+        console.error("Error uploading data to Pinata: ", error);
+
+        throw error
+    }
+}
 
 export async function RegisterCollectorRepository(data: RegisterRequestModel) {
     try {
@@ -24,21 +37,6 @@ export async function RegisterCollectorRepository(data: RegisterRequestModel) {
         console.error("Error register user: ", e);
 
         throw e;
-    }
-}
-
-async function uploadDataToPinata(data: RegisterRequestModel) {
-    try {
-        const res = await fetch("/api/pinata-url");
-        const { url } = await res.json();
-
-        const result = await pinata.upload.public.json(data).url(url);
-
-        return result;
-    } catch (error) {
-        console.error("Error uploading data to Pinata: ", error);
-
-        throw error
     }
 }
 
