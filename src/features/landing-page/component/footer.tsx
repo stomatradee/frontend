@@ -196,7 +196,7 @@ export default function Footer({
                     {/* Brand Column */}
                     <Grid size={{ xs: 12, md: 3 }}>
                         <Stack spacing={2}>
-                            <Image src={logoSrc} alt="Stomatrade" width={160} height={36} style={{ objectFit: "contain", objectPosition: "left" }} />
+                            <Image src={logoSrc} alt="Stomatrade" width={160} height={36} style={{ width: "auto", height: "auto", objectFit: "contain", objectPosition: "left" }} />
                             <Typography variant="body2" sx={{ color: "rgba(255,255,255,0.5)", fontSize: "0.8rem", lineHeight: 1.7 }}>
                                 {brandDescription}
                             </Typography>
