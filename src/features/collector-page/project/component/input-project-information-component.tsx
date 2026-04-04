@@ -272,6 +272,7 @@ export default function InputProjectInformationComponent({
                 "& .MuiOutlinedInput-root": {
                   borderRadius: "25px",
                   backgroundColor: theme.colors.bgColors,
+                  color: theme.colors.white,
 
                   "& fieldset": {
                     borderColor: theme.colors.thirdBgColors,
@@ -293,8 +294,15 @@ export default function InputProjectInformationComponent({
                 },
 
                 "& .MuiInputBase-input": {
+                  color: `${theme.colors.white} !important`,
+                  WebkitTextFillColor: `${theme.colors.white} !important`,
+                },
+
+                "& .MuiPickersSectionList-root": {
                   color: theme.colors.white,
-                  WebkitTextFillColor: theme.colors.white,
+                },
+                "& .MuiPickersSectionList-section": {
+                  color: `${theme.colors.white} !important`,
                 },
 
                 "& .MuiSvgIcon-root": {
