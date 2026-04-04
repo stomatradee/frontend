@@ -9,7 +9,8 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+// import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { IDatePickerControl } from "@/core/types/common";
@@ -258,7 +259,7 @@ export default function InputProjectInformationComponent({
       </Typography>
       <Box height={20} />
       <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <DatePicker
+        <DateTimePicker
           label="Select Date"
           onChange={(date) => onDeliveryDateChange(date)}
           slotProps={{
@@ -280,7 +281,7 @@ export default function InputProjectInformationComponent({
                     borderColor: theme.colors.primaryColors,
                   },
                   "&.Mui-focused fieldset": {
-                    borderColor: theme.colors.primaryColors,
+                    borderColor: `${theme.colors.primaryColors} !important`,
                   },
                 },
 
@@ -344,6 +345,25 @@ export default function InputProjectInformationComponent({
                     backgroundColor: theme.colors.thirdBgColors,
                   },
                 },
+                "& .MuiMultiSectionDigitalClockSection-item": {
+                  color: theme.colors.white,
+                  "&:hover": {
+                    backgroundColor: theme.colors.thirdBgColors,
+                  },
+                  "&.Mui-selected": {
+                    backgroundColor: `${theme.colors.primaryColors} !important`,
+                    color: theme.colors.bgColors,
+                    "&:hover": {
+                      backgroundColor: theme.colors.primaryColors,
+                    },
+                    "&:focus": {
+                      backgroundColor: theme.colors.primaryColors,
+                    },
+                  },
+                },
+                "& .MuiButton-text": {
+                  color: theme.colors.primaryColors,
+                },
               },
             },
             day: {
@@ -353,7 +373,7 @@ export default function InputProjectInformationComponent({
                   backgroundColor: theme.colors.thirdBgColors,
                 },
                 "&.Mui-selected": {
-                  backgroundColor: theme.colors.primaryColors,
+                  backgroundColor: `${theme.colors.primaryColors} !important`,
                   color: theme.colors.bgColors,
                   fontWeight: 600,
                   "&:hover": {
