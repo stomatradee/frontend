@@ -3,9 +3,9 @@ import { useCallback, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import z from "zod/v3";
 import { IDatePickerControl } from "@/core/types/common";
-import { ProfileRequestModel } from "@/repository/profile/model/profile-request-model";
+import { ProfileRequestModel } from "@/repository/collector-profile/profile/model/profile-request-model";
 import { useAccount } from "wagmi";
-import { GetCollectorProfileRepository } from "@/repository/profile/profile-repository";
+import { GetCollectorProfileRepository } from "@/repository/collector-profile/profile/profile-repository";
 import { toast } from "sonner";
 
 export default function useAddProjectCollectorForm() {

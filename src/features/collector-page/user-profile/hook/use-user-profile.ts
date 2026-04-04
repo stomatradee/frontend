@@ -1,7 +1,7 @@
 "use client"
 
-import { ProfileRequestModel, ProfileResponseModel } from "@/repository/profile/model/profile-request-model";
-import { GetCollectorProfileRepository } from "@/repository/profile/profile-repository";
+import { ProfileRequestModel, ProfileResponseModel } from "@/repository/collector-profile/profile/model/profile-request-model";
+import { GetCollectorProfileRepository } from "@/repository/collector-profile/profile/profile-repository";
 import { useCallback, useEffect, useState } from "react";
 import { toast } from "sonner";
 import { useAccount, useEnsAvatar, useEnsName } from "wagmi";

@@ -10,8 +10,13 @@ import {
   Typography,
 } from "@mui/material";
 import { themeConfig } from "@/core/config/theme-config";
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { LoadingScreen } from "@/core/component/loading-component";
+import {
+  getUSDTSymbol,
+  getUSDCSymbol,
+} from "@/repository/token/token-repository";
+import { toast } from "sonner";
 
 type FinancialInformationComponentProps = {
   assetPriceValue?: string;
@@ -40,18 +45,64 @@ export default function FinancialInformationComponent({
 
   const [isLoading, setLoading] = useState<boolean>(false);
 
-  const tokenCodeList = [
+  // const tokenCodeList = [
+  //   {
+  //     value: "USDT",
+  //     label: "USDT",
+  //   },
+  //   {
+  //     value: "USDC",
+  //     label: "USDC",
+  //   },
+  // ];
+
+  const [tokenCodeList, setTokenCodeList] = useState<
     {
-      value: "USDT",
-      label: "USDT",
-    },
-    {
-      value: "USDC",
-      label: "USDC",
-    },
-  ];
+      value: string;
+      label: string;
+    }[]
+  >([]);
 
   const [tokenCode, setTokenCode] = useState("USDT");
+
+  const getToken = useCallback(async () => {
+    try {
+      setLoading(true);
+      const usdtToken = await getUSDTSymbol();
+      const usdcToken = await getUSDCSymbol();
+
+      const usdtValue = {
+        value: usdtToken,
+        label: usdtToken,
+      };
+
+      const usdcValue = {
+        value: usdcToken,
+        label: usdcToken,
+      };
+
+      setTokenCodeList([usdtValue, usdcValue]);
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+      toast.error(`Get data failed: ${error}`, {
+        position: "top-center",
+        style: {
+          width: "600px",
+          left: "50%",
+          right: "50%",
+          transform: "translate(-50%)",
+          display: "flex",
+          alignItems: "center",
+        },
+      });
+    }
+  }, []);
+
+  useEffect(() => {
+    getToken();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <Card

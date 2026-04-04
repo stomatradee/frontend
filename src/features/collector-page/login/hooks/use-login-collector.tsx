@@ -3,8 +3,8 @@
 import { useNavigationUtils } from "@/core/hooks/use-navigation-utils";
 import { routes } from "@/core/config/routes";
 import { useCallback, useState } from "react";
-import { RegisterStatusRequestModel } from "@/repository/register/model/register-status-model";
-import { GetRegisterProfilStatus } from "@/repository/register/register-repository";
+import { RegisterStatusRequestModel } from "@/repository/collector-profile/register/model/register-status-model";
+import { GetRegisterProfilStatus } from "@/repository/collector-profile/register/register-repository";
 
 export function useLoginPage() {
   const { replaceRoute } = useNavigationUtils();

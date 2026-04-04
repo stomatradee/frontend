@@ -1,8 +1,8 @@
 import { useNavigationUtils } from "@/core/hooks/use-navigation-utils";
 import { routes } from "@/core/config/routes";
 import { useCallback, useState } from "react";
-import { RegisterRequestModel } from "@/repository/register/model/register-model";
-import { RegisterCollectorRepository } from "@/repository/register/register-repository";
+import { RegisterRequestModel } from "@/repository/collector-profile/register/model/register-model";
+import { RegisterCollectorRepository } from "@/repository/collector-profile/register/register-repository";
 import { toast } from 'sonner';
 import { useAccount } from "wagmi";
 

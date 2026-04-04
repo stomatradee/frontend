@@ -3,7 +3,7 @@ import { pinata } from "@/core/utils/config";
 
 import { writeContract, readContract } from "@wagmi/core";
 import { config } from "@/app/providers";
-import { ACCESS_REGISTRY_ABI, ACCESS_REGISTRY_CONTRACT_ADDRESS } from "@/core/config/abi/access-registry-abi";
+import { ACCESS_REGISTRY_ABI, ACCESS_REGISTRY_CONTRACT_ADDRESS } from "@/repository/collector-profile/abi/access-registry-abi";
 import { RegisterStatusRequestModel } from "./model/register-status-model";
 
 async function uploadDataToPinata(data: RegisterRequestModel) {
