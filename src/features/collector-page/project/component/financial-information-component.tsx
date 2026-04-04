@@ -21,40 +21,21 @@ import { toast } from "sonner";
 type FinancialInformationComponentProps = {
   assetPriceValue?: string;
   fundingPriceValue?: string;
-  investmentStatus?: boolean;
-  rateValue?: string;
   onAssetPriceChange?: (value: string) => void;
   onFundingPriceChange?: (value: string) => void;
-  onInvestmentStatusChange?: (value: boolean) => void;
-  onRateValueChange?: (value: string) => void;
   onTokenCodeChange?: (value: string) => void;
 };
 
 export default function FinancialInformationComponent({
   assetPriceValue,
   fundingPriceValue,
-  investmentStatus,
-  rateValue,
   onAssetPriceChange,
   onFundingPriceChange,
-  onInvestmentStatusChange,
-  onRateValueChange,
   onTokenCodeChange,
 }: FinancialInformationComponentProps) {
   const theme = themeConfig;
 
   const [isLoading, setLoading] = useState<boolean>(false);
-
-  // const tokenCodeList = [
-  //   {
-  //     value: "USDT",
-  //     label: "USDT",
-  //   },
-  //   {
-  //     value: "USDC",
-  //     label: "USDC",
-  //   },
-  // ];
 
   const [tokenCodeList, setTokenCodeList] = useState<
     {
@@ -81,6 +62,8 @@ export default function FinancialInformationComponent({
         label: usdcToken,
       };
 
+      onTokenCodeChange?.(usdtToken);
+
       setTokenCodeList([usdtValue, usdcValue]);
       setLoading(false);
     } catch (error) {
@@ -103,6 +86,15 @@ export default function FinancialInformationComponent({
     getToken();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const calculateFundingPrice = useCallback(
+    (newAssetPriceStr: string) => {
+      const assetPrice = parseInt(newAssetPriceStr || "0");
+      const fundingPrice = (assetPrice * 75) / 100;
+      onFundingPriceChange?.(fundingPrice.toString());
+    },
+    [onFundingPriceChange],
+  );
 
   return (
     <Card
@@ -248,7 +240,11 @@ export default function FinancialInformationComponent({
                 type="number"
                 placeholder="Input Asset Price"
                 value={assetPriceValue ?? ""}
-                onChange={(e) => onAssetPriceChange?.(e.target.value)}
+                onChange={(e) => {
+                  const newValue = e.target.value;
+                  onAssetPriceChange?.(newValue);
+                  calculateFundingPrice(newValue);
+                }}
                 variant="outlined"
                 fullWidth
                 slotProps={{
@@ -356,17 +352,17 @@ export default function FinancialInformationComponent({
               />
             </Box>
           </Box>
-          <Box height={50} />
+          {/* <Box height={50} /> */}
           <Box
-            display="flex"
-            flexDirection="row"
-            alignItems="flex-start"
-            margin="0 auto"
-            gap={3}
-            width="100%"
+          // // display="flex"
+          // // flexDirection="row"
+          // // alignItems="flex-start"
+          // // margin="0 auto"
+          // // gap={3}
+          // width="100%"
           >
             {/* Category Column */}
-            <Box display="flex" flexDirection="column" flex={1}>
+            {/* <Box display="flex" flexDirection="column" flex={1}>
               <Typography
                 variant="body1"
                 color={theme.colors.white}
@@ -425,10 +421,10 @@ export default function FinancialInformationComponent({
                   },
                 }}
               />
-            </Box>
+            </Box> */}
 
             {/* Quantity Column */}
-            <Box display="flex" flexDirection="column" flex={1}>
+            {/* <Box display="flex" flexDirection="column" flex={1}>
               <Typography
                 variant="body1"
                 color={theme.colors.white}
@@ -456,7 +452,7 @@ export default function FinancialInformationComponent({
                   },
                 }}
               />
-            </Box>
+            </Box> */}
           </Box>
         </>
       )}

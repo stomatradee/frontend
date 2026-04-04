@@ -1,119 +1,127 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useCallback, useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import z from "zod/v3";
-import { IDatePickerControl } from "@/core/types/common";
-import { ProfileRequestModel } from "@/repository/collector-profile/profile/model/profile-request-model";
+import { IDatePickerControl, TokenSymbol } from "@/core/types/common";
 import { useAccount } from "wagmi";
-import { GetCollectorProfileRepository } from "@/repository/collector-profile/profile/profile-repository";
-import { toast } from "sonner";
 
 export default function useAddProjectCollectorForm() {
     const RegisterCollectorSchema = z.object({
-        contractAddress: z.string().min(1, "Contract Address is required"),
-        role: z.string().min(1, "Role is required"),
-        fullname: z.string().min(1, "Fullname is required"),
-        phoneNumber: z.string().min(1, "Phone Number is required"),
-        residenceId: z.string().min(1, "Residence ID is required"),
-        companyName: z.string().min(1, "Company Name is required"),
-        companyAddress: z.string().min(1, "Company Address is required"),
         assetName: z.string().min(1, "Asset Name is required"),
-        assetImageCid: z.string().min(1, "Asset Image is required"),
-        quantity: z.string().min(1, "Quantity is required"),
-        assetCategory: z.string().min(1, "Asset Category is required"),
+        imageCID: z.string().min(1, "Image CID is required"),
+        category: z.string().min(1, "Category is required"),
+        weight: z.string().min(1, "Weight is required"),
         deliveryDate: z.custom<IDatePickerControl>(),
+        fundingDuration: z.string().min(1, "Funding Duration is required"),
+        repaymentDuration: z.string().min(1, "Repayment Duration is required"),
+        tokenContractAddress: z.string().min(1, "Token Contract Address is required"),
         assetPrice: z.string().min(1, "Asset Price is required"),
         fundingPrice: z.string().min(1, "Funding Price is required"),
-        returnRate: z.string().min(1, "Return Rate is required"),
-        tokenCode: z.string().min(1, "Token Code is required"),
-        investmentStatus: z.boolean().default(false),
-        currentFundingPrice: z.string().default("0"),
     });
 
     const methods = useForm({
         resolver: zodResolver(RegisterCollectorSchema),
         defaultValues: {
-            fullname: "",
-            phoneNumber: "",
-            residenceId: "",
-            companyName: "",
-            companyAddress: "",
             assetName: "",
-            assetImageCid: "",
-            quantity: "",
-            assetCategory: "",
-            deliveryDate: null,
+            imageCID: "",
+            category: "",
+            weight: "",
+            deliveryDate: "",
+            fundingDuration: "",
+            repaymentDuration: "",
+            tokenContractAddress: "",
             assetPrice: "",
             fundingPrice: "",
-            returnRate: "",
-            tokenCode: "",
-            investmentStatus: false,
-            currentFundingPrice: "0",
         },
     });
 
-    const [isLoading, setLoading] = useState(false)
+    const [isLoading, setLoading] = useState(false);
     const { address } = useAccount();
 
-    const getUserProfile = useCallback(async () => {
-        setLoading(true)
+    const [assetName, setAssetName] = useState<string>("");
+    const [fundingDuration, setFundingDuration] = useState<string>("");
+    const [repaymentDuration, setRepaymentDuration] = useState<string>("");
+    const [cidImage, setCidImage] = useState<string>("");
+    const [weight, setWeight] = useState<string>("");
+    const [assetPrice, setAssetPrice] = useState<string>("");
+    const [fundingPrice, setFundingPrice] = useState<string>("");
 
-        try {
-            const data: ProfileRequestModel = {
-                contractAddress: address ?? "0x0",
-                role: "collector",
-            };
+    const handleAssetNameChange = (value: string) => {
+        setAssetName(value);
+        methods.setValue("assetName", value, { shouldValidate: true });
+    };
 
-            const result = await GetCollectorProfileRepository(data)
+    const handleCidImageChange = (cid: string) => {
+        setCidImage(cid);
+        methods.setValue("imageCID", cid, { shouldValidate: true });
+    };
 
-            if (result !== null) {
-                result.contractAddress = address ?? ""
-                methods.setValue("contractAddress", address ?? "")
-                methods.setValue("role", result.role)
-                methods.setValue("fullname", result.fullname)
-                methods.setValue("phoneNumber", result.phoneNumber)
-                methods.setValue("residenceId", result.residenceId)
-                methods.setValue("companyName", result.companyName)
-                methods.setValue("companyAddress", result.companyAddress)
+    const handleFundingDurationChange = (duration: string) => {
+        setFundingDuration(duration);
+        methods.setValue("fundingDuration", duration, { shouldValidate: true });
+    };
 
-            } else {
-                toast.error("Data Not Found", {
-                    position: 'top-center',
-                    style: {
-                        width: '600px',
-                        left: '50%',
-                        right: '50%',
-                        transform: 'translate(-50%)',
-                        display: 'flex',
-                        alignItems: 'center',
-                    },
-                });
-            }
-        } catch (error) {
-            toast.error(`Get data failed: ${error}`, {
-                position: 'top-center',
-                style: {
-                    width: '600px',
-                    left: '50%',
-                    right: '50%',
-                    transform: 'translate(-50%)',
-                    display: 'flex',
-                    alignItems: 'center',
-                },
-            });
+    const handleRepaymentDurationChange = (duration: string) => {
+        setRepaymentDuration(duration);
+        methods.setValue("repaymentDuration", duration, { shouldValidate: true });
+    };
+
+    const handleCategoryChange = (category: string) => {
+        console.log("category", category);
+        methods.setValue("category", category, { shouldValidate: true });
+    };
+
+    const handleWeightChange = (weightParam: string) => {
+        setWeight(weightParam);
+        methods.setValue("weight", weightParam, { shouldValidate: true });
+    };
+
+    const handleDeliveryDateChange = (date: IDatePickerControl) => {
+        methods.setValue("deliveryDate", date, { shouldValidate: true });
+    };
+
+    const handleAssetPriceChange = (price: string) => {
+        setAssetPrice(price);
+        methods.setValue("assetPrice", price, { shouldValidate: true });
+    };
+
+    const handleFundingPriceChange = (price: string) => {
+        setFundingPrice(price);
+        methods.setValue("fundingPrice", price, { shouldValidate: true });
+    };
+
+    const handleTokenCodeChange = (tokenCode: string) => {
+        if (tokenCode === TokenSymbol.USDC) {
+            methods.setValue("tokenContractAddress", process.env.NEXT_PUBLIC_MOCK_USDC_ADDRESS || "", { shouldValidate: true });
+        } else if (tokenCode === TokenSymbol.USDT) {
+            methods.setValue("tokenContractAddress", process.env.NEXT_PUBLIC_MOCK_USDT_ADDRESS || "", { shouldValidate: true });
         }
+    };
 
-        setLoading(false)
-    }, [address, methods])
-
-    useEffect(() => {
-        getUserProfile()
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
-
+    const onSubmit = () => {
+        console.log(methods.getValues());
+    };
 
     return {
         methods,
         isLoading,
+        assetName,
+        handleAssetNameChange,
+        fundingDuration,
+        handleFundingDurationChange,
+        repaymentDuration,
+        handleRepaymentDurationChange,
+        cidImage,
+        handleCidImageChange,
+        weight,
+        handleWeightChange,
+        assetPrice,
+        handleAssetPriceChange,
+        fundingPrice,
+        handleFundingPriceChange,
+        handleCategoryChange,
+        handleDeliveryDateChange,
+        handleTokenCodeChange,
+        onSubmit,
     }
 }

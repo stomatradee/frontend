@@ -11,17 +11,29 @@ import UploadFileComponent from "@/core/component/upload-file-component";
 import InputProjectInformationComponent from "./component/input-project-information-component";
 import FinancialInformationComponent from "./component/financial-information-component";
 import SubmitButtonComponent from "@/core/component/submit-button-component";
-import { useState } from "react";
-
 export default function AddProjectCollectorFormView() {
-  const { methods, isLoading } = useAddProjectCollectorForm();
-
-  const [assetName, setAssetName] = useState<string>("");
-  const [rateInvestment, setRateInvestment] = useState<string>("");
-  const [quantity, setQuantity] = useState<string>("");
-  const [assetPrice, setAssetPrice] = useState<string>("");
-  const [fundingPrice, setFundingPrice] = useState<string>("");
-  const [investmentStatus, setInvestmentStatus] = useState<boolean>(false);
+  const {
+    methods,
+    isLoading,
+    assetName,
+    handleAssetNameChange,
+    fundingDuration,
+    handleFundingDurationChange,
+    repaymentDuration,
+    handleRepaymentDurationChange,
+    cidImage,
+    handleCidImageChange,
+    weight,
+    handleWeightChange,
+    assetPrice,
+    handleAssetPriceChange,
+    fundingPrice,
+    handleFundingPriceChange,
+    handleCategoryChange,
+    handleDeliveryDateChange,
+    handleTokenCodeChange,
+    onSubmit,
+  } = useAddProjectCollectorForm();
 
   return (
     <>
@@ -76,82 +88,41 @@ export default function AddProjectCollectorFormView() {
             label={"Asset Name"}
             placeholder={"Input Asset Name..."}
             value={assetName}
-            onChange={(value) => {
-              setAssetName(value);
-              methods.setValue("assetName", value, { shouldValidate: true });
-            }}
+            onChange={handleAssetNameChange}
           />
           <Box height={30} />
           <UploadFileComponent
             title={"Asset Imagery"}
             description={"Please add the file image for new asset"}
-            onCIDChange={(cid) => {
-              methods.setValue("assetImageCid", cid, { shouldValidate: true });
-            }}
+            onCIDChange={handleCidImageChange}
           />
           <Box height={30} />
           <InputProjectInformationComponent
             title={"Asset Information"}
             description={"Please add the information for new asset"}
-            quantityValue={quantity}
-            onCategoryChange={(category) => {
-              methods.setValue("assetCategory", category, {
-                shouldValidate: true,
-              });
-            }}
-            onQuantityChange={(quantity) => {
-              setQuantity(quantity);
-              methods.setValue("quantity", quantity, {
-                shouldValidate: true,
-              });
-            }}
-            onDeliveryDateChange={(date) => {
-              methods.setValue("deliveryDate", date, {
-                shouldValidate: true,
-              });
-            }}
+            quantityValue={weight}
+            fundingDurationValue={fundingDuration}
+            repaymentDurationValue={repaymentDuration}
+            onFundingDurationChange={handleFundingDurationChange}
+            onRepaymentDurationChange={handleRepaymentDurationChange}
+            onCategoryChange={handleCategoryChange}
+            onQuantityChange={handleWeightChange}
+            onDeliveryDateChange={handleDeliveryDateChange}
           />
           <Box height={30} />
           <FinancialInformationComponent
             assetPriceValue={assetPrice}
             fundingPriceValue={fundingPrice}
-            investmentStatus={investmentStatus}
-            rateValue={rateInvestment}
-            onAssetPriceChange={(assetPrice) => {
-              setAssetPrice(assetPrice);
-              methods.setValue("assetPrice", assetPrice, {
-                shouldValidate: true,
-              });
-            }}
-            onFundingPriceChange={(fundingPrice) => {
-              setFundingPrice(fundingPrice);
-              methods.setValue("fundingPrice", fundingPrice, {
-                shouldValidate: true,
-              });
-            }}
-            onInvestmentStatusChange={(investmentStatus) => {
-              setInvestmentStatus(investmentStatus);
-              methods.setValue("investmentStatus", investmentStatus, {
-                shouldValidate: true,
-              });
-            }}
-            onTokenCodeChange={(tokenCode) => {
-              methods.setValue("tokenCode", tokenCode, {
-                shouldValidate: true,
-              });
-            }}
-            onRateValueChange={(rateValue) => {
-              setRateInvestment(rateValue);
-              methods.setValue("returnRate", rateValue, {
-                shouldValidate: true,
-              });
-            }}
+            onAssetPriceChange={handleAssetPriceChange}
+            onFundingPriceChange={handleFundingPriceChange}
+            onTokenCodeChange={handleTokenCodeChange}
           />
           <Box height={30} />
           <SubmitButtonComponent
             title={"Submit Your Asset?"}
             description={"Press the right button to submit your Asset"}
             disabled={!methods.formState.isValid}
+            onSubmit={onSubmit}
             isLoading={isLoading}
           />
         </Box>
