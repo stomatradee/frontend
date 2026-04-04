@@ -1,6 +1,6 @@
 import { Box, Card, Typography } from "@mui/material";
 import { themeConfig } from "../config/theme-config";
-import { HTMLInputTypeAttribute, useState } from "react";
+import { useState } from "react";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import UploadFileRepository from "@/repository/upload-file/uplolad-file-repository";
 import { UploadFileRequestModel } from "@/repository/upload-file/model/upload-file-model";

@@ -21,7 +21,6 @@ export default function AddProjectCollectorFormView() {
     handleFundingDurationChange,
     repaymentDuration,
     handleRepaymentDurationChange,
-    cidImage,
     handleCidImageChange,
     weight,
     handleWeightChange,

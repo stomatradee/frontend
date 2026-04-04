@@ -1,9 +1,8 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import z from "zod/v3";
 import { IDatePickerControl, TokenSymbol } from "@/core/types/common";
-import { useAccount } from "wagmi";
 import { SubmitProjectPinataRequestModel } from "@/repository/project/model/submit-project-model";
 import { submitProject } from "@/repository/project/project-repository";
 import { toast } from "sonner";
@@ -123,7 +122,7 @@ export default function useAddProjectCollectorForm() {
 
             console.log(param);
 
-            const response = await submitProject(param);
+            await submitProject(param);
 
             toast.success(`Success minting asset to blockchain`, {
                 position: "top-center",

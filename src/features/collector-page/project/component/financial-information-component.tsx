@@ -5,7 +5,6 @@ import {
   Card,
   InputAdornment,
   MenuItem,
-  Switch,
   TextField,
   Typography,
 } from "@mui/material";
@@ -80,7 +79,7 @@ export default function FinancialInformationComponent({
         },
       });
     }
-  }, []);
+  }, [onTokenCodeChange]);
 
   useEffect(() => {
     getToken();
