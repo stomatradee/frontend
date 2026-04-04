@@ -18,7 +18,7 @@ export async function getUSDTSymbol(): Promise<string> {
         }
     } catch (error) {
         console.error("Error getting USDT symbol:", error);
-        throw new Error("Failed to get USDT symbol");
+        throw new Error(`Failed to get USDT symbol: ${error}`);
     }
 }
 
@@ -37,6 +37,6 @@ export async function getUSDCSymbol(): Promise<string> {
         }
     } catch (error) {
         console.error("Error getting USDC symbol:", error);
-        throw new Error("Failed to get USDC symbol");
+        throw new Error(`Failed to get USDC symbol: ${error}`);
     }
 }

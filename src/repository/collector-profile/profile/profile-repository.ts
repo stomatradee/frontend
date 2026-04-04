@@ -1,4 +1,4 @@
-import { ProfileRequestModel, ProfileResponseModel } from "./model/profile-request-model";
+import { ProfileRequestModel, ProfileResponseModel } from "./model/profile-model";
 import { readContract } from "@wagmi/core";
 import { ACCESS_REGISTRY_ABI, ACCESS_REGISTRY_CONTRACT_ADDRESS } from "@/repository/collector-profile/abi/access-registry-abi";
 import { config } from "@/app/providers";

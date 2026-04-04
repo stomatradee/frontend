@@ -4,6 +4,11 @@ import { useForm } from "react-hook-form";
 import z from "zod/v3";
 import { IDatePickerControl, TokenSymbol } from "@/core/types/common";
 import { useAccount } from "wagmi";
+import { SubmitProjectPinataRequestModel } from "@/repository/project/model/submit-project-model";
+import { submitProject } from "@/repository/project/project-repository";
+import { toast } from "sonner";
+import { useNavigationUtils } from "@/core/hooks/use-navigation-utils";
+import { routes } from "@/core/config/routes";
 
 export default function useAddProjectCollectorForm() {
     const RegisterCollectorSchema = z.object({
@@ -36,7 +41,7 @@ export default function useAddProjectCollectorForm() {
     });
 
     const [isLoading, setLoading] = useState(false);
-    const { address } = useAccount();
+    const { replaceRoute } = useNavigationUtils();
 
     const [assetName, setAssetName] = useState<string>("");
     const [fundingDuration, setFundingDuration] = useState<string>("");
@@ -98,8 +103,58 @@ export default function useAddProjectCollectorForm() {
         }
     };
 
-    const onSubmit = () => {
+    const onSubmit = async () => {
         console.log(methods.getValues());
+
+        try {
+            setLoading(true);
+            const param: SubmitProjectPinataRequestModel = {
+                assetName: methods.getValues("assetName"),
+                imageCID: methods.getValues("imageCID"),
+                category: methods.getValues("category"),
+                weight: methods.getValues("weight"),
+                deliveryDate: methods.getValues("deliveryDate")?.toString() || "",
+                fundingDuration: String(Math.floor(Date.now() / 1000) + (Number(methods.getValues("fundingDuration")) * 24 * 60 * 60)),
+                repaymentDuration: String(Math.floor(Date.now() / 1000) + (Number(methods.getValues("repaymentDuration")) * 24 * 60 * 60)),
+                tokenContractAddress: methods.getValues("tokenContractAddress"),
+                assetPrice: methods.getValues("assetPrice"),
+                fundingPrice: methods.getValues("fundingPrice"),
+            }
+
+            console.log(param);
+
+            const response = await submitProject(param);
+
+            toast.success(`Success minting asset to blockchain`, {
+                position: "top-center",
+                style: {
+                    width: "600px",
+                    left: "50%",
+                    right: "50%",
+                    transform: "translate(-50%)",
+                    display: "flex",
+                    alignItems: "center",
+                },
+            });
+
+            setLoading(false);
+
+            replaceRoute(routes.collector.dashboard);
+        } catch (error) {
+            setLoading(false);
+            toast.error(`Get data failed: ${error}`, {
+                position: "top-center",
+                style: {
+                    width: "600px",
+                    left: "50%",
+                    right: "50%",
+                    transform: "translate(-50%)",
+                    display: "flex",
+                    alignItems: "center",
+                },
+            });
+        }
+
     };
 
     return {
