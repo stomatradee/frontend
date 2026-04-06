@@ -1,8 +1,28 @@
+"use client";
+
 import { themeConfig } from "@/core/config/theme-config";
 import { Box, Typography } from "@mui/material";
+import EmptyAssetComponent from "./component/empty-asset-component";
+import { LoadingScreen } from "@/core/component/loading-component";
+import useMyProject from "./hooks/use-my-project";
 
 export default function MyProjectCollectorView() {
   const theme = themeConfig;
+
+  const { isLoading } = useMyProject();
+
+  if (isLoading) {
+    return (
+      <Box
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        minHeight="100vh"
+      >
+        <LoadingScreen />
+      </Box>
+    );
+  }
 
   return (
     <Box
@@ -19,6 +39,7 @@ export default function MyProjectCollectorView() {
       >
         My Asset
       </Typography>
+      <EmptyAssetComponent />
     </Box>
   );
 }

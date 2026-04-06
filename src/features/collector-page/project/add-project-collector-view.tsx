@@ -35,11 +35,10 @@ export default function AddProjectCollectorView() {
         paddingTop="90px"
       >
         <Image
-          src={imageConfig.icon.profileIcon}
+          src={imageConfig.icon.sudgestedIcon}
           alt="Profile Icon"
           width={150}
           height={150}
-          style={{ borderRadius: "50%" }}
         />
         <Box height={30} />
         <Typography

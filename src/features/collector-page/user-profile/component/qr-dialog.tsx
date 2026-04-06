@@ -27,7 +27,7 @@ export default function QrDialog({
       onClose={onClose}
       PaperProps={{
         sx: {
-          bgcolor: themeConfig.colors.secondaryBgColors,
+          bgcolor: themeConfig.colors.bgColors,
           color: themeConfig.colors.white,
           borderRadius: "16px",
           border: `1px solid ${themeConfig.colors.thirdBgColors}`,
