@@ -62,3 +62,5 @@ export async function submitProject(data: SubmitProjectPinataRequestModel) {
         throw new Error(`Failed to submit project: ${error}`);
     }
 }
+
+export async function getCollectorProject() { }
