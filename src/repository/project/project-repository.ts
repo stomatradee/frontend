@@ -3,6 +3,10 @@ import { SubmitProjectPinataRequestModel, SubmitProjectRequestModel } from "./mo
 import { writeContract } from "@wagmi/core";
 import { PROJECT_NFT_ABI, PROJECT_NFT_CONTRACT_ADDRESS } from "./abi/project-abi";
 import { config } from "@/app/providers";
+import apiConfig from "@/core/config/api-config/api-config";
+import { ENDPOINTS } from "@/core/config/api-config/endpoints";
+import { HTTP_METHOD } from "@/core/config/api-config/http-method";
+import { getCollectorProjectRequestModel, getCollectorProjectResponseModel } from "./model/get-collector-project";
 
 async function submitProjectPinata(data: SubmitProjectPinataRequestModel) {
     try {
@@ -63,4 +67,27 @@ export async function submitProject(data: SubmitProjectPinataRequestModel) {
     }
 }
 
-export async function getCollectorProject() { }
+export async function getCollectorProject(data: getCollectorProjectRequestModel) {
+    try {
+        const response = await apiConfig({
+            endpoint: `${ENDPOINTS.collectorAllData}/${data.address}`,
+            method: HTTP_METHOD.GET,
+        });
+
+        if (response.status !== 200) {
+            throw new Error(`Failed to fetch collector project: ${response.statusText}`);
+        } else {
+            const data = await response.json();
+
+            const result: getCollectorProjectResponseModel = {
+                collector: data.collector,
+                projects: data.projects,
+            }
+
+            return result;
+        }
+    } catch (error) {
+        console.error("Error fetching collector project: ", error);
+        throw new Error(`Failed to fetch collector project: ${error}`);
+    }
+}

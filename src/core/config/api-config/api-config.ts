@@ -1,14 +1,24 @@
-export default async function apiConfig(endpoint: string, method: string = "GET", body?: any) {
+type ApiConfigParams = {
+    endpoint: string;
+    method?: string;
+    requestParam?: any;
+};
+
+export default async function apiConfig({ endpoint, method = "GET", requestParam }: ApiConfigParams) {
     try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}${endpoint}`, {
+        const url = `${process.env.NEXT_PUBLIC_API_BASE_URL}${endpoint}`
+
+        console.log("url: ", url)
+
+        const response = await fetch(url, {
             method: method,
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify(body),
+            body: requestParam ? JSON.stringify(requestParam) : undefined,
         });
-        const data = await response.json();
-        return data;
+        // const data = await response.json();
+        return response;
     } catch (error) {
         console.error("Error fetching config: ", error);
         throw new Error(`Failed to fetch config: ${error}`);

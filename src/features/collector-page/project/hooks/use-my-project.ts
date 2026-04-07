@@ -1,14 +1,41 @@
+import { getCollectorProjectRequestModel, getCollectorProjectResponseModel } from "@/repository/project/model/get-collector-project";
+import { getCollectorProject } from "@/repository/project/project-repository";
 import { useCallback, useEffect, useState } from "react";
+import { toast } from "sonner";
+import { useAccount } from "wagmi";
 
 export default function useMyProject() {
     const [isLoading, setLoading] = useState(false)
+    const { address } = useAccount();
+
+    const [data, setData] = useState<getCollectorProjectResponseModel | null>(null)
 
     const getMyProject = useCallback(async () => {
-        setLoading(true)
+        try {
+            setLoading(true)
 
-        await new Promise((resolve) => setTimeout(resolve, 1000));
+            const param: getCollectorProjectRequestModel = {
+                address: address ?? "0x0",
+            }
 
-        setLoading(false)
+            const response = await getCollectorProject(param)
+
+            setData(response)
+
+            setLoading(false)
+        } catch (error) {
+            toast.error(`Get data failed: ${error}`, {
+                position: 'top-center',
+                style: {
+                    width: '600px',
+                    left: '50%',
+                    right: '50%',
+                    transform: 'translate(-50%)',
+                    display: 'flex',
+                    alignItems: 'center',
+                },
+            });
+        }
     }, [])
 
     useEffect(() => {
@@ -18,5 +45,6 @@ export default function useMyProject() {
 
     return {
         isLoading,
+        data,
     }
 }
