@@ -40,7 +40,7 @@ export default function useMyProject() {
                 },
             });
         }
-    }, [])
+    }, [address])
 
     useEffect(() => {
         getMyProject()

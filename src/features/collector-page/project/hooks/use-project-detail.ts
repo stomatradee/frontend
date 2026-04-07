@@ -41,7 +41,7 @@ export default function UseProjectDetail() {
                 },
             });
         }
-    }, [])
+    }, [projectId])
 
     useEffect(() => {
         getProjectDetail()

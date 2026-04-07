@@ -1,7 +1,7 @@
 type ApiConfigParams = {
     endpoint: string;
     method?: string;
-    requestParam?: any;
+    requestParam?: unknown;
 };
 
 export default async function apiConfig({ endpoint, method = "GET", requestParam }: ApiConfigParams) {

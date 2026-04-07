@@ -25,7 +25,7 @@ export default function EmptyAssetComponent() {
         fontWeight={600}
         sx={{ fontSize: { xs: 16, sm: 18, md: 15 } }}
       >
-        You don't have any asset yet
+        You dont have any asset yet
       </Typography>
       <Box height={30} />
     </Box>
