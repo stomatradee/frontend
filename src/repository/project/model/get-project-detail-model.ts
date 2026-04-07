@@ -32,18 +32,24 @@ export type ProjectDataResponse = {
     collector: string;
     acceptedToken: string;
     commodityType: string;
+
     volumeKg: string;
     collateralValue: string;
     collateralValueUSD: number;
+
     maxFunding: string;
-    maxFundingUSD: number;
+
     profitPerKgInvestor: string;
     profitPerKgInvestorUSD: number;
+
     profitPerKgPlatform: string;
     profitPerKgPlatformUSD: number;
+
     fundingDeadline: string;
     repaymentDeadline: string;
+
     metadataURI: string;
+    metadata: ProjectMetadataModel;
     status: ProjectStatus;
     statusLabel: string;
     totalFunded: string;
@@ -58,6 +64,7 @@ export type ProjectDataResponse = {
     fundedAt: number | null;
     settledAt: number | null;
     fundingProgress: number;
+    maxFundingUSD: number;
     pricePerKg: number;
     returnRate: number;
 };
@@ -71,4 +78,17 @@ export type InvestmentModel = {
     claimedAmountUSD: number;
     timestamp: number;
     sharePercent: number;
+};
+
+export type ProjectMetadataModel = {
+    assetName: string;
+    imageCID: string;
+    category: string;
+    weight: string;
+    deliveryDate: string;
+    fundingDuration: string;
+    repaymentDuration: string;
+    tokenContractAddress: string;
+    assetPrice: string;
+    fundingPrice: string;
 };
