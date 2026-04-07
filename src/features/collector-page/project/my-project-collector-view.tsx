@@ -5,6 +5,7 @@ import {
   Box,
   Card,
   CardContent,
+  CardMedia,
   Chip,
   Grid,
   LinearProgress,
@@ -17,7 +18,7 @@ import useMyProject from "./hooks/use-my-project";
 export default function MyProjectCollectorView() {
   const theme = themeConfig;
 
-  const { isLoading, data } = useMyProject();
+  const { isLoading, data, handleNavigateToProjectDetail } = useMyProject();
 
   if (isLoading) {
     return (
@@ -55,7 +56,12 @@ export default function MyProjectCollectorView() {
           <Grid container spacing={2}>
             {data?.projects.map((project) => (
               <Card
+                onClick={() => {
+                  handleNavigateToProjectDetail(project.id);
+                }}
+                key={project.id}
                 sx={{
+                  width: "250px",
                   backgroundColor: theme.colors.secondaryBgColors,
                   border: `1px solid ${theme.colors.thirdBgColors}`,
                   borderRadius: "12px",
@@ -64,9 +70,15 @@ export default function MyProjectCollectorView() {
                     borderColor: theme.colors.primaryColors,
                     transform: "translateY(-4px)",
                     boxShadow: `0 8px 24px rgba(44, 255, 158, 0.15)`,
+                    cursor: "pointer",
                   },
                 }}
               >
+                <CardMedia
+                  sx={{ height: 140 }}
+                  image={`https://gateway.pinata.cloud/ipfs/${project.metadata.imageCID}`}
+                  title={project.metadata.assetName}
+                />
                 <CardContent sx={{ padding: "20px" }}>
                   {/* Header: Commodity + Status */}
                   <Box
@@ -81,7 +93,7 @@ export default function MyProjectCollectorView() {
                       color={theme.colors.white}
                       sx={{ textTransform: "capitalize" }}
                     >
-                      {project.commodityType}
+                      {project.metadata.assetName}
                     </Typography>
                     <Chip
                       label={project.statusLabel}
@@ -191,7 +203,7 @@ export default function MyProjectCollectorView() {
                         fontSize={11}
                         color={theme.colors.thirdBgColors}
                       >
-                        Created
+                        Delivery Date
                       </Typography>
                       <Typography
                         fontSize={14}

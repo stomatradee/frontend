@@ -1,4 +1,6 @@
-import { getCollectorProjectRequestModel, getCollectorProjectResponseModel } from "@/repository/project/model/get-collector-project";
+import { routes } from "@/core/config/routes";
+import { useNavigationUtils } from "@/core/hooks/use-navigation-utils";
+import { getCollectorProjectRequestModel, getCollectorProjectResponseModel } from "@/repository/project/model/get-collector-project-model";
 import { getCollectorProject } from "@/repository/project/project-repository";
 import { useCallback, useEffect, useState } from "react";
 import { toast } from "sonner";
@@ -7,6 +9,7 @@ import { useAccount } from "wagmi";
 export default function useMyProject() {
     const [isLoading, setLoading] = useState(false)
     const { address } = useAccount();
+    const { pushRoute } = useNavigationUtils();
 
     const [data, setData] = useState<getCollectorProjectResponseModel | null>(null)
 
@@ -24,6 +27,7 @@ export default function useMyProject() {
 
             setLoading(false)
         } catch (error) {
+            setLoading(false)
             toast.error(`Get data failed: ${error}`, {
                 position: 'top-center',
                 style: {
@@ -43,8 +47,14 @@ export default function useMyProject() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
+
+    const handleNavigateToProjectDetail = useCallback((projectId: string) => {
+        pushRoute(routes.collector.projectDetail, projectId);
+    }, [pushRoute])
+
     return {
         isLoading,
         data,
+        handleNavigateToProjectDetail,
     }
 }

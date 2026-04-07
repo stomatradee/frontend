@@ -24,7 +24,7 @@ export type collectorProjectResponse = {
     commodityType: string;
     status: number;
     statusLabel: string;
-    metadataURI: string;
+    metadata: metadataResponse;
     investorCount: number;
     createdAt: number;
     fundingProgress: number;
@@ -32,5 +32,18 @@ export type collectorProjectResponse = {
     totalFundedUSD: number;
     pricePerKg: number;
     returnRate: number;
+}
+
+export type metadataResponse = {
+    assetName: string;
+    imageCID: string;
+    category: string;
+    weight: string;
+    deliveryDate: string;
+    fundingDuration: string;
+    repaymentDuration: string;
+    tokenContractAddress: string;
+    assetPrice: string;
+    fundingPrice: string;
 }
 

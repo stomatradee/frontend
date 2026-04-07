@@ -6,7 +6,8 @@ import { config } from "@/app/providers";
 import apiConfig from "@/core/config/api-config/api-config";
 import { ENDPOINTS } from "@/core/config/api-config/endpoints";
 import { HTTP_METHOD } from "@/core/config/api-config/http-method";
-import { getCollectorProjectRequestModel, getCollectorProjectResponseModel } from "./model/get-collector-project";
+import { getCollectorProjectRequestModel, getCollectorProjectResponseModel } from "./model/get-collector-project-model";
+import { ProjectDetailRequest, ProjectDetailResponse } from "./model/get-project-detail-model";
 
 async function submitProjectPinata(data: SubmitProjectPinataRequestModel) {
     try {
@@ -88,6 +89,36 @@ export async function getCollectorProject(data: getCollectorProjectRequestModel)
         }
     } catch (error) {
         console.error("Error fetching collector project: ", error);
+        throw new Error(`Failed to fetch collector project: ${error}`);
+    }
+}
+
+export async function getProjectDetails(param: ProjectDetailRequest) {
+    console.log("project detail param: ", param);
+    try {
+        const response = await apiConfig({
+            endpoint: `${ENDPOINTS.projectDetail}/${param.projectId}`,
+            method: HTTP_METHOD.GET,
+        });
+
+        if (response.status !== 200) {
+            throw new Error(`Failed to fetch project detail: ${response.statusText}`);
+        } else {
+            const data = await response.json();
+
+            const result: ProjectDetailResponse = {
+                project: data.project,
+                investments: data.investments,
+                collector: data.collector,
+            }
+
+            console.log("project detail data: ", result);
+
+            return result;
+        }
+    } catch (error) {
+        console.error("Error fetching collector project: ", error);
+
         throw new Error(`Failed to fetch collector project: ${error}`);
     }
 }
