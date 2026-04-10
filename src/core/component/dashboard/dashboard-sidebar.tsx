@@ -81,7 +81,7 @@ export default function DashboardSidebar({
               path: routes.collector.userProfile(),
             },
           ],
-    [],
+    [role],
   );
 
   return (

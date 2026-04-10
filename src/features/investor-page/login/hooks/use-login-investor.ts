@@ -1,6 +1,6 @@
 import { routes } from "@/core/config/routes";
 import { useNavigationUtils } from "@/core/hooks/use-navigation-utils";
-import { RegisterStatusRequestModel } from "@/repository/collector-profile/register/model/register-status-model";
+// import { RegisterStatusRequestModel } from "@/repository/collector-profile/register/model/register-status-model";
 import { useCallback, useState } from "react";
 
 export function useLoginInvestor() {
@@ -8,7 +8,7 @@ export function useLoginInvestor() {
     const [isLoading, setLoading] = useState(false);
 
     const handleConnectWallet = useCallback(
-        async (address: string) => {
+        async () => {
             setLoading(true);
 
             // const data: RegisterStatusRequestModel = {
