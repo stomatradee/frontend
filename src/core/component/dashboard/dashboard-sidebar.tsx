@@ -14,6 +14,9 @@ import {
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import FolderOutlinedIcon from "@mui/icons-material/FolderOutlined";
 import BusinessIcon from "@mui/icons-material/Business";
+import PieChartOutlineIcon from "@mui/icons-material/PieChartOutline";
+import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
+import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import { themeConfig } from "@/core/config/theme-config";
 import { imageConfig } from "@/core/config/images-config";
 import { useAccount } from "wagmi";
@@ -64,17 +67,17 @@ export default function DashboardSidebar({
         : [
             {
               label: "My Portofolio",
-              icon: <FolderOutlinedIcon />,
+              icon: <PieChartOutlineIcon />,
               path: routes.collector.myProject(),
             },
             {
               label: "Asset List",
-              icon: <AddCircleOutlineIcon />,
+              icon: <FormatListBulletedIcon />,
               path: routes.collector.addProject(),
             },
             {
               label: "My Profile",
-              icon: <BusinessIcon />,
+              icon: <PersonOutlineIcon />,
               path: routes.collector.userProfile(),
             },
           ],
