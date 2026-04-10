@@ -1,3 +1,4 @@
+import { routes } from "@/core/config/routes";
 import { useNavigationUtils } from "@/core/hooks/use-navigation-utils";
 import { RegisterStatusRequestModel } from "@/repository/collector-profile/register/model/register-status-model";
 import { useCallback, useState } from "react";
@@ -19,7 +20,7 @@ export function useLoginInvestor() {
             // console.log("result: ", result);
 
             // if (result === true) {
-            //     replaceRoute(routes.collector.dashboard);
+            replaceRoute(routes.investor.dashboard);
             // } else {
             //     replaceRoute(routes.collector.registerProfile);
             // }

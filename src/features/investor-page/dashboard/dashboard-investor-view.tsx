@@ -1,12 +1,13 @@
 "use client";
 
-import { Box } from "@mui/material";
+import DashboardNavbar from "@/core/component/dashboard/dashboard-navbar";
+import DashboardSidebar from "@/core/component/dashboard/dashboard-sidebar";
 import { themeConfig } from "@/core/config/theme-config";
-import DashboardSidebar from "../../../core/component/dashboard/dashboard-sidebar";
-import DashboardNavbar from "../../../core/component/dashboard/dashboard-navbar";
-import { useDashboardCollector } from "./hooks/use-dashboard-collector";
+import { ROLE } from "@/core/types/common";
+import { useDashboardCollector } from "@/features/collector-page/dashboard/hooks/use-dashboard-collector";
+import { Box } from "@mui/material";
 
-export default function DashboardCollectorView({
+export default function DashboardInvestorView({
   children,
 }: {
   children: React.ReactNode;
@@ -18,7 +19,7 @@ export default function DashboardCollectorView({
   return (
     <Box sx={{ display: "flex", minHeight: "100vh" }}>
       {/* Sidebar */}
-      <DashboardSidebar />
+      <DashboardSidebar role={ROLE.INVESTOR} />
 
       {/* Main Content Area */}
       <Box

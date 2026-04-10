@@ -2,18 +2,18 @@
 
 import { AppBar, Toolbar, Button, Box } from "@mui/material";
 import { themeConfig } from "@/core/config/theme-config";
-import { SIDEBAR_WIDTH } from "./collector-sidebar";
+import { SIDEBAR_WIDTH } from "./dashboard-sidebar";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { useAccount } from "wagmi";
 import { useEffect, useRef } from "react";
 
-export interface CollectorNavbarProps {
+export interface DashboardNavbarProps {
   handleDisconnect: () => void;
 }
 
-export default function CollectorNavbar({
+export default function DashboardNavbar({
   handleDisconnect,
-}: CollectorNavbarProps) {
+}: DashboardNavbarProps) {
   const theme = themeConfig;
 
   const { status } = useAccount();

@@ -29,35 +29,55 @@ interface NavItem {
   path: string;
 }
 
-export default function CollectorSidebar() {
+export interface DashboardSidebarProps {
+  role?: "collector" | "investor";
+}
+
+export default function DashboardSidebar({
+  role = "collector",
+}: DashboardSidebarProps) {
   const theme = themeConfig;
   const { address } = useAccount();
   const pathname = usePathname();
   const router = useRouter();
 
   const navItems: NavItem[] = useMemo(
-    () => [
-      // {
-      //   label: "Home",
-      //   icon: <HomeIcon />,
-      //   path: routes.collector.home(),
-      // },
-      {
-        label: "My Asset",
-        icon: <FolderOutlinedIcon />,
-        path: routes.collector.myProject(),
-      },
-      {
-        label: "Tokenize Asset",
-        icon: <AddCircleOutlineIcon />,
-        path: routes.collector.addProject(),
-      },
-      {
-        label: "User Profile",
-        icon: <BusinessIcon />,
-        path: routes.collector.userProfile(),
-      },
-    ],
+    () =>
+      role === "collector"
+        ? [
+            {
+              label: "My Asset",
+              icon: <FolderOutlinedIcon />,
+              path: routes.collector.myProject(),
+            },
+            {
+              label: "Tokenize Asset",
+              icon: <AddCircleOutlineIcon />,
+              path: routes.collector.addProject(),
+            },
+            {
+              label: "User Profile",
+              icon: <BusinessIcon />,
+              path: routes.collector.userProfile(),
+            },
+          ]
+        : [
+            {
+              label: "My Portofolio",
+              icon: <FolderOutlinedIcon />,
+              path: routes.collector.myProject(),
+            },
+            {
+              label: "Asset List",
+              icon: <AddCircleOutlineIcon />,
+              path: routes.collector.addProject(),
+            },
+            {
+              label: "My Profile",
+              icon: <BusinessIcon />,
+              path: routes.collector.userProfile(),
+            },
+          ],
     [],
   );
 
@@ -99,13 +119,24 @@ export default function CollectorSidebar() {
 
       {/* User Info */}
       <Box display="flex" flexDirection="column" alignItems="center">
-        <Image
-          src={imageConfig.icon.profileIcon}
-          alt="Profile Icon"
-          width={150}
-          height={150}
-          style={{ borderRadius: "20%" }}
-        />
+        {role === "collector" ? (
+          <Image
+            src={imageConfig.icon.profileIcon}
+            alt="Profile Icon"
+            width={150}
+            height={150}
+            style={{ borderRadius: "20%" }}
+          />
+        ) : (
+          <Image
+            src={imageConfig.icon.investorProfileIcon}
+            alt="Investor Profile Icon"
+            width={150}
+            height={150}
+            style={{ borderRadius: "20%" }}
+          />
+        )}
+
         <Box height={20} />
         <Box
           sx={{
@@ -116,37 +147,83 @@ export default function CollectorSidebar() {
             pb: 3,
           }}
         >
-          <Avatar
-            sx={{
-              width: 36,
-              height: 36,
-              bgcolor: theme.colors.secondaryBgColors,
-              fontSize: 14,
-            }}
-          >
-            CP
-          </Avatar>
-          <Box width={120}>
-            <Typography
-              variant="body2"
-              fontWeight={600}
-              sx={{ color: theme.colors.white, fontSize: 13, lineHeight: 1.3 }}
-            >
-              Collector Pro
-            </Typography>
-            <Typography
-              variant="caption"
-              noWrap
-              sx={{
-                color: theme.colors.white,
-                fontSize: 11,
-                width: "100%",
-                display: "block",
-              }}
-            >
-              {address}
-            </Typography>
-          </Box>
+          {role === "collector" ? (
+            <>
+              <Avatar
+                sx={{
+                  width: 36,
+                  height: 36,
+                  bgcolor: theme.colors.secondaryBgColors,
+                  fontSize: 14,
+                }}
+              >
+                CP
+              </Avatar>
+              <Box width={120}>
+                <Typography
+                  variant="body2"
+                  fontWeight={600}
+                  sx={{
+                    color: theme.colors.white,
+                    fontSize: 13,
+                    lineHeight: 1.3,
+                  }}
+                >
+                  Collector Pro
+                </Typography>
+                <Typography
+                  variant="caption"
+                  noWrap
+                  sx={{
+                    color: theme.colors.white,
+                    fontSize: 11,
+                    width: "100%",
+                    display: "block",
+                  }}
+                >
+                  {address}
+                </Typography>
+              </Box>
+            </>
+          ) : (
+            <>
+              <Avatar
+                sx={{
+                  width: 36,
+                  height: 36,
+                  bgcolor: theme.colors.secondaryBgColors,
+                  fontSize: 14,
+                }}
+              >
+                IP
+              </Avatar>
+              <Box width={120}>
+                <Typography
+                  variant="body2"
+                  fontWeight={600}
+                  sx={{
+                    color: theme.colors.white,
+                    fontSize: 13,
+                    lineHeight: 1.3,
+                  }}
+                >
+                  Investor Pro
+                </Typography>
+                <Typography
+                  variant="caption"
+                  noWrap
+                  sx={{
+                    color: theme.colors.white,
+                    fontSize: 11,
+                    width: "100%",
+                    display: "block",
+                  }}
+                >
+                  {address}
+                </Typography>
+              </Box>
+            </>
+          )}
         </Box>
       </Box>
 

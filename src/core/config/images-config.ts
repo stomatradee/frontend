@@ -28,6 +28,7 @@ export const imageConfig = {
         traceabilityIcon: "/icon/traceability-icon.webp",
         flowerIcon: "/icon/flower-icon.webp",
         profileIcon: "/icon/profile.webp",
+        investorProfileIcon: "/icon/investor-profile.webp",
         sudgestedIcon: "/icon/sudgested-icon.webp",
         confusedIcon: "/icon/confused-icon.webp",
     },
