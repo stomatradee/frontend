@@ -1,15 +1,15 @@
 "use client";
 
 import LoginPageComponent from "@/core/component/login-page-component";
-import { useLoginCollector } from "./hooks/use-login-collector";
+import { useLoginInvestor } from "./hooks/use-login-investor";
 
-export default function LoginCollectorView() {
+export default function LoginInvestorView() {
   const {
     handleTermsClick,
     handlePrivacyClick,
     handleConnectWallet,
     isLoading,
-  } = useLoginCollector();
+  } = useLoginInvestor();
 
   return (
     <LoginPageComponent
@@ -17,6 +17,7 @@ export default function LoginCollectorView() {
       onTermsClick={handleTermsClick}
       onPrivacyClick={handlePrivacyClick}
       isLoading={isLoading}
+      role="investor"
     />
   );
 }

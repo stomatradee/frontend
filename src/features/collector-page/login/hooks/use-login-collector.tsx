@@ -6,7 +6,7 @@ import { useCallback, useState } from "react";
 import { RegisterStatusRequestModel } from "@/repository/collector-profile/register/model/register-status-model";
 import { GetRegisterProfilStatus } from "@/repository/collector-profile/register/register-repository";
 
-export function useLoginPage() {
+export function useLoginCollector() {
   const { replaceRoute } = useNavigationUtils();
   const [isLoading, setLoading] = useState(false);
 

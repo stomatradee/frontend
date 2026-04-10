@@ -22,6 +22,7 @@ export interface LoginPageComponentProps {
   onTermsClick: () => void;
   onPrivacyClick: () => void;
   isLoading?: boolean;
+  role?: "collector" | "investor";
 }
 
 export default function LoginPageComponent({
@@ -29,6 +30,7 @@ export default function LoginPageComponent({
   onTermsClick,
   onPrivacyClick,
   isLoading = false,
+  role,
 }: LoginPageComponentProps) {
   const theme = themeConfig;
 
@@ -256,7 +258,15 @@ export default function LoginPageComponent({
                   lineHeight: 1.1,
                 }}
               >
-                Where Farmer <br /> Meet Identity
+                {role === "investor" ? (
+                  <>
+                    Where Investment <br /> Drives Agricultural Growth
+                  </>
+                ) : (
+                  <>
+                    Where Farmers <br /> Meet Identity
+                  </>
+                )}
               </Typography>
               <Typography
                 variant="body1"
@@ -267,9 +277,9 @@ export default function LoginPageComponent({
                   fontSize: { xs: "0.875rem", md: "1rem" },
                 }}
               >
-                Every your contribution, growth, and carbon tells a story. Your
-                profile directly reflects your reputation for supporting farmers
-                into opportunities.
+                {role === "investor"
+                  ? "Every investment you make drives growth for farmers and sustainability for the planet. Your portfolio reflects real impact supporting agriculture while generating meaningful returns."
+                  : "Every your contribution, growth, and carbon tells a story. Your profile directly reflects your reputation for supporting farmers into opportunities."}
               </Typography>
             </Stack>
           </Box>

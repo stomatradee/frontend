@@ -12,6 +12,7 @@ const COLLECTOR = {
 
 const INVESTOR = {
     HOME: "/investor/home",
+    LOGIN: "/investor/login-investor",
 }
 
 export const routes = {
@@ -29,5 +30,6 @@ export const routes = {
     },
     investor: {
         home: () => INVESTOR.HOME,
+        login: () => INVESTOR.LOGIN,
     },
 }
