@@ -68,17 +68,17 @@ export default function DashboardSidebar({
             {
               label: "My Portofolio",
               icon: <PieChartOutlineIcon />,
-              path: routes.collector.myProject(),
+              path: routes.investor.myPortofolio(),
             },
             {
               label: "Asset List",
               icon: <FormatListBulletedIcon />,
-              path: routes.collector.addProject(),
+              path: routes.investor.projectList(),
             },
             {
               label: "My Profile",
               icon: <PersonOutlineIcon />,
-              path: routes.collector.userProfile(),
+              path: routes.investor.userProfile(),
             },
           ],
     [role],

@@ -14,6 +14,9 @@ const INVESTOR = {
     HOME: "/investor/home",
     LOGIN: "/investor/login-investor",
     DASHBOARD: "/investor/dashboard-investor",
+    MY_PORTOFOLIO: "/investor/my-portofolio-investor",
+    PROJECT_LIST: "/investor/project-list-investor",
+    USER_PROFILE: "/investor/user-profile-investor",
 }
 
 export const routes = {
@@ -33,5 +36,8 @@ export const routes = {
         home: () => INVESTOR.HOME,
         login: () => INVESTOR.LOGIN,
         dashboard: () => INVESTOR.DASHBOARD,
+        myPortofolio: () => INVESTOR.MY_PORTOFOLIO,
+        projectList: () => INVESTOR.PROJECT_LIST,
+        userProfile: () => INVESTOR.USER_PROFILE,
     },
 }
