@@ -1,4 +1,5 @@
 export const ENDPOINTS = {
     collectorAllData: "/collector",
-    projectDetail: "/projects"
+    projectDetail: "/projects",
+    openProject: "/projects/open"
 }

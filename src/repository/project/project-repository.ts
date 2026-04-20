@@ -8,6 +8,7 @@ import { ENDPOINTS } from "@/core/config/api-config/endpoints";
 import { HTTP_METHOD } from "@/core/config/api-config/http-method";
 import { getCollectorProjectRequestModel, getCollectorProjectResponseModel } from "./model/get-collector-project-model";
 import { ProjectDetailRequest, ProjectDetailResponse } from "./model/get-project-detail-model";
+import { OpenProjectResponseModel } from "./model/open-project-model";
 
 async function submitProjectPinata(data: SubmitProjectPinataRequestModel) {
     try {
@@ -120,5 +121,30 @@ export async function getProjectDetails(param: ProjectDetailRequest) {
         console.error("Error fetching collector project: ", error);
 
         throw new Error(`Failed to fetch collector project: ${error}`);
+    }
+}
+
+export async function getOpenProject() {
+    try {
+        const response = await apiConfig({
+            endpoint: `${ENDPOINTS.openProject}`,
+            method: HTTP_METHOD.GET,
+        });
+
+        if (response.status !== 200) {
+            throw new Error(`Failed to fetch open project: ${response.statusText}`);
+        } else {
+            const data = await response.json();
+
+            const result: OpenProjectResponseModel = {
+                projects: data.projects,
+            }
+
+            return result;
+        }
+    } catch (error) {
+        console.error("Error fetching open project: ", error);
+
+        throw new Error(`Failed to fetch open project: ${error}`);
     }
 }
