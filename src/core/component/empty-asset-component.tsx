@@ -3,7 +3,13 @@ import { themeConfig } from "@/core/config/theme-config";
 import { Box, Typography } from "@mui/material";
 import Image from "next/image";
 
-export default function EmptyAssetComponent() {
+interface EmptyAssetComponentProps {
+  title?: string;
+}
+
+export default function EmptyAssetComponent({
+  title = "You dont have any asset yet",
+}: EmptyAssetComponentProps) {
   return (
     <Box
       display="flex"
@@ -25,7 +31,7 @@ export default function EmptyAssetComponent() {
         fontWeight={600}
         sx={{ fontSize: { xs: 16, sm: 18, md: 15 } }}
       >
-        You dont have any asset yet
+        {title}
       </Typography>
       <Box height={30} />
     </Box>

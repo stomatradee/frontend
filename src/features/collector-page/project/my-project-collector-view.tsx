@@ -11,7 +11,7 @@ import {
   LinearProgress,
   Typography,
 } from "@mui/material";
-import EmptyAssetComponent from "./component/empty-asset-component";
+import EmptyAssetComponent from "../../../core/component/empty-asset-component";
 import { LoadingScreen } from "@/core/component/loading-component";
 import useMyProject from "./hooks/use-my-project";
 

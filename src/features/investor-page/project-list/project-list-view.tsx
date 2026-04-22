@@ -3,7 +3,7 @@
 import { themeConfig } from "@/core/config/theme-config";
 import { Box, Grid, Typography } from "@mui/material";
 import { useProjectList } from "./hooks/use-project-list";
-import EmptyAssetComponent from "@/features/collector-page/project/component/empty-asset-component";
+import EmptyAssetComponent from "@/core/component/empty-asset-component";
 import ProjectCard from "@/core/component/project-card";
 import { LoadingScreen } from "@/core/component/loading-component";
 
@@ -42,7 +42,7 @@ export default function ProjectListView() {
       </Typography>
 
       {data?.projects.length === 0 ? (
-        <EmptyAssetComponent />
+        <EmptyAssetComponent title="No Project Found" />
       ) : (
         <Box paddingTop="32px">
           <Grid container spacing={2}>
