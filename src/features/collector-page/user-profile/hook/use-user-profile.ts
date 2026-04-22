@@ -1,4 +1,3 @@
-"use client"
 
 import { ProfileRequestModel, ProfileResponseModel } from "@/repository/collector-profile/profile/model/profile-model";
 import { GetCollectorProfileRepository } from "@/repository/collector-profile/profile/profile-repository";

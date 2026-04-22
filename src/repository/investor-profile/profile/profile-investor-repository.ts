@@ -2,7 +2,7 @@ import { collection, getDocs, query, where } from "firebase/firestore";
 import { ProfileInvestorRequestModel, ProfileInvestorResponseModel } from "./model/profile-investor-model";
 import { db } from "@/core/config/firebase-config";
 
-export async function ProfileInvestorRepository(data: ProfileInvestorRequestModel) {
+export async function GetInvestorProfileRepository(data: ProfileInvestorRequestModel) {
     try {
         console.log("profile req: ", data)
 

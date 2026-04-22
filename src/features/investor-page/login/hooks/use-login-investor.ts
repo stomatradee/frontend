@@ -1,7 +1,7 @@
 import { routes } from "@/core/config/routes";
 import { useNavigationUtils } from "@/core/hooks/use-navigation-utils";
 import { ProfileInvestorRequestModel } from "@/repository/investor-profile/profile/model/profile-investor-model";
-import { ProfileInvestorRepository } from "@/repository/investor-profile/profile/profile-investor-repository";
+import { GetInvestorProfileRepository } from "@/repository/investor-profile/profile/profile-investor-repository";
 // import { RegisterStatusRequestModel } from "@/repository/collector-profile/register/model/register-status-model";
 import { useCallback, useState } from "react";
 
@@ -18,7 +18,7 @@ export function useLoginInvestor() {
                 role: "investor",
             };
 
-            const result = await ProfileInvestorRepository(data);
+            const result = await GetInvestorProfileRepository(data);
 
             console.log("result: ", result);
 
