@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { imageConfig } from "@/core/config/images-config";
 import { useNavigationUtils } from "@/core/hooks/use-navigation-utils";
 import { routes } from "@/core/config/routes";
@@ -206,6 +206,7 @@ export function useLandingPage() {
 
     const [open, setOpen] = useState(false);
     const { pushRoute } = useNavigationUtils();
+    const [isSplashScreen, setIsSplashScreen] = useState<boolean>(true);
 
     // --- Handler functions ---
     const handleNavItemClick = useCallback((href: string) => {
@@ -261,6 +262,14 @@ export function useLandingPage() {
         console.log("Sign up with email:", email);
     }, []);
 
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setIsSplashScreen(false);
+        }, 2000);
+        return () => clearTimeout(timer);
+    }, []);
+
     return {
         // Data
         navItems,
@@ -269,6 +278,7 @@ export function useLandingPage() {
         solvingProblemData,
         growthData,
         greenFutureData,
+        isSplashScreen,
         footerData,
         logoSrc: imageConfig.logo.stomatradeLogo,
         open,
