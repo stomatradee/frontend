@@ -23,6 +23,7 @@ import UseProjectDetailCollector from "./hooks/use-project-detail-collector";
 import { Icon } from "@iconify/react";
 import Image from "next/image";
 import { imageConfig } from "@/core/config/images-config";
+import EmptyAssetComponent from "@/core/component/empty-asset-component";
 
 export default function ProjectDetailCollectorView() {
   const theme = themeConfig;
@@ -43,16 +44,7 @@ export default function ProjectDetailCollectorView() {
 
   if (!data) {
     return (
-      <Box
-        display="flex"
-        justifyContent="center"
-        alignItems="center"
-        minHeight="100vh"
-      >
-        <Typography color={theme.colors.white} fontSize={16}>
-          Project not found
-        </Typography>
-      </Box>
+      <EmptyAssetComponent title="No Project Detail Found" />
     );
   }
 

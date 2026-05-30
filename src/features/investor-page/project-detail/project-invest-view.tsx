@@ -1,34 +1,19 @@
 "use client";
 
+
 import { themeConfig } from "@/core/config/theme-config";
-import {
-    AppBar,
-    Box,
-    Card,
-    CardContent,
-    CardMedia,
-    Chip,
-    IconButton,
-    LinearProgress,
-    Table,
-    TableBody,
-    TableCell,
-    TableContainer,
-    TableHead,
-    TableRow,
-    Typography,
-} from "@mui/material";
+import { AppBar, Box, Card, CardContent, CardMedia, Chip, IconButton, LinearProgress, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
+import UseProjectInvest from "./hooks/use-project-invest";
 import { LoadingScreen } from "@/core/component/loading-component";
-import { Icon } from "@iconify/react";
 import Image from "next/image";
 import { imageConfig } from "@/core/config/images-config";
-import UseProjectDetail from "./hooks/use-project-detail";
+import { Icon } from "@iconify/react";
 import SubmitButtonComponent from "@/core/component/submit-button-component";
 import EmptyAssetComponent from "@/core/component/empty-asset-component";
 
-export default function ProjectDetailView() {
+export default function ProjectInvestView() {
     const theme = themeConfig;
-    const { data, isLoading, handleNavigateToProjectInvest } = UseProjectDetail();
+    const { data, isLoading } = UseProjectInvest();
 
     if (isLoading) {
         return (
@@ -135,22 +120,22 @@ export default function ProjectDetailView() {
             >
                 {/* Page Header */}
                 {/* <Box textAlign="center" marginBottom="8px">
-             <Typography
-               variant="h1"
-               color={theme.colors.white}
-               fontWeight={600}
-               sx={{ fontSize: { xs: 16, sm: 18, md: 25 } }}
-             >
-               Asset Details
-             </Typography>
-             <Typography
-               color={theme.colors.thirdBgColors}
-               fontSize={14}
-               marginTop="4px"
-             >
-               Detailed view of asset ID {project.id}
-             </Typography>
-           </Box> */}
+                <Typography
+                  variant="h1"
+                  color={theme.colors.white}
+                  fontWeight={600}
+                  sx={{ fontSize: { xs: 16, sm: 18, md: 25 } }}
+                >
+                  Asset Details
+                </Typography>
+                <Typography
+                  color={theme.colors.thirdBgColors}
+                  fontSize={14}
+                  marginTop="4px"
+                >
+                  Detailed view of asset ID {project.id}
+                </Typography>
+              </Box> */}
 
                 {/* Image Card */}
                 <Card sx={{ ...cardSx, overflow: "hidden" }}>
@@ -543,12 +528,10 @@ export default function ProjectDetailView() {
 
                 <SubmitButtonComponent
                     isLoading={false}
-                    title="Invest this project?"
-                    buttonTitle="Invest"
+                    title="Pay to join this project?"
+                    buttonTitle="Pay"
                     description="Make sure you have enough balance before investing."
-                    onSubmit={() => {
-                        handleNavigateToProjectInvest(project.id)
-                    }}
+                    onSubmit={() => { }}
                 />
             </Box>
         </>

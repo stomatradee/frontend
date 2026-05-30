@@ -19,6 +19,7 @@ const INVESTOR = {
     USER_PROFILE: "/investor/user-profile-investor",
     REGISTER_PROFILE: "/investor/register-investor",
     PROJECT_DETAIL: "/investor/project-detail-investor",
+    PROJECT_INVEST: "/investor/project-invest-investor",
 }
 
 export const routes = {
@@ -43,5 +44,6 @@ export const routes = {
         userProfile: () => INVESTOR.USER_PROFILE,
         registerProfile: () => INVESTOR.REGISTER_PROFILE,
         projectDetail: (id: string | number) => `${INVESTOR.PROJECT_DETAIL}?projectId=${id}`,
+        projectInvest: (id: string | number) => `${INVESTOR.PROJECT_INVEST}?projectId=${id}`,
     },
 }
