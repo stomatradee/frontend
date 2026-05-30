@@ -1,3 +1,5 @@
+import { routes } from "@/core/config/routes";
+import { useNavigationUtils } from "@/core/hooks/use-navigation-utils";
 import { OpenProjectResponseModel } from "@/repository/project/model/open-project-model";
 import { getOpenProject } from "@/repository/project/project-repository";
 import { useCallback, useEffect, useState } from "react";
@@ -7,6 +9,8 @@ export function useProjectList() {
     const [isLoading, setLoading] = useState(false)
 
     const [data, setData] = useState<OpenProjectResponseModel | null>(null)
+
+    const { pushRoute } = useNavigationUtils();
 
     const getProject = useCallback(async () => {
         try {
@@ -38,8 +42,13 @@ export function useProjectList() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
+    const handleNavigateToProjectDetail = useCallback((projectId: string) => {
+        pushRoute(routes.investor.projectDetail, projectId);
+    }, [pushRoute])
+
     return {
         isLoading,
         data,
+        handleNavigateToProjectDetail,
     }
 }

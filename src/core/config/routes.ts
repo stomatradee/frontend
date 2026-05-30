@@ -18,6 +18,7 @@ const INVESTOR = {
     PROJECT_LIST: "/investor/project-list-investor",
     USER_PROFILE: "/investor/user-profile-investor",
     REGISTER_PROFILE: "/investor/register-investor",
+    PROJECT_DETAIL: "/investor/project-detail-investor",
 }
 
 export const routes = {
@@ -41,5 +42,6 @@ export const routes = {
         projectList: () => INVESTOR.PROJECT_LIST,
         userProfile: () => INVESTOR.USER_PROFILE,
         registerProfile: () => INVESTOR.REGISTER_PROFILE,
+        projectDetail: (id: string | number) => `${INVESTOR.PROJECT_DETAIL}?projectId=${id}`,
     },
 }

@@ -5,10 +5,12 @@ import Image from "next/image";
 
 interface EmptyAssetComponentProps {
   title?: string;
+  image?: string;
 }
 
 export default function EmptyAssetComponent({
   title = "You dont have any asset yet",
+  image = imageConfig.icon.confusedIcon,
 }: EmptyAssetComponentProps) {
   return (
     <Box
@@ -19,7 +21,7 @@ export default function EmptyAssetComponent({
       paddingTop="90px"
     >
       <Image
-        src={imageConfig.icon.confusedIcon}
+        src={image}
         alt="Profile Icon"
         width={150}
         height={150}

@@ -31,6 +31,7 @@ export const imageConfig = {
         investorProfileIcon: "/icon/investor-profile.webp",
         sudgestedIcon: "/icon/sudgested-icon.webp",
         confusedIcon: "/icon/confused-icon.webp",
+        confusedIconRich: "/icon/confused-icon-rich.webp",
     },
     logo: {
         stomatradeLogo: "/logo/stomatrade-logo.webp",

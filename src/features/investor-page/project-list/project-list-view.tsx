@@ -6,11 +6,12 @@ import { useProjectList } from "./hooks/use-project-list";
 import EmptyAssetComponent from "@/core/component/empty-asset-component";
 import ProjectCard from "@/core/component/project-card";
 import { LoadingScreen } from "@/core/component/loading-component";
+import { imageConfig } from "@/core/config/images-config";
 
 export default function ProjectListView() {
   const theme = themeConfig;
 
-  const { isLoading, data } = useProjectList();
+  const { isLoading, data, handleNavigateToProjectDetail } = useProjectList();
 
   if (isLoading) {
     return (
@@ -42,7 +43,7 @@ export default function ProjectListView() {
       </Typography>
 
       {data?.projects.length === 0 ? (
-        <EmptyAssetComponent title="No Project Found" />
+        <EmptyAssetComponent title="No Project Found" image={imageConfig.icon.confusedIconRich} />
       ) : (
         <Box paddingTop="32px">
           <Grid container spacing={2}>
@@ -60,7 +61,9 @@ export default function ProjectListView() {
                 totalFundedUSD={project.totalFundedUSD}
                 investorCount={project.investorCount}
                 id={project.id.toString()}
-                handleNavigateToProjectDetail={() => {}}
+                handleNavigateToProjectDetail={() => {
+                  handleNavigateToProjectDetail(project.id.toString())
+                }}
               />
             ))}
           </Grid>

@@ -4,6 +4,7 @@ import { LoadingScreen } from "@/core/component/loading-component";
 
 type SubmitButtonComponentProps = {
   title?: string;
+  buttonTitle?: string;
   description?: string;
   onSubmit?: () => void;
   disabled?: boolean;
@@ -12,6 +13,7 @@ type SubmitButtonComponentProps = {
 
 export default function SubmitButtonComponent({
   title,
+  buttonTitle = "Submit",
   description,
   onSubmit,
   disabled,
@@ -96,7 +98,7 @@ export default function SubmitButtonComponent({
               transition: "all 0.3s",
             }}
           >
-            Submit
+            {buttonTitle}
           </Button>
         </Box>
       )}

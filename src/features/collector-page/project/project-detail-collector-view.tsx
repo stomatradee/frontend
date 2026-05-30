@@ -19,14 +19,14 @@ import {
   Typography,
 } from "@mui/material";
 import { LoadingScreen } from "@/core/component/loading-component";
-import useProjectDetail from "./hooks/use-project-detail";
+import UseProjectDetailCollector from "./hooks/use-project-detail-collector";
 import { Icon } from "@iconify/react";
 import Image from "next/image";
 import { imageConfig } from "@/core/config/images-config";
 
 export default function ProjectDetailCollectorView() {
   const theme = themeConfig;
-  const { data, isLoading } = useProjectDetail();
+  const { data, isLoading } = UseProjectDetailCollector();
 
   if (isLoading) {
     return (
@@ -439,11 +439,10 @@ export default function ProjectDetailCollectorView() {
                       : theme.colors.primaryColors,
                     fontWeight: 600,
                     fontSize: 12,
-                    border: `1px solid ${
-                      collector.isBlacklisted
-                        ? "#FF4444"
-                        : theme.colors.primaryColors
-                    }`,
+                    border: `1px solid ${collector.isBlacklisted
+                      ? "#FF4444"
+                      : theme.colors.primaryColors
+                      }`,
                   }}
                 />
               </Box>
