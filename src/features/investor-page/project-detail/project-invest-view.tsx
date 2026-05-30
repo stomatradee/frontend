@@ -10,10 +10,11 @@ import { imageConfig } from "@/core/config/images-config";
 import { Icon } from "@iconify/react";
 import SubmitButtonComponent from "@/core/component/submit-button-component";
 import EmptyAssetComponent from "@/core/component/empty-asset-component";
+import AmountInformationComponent from "./component/amount-information-component";
 
 export default function ProjectInvestView() {
     const theme = themeConfig;
-    const { data, isLoading } = UseProjectInvest();
+    const { data, isLoading, amountValue, methods, handleAmountValueChange, handleTokenCodeChange } = UseProjectInvest();
 
     if (isLoading) {
         return (
@@ -119,23 +120,26 @@ export default function ProjectInvestView() {
                 gap="20px"
             >
                 {/* Page Header */}
-                {/* <Box textAlign="center" marginBottom="8px">
-                <Typography
-                  variant="h1"
-                  color={theme.colors.white}
-                  fontWeight={600}
-                  sx={{ fontSize: { xs: 16, sm: 18, md: 25 } }}
-                >
-                  Asset Details
-                </Typography>
-                <Typography
-                  color={theme.colors.thirdBgColors}
-                  fontSize={14}
-                  marginTop="4px"
-                >
-                  Detailed view of asset ID {project.id}
-                </Typography>
-              </Box> */}
+                <Box textAlign="center" marginBottom="8px">
+                    <Typography
+                        variant="h1"
+                        color={theme.colors.white}
+                        fontWeight={600}
+                        sx={{ fontSize: { xs: 16, sm: 18, md: 30 } }}
+                    >
+                        Start Investment In {project.metadata?.assetName} Project
+                    </Typography>
+                    <Box height={10} />
+                    <Typography
+                        variant="body1"
+                        color={theme.colors.thirdBgColors}
+                        fontWeight={600}
+                        sx={{ fontSize: { xs: 16, sm: 18, md: 15 } }}
+                    >
+                        Please make your first contribution to support this project
+                    </Typography>
+                    <Box height={30} />
+                </Box>
 
                 {/* Image Card */}
                 <Card sx={{ ...cardSx, overflow: "hidden" }}>
@@ -526,12 +530,19 @@ export default function ProjectInvestView() {
                     </CardContent>
                 </Card>
 
+                <AmountInformationComponent
+                    amountValue={amountValue}
+                    onAmountValueChange={handleAmountValueChange}
+                    onTokenCodeChange={handleTokenCodeChange}
+                />
+
                 <SubmitButtonComponent
                     isLoading={false}
                     title="Pay to join this project?"
                     buttonTitle="Pay"
                     description="Make sure you have enough balance before investing."
                     onSubmit={() => { }}
+                    disabled={!methods.formState.isValid}
                 />
             </Box>
         </>
