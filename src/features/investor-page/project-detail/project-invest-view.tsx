@@ -14,7 +14,7 @@ import AmountInformationComponent from "./component/amount-information-component
 
 export default function ProjectInvestView() {
     const theme = themeConfig;
-    const { data, isLoading, amountValue, methods, handleAmountValueChange, handleTokenCodeChange } = UseProjectInvest();
+    const { data, isLoading, isPayLoading, amountValue, methods, handleAmountValueChange, handleTokenCodeChange, onInvest } = UseProjectInvest();
 
     if (isLoading) {
         return (
@@ -537,11 +537,11 @@ export default function ProjectInvestView() {
                 />
 
                 <SubmitButtonComponent
-                    isLoading={false}
+                    isLoading={isPayLoading}
                     title="Pay to join this project?"
                     buttonTitle="Pay"
                     description="Make sure you have enough balance before investing."
-                    onSubmit={() => { }}
+                    onSubmit={onInvest}
                     disabled={!methods.formState.isValid}
                 />
             </Box>
