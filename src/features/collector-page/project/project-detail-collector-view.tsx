@@ -71,7 +71,7 @@ export default function ProjectDetailCollectorView() {
   const cardSx = {
     backgroundColor: theme.colors.secondaryBgColors,
     border: `1px solid ${theme.colors.thirdBgColors}`,
-    borderRadius: "12px",
+    borderRadius: "30px",
     transition: "all 0.3s ease",
     "&:hover": {
       borderColor: theme.colors.primaryColors,
