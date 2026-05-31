@@ -260,6 +260,7 @@ export default function InputProjectInformationComponent({
       <Box height={20} />
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <DateTimePicker
+          disablePast={true}
           label="Select Date"
           onChange={(date) => onDeliveryDateChange(date)}
           slotProps={{
