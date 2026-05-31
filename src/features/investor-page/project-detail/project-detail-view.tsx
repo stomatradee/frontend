@@ -28,7 +28,7 @@ import EmptyAssetComponent from "@/core/component/empty-asset-component";
 
 export default function ProjectDetailView() {
     const theme = themeConfig;
-    const { data, isLoading, handleNavigateToProjectInvest } = UseProjectDetail();
+    const { data, address, isLoading, handleNavigateToProjectInvest } = UseProjectDetail();
 
     if (isLoading) {
         return (
@@ -93,7 +93,7 @@ export default function ProjectDetailView() {
 
                 <Box display="flex" alignItems="center" gap="4px">
                     <Image
-                        src={imageConfig.icon.profileIcon}
+                        src={imageConfig.icon.investorProfileIcon}
                         alt="Profile Icon"
                         width={40}
                         height={40}
@@ -106,11 +106,11 @@ export default function ProjectDetailView() {
                         color={theme.colors.white}
                         sx={{ fontFamily: "monospace" }}
                     >
-                        {truncateAddress(collector.address)}
+                        {truncateAddress(address ?? "0x0")}
                     </Typography>
                     <IconButton
                         size="small"
-                        onClick={() => handleCopyAddress(collector.address)}
+                        onClick={() => handleCopyAddress(address ?? "0x0")}
                         sx={{
                             color: theme.colors.thirdBgColors,
                             padding: "2px",

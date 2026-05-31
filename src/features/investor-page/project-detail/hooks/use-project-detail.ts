@@ -5,6 +5,7 @@ import { getProjectDetails } from "@/repository/project/project-repository";
 import { useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import { toast } from "sonner";
+import { useAccount, useConnection } from "wagmi";
 
 export default function UseProjectDetail() {
     const searchParams = useSearchParams();
@@ -13,6 +14,8 @@ export default function UseProjectDetail() {
 
     const [isLoading, setLoading] = useState(false)
     const [data, setData] = useState<ProjectDetailResponse | null>(null)
+
+    const { address } = useConnection();
 
     const { pushRoute } = useNavigationUtils();
 
@@ -59,6 +62,7 @@ export default function UseProjectDetail() {
     return {
         isLoading,
         data,
+        address,
         handleNavigateToProjectInvest,
     }
 }

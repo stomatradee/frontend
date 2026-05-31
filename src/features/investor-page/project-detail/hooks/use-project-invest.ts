@@ -5,17 +5,23 @@ import { startInvestProject } from "@/repository/investment/investment-repositor
 import { InvestRequestModel } from "@/repository/investment/model/investment-request-model";
 import { ProjectDetailRequest, ProjectDetailResponse } from "@/repository/project/model/get-project-detail-model";
 import { getProjectDetails } from "@/repository/project/project-repository";
+import { MOCK_USDC_CONTRACT_ADDRESS } from "@/repository/token/abi/mock-usdc-abi";
+import { MOCK_USDT_CONTRACT_ADDRESS } from "@/repository/token/abi/mock-usdt-abi";
+import { ApproveRequestModel } from "@/repository/token/model/approve-model";
+import { approveUSDCToken, approveUSDTToken } from "@/repository/token/token-repository";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
+import { useConnection } from "wagmi";
 import z from "zod";
 
 export default function UseProjectInvest() {
     const RegisterCollectorSchema = z.object({
         amountValue: z.string().min(1, "Amount is required"),
         tokenContractAddress: z.string().min(1, "Token Contract Address is required"),
+        tokenSymbol: z.string().min(1, "Token ID is required"),
     });
 
     const methods = useForm({
@@ -23,10 +29,11 @@ export default function UseProjectInvest() {
         defaultValues: {
             amountValue: "",
             tokenContractAddress: "",
+            tokenSymbol: ""
         },
     });
 
-
+    const { address } = useConnection();
 
     const searchParams = useSearchParams();
 
@@ -84,10 +91,12 @@ export default function UseProjectInvest() {
 
     const handleTokenCodeChange = (tokenCode: string) => {
         if (tokenCode === TokenSymbol.USDC) {
-            methods.setValue("tokenContractAddress", process.env.NEXT_PUBLIC_MOCK_USDC_ADDRESS || "", { shouldValidate: true });
+            methods.setValue("tokenContractAddress", MOCK_USDC_CONTRACT_ADDRESS || "", { shouldValidate: true });
         } else if (tokenCode === TokenSymbol.USDT) {
-            methods.setValue("tokenContractAddress", process.env.NEXT_PUBLIC_MOCK_USDT_ADDRESS || "", { shouldValidate: true });
+            methods.setValue("tokenContractAddress", MOCK_USDT_CONTRACT_ADDRESS || "", { shouldValidate: true });
         }
+
+        methods.setValue("tokenSymbol", tokenCode, { shouldValidate: true });
     };
 
     const onInvest = async () => {
@@ -99,6 +108,18 @@ export default function UseProjectInvest() {
             const param: InvestRequestModel = {
                 projectId: projectId ?? "0x0",
                 amount: amountValue,
+            }
+
+            const paramApprove: ApproveRequestModel = {
+                amount: amountValue,
+            }
+
+            const tokenSymbol = methods.getValues("tokenSymbol")
+
+            if (tokenSymbol === TokenSymbol.USDC) {
+                await approveUSDCToken(paramApprove)
+            } else if (tokenSymbol === TokenSymbol.USDT) {
+                await approveUSDTToken(paramApprove)
             }
 
             await startInvestProject(param)
@@ -140,6 +161,7 @@ export default function UseProjectInvest() {
         data,
         amountValue,
         methods,
+        address,
         handleAmountValueChange,
         handleTokenCodeChange,
         onInvest,

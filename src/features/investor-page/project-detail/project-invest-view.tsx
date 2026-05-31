@@ -14,7 +14,7 @@ import AmountInformationComponent from "./component/amount-information-component
 
 export default function ProjectInvestView() {
     const theme = themeConfig;
-    const { data, isLoading, isPayLoading, amountValue, methods, handleAmountValueChange, handleTokenCodeChange, onInvest } = UseProjectInvest();
+    const { data, isLoading, isPayLoading, amountValue, methods, address, handleAmountValueChange, handleTokenCodeChange, onInvest } = UseProjectInvest();
 
     if (isLoading) {
         return (
@@ -79,7 +79,7 @@ export default function ProjectInvestView() {
 
                 <Box display="flex" alignItems="center" gap="4px">
                     <Image
-                        src={imageConfig.icon.profileIcon}
+                        src={imageConfig.icon.investorProfileIcon}
                         alt="Profile Icon"
                         width={40}
                         height={40}
@@ -92,11 +92,11 @@ export default function ProjectInvestView() {
                         color={theme.colors.white}
                         sx={{ fontFamily: "monospace" }}
                     >
-                        {truncateAddress(collector.address)}
+                        {truncateAddress(address ?? "0x0")}
                     </Typography>
                     <IconButton
                         size="small"
-                        onClick={() => handleCopyAddress(collector.address)}
+                        onClick={() => handleCopyAddress(address ?? "0x0")}
                         sx={{
                             color: theme.colors.thirdBgColors,
                             padding: "2px",
@@ -136,7 +136,7 @@ export default function ProjectInvestView() {
                         fontWeight={600}
                         sx={{ fontSize: { xs: 16, sm: 18, md: 15 } }}
                     >
-                        Please make your first contribution to support this project
+                        Make your first contribution to support this project
                     </Typography>
                     <Box height={30} />
                 </Box>
@@ -145,8 +145,8 @@ export default function ProjectInvestView() {
                 <Card sx={{ ...cardSx, overflow: "hidden" }}>
                     <CardMedia
                         sx={{ height: { xs: 250, sm: 350, md: 400 } }}
-                        image={`https://gateway.pinata.cloud/ipfs/${project.metadata.imageCID}`}
-                        title={project.metadata.assetName}
+                        image={`https://gateway.pinata.cloud/ipfs/${project.metadata?.imageCID ?? ""}`}
+                        title={project.metadata?.assetName ?? "Project Image"}
                     />
                 </Card>
 
