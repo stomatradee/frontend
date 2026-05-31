@@ -9,6 +9,8 @@ import { HTTP_METHOD } from "@/core/config/api-config/http-method";
 import { getCollectorProjectRequestModel, getCollectorProjectResponseModel } from "./model/get-collector-project-model";
 import { ProjectDetailRequest, ProjectDetailResponse } from "./model/get-project-detail-model";
 import { OpenProjectResponseModel } from "./model/open-project-model";
+import { parseGwei } from "viem";
+import { da } from "zod/v4/locales";
 
 async function submitProjectPinata(data: SubmitProjectPinataRequestModel) {
     try {
@@ -33,7 +35,8 @@ export async function submitProject(data: SubmitProjectPinataRequestModel) {
             acceptedToken: data.tokenContractAddress,
             commodityType: data.category,
             volumeKg: BigInt(data.weight),
-            collateralValue: BigInt(data.assetPrice),
+            // collateralValue: BigInt(data.assetPrice),
+            collateralValue: parseGwei(data.assetPrice),
             fundingDuration: BigInt(data.fundingDuration),
             repaymentDuration: BigInt(data.repaymentDuration),
             cid: pinataResponse.cid,
