@@ -395,6 +395,9 @@ export default function InputProjectInformationComponent({
                 "&.MuiPickersDay-today": {
                   borderColor: theme.colors.primaryColors,
                   color: theme.colors.primaryColors,
+                  "&.MuiPickersDay-today.Mui-selected": {
+                    color: theme.colors.bgColors,
+                  },
                 },
               },
             },
