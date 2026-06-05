@@ -155,9 +155,12 @@ export default function ProjectDetailView() {
                 {/* Image Card */}
                 <Card sx={{ ...cardSx, overflow: "hidden" }}>
                     <CardMedia
-                        sx={{ height: { xs: 250, sm: 350, md: 400 } }}
-                        image={`https://gateway.pinata.cloud/ipfs/${project.metadata.imageCID}`}
-                        title={project.metadata.assetName}
+                        sx={{
+                            height: { xs: 250, sm: 350, md: 400 },
+                            backgroundColor: theme.colors.thirdBgColors, // Fallback background color
+                        }}
+                        image={project.metadata.imageCID ? `https://gateway.pinata.cloud/ipfs/${project.metadata.imageCID}` : "https://placehold.co/800x400?text=No+Image"}
+                        title={project.metadata.assetName || "Project Image"}
                     />
                 </Card>
 

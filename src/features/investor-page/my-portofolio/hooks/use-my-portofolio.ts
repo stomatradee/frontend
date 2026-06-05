@@ -1,3 +1,5 @@
+"use client";
+
 import { routes } from "@/core/config/routes";
 import { useNavigationUtils } from "@/core/hooks/use-navigation-utils";
 import { OpenProjectResponseModel } from "@/repository/project/model/open-project-model";

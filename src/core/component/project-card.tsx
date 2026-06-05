@@ -61,9 +61,12 @@ export default function ProjectCard({
       }}
     >
       <CardMedia
-        sx={{ height: 140 }}
-        image={`https://gateway.pinata.cloud/ipfs/${imageCID}`}
-        title={assetName}
+        sx={{
+          height: 140,
+          backgroundColor: theme.colors.thirdBgColors, // Fallback background color
+        }}
+        image={imageCID ? `https://gateway.pinata.cloud/ipfs/${imageCID}` : "https://placehold.co/400x140?text=No+Image"}
+        title={assetName || "Project Image"}
       />
       <CardContent sx={{ padding: "20px" }}>
         {/* Header: Commodity + Status */}
@@ -79,7 +82,7 @@ export default function ProjectCard({
             color={theme.colors.white}
             sx={{ textTransform: "capitalize" }}
           >
-            {assetName}
+            {assetName ?? "-"}
           </Typography>
           <Chip
             label={statusLabel}
