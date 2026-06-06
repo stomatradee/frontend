@@ -5,7 +5,7 @@ import { getProjectDetails } from "@/repository/project/project-repository";
 import { useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import { toast } from "sonner";
-import { useAccount, useConnection } from "wagmi";
+import { useConnection } from "wagmi";
 
 export default function UseProjectDetail() {
     const searchParams = useSearchParams();

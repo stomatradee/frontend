@@ -107,7 +107,7 @@ export default function ProjectCard({
               fontWeight={600}
               color={theme.colors.primaryColors}
             >
-              {fundingProgress}%
+              {fundingProgress ?? "0"}%
             </Typography>
           </Box>
           <LinearProgress
@@ -128,8 +128,8 @@ export default function ProjectCard({
             color={theme.colors.thirdBgColors}
             marginTop="4px"
           >
-            ${totalFundedUSD.toLocaleString()} / $
-            {maxFundingUSD.toLocaleString()}
+            ${totalFundedUSD.toLocaleString() ?? "0"} / $
+            {maxFundingUSD.toLocaleString() ?? "0"}
           </Typography>
         </Box>
 
@@ -144,7 +144,7 @@ export default function ProjectCard({
               fontWeight={600}
               color={theme.colors.white}
             >
-              ${pricePerKg}
+              ${pricePerKg ?? "0"}
             </Typography>
           </Box>
           <Box>
@@ -156,7 +156,7 @@ export default function ProjectCard({
               fontWeight={600}
               color={theme.colors.thirdColors}
             >
-              {returnRate}%
+              {returnRate ?? "0"}%
             </Typography>
           </Box>
           <Box>
@@ -168,7 +168,7 @@ export default function ProjectCard({
               fontWeight={600}
               color={theme.colors.white}
             >
-              {investorCount}
+              {investorCount ?? "0"}
             </Typography>
           </Box>
           <Box>
@@ -180,7 +180,7 @@ export default function ProjectCard({
               fontWeight={600}
               color={theme.colors.white}
             >
-              {new Date(createdAt * 1000).toLocaleDateString()}
+              {new Date(createdAt * 1000).toLocaleDateString() ?? "-"}
             </Typography>
           </Box>
         </Box>

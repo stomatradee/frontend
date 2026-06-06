@@ -10,7 +10,6 @@ import { getCollectorProjectRequestModel, getCollectorProjectResponseModel } fro
 import { ProjectDetailRequest, ProjectDetailResponse } from "./model/get-project-detail-model";
 import { OpenProjectResponseModel } from "./model/open-project-model";
 import { parseGwei } from "viem";
-import { da } from "zod/v4/locales";
 
 async function submitProjectPinata(data: SubmitProjectPinataRequestModel) {
     try {
