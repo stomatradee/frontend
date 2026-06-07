@@ -1,17 +1,9 @@
 "use client";
 
 import { themeConfig } from "@/core/config/theme-config";
-import {
-  Box,
-  Card,
-  CardContent,
-  CardMedia,
-  Chip,
-  Grid,
-  LinearProgress,
-  Typography,
-} from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
 import EmptyAssetComponent from "../../../core/component/empty-asset-component";
+import ProjectCard from "@/core/component/project-card";
 import { LoadingScreen } from "@/core/component/loading-component";
 import useMyProject from "./hooks/use-my-project";
 
@@ -49,178 +41,30 @@ export default function MyProjectCollectorView() {
         My Asset
       </Typography>
 
-      {data?.projects.length === 0 ? (
+      {!data?.projects?.length ? (
         <EmptyAssetComponent />
       ) : (
         <Box paddingTop="32px">
           <Grid container spacing={2}>
-            {data?.projects.map((project) => (
-              <Card
-                onClick={() => {
-                  handleNavigateToProjectDetail(project.id);
-                }}
-                key={project.id}
-                sx={{
-                  width: "250px",
-                  backgroundColor: theme.colors.secondaryBgColors,
-                  border: `1px solid ${theme.colors.thirdBgColors}`,
-                  borderRadius: "12px",
-                  transition: "all 0.3s ease",
-                  "&:hover": {
-                    borderColor: theme.colors.primaryColors,
-                    transform: "translateY(-4px)",
-                    boxShadow: `0 8px 24px rgba(44, 255, 158, 0.15)`,
-                    cursor: "pointer",
-                  },
-                }}
-              >
-                <CardMedia
-                  sx={{
-                    height: 140,
-                    backgroundColor: theme.colors.thirdBgColors, // Fallback background color
+            {data.projects.map((project) => (
+              <Grid key={project.id}>
+                <ProjectCard
+                  assetName={project.metadata?.assetName}
+                  createdAt={project.createdAt}
+                  fundingProgress={project.fundingProgress}
+                  imageCID={project.metadata?.imageCID}
+                  maxFundingUSD={project.maxFundingUSD}
+                  pricePerKg={project.pricePerKg}
+                  returnRate={project.returnRate}
+                  statusLabel={project.statusLabel}
+                  totalFundedUSD={project.totalFundedUSD}
+                  investorCount={project.investorCount}
+                  id={project.id.toString()}
+                  handleNavigateToProjectDetail={() => {
+                    handleNavigateToProjectDetail(project.id);
                   }}
-                  image={project.metadata?.imageCID ? `https://gateway.pinata.cloud/ipfs/${project.metadata.imageCID}` : "https://placehold.co/400x140?text=No+Image"}
-                  title={project.metadata?.assetName ?? "Project Image"}
                 />
-                <CardContent sx={{ padding: "20px" }}>
-                  {/* Header: Commodity + Status */}
-                  <Box
-                    display="flex"
-                    justifyContent="space-between"
-                    alignItems="center"
-                    marginBottom="16px"
-                  >
-                    <Typography
-                      fontWeight={700}
-                      fontSize={18}
-                      color={theme.colors.white}
-                      sx={{ textTransform: "capitalize" }}
-                    >
-                      {project.metadata.assetName}
-                    </Typography>
-                    <Chip
-                      label={project.statusLabel}
-                      size="small"
-                      sx={{
-                        backgroundColor: theme.colors.fourGreenColors,
-                        color: theme.colors.primaryColors,
-                        fontWeight: 600,
-                        fontSize: 11,
-                      }}
-                    />
-                  </Box>
-
-                  {/* Funding Progress */}
-                  <Box marginBottom="16px">
-                    <Box
-                      display="flex"
-                      justifyContent="space-between"
-                      marginBottom="6px"
-                    >
-                      <Typography
-                        fontSize={12}
-                        color={theme.colors.thirdBgColors}
-                      >
-                        Funding Progress
-                      </Typography>
-                      <Typography
-                        fontSize={12}
-                        fontWeight={600}
-                        color={theme.colors.primaryColors}
-                      >
-                        {project.fundingProgress}%
-                      </Typography>
-                    </Box>
-                    <LinearProgress
-                      variant="determinate"
-                      value={project.fundingProgress}
-                      sx={{
-                        height: 6,
-                        borderRadius: 3,
-                        backgroundColor: theme.colors.thirdBgColors,
-                        "& .MuiLinearProgress-bar": {
-                          borderRadius: 3,
-                          background: `linear-gradient(90deg, ${theme.colors.secondaryColors}, ${theme.colors.primaryColors})`,
-                        },
-                      }}
-                    />
-                    <Typography
-                      fontSize={11}
-                      color={theme.colors.thirdBgColors}
-                      marginTop="4px"
-                    >
-                      ${project.totalFundedUSD.toLocaleString()} / $
-                      {project.maxFundingUSD.toLocaleString()}
-                    </Typography>
-                  </Box>
-
-                  {/* Stats Grid */}
-                  <Box display="grid" gridTemplateColumns="1fr 1fr" gap="12px">
-                    <Box>
-                      <Typography
-                        fontSize={11}
-                        color={theme.colors.thirdBgColors}
-                      >
-                        Price/Kg
-                      </Typography>
-                      <Typography
-                        fontSize={14}
-                        fontWeight={600}
-                        color={theme.colors.white}
-                      >
-                        ${project.pricePerKg}
-                      </Typography>
-                    </Box>
-                    <Box>
-                      <Typography
-                        fontSize={11}
-                        color={theme.colors.thirdBgColors}
-                      >
-                        Return Rate
-                      </Typography>
-                      <Typography
-                        fontSize={14}
-                        fontWeight={600}
-                        color={theme.colors.thirdColors}
-                      >
-                        {project.returnRate}%
-                      </Typography>
-                    </Box>
-                    <Box>
-                      <Typography
-                        fontSize={11}
-                        color={theme.colors.thirdBgColors}
-                      >
-                        Investors
-                      </Typography>
-                      <Typography
-                        fontSize={14}
-                        fontWeight={600}
-                        color={theme.colors.white}
-                      >
-                        {project.investorCount}
-                      </Typography>
-                    </Box>
-                    <Box>
-                      <Typography
-                        fontSize={11}
-                        color={theme.colors.thirdBgColors}
-                      >
-                        Delivery Date
-                      </Typography>
-                      <Typography
-                        fontSize={14}
-                        fontWeight={600}
-                        color={theme.colors.white}
-                      >
-                        {new Date(
-                          project.createdAt * 1000,
-                        ).toLocaleDateString()}
-                      </Typography>
-                    </Box>
-                  </Box>
-                </CardContent>
-              </Card>
+              </Grid>
             ))}
           </Grid>
         </Box>
