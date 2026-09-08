@@ -11,9 +11,8 @@ interface StatCardProps {
     variant?: "default" | "featured";
     ctaLabel?: string;
     ctaImage?: string;
+    handleSustainabilityClick?: () => void;
 }
-
-import { useLandingPageActions } from "../context/landing-page-context";
 
 export default function StatCard({
     title,
@@ -22,8 +21,8 @@ export default function StatCard({
     variant = "default",
     ctaLabel,
     ctaImage,
+    handleSustainabilityClick,
 }: StatCardProps) {
-    const { handleSustainabilityClick } = useLandingPageActions();
     if (variant === "featured") {
         return (
             <Box

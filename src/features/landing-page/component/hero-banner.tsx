@@ -12,9 +12,9 @@ interface HeroBannerProps {
     desktopBackgroundImage: string;
     primaryButtonLabel: string;
     secondaryButtonLabel: string;
+    handleConnectWallet: () => void;
+    handleLearnMore: () => void;
 }
-
-import { useLandingPageActions } from "../context/landing-page-context";
 
 export default function HeroBanner({
     badgeText,
@@ -24,8 +24,9 @@ export default function HeroBanner({
     desktopBackgroundImage,
     primaryButtonLabel,
     secondaryButtonLabel,
+    handleConnectWallet,
+    handleLearnMore,
 }: HeroBannerProps) {
-    const { handleConnectWallet, handleLearnMore } = useLandingPageActions();
     return (
         <Box
             component="section"

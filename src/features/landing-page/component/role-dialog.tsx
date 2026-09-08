@@ -1,9 +1,13 @@
 "use client";
 import { Dialog, DialogContent, DialogContentText, DialogTitle, List, ListItemButton, ListItemText } from "@mui/material";
-import { useLandingPageActions } from "../context/landing-page-context";
 
-export default function RoleDialog() {
-    const { open, handleCloseRoleDialog, handleRoleSelected } = useLandingPageActions();
+interface RoleDialogProps {
+    open: boolean;
+    handleCloseRoleDialog: () => void;
+    handleRoleSelected: (role: "collector" | "investor") => void;
+}
+
+export default function RoleDialog({ open, handleCloseRoleDialog, handleRoleSelected }: RoleDialogProps) {
     return (
         <Dialog 
             open={open} 

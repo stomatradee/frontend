@@ -230,7 +230,7 @@ export function useLandingPage() {
         if (role == "collector") {
             pushRoute(routes.collector.login)
         } else {
-            // pushRoute(routes.investor.login)
+            pushRoute(routes.investor.login)
         }
         // TODO: Implement wallet connection or redirection based on role
     }, [pushRoute]);

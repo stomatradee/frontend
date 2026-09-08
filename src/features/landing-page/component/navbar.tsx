@@ -12,16 +12,17 @@ interface NavbarProps {
     logoSrc: string;
     navItems: NavItem[];
     ctaLabel: string;
+    handleConnectWallet: () => void;
+    handleNavItemClick: (href: string) => void;
 }
-
-import { useLandingPageActions } from "../context/landing-page-context";
 
 export default function Navbar({
     logoSrc,
     navItems,
     ctaLabel,
+    handleConnectWallet,
+    handleNavItemClick,
 }: NavbarProps) {
-    const { handleConnectWallet, handleNavItemClick } = useLandingPageActions();
     return (
         <AppBar
             position="fixed"

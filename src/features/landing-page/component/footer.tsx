@@ -39,6 +39,7 @@ interface FooterProps {
     // Bottom bar
     copyrightText: string;
     legalLinks: { label: string; href: string }[];
+    handleSignUp: (email: string) => void;
 }
 
 // --- Social icon SVGs ---
@@ -70,8 +71,6 @@ const socialIcons: Record<string, React.ReactNode> = {
     ),
 };
 
-import { useLandingPageActions } from "../context/landing-page-context";
-
 export default function Footer({
     newsletterHeading,
     newsletterPrivacyText,
@@ -83,8 +82,8 @@ export default function Footer({
     contactItems,
     copyrightText,
     legalLinks,
+    handleSignUp,
 }: FooterProps) {
-    const { handleSignUp } = useLandingPageActions();
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();

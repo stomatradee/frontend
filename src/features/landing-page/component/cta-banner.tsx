@@ -12,9 +12,9 @@ interface CtaBannerProps {
     desktopBackgroundImage?: string;
     primaryButtonLabel?: string;
     secondaryButtonLabel?: string;
+    handleConnectWallet?: () => void;
+    handleWhatIsStomatrade?: () => void;
 }
-
-import { useLandingPageActions } from "../context/landing-page-context";
 
 export default function CtaBanner({
     badgeText,
@@ -24,8 +24,9 @@ export default function CtaBanner({
     desktopBackgroundImage,
     primaryButtonLabel,
     secondaryButtonLabel,
+    handleConnectWallet,
+    handleWhatIsStomatrade,
 }: CtaBannerProps) {
-    const { handleConnectWallet, handleWhatIsStomatrade } = useLandingPageActions();
     return (
         <Box
             sx={{

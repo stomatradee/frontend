@@ -10,7 +10,6 @@ import CtaBanner from "./component/cta-banner";
 import Footer from "./component/footer";
 import RoleDialog from "./component/role-dialog";
 
-import { LandingPageProvider } from "./context/landing-page-context";
 import { landingPageData } from "./constants/landing-page-data";
 import { useLandingPage } from "./hooks/use-landing-page";
 import SplashPageView from "./splash-page-view";
@@ -26,14 +25,24 @@ export default function LandingPageView() {
     logoSrc,
   } = landingPageData;
 
-  const { isSplashScreen } = useLandingPage();
+  const { 
+    isSplashScreen,
+    open,
+    handleNavItemClick,
+    handleConnectWallet,
+    handleCloseRoleDialog,
+    handleRoleSelected,
+    handleLearnMore,
+    handleSustainabilityClick,
+    handleWhatIsStomatrade,
+    handleSignUp,
+  } = useLandingPage();
 
   if (isSplashScreen) {
     return <SplashPageView />;
   }
 
   return (
-    <LandingPageProvider>
       <Box
         sx={{
           position: "relative",
@@ -48,6 +57,8 @@ export default function LandingPageView() {
             logoSrc={logoSrc}
             navItems={navItems}
             ctaLabel="Connect Wallet"
+            handleConnectWallet={handleConnectWallet}
+            handleNavItemClick={handleNavItemClick}
           />
 
           {/* Hero Banner */}
@@ -59,6 +70,8 @@ export default function LandingPageView() {
             desktopBackgroundImage={heroBannerData.desktopBackgroundImage}
             primaryButtonLabel="Connect Wallet"
             secondaryButtonLabel="Learn More"
+            handleConnectWallet={handleConnectWallet}
+            handleLearnMore={handleLearnMore}
           />
 
           {/* Stats */}
@@ -81,6 +94,7 @@ export default function LandingPageView() {
                     variant={card.variant}
                     ctaLabel={card.ctaLabel}
                     ctaImage={card.ctaImage}
+                    handleSustainabilityClick={handleSustainabilityClick}
                   />
                 </Grid>
               ))}
@@ -132,6 +146,8 @@ export default function LandingPageView() {
             desktopBackgroundImage={growthData.desktopBackgroundImage}
             primaryButtonLabel="Connect Wallet"
             secondaryButtonLabel="What is Stomatrade"
+            handleConnectWallet={handleConnectWallet}
+            handleWhatIsStomatrade={handleWhatIsStomatrade}
           />
         </Box>
 
@@ -148,11 +164,15 @@ export default function LandingPageView() {
             contactItems={footerData.contactItems}
             copyrightText={footerData.copyrightText}
             legalLinks={footerData.legalLinks}
+            handleSignUp={handleSignUp}
           />
         </Box>
 
-        <RoleDialog />
+        <RoleDialog 
+          open={open} 
+          handleCloseRoleDialog={handleCloseRoleDialog}
+          handleRoleSelected={handleRoleSelected}
+        />
       </Box>
-    </LandingPageProvider>
   );
 }
