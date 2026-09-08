@@ -22,7 +22,8 @@ export function useLandingPage() {
     }, []);
 
     const handleConnectWallet = useCallback(() => {
-        setOpen(true);
+        // setOpen(true);
+        pushRoute(routes.investor.login)
     }, []);
 
     const handleCloseRoleDialog = useCallback(() => {
@@ -32,12 +33,12 @@ export function useLandingPage() {
     const handleRoleSelected = useCallback((role: "collector" | "investor") => {
         setOpen(false);
 
-        if (role == "collector") {
-            pushRoute(routes.collector.login)
-        } else {
-            pushRoute(routes.investor.login)
-        }
-        // TODO: Implement wallet connection or redirection based on role
+        // if (role == "collector") {
+        //     pushRoute(routes.collector.login)
+        // } else {
+        //     pushRoute(routes.investor.login)
+        // }
+
     }, [pushRoute]);
 
     const handleLearnMore = useCallback(() => {
@@ -78,9 +79,7 @@ export function useLandingPage() {
     return {
         // Data
         isSplashScreen,
-        logoSrc: imageConfig.logo.stomatradeLogo,
         open,
-
         // Handlers
         handleNavItemClick,
         handleConnectWallet,
