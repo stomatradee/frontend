@@ -1,6 +1,4 @@
-
 import Image from "next/image";
-import { Box, Typography, Stack } from "@mui/material";
 
 interface SectionHeaderProps {
     logoSrc?: string;
@@ -14,52 +12,32 @@ export default function SectionHeader({
     subheading,
 }: SectionHeaderProps) {
     return (
-        <Stack
-            alignItems="center"
-            spacing={2}
-            sx={{ textAlign: "center", mb: 6 }}
-        >
+        <div className="flex flex-col items-center gap-4 text-center mb-12">
             {/* Logo */}
             {logoSrc && (
-                <Box sx={{ mb: 1 }}>
+                <div className="mb-2">
                     <Image
                         src={logoSrc}
                         alt="Stomatrade Logo"
                         width={200}
                         height={50}
-                        style={{ height: 48, width: "auto", objectFit: "contain" }}
+                        className="h-12 w-auto object-contain"
                     />
-                </Box>
+                </div>
             )}
 
             {/* Main Heading */}
-            <Typography
-                variant="h2"
-                sx={{
-                    fontSize: { xs: "1.875rem", sm: "2.5rem", lg: "3rem" },
-                    fontWeight: 700,
-                    lineHeight: 1.15,
-                    color: "white",
-                    maxWidth: "48rem",
-                }}
-            >
+            <h2 className="text-[1.875rem] sm:text-[2.5rem] lg:text-[3rem] font-bold leading-[1.15] text-white max-w-3xl">
                 {heading}
-            </Typography>
+            </h2>
 
             {/* Subheading */}
             {subheading && (
-                <Typography
-                    variant="body1"
-                    sx={{
-                        fontSize: { xs: "0.875rem", sm: "1rem" },
-                        color: "rgba(255,255,255,0.5)",
-                        fontWeight: 300,
-                        fontStyle: "italic",
-                    }}
-                >
+                <p className="text-[0.875rem] sm:text-[1rem] text-white/50 font-light italic">
                     {subheading}
-                </Typography>
+                </p>
             )}
-        </Stack>
+        </div>
     );
 }
+

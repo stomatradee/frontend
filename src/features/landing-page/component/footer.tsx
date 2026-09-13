@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import { Box, Typography, Button, Stack, TextField, Grid, IconButton } from "@mui/material";
 
 // --- Type definitions ---
 interface FooterLinkColumn {
@@ -96,175 +95,104 @@ export default function Footer({
     };
 
     return (
-        <Box component="footer">
+        <footer className="w-full">
             {/* ── Newsletter Section ── */}
-            <Box
-                sx={{
-                    position: "relative",
-                    overflow: "hidden",
-                    py: { xs: 5, lg: 25 },
-                    px: { xs: 3, lg: 8 },
-                }}
-            >
+            <div className="relative overflow-hidden py-20 lg:py-48 px-6 lg:px-32">
                 {/* Background */}
                 <Image
                     src={newsletterBgImage}
                     alt=""
                     fill
-                    style={{ objectFit: "cover", objectPosition: "top center", zIndex: 0 }}
+                    className="object-cover object-top z-0"
                     sizes="100vw"
                 />
-                {/* <Box sx={{ position: "absolute", inset: 0, zIndex: 1, backgroundColor: "rgba(10,10,10,0.65)" }} /> */}
 
                 {/* Content */}
-                <Stack
-                    alignItems="center"
-                    spacing={3}
-                    sx={{ position: "relative", zIndex: 2, maxWidth: "36rem", mx: "auto", textAlign: "center" }}
-                >
-                    <Typography
-                        variant="h4"
-                        sx={{
-                            fontSize: { xs: "1.25rem", sm: "1.5rem", lg: "1.75rem" },
-                            fontWeight: 600,
-                            color: "white",
-                            lineHeight: 1.3,
-                        }}
-                    >
+                <div className="relative z-10 max-w-xl mx-auto flex flex-col items-center text-center gap-6">
+                    <h4 className="text-[1.25rem] sm:text-[1.5rem] lg:text-[1.75rem] font-semibold text-white leading-tight">
                         {newsletterHeading}
-                    </Typography>
+                    </h4>
 
                     {/* Email Form */}
-                    <Stack
-                        component="form"
+                    <form
                         onSubmit={handleSubmit}
-                        direction="row"
-                        spacing={1}
-                        sx={{ width: "100%", maxWidth: "28rem" }}
+                        className="flex flex-row gap-2 w-full max-w-md"
                     >
-                        <TextField
+                        <input
                             name="email"
                             type="email"
                             placeholder="Enter a valid email address"
-                            fullWidth
-                            size="small"
-                            sx={{
-                                "& .MuiOutlinedInput-root": {
-                                    backgroundColor: "rgba(255,255,255,0.08)",
-                                    borderRadius: "0.5rem",
-                                    color: "white",
-                                    fontSize: "0.875rem",
-                                    "& fieldset": { borderColor: "rgba(255,255,255,0.2)" },
-                                    "&:hover fieldset": { borderColor: "rgba(255,255,255,0.4)" },
-                                    "&.Mui-focused fieldset": { borderColor: "var(--primary-colors)" },
-                                },
-                                "& .MuiInputBase-input::placeholder": { color: "rgba(255,255,255,0.4)" },
-                            }}
+                            className="w-full bg-white/10 rounded-lg text-white text-sm px-4 py-2.5 border border-white/20 focus:outline-none focus:border-primary hover:border-white/40 transition-colors placeholder-white/40"
+                            required
                         />
-                        <Button
+                        <button
                             type="submit"
-                            variant="contained"
-                            sx={{
-                                backgroundColor: "var(--primary-colors)",
-                                color: "#0A0A0A",
-                                fontWeight: 700,
-                                fontSize: "0.875rem",
-                                px: 3,
-                                borderRadius: "0.5rem",
-                                textTransform: "none",
-                                whiteSpace: "nowrap",
-                                "&:hover": { backgroundColor: "var(--third-colors)" },
-                            }}
+                            className="bg-primary text-[#0A0A0A] font-bold text-sm px-6 py-2.5 rounded-lg whitespace-nowrap hover:bg-[#4CFDB3] transition-colors"
                         >
                             Sign up
-                        </Button>
-                    </Stack>
+                        </button>
+                    </form>
 
-                    <Typography
-                        variant="caption"
-                        sx={{ color: "rgba(255,255,255,0.4)", fontSize: "0.7rem", lineHeight: 1.6, maxWidth: "26rem" }}
-                    >
+                    <p className="text-white/40 text-[0.7rem] leading-relaxed max-w-sm">
                         {newsletterPrivacyText}
-                    </Typography>
-                </Stack>
-            </Box>
+                    </p>
+                </div>
+            </div>
 
             {/* ── Footer Links Section ── */}
-            <Box sx={{ px: { xs: 3, lg: 8 }, py: { xs: 6, lg: 8 }, backgroundColor: "var(--bg-colors)" }}>
-                <Grid container spacing={4} sx={{ maxWidth: "72rem", mx: "auto" }}>
+            <div className="px-6 lg:px-32 py-12 lg:py-16 bg-background">
+                <div className="flex flex-wrap -mx-4 max-w-7xl mx-auto">
                     {/* Brand Column */}
-                    <Grid size={{ xs: 12, md: 3 }}>
-                        <Stack spacing={2}>
-                            <Image src={logoSrc} alt="Stomatrade" width={160} height={36} style={{ width: "auto", height: "auto", objectFit: "contain", objectPosition: "left" }} />
-                            <Typography variant="body2" sx={{ color: "rgba(255,255,255,0.5)", fontSize: "0.8rem", lineHeight: 1.7 }}>
-                                {brandDescription}
-                            </Typography>
-                            <Stack direction="row" spacing={1} sx={{ pt: 1 }}>
-                                {socialLinks.map((s) => (
-                                    <IconButton
-                                        key={s.label}
-                                        href={s.href}
-                                        target="_blank"
-                                        rel="noopener"
-                                        aria-label={s.label}
-                                        size="small"
-                                        sx={{ color: "rgba(255,255,255,0.5)", "&:hover": { color: "var(--primary-colors)" } }}
-                                    >
-                                        {socialIcons[s.icon] ?? null}
-                                    </IconButton>
-                                ))}
-                            </Stack>
-                        </Stack>
-                    </Grid>
+                    <div className="w-full md:w-1/4 px-4 mb-8 md:mb-0 flex flex-col gap-4">
+                        <Image src={logoSrc} alt="Stomatrade" width={160} height={36} className="w-auto h-auto object-contain object-left" />
+                        <p className="text-white/50 text-[0.8rem] leading-relaxed">
+                            {brandDescription}
+                        </p>
+                        <div className="flex flex-row gap-2 pt-2">
+                            {socialLinks.map((s) => (
+                                <a
+                                    key={s.label}
+                                    href={s.href}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    aria-label={s.label}
+                                    className="text-white/50 hover:text-primary transition-colors p-1"
+                                >
+                                    {socialIcons[s.icon] ?? null}
+                                </a>
+                            ))}
+                        </div>
+                    </div>
 
                     {/* Link Columns */}
                     {linkColumns.map((col) => (
-                        <Grid key={col.title} size={{ xs: 6, sm: 4, md: 2 }}>
-                            <Typography variant="subtitle2" sx={{ fontWeight: 700, color: "white", mb: 2, fontSize: "0.875rem" }}>
+                        <div key={col.title} className="w-1/2 sm:w-1/3 md:w-1/6 px-4 mb-8 md:mb-0">
+                            <h6 className="font-bold text-white mb-4 text-sm">
                                 {col.title}
-                            </Typography>
-                            <Stack spacing={1.5}>
+                            </h6>
+                            <div className="flex flex-col gap-3">
                                 {col.links.map((link) => (
-                                    <Typography
+                                    <a
                                         key={link.label}
-                                        component="a"
                                         href={link.href}
-                                        variant="body2"
-                                        sx={{
-                                            color: "rgba(255,255,255,0.5)",
-                                            fontSize: "0.8rem",
-                                            textDecoration: "none",
-                                            transition: "color 0.2s",
-                                            "&:hover": { color: "var(--primary-colors)" },
-                                        }}
+                                        className="text-white/50 text-[0.8rem] hover:text-primary transition-colors"
                                     >
                                         {link.label}
-                                    </Typography>
+                                    </a>
                                 ))}
-                            </Stack>
-                        </Grid>
+                            </div>
+                        </div>
                     ))}
 
                     {/* Contact Column */}
-                    <Grid size={{ xs: 12, sm: 4, md: 2 }}>
-                        <Typography variant="subtitle2" sx={{ fontWeight: 700, color: "white", mb: 2, fontSize: "0.875rem" }}>
+                    <div className="w-full sm:w-1/3 md:w-1/6 px-4">
+                        <h6 className="font-bold text-white mb-4 text-sm">
                             Contact
-                        </Typography>
-                        <Stack spacing={1.5}>
+                        </h6>
+                        <div className="flex flex-col gap-3">
                             {contactItems.map((item) => (
-                                <Stack key={item.label} direction="row" spacing={1} alignItems="center">
-                                    <Box
-                                        sx={{
-                                            width: 24,
-                                            height: 24,
-                                            borderRadius: "50%",
-                                            backgroundColor: "var(--primary-colors)",
-                                            display: "flex",
-                                            alignItems: "center",
-                                            justifyContent: "center",
-                                            flexShrink: 0,
-                                        }}
-                                    >
+                                <div key={item.label} className="flex flex-row items-center gap-2">
+                                    <div className="w-6 h-6 rounded-full bg-primary flex items-center justify-center shrink-0">
                                         {item.icon === "phone" ? (
                                             <svg width="12" height="12" viewBox="0 0 24 24" fill="#0A0A0A">
                                                 <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />
@@ -274,68 +202,40 @@ export default function Footer({
                                                 <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z" />
                                             </svg>
                                         )}
-                                    </Box>
-                                    <Typography
-                                        component="a"
+                                    </div>
+                                    <a
                                         href={item.href}
-                                        variant="body2"
-                                        sx={{
-                                            color: "rgba(255,255,255,0.5)",
-                                            fontSize: "0.8rem",
-                                            textDecoration: "none",
-                                            transition: "color 0.2s",
-                                            "&:hover": { color: "var(--primary-colors)" },
-                                        }}
+                                        className="text-white/50 text-[0.8rem] hover:text-primary transition-colors"
                                     >
                                         {item.label}
-                                    </Typography>
-                                </Stack>
+                                    </a>
+                                </div>
                             ))}
-                        </Stack>
-                    </Grid>
-                </Grid>
-            </Box>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             {/* ── Bottom Bar ── */}
-            <Box
-                sx={{
-                    px: { xs: 3, lg: 8 },
-                    py: 3,
-                    borderTop: "1px solid rgba(255,255,255,0.08)",
-                    backgroundColor: "var(--bg-colors)",
-                }}
-            >
-                <Stack
-                    direction={{ xs: "column", sm: "row" }}
-                    justifyContent="space-between"
-                    alignItems={{ xs: "center", sm: "center" }}
-                    spacing={2}
-                    sx={{ maxWidth: "72rem", mx: "auto" }}
-                >
-                    <Typography variant="caption" sx={{ color: "rgba(255,255,255,0.35)", fontSize: "0.75rem" }}>
+            <div className="px-6 lg:px-32 py-6 border-t border-white/10 bg-background">
+                <div className="flex flex-col sm:flex-row justify-between items-center gap-4 max-w-7xl mx-auto">
+                    <span className="text-white/35 text-xs">
                         {copyrightText}
-                    </Typography>
-                    <Stack direction="row" spacing={3}>
+                    </span>
+                    <div className="flex flex-row gap-6">
                         {legalLinks.map((link) => (
-                            <Typography
+                            <a
                                 key={link.label}
-                                component="a"
                                 href={link.href}
-                                variant="caption"
-                                sx={{
-                                    color: "rgba(255,255,255,0.35)",
-                                    fontSize: "0.75rem",
-                                    textDecoration: "none",
-                                    transition: "color 0.2s",
-                                    "&:hover": { color: "white" },
-                                }}
+                                className="text-white/35 text-xs hover:text-white transition-colors"
                             >
                                 {link.label}
-                            </Typography>
+                            </a>
                         ))}
-                    </Stack>
-                </Stack>
-            </Box>
-        </Box>
+                    </div>
+                </div>
+            </div>
+        </footer>
     );
 }
+

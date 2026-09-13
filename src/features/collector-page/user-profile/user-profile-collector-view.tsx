@@ -1,8 +1,6 @@
 "use client";
 
-import { Box, Card, Typography } from "@mui/material";
 import Image from "next/image";
-import { themeConfig } from "@/core/config/theme-config";
 import useUserProfile from "./hook/use-user-profile";
 import { LoadingScreen } from "@/core/component/loading-component";
 import { imageConfig } from "@/core/config/images-config";
@@ -10,154 +8,64 @@ import { Icon } from "@iconify/react";
 import QrDialog from "./component/qr-dialog";
 
 export default function UserProfileCollectorView() {
-  const theme = themeConfig;
-
   const { userData, isLoading, address, isQrOpen, openQrCode, closeQrCode } =
     useUserProfile();
 
   if (isLoading) {
     return (
-      <Box
-        display="flex"
-        justifyContent="center"
-        alignItems="center"
-        minHeight="100vh"
-      >
+      <div className="flex justify-center items-center min-h-screen">
         <LoadingScreen />
-      </Box>
+      </div>
     );
   }
 
   return (
-    <Box
-      display="flex"
-      flexDirection="column"
-      minHeight="100vh"
-      padding={{ xs: "100px 20px 40px", md: "20px" }}
-      //   width="100%"
-      //   maxWidth="1200px"
-      margin="0 auto"
-    >
-      <Typography
-        variant="h1"
-        color={theme.colors.white}
-        fontWeight={600}
-        sx={{ fontSize: { xs: 16, sm: 18, md: 25 } }}
-      >
+    <div className="flex flex-col min-h-screen pt-[100px] px-5 pb-10 md:p-5 mx-auto">
+      <h1 className="text-white font-semibold text-[16px] sm:text-[18px] md:text-[25px]">
         Your Profile
-      </Typography>
+      </h1>
 
-      <Box height={30} />
+      <div className="h-[30px]" />
 
-      <Card
-        sx={{
-          background: theme.colors.secondaryBgColors,
-          borderRadius: "20px",
-          border: `1px solid ${theme.colors.thirdBgColors}`,
-          // borderTop: `2px solid transparent`,
-          // borderImage: `linear-gradient(90deg, ${theme.colors.secondaryColors}, ${theme.colors.primaryColors}) 1`,
-          borderImageSlice: 1,
-          width: "100%",
-          padding: { xs: "25px 20px", sm: "35px" },
-          transition: "all 0.3s ease",
-          "&:hover": {
-            borderColor: theme.colors.primaryColors,
-            transform: "translateY(-4px)",
-            boxShadow: `0 8px 24px rgba(44, 255, 158, 0.15)`,
-          },
-        }}
-      >
-        <Box
-          display="flex"
-          flexDirection={{ xs: "column", sm: "row" }}
-          alignItems="center"
-          gap={{ xs: "16px", sm: "30px" }}
-          margin="0 auto"
-        >
-          <Box
-            sx={{
-              position: "relative",
-              borderRadius: "20%",
-              overflow: "hidden",
-              border: `2px solid ${theme.colors.thirdBgColors}`,
-              flexShrink: 0,
-              width: { xs: 100, sm: 150 },
-              height: { xs: 100, sm: 150 },
-            }}
-          >
+      <div className="bg-background-secondary rounded-[20px] border border-background-third w-full px-5 py-[25px] sm:p-[35px] transition-all duration-300 hover:border-primary hover:-translate-y-1 hover:shadow-[0_8px_24px_rgba(44,255,158,0.15)]">
+        <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-[30px] mx-auto">
+          <div className="relative rounded-[20%] overflow-hidden border-2 border-background-third shrink-0 w-[100px] h-[100px] sm:w-[150px] sm:h-[150px]">
             <Image
               src={imageConfig.icon.profileIcon}
               alt="Profile Icon"
               fill
-              style={{ objectFit: "cover" }}
+              className="object-cover"
             />
-          </Box>
+          </div>
 
-          <Box
-            display="flex"
-            flexDirection="column"
-            flexGrow={1}
-            alignItems={{ xs: "center", sm: "flex-start" }}
-          >
-            <Typography
-              variant="body1"
-              color={theme.colors.white}
-              fontWeight={700}
-              sx={{ fontSize: { xs: 18, sm: 22, md: 30 } }}
-            >
+          <div className="flex flex-col grow items-center sm:items-start">
+            <h2 className="text-white font-bold text-[18px] sm:text-[22px] md:text-[30px]">
               {userData?.fullname}
-            </Typography>
+            </h2>
 
-            <Typography
-              variant="body1"
-              color={theme.colors.primaryColors}
-              fontWeight={500}
-              sx={{
-                fontSize: { xs: 11, sm: 13, md: 15 },
-                fontFamily: "monospace",
-                overflow: "hidden",
-                textOverflow: "ellipsis",
-                maxWidth: { xs: "200px", sm: "300px", md: "100%" },
-                whiteSpace: "nowrap",
-              }}
-            >
+            <p className="text-primary font-medium text-[11px] sm:text-[13px] md:text-[15px] font-mono overflow-hidden text-ellipsis max-w-[200px] sm:max-w-[300px] md:max-w-full whitespace-nowrap">
               {userData?.contractAddress}
-            </Typography>
-          </Box>
+            </p>
+          </div>
 
-          <Box
+          <button
             onClick={openQrCode}
-            sx={{
-              background: theme.colors.bgColors,
-              border: `1px solid ${theme.colors.thirdBgColors}`,
-              borderRadius: "50%",
-              padding: "16px",
-              cursor: "pointer",
-              transition: "all 0.3s ease",
-              flexShrink: 0,
-              "&:hover": {
-                borderColor: theme.colors.primaryColors,
-                boxShadow: `0 0 16px rgba(44, 255, 158, 0.2)`,
-              },
-              "&:active": {
-                transform: "scale(0.93)",
-              },
-            }}
+            className="bg-background border border-background-third rounded-full p-4 cursor-pointer transition-all duration-300 shrink-0 hover:border-primary hover:shadow-[0_0_16px_rgba(44,255,158,0.2)] active:scale-95 flex items-center justify-center"
           >
             <Icon
               icon="ic:baseline-qrcode"
               width={24}
-              color={theme.colors.white}
+              className="text-white"
             />
-          </Box>
-        </Box>
-      </Card>
+          </button>
+        </div>
+      </div>
 
       <QrDialog
         walletAddress={address ?? ""}
         open={isQrOpen}
         onClose={closeQrCode}
       />
-    </Box>
+    </div>
   );
 }

@@ -1,6 +1,4 @@
 import { imageConfig } from "@/core/config/images-config";
-import { themeConfig } from "@/core/config/theme-config";
-import { Box, Typography } from "@mui/material";
 import Image from "next/image";
 
 interface EmptyAssetComponentProps {
@@ -13,29 +11,19 @@ export default function EmptyAssetComponent({
   image = imageConfig.icon.confusedIcon,
 }: EmptyAssetComponentProps) {
   return (
-    <Box
-      display="flex"
-      flexDirection="column"
-      justifyContent="center"
-      alignItems="center"
-      paddingTop="90px"
-    >
+    <div className="flex flex-col justify-center items-center pt-[90px]">
       <Image
         src={image}
         alt="Profile Icon"
         width={150}
         height={150}
       />
-      <Box height={30} />
-      <Typography
-        variant="body1"
-        color={themeConfig.colors.white}
-        fontWeight={600}
-        sx={{ fontSize: { xs: 16, sm: 18, md: 15 } }}
-      >
+      <div className="h-[30px]" />
+      <p className="text-foreground font-semibold text-[16px] sm:text-[18px] md:text-[15px]">
         {title}
-      </Typography>
-      <Box height={30} />
-    </Box>
+      </p>
+      <div className="h-[30px]" />
+    </div>
   );
 }
+

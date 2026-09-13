@@ -1,18 +1,8 @@
 "use client";
 
 import { useEffect, useMemo } from "react";
-import {
-  Box,
-  Typography,
-  Button,
-  Stack,
-  Container,
-  Card,
-  Link,
-} from "@mui/material";
 import { imageConfig } from "@/core/config/images-config";
-import { themeConfig } from "../config/theme-config";
-import NorthEastIcon from "@mui/icons-material/NorthEast";
+import { Icon } from "@iconify/react";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { useAccount } from "wagmi";
 import { LoadingScreen } from "./loading-component";
@@ -32,8 +22,6 @@ export default function LoginPageComponent({
   isLoading = false,
   role,
 }: LoginPageComponentProps) {
-  const theme = themeConfig;
-
   const { isConnected, address } = useAccount();
 
   useEffect(() => {
@@ -57,207 +45,81 @@ export default function LoginPageComponent({
   );
 
   return (
-    <Box
-      sx={{
-        minHeight: "100vh",
-        backgroundImage: {
-          xs: `url(${pageMemo.bgImageMobile})`,
-          md: `url(${pageMemo.bgImageDesktop})`,
-        },
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-        display: "flex",
-        flexDirection: "column",
+    <div
+      className="min-h-screen bg-cover bg-center bg-no-repeat flex flex-col"
+      style={{
+        backgroundImage: `url(${
+          typeof window !== "undefined" && window.innerWidth >= 768
+            ? pageMemo.bgImageDesktop
+            : pageMemo.bgImageMobile
+        })`,
       }}
     >
-      <Container
-        maxWidth="xl"
-        sx={{ flexGrow: 1, display: "flex", flexDirection: "column" }}
-      >
-        <Box
-          display="flex"
-          flexDirection={{ xs: "column", md: "row" }}
-          justifyContent={{ xs: "center", md: "space-between" }}
-          alignItems={{ xs: "center", md: "center" }}
-          sx={{ flexGrow: 1, py: { xs: 3, sm: 4, md: 10 } }}
-        >
+      <div className="max-w-7xl mx-auto w-full flex-grow flex flex-col">
+        <div className="flex flex-col md:flex-row justify-center md:justify-between items-center flex-grow py-6 sm:py-8 md:py-24">
           {/* Left Card Section */}
-          <Box
-            flex={{ xs: "none", md: 0.4 }}
-            width={{ xs: "100%", md: "auto" }}
-            minWidth={{ xs: "unset", md: "450px" }}
-            display="flex"
-            justifyContent={{ xs: "center", md: "flex-start" }}
-            order={{ xs: 1, md: 1 }}
-          >
-            <Card
-              sx={{
-                bgcolor: theme.colors.secondaryBgColors,
-                borderRadius: { xs: "20px", md: "30px" },
-                padding: { xs: "10px", md: "13px" },
-                mx: { xs: "auto", md: 0 },
-                ml: { md: "120px" },
-                maxWidth: "430px",
-                width: { xs: "100%", sm: "380px", md: "430px" },
-              }}
-            >
-              <Stack spacing={{ xs: 2.5, md: 4 }}>
+          <div className="flex-none md:flex-[0.4] w-full md:w-auto min-w-[unset] md:min-w-[450px] flex justify-center md:justify-start order-1 md:order-1">
+            <div className="bg-background-secondary rounded-[20px] md:rounded-[30px] p-[10px] md:p-[13px] mx-auto md:mx-0 md:ml-[120px] max-w-[430px] w-full sm:w-[380px] md:w-[430px]">
+              <div className="flex flex-col gap-5 md:gap-10">
                 {/* Auth Component */}
-                <Box
-                  display="flex"
-                  flexDirection="column"
-                  justifyContent="center"
-                  alignItems="center"
-                  sx={{
-                    padding: { xs: "24px 20px", md: "34px" },
-                    backgroundColor: theme.colors.bgColors,
-                    borderRadius: { xs: "16px", md: "30px" },
-                  }}
-                >
-                  <Typography
-                    variant="body1"
-                    color={theme.colors.white}
-                    fontWeight={600}
-                    sx={{ fontSize: { xs: 16, sm: 18, md: 20 } }}
-                  >
+                <div className="flex flex-col justify-center items-center p-[24px_20px] md:p-[34px] bg-background rounded-[16px] md:rounded-[30px]">
+                  <h2 className="text-foreground font-semibold text-[16px] sm:text-[18px] md:text-[20px]">
                     {pageMemo.authTitle}
-                  </Typography>
-                  <Box height={{ xs: 6, md: 8 }} />
-                  <Typography
-                    variant="body1"
-                    color={theme.colors.thirdBgColors}
-                    align="center"
-                    sx={{
-                      fontSize: { xs: 11, md: 12 },
-                      px: { xs: 1, md: 0 },
-                    }}
-                  >
+                  </h2>
+                  <div className="h-6 md:h-8" />
+                  <p className="text-background-third text-center text-[11px] md:text-[12px] px-2 md:px-0">
                     {pageMemo.authDesc}
-                  </Typography>
-                  <Box height={{ xs: 28, md: 46 }} />
+                  </p>
+                  <div className="h-[28px] md:h-[46px]" />
                   <ConnectButton.Custom>
                     {({ openConnectModal }) => {
                       if (isLoading === true) {
                         return (
-                          <LoadingScreen
-                            sx={{
-                              paddingTop: "20px",
-                              paddingBottom: "20px",
-                            }}
-                          />
+                          <div className="pt-5 pb-5">
+                            <LoadingScreen />
+                          </div>
                         );
                       } else {
                         return (
-                          <Button
+                          <button
                             onClick={openConnectModal}
-                            fullWidth
-                            variant="outlined"
-                            endIcon={
-                              <NorthEastIcon
-                                sx={{ fontSize: { xs: 14, md: 16 } }}
-                              />
-                            }
-                            sx={{
-                              borderRadius: "9999px",
-                              borderColor: "var(--primary-colors)",
-                              color: "var(--primary-colors)",
-                              fontWeight: 600,
-                              textTransform: "none",
-                              fontSize: { xs: "0.85rem", md: "0.95rem" },
-                              py: { xs: "8px", md: "9px" },
-                              "&:hover": {
-                                backgroundColor: "var(--primary-colors)",
-                                borderColor: "var(--primary-colors)",
-                                color: "#0A0A0A",
-                              },
-                              transition: "all 0.3s",
-                            }}
+                            className="w-full flex items-center justify-center gap-2 rounded-full border border-primary text-primary font-semibold text-[0.85rem] md:text-[0.95rem] py-2 md:py-[9px] hover:bg-primary hover:text-[#0A0A0A] transition-all duration-300"
                           >
                             {pageMemo.connectWalletButtonText}
-                          </Button>
+                            <Icon icon="mdi:arrow-top-right" className="text-[14px] md:text-[16px]" />
+                          </button>
                         );
                       }
                     }}
                   </ConnectButton.Custom>
-                  <Box height={{ xs: 12, md: 20 }} />
-                </Box>
+                  <div className="h-[12px] md:h-[20px]" />
+                </div>
 
                 {/* Terms */}
-                <Typography
-                  variant="caption"
-                  textAlign="center"
-                  color="#737373"
-                  sx={{
-                    mt: 2,
-                    fontSize: { xs: "0.65rem", md: "0.7rem" },
-                    px: { xs: 1, md: 0 },
-                  }}
-                >
+                <p className="text-center text-[#737373] mt-4 text-[0.65rem] md:text-[0.7rem] px-2 md:px-0">
                   By continuing, you agree to opportunities <br />
-                  <Link
-                    component="button"
-                    variant="caption"
+                  <button
                     onClick={onTermsClick}
-                    sx={{
-                      color: "#a3a3a3",
-                      fontWeight: 600,
-                      textDecoration: "underline",
-                    }}
+                    className="text-[#a3a3a3] font-semibold underline hover:text-white transition-colors"
                   >
                     {pageMemo.termsText}
-                  </Link>{" "}
+                  </button>{" "}
                   and{" "}
-                  <Link
-                    component="button"
-                    variant="caption"
+                  <button
                     onClick={onPrivacyClick}
-                    sx={{
-                      color: "#a3a3a3",
-                      fontWeight: 600,
-                      textDecoration: "underline",
-                    }}
+                    className="text-[#a3a3a3] font-semibold underline hover:text-white transition-colors"
                   >
                     {pageMemo.privacyText}
-                  </Link>
-                </Typography>
-              </Stack>
-            </Card>
-          </Box>
+                  </button>
+                </p>
+              </div>
+            </div>
+          </div>
 
           {/* Hero Section - Below card on mobile, right side on desktop */}
-          <Box
-            flex={{ xs: "none", md: 0.5 }}
-            width={{ xs: "100%", md: "auto" }}
-            minWidth={{ xs: "unset", md: "500px" }}
-            display={{ xs: "none", md: "flex" }}
-            flexDirection="column"
-            justifyContent="flex-end"
-            order={{ xs: 2, md: 2 }}
-            sx={{
-              mt: { xs: 4, md: "auto" },
-              alignSelf: "stretch",
-              pb: { xs: 3, md: 5 },
-            }}
-          >
-            <Stack
-              spacing={{ xs: 2, md: 3 }}
-              sx={{
-                alignSelf: { xs: "center", md: "flex-start" },
-                textAlign: { xs: "center", md: "left" },
-                mt: "auto",
-                pl: { md: 4 },
-                px: { xs: 2, md: 0 },
-              }}
-            >
-              <Typography
-                variant="h2"
-                fontWeight={500}
-                sx={{
-                  fontSize: { xs: 32, sm: 48, md: 64 },
-                  lineHeight: 1.1,
-                }}
-              >
+          <div className="hidden md:flex flex-[0.5] w-full md:w-auto min-w-[unset] md:min-w-[500px] flex-col justify-end order-2 mt-8 md:mt-auto self-stretch pb-6 md:pb-10">
+            <div className="flex flex-col gap-4 md:gap-6 self-center md:self-start text-center md:text-left mt-auto md:pl-8 px-4 md:px-0">
+              <h1 className="font-medium text-[32px] sm:text-[48px] md:text-[64px] leading-[1.1]">
                 {role === "investor" ? (
                   <>
                     Where Investment <br /> Drives Agricultural Growth
@@ -267,24 +129,17 @@ export default function LoginPageComponent({
                     Where Farmers <br /> Meet Identity
                   </>
                 )}
-              </Typography>
-              <Typography
-                variant="body1"
-                color="#a3a3a3"
-                sx={{
-                  maxWidth: { xs: "100%", md: "500px" },
-                  lineHeight: 1.6,
-                  fontSize: { xs: "0.875rem", md: "1rem" },
-                }}
-              >
+              </h1>
+              <p className="text-[#a3a3a3] max-w-full md:max-w-[500px] leading-[1.6] text-[0.875rem] md:text-[1rem]">
                 {role === "investor"
                   ? "Every investment you make drives growth for farmers and sustainability for the planet. Your portfolio reflects real impact supporting agriculture while generating meaningful returns."
                   : "Every your contribution, growth, and carbon tells a story. Your profile directly reflects your reputation for supporting farmers into opportunities."}
-              </Typography>
-            </Stack>
-          </Box>
-        </Box>
-      </Container>
-    </Box>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }
+

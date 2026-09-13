@@ -1,7 +1,5 @@
 "use client";
 
-import { themeConfig } from "@/core/config/theme-config";
-import { Box, Grid, Typography } from "@mui/material";
 import { useProjectList } from "./hooks/use-project-list";
 import EmptyAssetComponent from "@/core/component/empty-asset-component";
 import ProjectCard from "@/core/component/project-card";
@@ -9,46 +7,29 @@ import { LoadingScreen } from "@/core/component/loading-component";
 import { imageConfig } from "@/core/config/images-config";
 
 export default function ProjectListView() {
-  const theme = themeConfig;
-
   const { isLoading, data, handleNavigateToProjectDetail } = useProjectList();
 
   if (isLoading) {
     return (
-      <Box
-        display="flex"
-        justifyContent="center"
-        alignItems="center"
-        minHeight="100vh"
-      >
+      <div className="flex justify-center items-center min-h-screen">
         <LoadingScreen />
-      </Box>
+      </div>
     );
   }
 
   return (
-    <Box
-      display="flex"
-      flexDirection="column"
-      padding={{ xs: "100px 20px 40px", md: "20px" }}
-      margin="0 auto"
-    >
-      <Typography
-        variant="h1"
-        color={theme.colors.white}
-        fontWeight={600}
-        sx={{ fontSize: { xs: 16, sm: 18, md: 25 } }}
-      >
+    <div className="flex flex-col pt-[100px] px-5 pb-10 md:pt-5 mx-auto">
+      <h1 className="text-white font-semibold text-[16px] sm:text-[18px] md:text-[25px]">
         All Asset
-      </Typography>
+      </h1>
 
       {!data?.projects?.length ? (
         <EmptyAssetComponent title="No Project Found" image={imageConfig.icon.confusedIconRich} />
       ) : (
-        <Box paddingTop="32px">
-          <Grid container spacing={2}>
+        <div className="pt-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
             {data.projects.map((project) => (
-              <Grid key={project.id}>
+              <div key={project.id}>
                 <ProjectCard
                   assetName={project.metadata?.assetName}
                   createdAt={project.createdAt}
@@ -65,11 +46,12 @@ export default function ProjectListView() {
                     handleNavigateToProjectDetail(project.id.toString())
                   }}
                 />
-              </Grid>
+              </div>
             ))}
-          </Grid>
-        </Box>
+          </div>
+        </div>
       )}
-    </Box>
+    </div>
   );
 }
+

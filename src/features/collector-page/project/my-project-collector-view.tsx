@@ -1,53 +1,34 @@
 "use client";
 
-import { themeConfig } from "@/core/config/theme-config";
-import { Box, Grid, Typography } from "@mui/material";
 import EmptyAssetComponent from "../../../core/component/empty-asset-component";
 import ProjectCard from "@/core/component/project-card";
 import { LoadingScreen } from "@/core/component/loading-component";
 import useMyProject from "./hooks/use-my-project";
 
 export default function MyProjectCollectorView() {
-  const theme = themeConfig;
-
   const { isLoading, data, handleNavigateToProjectDetail } = useMyProject();
 
   if (isLoading) {
     return (
-      <Box
-        display="flex"
-        justifyContent="center"
-        alignItems="center"
-        minHeight="100vh"
-      >
+      <div className="flex justify-center items-center min-h-screen">
         <LoadingScreen />
-      </Box>
+      </div>
     );
   }
 
   return (
-    <Box
-      display="flex"
-      flexDirection="column"
-      padding={{ xs: "100px 20px 40px", md: "20px" }}
-      margin="0 auto"
-    >
-      <Typography
-        variant="h1"
-        color={theme.colors.white}
-        fontWeight={600}
-        sx={{ fontSize: { xs: 16, sm: 18, md: 25 } }}
-      >
+    <div className="flex flex-col pt-[100px] px-5 pb-10 md:p-5 mx-auto">
+      <h1 className="text-white font-semibold text-[16px] sm:text-[18px] md:text-[25px]">
         My Asset
-      </Typography>
+      </h1>
 
       {!data?.projects?.length ? (
         <EmptyAssetComponent />
       ) : (
-        <Box paddingTop="32px">
-          <Grid container spacing={2}>
+        <div className="pt-8">
+          <div className="flex flex-wrap gap-4">
             {data.projects.map((project) => (
-              <Grid key={project.id}>
+              <div key={project.id}>
                 <ProjectCard
                   assetName={project.metadata?.assetName}
                   createdAt={project.createdAt}
@@ -64,11 +45,11 @@ export default function MyProjectCollectorView() {
                     handleNavigateToProjectDetail(project.id);
                   }}
                 />
-              </Grid>
+              </div>
             ))}
-          </Grid>
-        </Box>
+          </div>
+        </div>
       )}
-    </Box>
+    </div>
   );
 }

@@ -1,82 +1,37 @@
 "use client";
 
 import { imageConfig } from "@/core/config/images-config";
-import { themeConfig } from "@/core/config/theme-config";
-import { Box, Button, Typography } from "@mui/material";
 import Image from "next/image";
 import useAddProjectCollector from "./hooks/use-add-project-collector";
 
 export default function AddProjectCollectorView() {
-  const theme = themeConfig;
-
   const { onAddProject } = useAddProjectCollector();
 
   return (
-    <Box
-      display="flex"
-      flexDirection="column"
-      padding={{ xs: "100px 20px 40px", md: "20px" }}
-      margin="0 auto"
-    >
-      <Typography
-        variant="h1"
-        color={theme.colors.white}
-        fontWeight={600}
-        sx={{ fontSize: { xs: 16, sm: 18, md: 25 } }}
-      >
+    <div className="flex flex-col pt-[100px] px-5 pb-10 md:p-5 mx-auto">
+      <h1 className="text-white font-semibold text-[16px] sm:text-[18px] md:text-[25px]">
         Tokenize New Asset
-      </Typography>
+      </h1>
 
-      <Box
-        display="flex"
-        flexDirection="column"
-        justifyContent="center"
-        alignItems="center"
-        paddingTop="90px"
-      >
+      <div className="flex flex-col justify-center items-center pt-[90px]">
         <Image
           src={imageConfig.icon.sudgestedIcon}
           alt="Profile Icon"
           width={150}
           height={150}
         />
-        <Box height={30} />
-        <Typography
-          variant="body1"
-          color={theme.colors.white}
-          fontWeight={600}
-          sx={{ fontSize: { xs: 16, sm: 18, md: 15 } }}
-        >
+        <div className="h-[30px]" />
+        <p className="text-white font-semibold text-[16px] sm:text-[18px] md:text-[15px]">
           Upload your asset and tokenize on Stomatrade Platform
-        </Typography>
-        <Box height={30} />
-        <Button
+        </p>
+        <div className="h-[30px]" />
+        <button
           onClick={onAddProject}
-          variant="outlined"
-          sx={{
-            width: { xs: "100%", sm: "200px" },
-            borderRadius: "9999px",
-            borderColor: "var(--primary-colors)",
-            color: "var(--primary-colors)",
-            fontWeight: 600,
-            textTransform: "none",
-            fontSize: { xs: "0.85rem", md: "0.95rem" },
-            py: { xs: "8px", md: "9px" },
-            "&:hover": {
-              backgroundColor: "var(--primary-colors)",
-              borderColor: "var(--primary-colors)",
-              color: "#0A0A0A",
-            },
-            "&.Mui-disabled": {
-              color: theme.colors.thirdBgColors,
-              borderColor: theme.colors.thirdBgColors,
-            },
-            transition: "all 0.3s",
-          }}
+          className="w-full sm:w-[200px] rounded-full border border-primary text-primary font-semibold text-[13.6px] md:text-[15.2px] py-2 md:py-[9px] transition-all duration-300 hover:bg-primary hover:text-background disabled:text-background-third disabled:border-background-third disabled:cursor-not-allowed"
         >
           Upload Asset
-        </Button>
-      </Box>
-    </Box>
+        </button>
+      </div>
+    </div>
   );
 }

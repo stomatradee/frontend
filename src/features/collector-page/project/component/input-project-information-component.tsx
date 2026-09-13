@@ -1,20 +1,8 @@
 "use client";
 
-import { themeConfig } from "@/core/config/theme-config";
-import {
-  Box,
-  Card,
-  InputAdornment,
-  MenuItem,
-  TextField,
-  Typography,
-} from "@mui/material";
-// import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { IDatePickerControl } from "@/core/types/common";
 import { useEffect } from "react";
+import dayjs from "dayjs";
+import { IDatePickerControl } from "@/core/types/common";
 
 type InputProjectInformationComponentProps = {
   title?: string;
@@ -44,25 +32,11 @@ export default function InputProjectInformationComponent({
   onFundingDurationChange,
   onRepaymentDurationChange,
 }: InputProjectInformationComponentProps) {
-  const theme = themeConfig;
-
   const category = [
-    {
-      value: "coffee",
-      label: "Coffee",
-    },
-    {
-      value: "cocoa",
-      label: "Cocoa",
-    },
-    {
-      value: "palm-oil",
-      label: "Palm Oil",
-    },
-    {
-      value: "rubber",
-      label: "Rubber",
-    },
+    { value: "coffee", label: "Coffee" },
+    { value: "cocoa", label: "Cocoa" },
+    { value: "palm-oil", label: "Palm Oil" },
+    { value: "rubber", label: "Rubber" },
   ];
 
   useEffect(() => {
@@ -71,474 +45,121 @@ export default function InputProjectInformationComponent({
   }, []);
 
   return (
-    <Card
-      sx={{
-        bgcolor: theme.colors.secondaryBgColors,
-        borderRadius: "30px",
-        border: "1px solid",
-        borderColor: theme.colors.thirdBgColors,
-        width: "100%",
-        maxWidth: "1000px",
-        padding: { xs: "25px 20px", sm: "35px" },
-      }}
-    >
-      <Typography
-        variant="h1"
-        color={theme.colors.white}
-        fontWeight={600}
-        sx={{ fontSize: { xs: 16, sm: 18, md: 25 } }}
-      >
+    <div className="bg-background-secondary rounded-[30px] border border-background-third w-full max-w-[1000px] px-5 py-[25px] sm:p-[35px]">
+      <h1 className="text-white font-semibold text-[16px] sm:text-[18px] md:text-[25px]">
         {title ?? "Title"}
-      </Typography>
-      <Box height={10} />
-      <Typography
-        variant="body1"
-        color={theme.colors.thirdBgColors}
-        fontWeight={600}
-        sx={{ fontSize: { xs: 16, sm: 18, md: 15 } }}
-      >
+      </h1>
+      <div className="h-[10px]" />
+      <p className="text-background-third font-semibold text-[16px] sm:text-[18px] md:text-[15px]">
         {description ?? "Description"}
-      </Typography>
-      <Box height={30} />
-      <Box
-        display="flex"
-        flexDirection="row"
-        alignItems="flex-start"
-        margin="0 auto"
-        gap={3}
-        width="100%"
-      >
+      </p>
+      <div className="h-[30px]" />
+      
+      <div className="flex flex-col sm:flex-row items-start mx-auto gap-5 sm:gap-8 w-full">
         {/* Category Column */}
-        <Box display="flex" flexDirection="column" flex={1}>
-          <Typography
-            variant="body1"
-            color={theme.colors.white}
-            fontWeight={600}
-            sx={{ fontSize: { xs: 16, sm: 18, md: 15 } }}
-          >
+        <div className="flex flex-col flex-1 w-full">
+          <label className="text-white font-semibold text-[16px] sm:text-[18px] md:text-[15px]">
             Category
-          </Typography>
-          <Box height={20} />
-          <TextField
-            id="category"
-            select
+          </label>
+          <div className="h-[20px]" />
+          <select
             defaultValue="coffee"
-            variant="outlined"
             onChange={(e) => onCategoryChange(e.target.value)}
-            fullWidth
-            SelectProps={{
-              MenuProps: {
-                PaperProps: {
-                  sx: {
-                    backgroundColor: theme.colors.secondaryBgColors,
-                    borderRadius: "15px",
-                  },
-                },
-              },
-            }}
-            sx={{
-              "& .MuiOutlinedInput-root": {
-                backgroundColor: theme.colors.bgColors,
-                borderRadius: "25px",
-                "&:hover fieldset": {
-                  borderColor: theme.colors.primaryColors,
-                },
-                "&.Mui-focused fieldset": {
-                  borderColor: theme.colors.primaryColors,
-                },
-              },
-              "& .MuiInputLabel-root": {
-                color: "gray",
-              },
-              "& .MuiInputLabel-root.Mui-focused": {
-                color: theme.colors.white,
-              },
-              "& .MuiInputBase-input,  & input": {
-                color: theme.colors.white,
-              },
-              "& .MuiSelect-icon": {
-                color: theme.colors.white,
-              },
+            className="w-full bg-background border border-background-third rounded-[25px] text-white px-4 py-3 sm:py-4 focus:outline-none focus:border-primary transition-colors appearance-none"
+            style={{
+              backgroundImage: `url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23FFFFFF%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E")`,
+              backgroundRepeat: 'no-repeat',
+              backgroundPosition: 'right 1rem top 50%',
+              backgroundSize: '0.65rem auto'
             }}
           >
             {category.map((data) => (
-              <MenuItem
-                key={data.value}
-                value={data.value}
-                sx={{
-                  color: theme.colors.white,
-                  "&:hover": {
-                    backgroundColor: theme.colors.thirdBgColors,
-                  },
-                  "&.Mui-selected": {
-                    backgroundColor: theme.colors.primaryColors + "08",
-                    color: theme.colors.primaryColors,
-                    "&:hover": {
-                      backgroundColor: theme.colors.primaryColors + "14",
-                    },
-                  },
-                }}
-              >
+              <option key={data.value} value={data.value} className="bg-background-secondary text-white">
                 {data.label}
-              </MenuItem>
+              </option>
             ))}
-          </TextField>
-        </Box>
+          </select>
+        </div>
 
         {/* Weight Column */}
-        <Box display="flex" flexDirection="column" flex={1}>
-          <Typography
-            variant="body1"
-            color={theme.colors.white}
-            fontWeight={600}
-            sx={{ fontSize: { xs: 16, sm: 18, md: 15 } }}
-          >
+        <div className="flex flex-col flex-1 w-full">
+          <label className="text-white font-semibold text-[16px] sm:text-[18px] md:text-[15px]">
             Weight
-          </Typography>
-          <Box height={20} />
-          <TextField
-            id={label}
-            type="number"
-            label="Weight"
-            placeholder="Input Weight"
-            value={quantityValue ?? ""}
-            onChange={(e) => onQuantityChange(e.target.value)}
-            variant="outlined"
-            fullWidth
-            slotProps={{
-              input: {
-                endAdornment: (
-                  <InputAdornment
-                    position="end"
-                    sx={{
-                      "& .MuiTypography-root": {
-                        color: theme.colors.white,
-                      },
-                    }}
-                  >
-                    Kg
-                  </InputAdornment>
-                ),
-              },
-            }}
-            sx={{
-              "& .MuiOutlinedInput-root": {
-                backgroundColor: theme.colors.bgColors,
-                borderRadius: "25px",
-                "&:hover fieldset": {
-                  borderColor: theme.colors.primaryColors,
-                },
-                "&.Mui-focused fieldset": {
-                  borderColor: theme.colors.primaryColors,
-                },
-              },
-              "& .MuiInputLabel-root": {
-                color: "gray",
-              },
-              "& .MuiInputLabel-root.Mui-focused": {
-                color: theme.colors.white,
-              },
-              "& .MuiInputBase-input::placeholder": {
-                color: theme.colors.thirdBgColors,
-              },
-              "& .MuiInputBase-input": {
-                color: theme.colors.white,
-              },
-            }}
-          />
-        </Box>
-      </Box>
-      <Box height={50} />
-      <Typography
-        variant="body1"
-        color={theme.colors.white}
-        fontWeight={600}
-        sx={{ fontSize: { xs: 16, sm: 18, md: 15 } }}
-      >
+          </label>
+          <div className="h-[20px]" />
+          <div className="relative w-full">
+            <input
+              type="number"
+              placeholder="Input Weight"
+              value={quantityValue ?? ""}
+              onChange={(e) => onQuantityChange(e.target.value)}
+              className="w-full bg-background border border-background-third rounded-[25px] text-white px-4 py-3 sm:py-4 focus:outline-none focus:border-primary transition-colors placeholder:text-background-third pr-12"
+            />
+            <div className="absolute inset-y-0 right-0 flex items-center pr-4 pointer-events-none">
+              <span className="text-white">Kg</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div className="h-[50px]" />
+      
+      <label className="text-white font-semibold text-[16px] sm:text-[18px] md:text-[15px]">
         Delivery Date
-      </Typography>
-      <Box height={20} />
-      <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <DateTimePicker
-          disablePast={true}
-          label="Select Date"
-          onChange={(date) => onDeliveryDateChange(date)}
-          slotProps={{
-            textField: {
-              fullWidth: true,
-              variant: "outlined",
-              sx: {
-                backgroundColor: theme.colors.bgColors,
-                borderRadius: "25px",
-                "& .MuiOutlinedInput-root": {
-                  borderRadius: "25px",
-                  backgroundColor: theme.colors.bgColors,
-                  color: theme.colors.white,
-
-                  "& fieldset": {
-                    borderColor: theme.colors.thirdBgColors,
-                    borderRadius: "25px",
-                  },
-                  "&:hover fieldset": {
-                    borderColor: theme.colors.primaryColors,
-                  },
-                  "&.Mui-focused fieldset": {
-                    borderColor: `${theme.colors.primaryColors} !important`,
-                  },
-                },
-
-                "& .MuiInputLabel-root": {
-                  color: "gray",
-                },
-                "& .MuiInputLabel-root.Mui-focused": {
-                  color: theme.colors.white,
-                },
-
-                "& .MuiInputBase-input": {
-                  color: `${theme.colors.white} !important`,
-                  WebkitTextFillColor: `${theme.colors.white} !important`,
-                },
-
-                "& .MuiPickersSectionList-root": {
-                  color: theme.colors.white,
-                },
-                "& .MuiPickersSectionList-section": {
-                  color: `${theme.colors.white} !important`,
-                },
-
-                "& .MuiSvgIcon-root": {
-                  color: theme.colors.white,
-                },
-              },
-            },
-            popper: {
-              sx: {
-                "& .MuiPaper-root": {
-                  backgroundColor: theme.colors.secondaryBgColors,
-                  borderRadius: "15px",
-                  border: `1px solid ${theme.colors.thirdBgColors}`,
-                  color: theme.colors.white,
-                },
-              },
-            },
-            desktopPaper: {
-              sx: {
-                backgroundColor: theme.colors.secondaryBgColors,
-                borderRadius: "15px",
-                border: `1px solid ${theme.colors.thirdBgColors}`,
-              },
-            },
-            layout: {
-              sx: {
-                backgroundColor: theme.colors.secondaryBgColors,
-                color: theme.colors.white,
-                "& .MuiDayCalendar-weekDayLabel": {
-                  color: theme.colors.thirdBgColors,
-                },
-                "& .MuiPickersCalendarHeader-label": {
-                  color: theme.colors.white,
-                },
-                "& .MuiPickersCalendarHeader-switchViewButton": {
-                  color: theme.colors.white,
-                },
-                "& .MuiPickersArrowSwitcher-button": {
-                  color: theme.colors.white,
-                },
-                "& .MuiPickersYear-yearButton": {
-                  color: theme.colors.white,
-                  "&.Mui-selected": {
-                    backgroundColor: theme.colors.primaryColors,
-                    color: theme.colors.bgColors,
-                  },
-                  "&:hover": {
-                    backgroundColor: theme.colors.thirdBgColors,
-                  },
-                },
-                "& .MuiMultiSectionDigitalClockSection-item": {
-                  color: theme.colors.white,
-                  "&:hover": {
-                    backgroundColor: theme.colors.thirdBgColors,
-                  },
-                  "&.Mui-selected": {
-                    backgroundColor: `${theme.colors.primaryColors} !important`,
-                    color: theme.colors.bgColors,
-                    "&:hover": {
-                      backgroundColor: theme.colors.primaryColors,
-                    },
-                    "&:focus": {
-                      backgroundColor: theme.colors.primaryColors,
-                    },
-                  },
-                },
-                "& .MuiButton-text": {
-                  color: theme.colors.primaryColors,
-                },
-              },
-            },
-            day: {
-              sx: {
-                color: theme.colors.white,
-                "&:hover": {
-                  backgroundColor: theme.colors.thirdBgColors,
-                },
-                "&.Mui-selected": {
-                  backgroundColor: `${theme.colors.primaryColors} !important`,
-                  color: theme.colors.bgColors,
-                  fontWeight: 600,
-                  "&:hover": {
-                    backgroundColor: theme.colors.primaryColors,
-                  },
-                  "&:focus": {
-                    backgroundColor: theme.colors.primaryColors,
-                  },
-                },
-                "&.MuiPickersDay-today": {
-                  borderColor: theme.colors.primaryColors,
-                  color: theme.colors.primaryColors,
-                  "&.MuiPickersDay-today.Mui-selected": {
-                    color: theme.colors.bgColors,
-                  },
-                },
-              },
-            },
-          }}
-        />
-      </LocalizationProvider>
-      <Box height={50} />
-      <Box
-        display="flex"
-        flexDirection="row"
-        alignItems="flex-start"
-        margin="0 auto"
-        gap={3}
-        width="100%"
-      >
-        {/* Category Column */}
-        <Box display="flex" flexDirection="column" flex={1}>
-          <Typography
-            variant="body1"
-            color={theme.colors.white}
-            fontWeight={600}
-            sx={{ fontSize: { xs: 16, sm: 18, md: 15 } }}
-          >
+      </label>
+      <div className="h-[20px]" />
+      <input
+        type="datetime-local"
+        onChange={(e) => {
+          const value = e.target.value;
+          onDeliveryDateChange(value ? dayjs(value) : null);
+        }}
+        className="w-full bg-background border border-background-third rounded-[25px] text-white px-4 py-3 sm:py-4 focus:outline-none focus:border-primary transition-colors [color-scheme:dark]"
+      />
+      
+      <div className="h-[50px]" />
+      
+      <div className="flex flex-col sm:flex-row items-start mx-auto gap-5 sm:gap-8 w-full">
+        {/* Funding Duration Column */}
+        <div className="flex flex-col flex-1 w-full">
+          <label className="text-white font-semibold text-[16px] sm:text-[18px] md:text-[15px]">
             Funding Duration
-          </Typography>
-          <Box height={20} />
-          <TextField
-            id={label}
-            type="number"
-            label="Funding Duration"
-            placeholder="Input Funding Duration"
-            value={fundingDurationValue ?? ""}
-            onChange={(e) => onFundingDurationChange(e.target.value)}
-            variant="outlined"
-            fullWidth
-            slotProps={{
-              input: {
-                endAdornment: (
-                  <InputAdornment
-                    position="end"
-                    sx={{
-                      "& .MuiTypography-root": {
-                        color: theme.colors.white,
-                      },
-                    }}
-                  >
-                    Days
-                  </InputAdornment>
-                ),
-              },
-            }}
-            sx={{
-              "& .MuiOutlinedInput-root": {
-                backgroundColor: theme.colors.bgColors,
-                borderRadius: "25px",
-                "&:hover fieldset": {
-                  borderColor: theme.colors.primaryColors,
-                },
-                "&.Mui-focused fieldset": {
-                  borderColor: theme.colors.primaryColors,
-                },
-              },
-              "& .MuiInputLabel-root": {
-                color: "gray",
-              },
-              "& .MuiInputLabel-root.Mui-focused": {
-                color: theme.colors.white,
-              },
-              "& .MuiInputBase-input::placeholder": {
-                color: theme.colors.thirdBgColors,
-              },
-              "& .MuiInputBase-input": {
-                color: theme.colors.white,
-              },
-            }}
-          />
-        </Box>
+          </label>
+          <div className="h-[20px]" />
+          <div className="relative w-full">
+            <input
+              type="number"
+              placeholder="Input Funding Duration"
+              value={fundingDurationValue ?? ""}
+              onChange={(e) => onFundingDurationChange(e.target.value)}
+              className="w-full bg-background border border-background-third rounded-[25px] text-white px-4 py-3 sm:py-4 focus:outline-none focus:border-primary transition-colors placeholder:text-background-third pr-[60px]"
+            />
+            <div className="absolute inset-y-0 right-0 flex items-center pr-4 pointer-events-none">
+              <span className="text-white">Days</span>
+            </div>
+          </div>
+        </div>
 
-        {/* Weight Column */}
-        <Box display="flex" flexDirection="column" flex={1}>
-          <Typography
-            variant="body1"
-            color={theme.colors.white}
-            fontWeight={600}
-            sx={{ fontSize: { xs: 16, sm: 18, md: 15 } }}
-          >
+        {/* Repayment Duration Column */}
+        <div className="flex flex-col flex-1 w-full">
+          <label className="text-white font-semibold text-[16px] sm:text-[18px] md:text-[15px]">
             Repayment Duration
-          </Typography>
-          <Box height={20} />
-          <TextField
-            id={label}
-            type="number"
-            label="Repayment Duration"
-            placeholder="Input Repayment Duration"
-            value={repaymentDurationValue ?? ""}
-            onChange={(e) => onRepaymentDurationChange(e.target.value)}
-            variant="outlined"
-            fullWidth
-            slotProps={{
-              input: {
-                endAdornment: (
-                  <InputAdornment
-                    position="end"
-                    sx={{
-                      "& .MuiTypography-root": {
-                        color: theme.colors.white,
-                      },
-                    }}
-                  >
-                    Days
-                  </InputAdornment>
-                ),
-              },
-            }}
-            sx={{
-              "& .MuiOutlinedInput-root": {
-                backgroundColor: theme.colors.bgColors,
-                borderRadius: "25px",
-                "&:hover fieldset": {
-                  borderColor: theme.colors.primaryColors,
-                },
-                "&.Mui-focused fieldset": {
-                  borderColor: theme.colors.primaryColors,
-                },
-              },
-              "& .MuiInputLabel-root": {
-                color: "gray",
-              },
-              "& .MuiInputLabel-root.Mui-focused": {
-                color: theme.colors.white,
-              },
-              "& .MuiInputBase-input::placeholder": {
-                color: theme.colors.thirdBgColors,
-              },
-              "& .MuiInputBase-input": {
-                color: theme.colors.white,
-              },
-            }}
-          />
-        </Box>
-      </Box>
-    </Card>
+          </label>
+          <div className="h-[20px]" />
+          <div className="relative w-full">
+            <input
+              type="number"
+              placeholder="Input Repayment Duration"
+              value={repaymentDurationValue ?? ""}
+              onChange={(e) => onRepaymentDurationChange(e.target.value)}
+              className="w-full bg-background border border-background-third rounded-[25px] text-white px-4 py-3 sm:py-4 focus:outline-none focus:border-primary transition-colors placeholder:text-background-third pr-[60px]"
+            />
+            <div className="absolute inset-y-0 right-0 flex items-center pr-4 pointer-events-none">
+              <span className="text-white">Days</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }

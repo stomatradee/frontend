@@ -1,8 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { Box, Typography, Button } from "@mui/material";
-import NorthEastIcon from "@mui/icons-material/NorthEast";
+import { Icon } from "@iconify/react";
 
 interface StatCardProps {
     title: string;
@@ -25,127 +24,51 @@ export default function StatCard({
 }: StatCardProps) {
     if (variant === "featured") {
         return (
-            <Box
-                sx={{
-                    position: "relative",
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "space-between",
-                    overflow: "hidden",
-                    borderRadius: "1rem",
-                    border: "1px solid rgba(255,255,255,0.1)",
-                    background: "linear-gradient(to bottom right, rgba(0,105,35,0.3), #0A0A0A)",
-                    p: 3,
-                    minHeight: 180,
-                }}
-            >
+            <div className="relative flex flex-col justify-between overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-[#0069234D] to-[#0A0A0A] p-6 min-h-[180px]">
                 {/* Background Image */}
                 {ctaImage && (
                     <Image
                         src={ctaImage}
                         alt={title}
                         fill
-                        style={{
-                            objectFit: "cover",
-                            objectPosition: "right bottom",
-                            opacity: 0.5,
-                            zIndex: 0,
-                        }}
+                        className="object-cover object-right-bottom opacity-50 z-0"
                         sizes="(max-width: 768px) 100vw, 33vw"
                     />
                 )}
 
-                <Box sx={{ position: "relative", zIndex: 10, display: "flex", flexDirection: "column", gap: 1.5 }}>
-                    <Typography
-                        variant="h6"
-                        sx={{
-                            fontSize: { xs: "1.125rem", sm: "1.25rem" },
-                            fontWeight: 700,
-                            color: "var(--primary-colors)",
-                            lineHeight: 1.3,
-                        }}
-                    >
+                <div className="relative z-10 flex flex-col gap-3.5">
+                    <h6 className="text-[1.125rem] sm:text-[1.25rem] font-bold text-primary leading-tight">
                         {title}
-                    </Typography>
+                    </h6>
 
                     {ctaLabel && (
-                        <Button
+                        <button
                             onClick={handleSustainabilityClick}
-                            variant="outlined"
-                            endIcon={<NorthEastIcon sx={{ fontSize: 12 }} />}
-                            size="small"
-                            sx={{
-                                width: "fit-content",
-                                borderRadius: "9999px",
-                                borderColor: "rgba(255,255,255,0.2)",
-                                backgroundColor: "rgba(255,255,255,0.05)",
-                                color: "white",
-                                fontWeight: 500,
-                                fontSize: "0.75rem",
-                                textTransform: "none",
-                                px: 2,
-                                py: 0.5,
-                                "&:hover": {
-                                    backgroundColor: "rgba(255,255,255,0.1)",
-                                    borderColor: "rgba(255,255,255,0.3)",
-                                },
-                                transition: "all 0.3s",
-                            }}
+                            className="w-fit flex items-center gap-1 rounded-full border border-white/20 bg-white/5 text-white font-medium text-xs px-4 py-1 hover:bg-white/10 hover:border-white/30 transition-all duration-300"
                         >
                             {ctaLabel}
-                        </Button>
+                            <Icon icon="mdi:arrow-top-right" className="text-[12px]" />
+                        </button>
                     )}
-                </Box>
-            </Box>
+                </div>
+            </div>
         );
     }
 
     return (
-        <Box
-            sx={{
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
-                gap: 1,
-                borderRadius: "1rem",
-                border: "1px solid rgba(255,255,255,0.1)",
-                backgroundColor: "var(--secondary-bg-colors)",
-                p: 3,
-                minHeight: 180,
-            }}
-        >
-            <Typography
-                variant="overline"
-                sx={{
-                    color: "rgba(255,255,255,0.4)",
-                    fontSize: "0.75rem",
-                    letterSpacing: "0.08em",
-                    fontWeight: 500,
-                }}
-            >
+        <div className="flex flex-col justify-center gap-2.5 rounded-2xl border border-white/10 bg-background-secondary p-6 min-h-[180px]">
+            <span className="text-white/40 text-xs tracking-widest font-medium uppercase">
                 {title}
-            </Typography>
-            <Box sx={{ display: "flex", alignItems: "baseline", gap: 1 }}>
-                <Typography
-                    variant="h3"
-                    sx={{
-                        fontSize: { xs: "1.875rem", sm: "2.25rem" },
-                        fontWeight: 700,
-                        color: "var(--primary-colors)",
-                    }}
-                >
+            </span>
+            <div className="flex items-baseline gap-2">
+                <h3 className="text-[1.875rem] sm:text-[2.25rem] font-bold text-primary">
                     {value}
-                </Typography>
-                <Typography
-                    variant="body2"
-                    sx={{
-                        color: "rgba(255,255,255,0.6)",
-                        fontWeight: 300,
-                    }}
-                >
+                </h3>
+                <span className="text-white/60 font-light text-sm">
                     {description}
-                </Typography>
-            </Box>
-        </Box>
+                </span>
+            </div>
+        </div>
     );
 }
+

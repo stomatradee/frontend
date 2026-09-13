@@ -1,7 +1,5 @@
 "use client";
 
-import { Box } from "@mui/material";
-import { themeConfig } from "@/core/config/theme-config";
 import DashboardSidebar from "../../../core/component/dashboard/dashboard-sidebar";
 import DashboardNavbar from "../../../core/component/dashboard/dashboard-navbar";
 import { useDashboardCollector } from "./hooks/use-dashboard-collector";
@@ -11,32 +9,23 @@ export default function DashboardCollectorView({
 }: {
   children: React.ReactNode;
 }) {
-  const theme = themeConfig;
-
   const { handleDisconnectWallet } = useDashboardCollector();
 
   return (
-    <Box sx={{ display: "flex", minHeight: "100vh" }}>
+    <div className="flex min-h-screen">
       {/* Sidebar */}
       <DashboardSidebar />
 
       {/* Main Content Area */}
-      <Box
-        component="main"
-        sx={{
-          flexGrow: 1,
-          backgroundColor: theme.colors.bgColors,
-          minHeight: "100vh",
-        }}
-      >
+      <main className="flex-grow bg-background min-h-screen">
         {/* Navbar */}
         <DashboardNavbar handleDisconnect={handleDisconnectWallet} />
 
         {/* Page Content */}
-        <Box sx={{ pt: "82px", px: "32px", pb: 3, color: theme.colors.white }}>
+        <div className="pt-[82px] px-[32px] pb-6 text-white">
           {children}
-        </Box>
-      </Box>
-    </Box>
+        </div>
+      </main>
+    </div>
   );
 }

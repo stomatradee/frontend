@@ -1,8 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { Box, Typography, Button, Stack, Chip } from "@mui/material";
-import NorthEastIcon from "@mui/icons-material/NorthEast";
+import { Icon } from "@iconify/react";
 
 interface CtaBannerProps {
     badgeText?: string;
@@ -28,168 +27,79 @@ export default function CtaBanner({
     handleWhatIsStomatrade,
 }: CtaBannerProps) {
     return (
-        <Box
-            sx={{
-                position: "relative",
-                width: "100%",
-                overflow: "hidden",
-                // aspectRatio: { xs: "auto", md: "2.75 / 1" },
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                py: { xs: 12, lg: 48 },
-                px: { xs: 3, lg: 8 },
-            }}
-        >
+        <div className="relative w-full overflow-hidden flex items-center justify-center py-24 lg:py-48 px-6 lg:px-32">
             {/* Background Image - Mobile */}
             {mobileBackgroundImage && (
-                <Box sx={{ display: { xs: "block", md: "none" }, position: "absolute", inset: 0, zIndex: 0 }}>
+                <div className="block md:hidden absolute inset-0 z-0">
                     <Image
                         src={mobileBackgroundImage}
                         alt=""
                         fill
-                        style={{ objectPosition: "center" }}
+                        className="object-cover object-center"
                         sizes="100vw"
                     />
-                </Box>
+                </div>
             )}
 
             {/* Background Image - Desktop */}
             {desktopBackgroundImage && (
-                <Box sx={{ display: { xs: "none", md: "block" }, position: "absolute", inset: 0, zIndex: 0 }}>
+                <div className="hidden md:block absolute inset-0 z-0">
                     <Image
                         src={desktopBackgroundImage}
                         alt=""
                         fill
-                        style={{ objectPosition: "center" }}
+                        className="object-cover object-center"
                         sizes="100vw"
                     />
-                </Box>
+                </div>
             )}
 
-            {/* Dark overlay */}
-            {/* <Box
-                sx={{
-                    position: "absolute",
-                    inset: 0,
-                    zIndex: 1,
-                    backgroundColor: "rgba(10,10,10,0.6)",
-                }}
-            /> */}
-
             {/* Content */}
-            <Stack
-                alignItems="center"
-                spacing={3}
-                sx={{
-                    position: "relative",
-                    zIndex: 2,
-                    textAlign: "center",
-                    maxWidth: "48rem",
-                    mx: "auto",
-                }}
-            >
+            <div className="relative z-[2] flex flex-col items-center gap-6 text-center max-w-3xl mx-auto">
                 {/* Badge */}
                 {badgeText && (
-                    <Chip
-                        label={badgeText}
-                        variant="outlined"
-                        size="small"
-                        sx={{
-                            borderColor: "var(--primary-colors)",
-                            color: "var(--primary-colors)",
-                            fontWeight: 600,
-                            fontSize: "0.75rem",
-                            height: "auto",
-                            "& .MuiChip-label": { px: 2, py: 0.75 },
-                        }}
-                    />
+                    <span className="border border-primary text-primary font-semibold text-xs px-4 py-1.5 rounded-full">
+                        {badgeText}
+                    </span>
                 )}
 
                 {/* Heading */}
-                <Typography
-                    variant="h2"
-                    sx={{
-                        fontSize: { xs: "1.75rem", sm: "2.25rem", lg: "3rem" },
-                        fontWeight: 700,
-                        lineHeight: 1.15,
-                        color: "white",
-                    }}
-                >
+                <h2 className="text-[1.75rem] sm:text-[2.25rem] lg:text-[3rem] font-bold leading-[1.15] text-white">
                     {heading}
-                </Typography>
+                </h2>
 
                 {/* Description */}
                 {description && (
-                    <Typography
-                        variant="body1"
-                        sx={{
-                            fontSize: { xs: "0.875rem", sm: "1rem" },
-                            color: "rgba(255,255,255,0.6)",
-                            fontWeight: 300,
-                            lineHeight: 1.7,
-                            maxWidth: "40rem",
-                        }}
-                    >
+                    <p className="text-[0.875rem] sm:text-[1rem] text-white/60 font-light leading-relaxed max-w-2xl">
                         {description}
-                    </Typography>
+                    </p>
                 )}
 
                 {/* CTA Buttons */}
                 {(primaryButtonLabel || secondaryButtonLabel) && (
-                    <Stack
-                        direction={{ xs: "column", sm: "row" }}
-                        spacing={2}
-                        sx={{ pt: 1 }}
-                    >
+                    <div className="flex flex-col sm:flex-row gap-4 pt-2">
                         {primaryButtonLabel && (
-                            <Button
-                                variant="contained"
+                            <button
                                 onClick={handleConnectWallet}
-                                sx={{
-                                    backgroundColor: "var(--primary-colors)",
-                                    color: "#0A0A0A",
-                                    fontWeight: 700,
-                                    fontSize: "0.875rem",
-                                    px: 4,
-                                    py: 1.5,
-                                    borderRadius: "0.5rem",
-                                    textTransform: "none",
-                                    "&:hover": {
-                                        backgroundColor: "var(--third-colors)",
-                                    },
-                                }}
+                                className="bg-primary text-[#0A0A0A] font-bold text-sm px-8 py-3 rounded-lg hover:bg-[#4CFDB3] transition-colors"
                             >
                                 {primaryButtonLabel}
-                            </Button>
+                            </button>
                         )}
 
                         {secondaryButtonLabel && (
-                            <Button
-                                variant="outlined"
+                            <button
                                 onClick={handleWhatIsStomatrade}
-                                endIcon={<NorthEastIcon sx={{ fontSize: 16 }} />}
-                                sx={{
-                                    borderColor: "rgba(255,255,255,0.3)",
-                                    color: "white",
-                                    fontWeight: 600,
-                                    fontSize: "0.875rem",
-                                    px: 4,
-                                    py: 1.5,
-                                    borderRadius: "0.5rem",
-                                    textTransform: "none",
-                                    "&:hover": {
-                                        borderColor: "rgba(255,255,255,0.6)",
-                                        backgroundColor: "rgba(255,255,255,0.05)",
-                                    },
-                                }}
+                                className="flex items-center justify-center gap-2 border border-white/30 text-white font-semibold text-sm px-8 py-3 rounded-lg hover:border-white/60 hover:bg-white/5 transition-colors"
                             >
                                 {secondaryButtonLabel}
-                            </Button>
+                                <Icon icon="mdi:arrow-top-right" className="text-base" />
+                            </button>
                         )}
-                    </Stack>
+                    </div>
                 )}
-            </Stack>
-        </Box>
+            </div>
+        </div>
     );
 }
+

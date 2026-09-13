@@ -1,7 +1,5 @@
 import { LoadingScreen } from "@/core/component/loading-component";
-import { themeConfig } from "@/core/config/theme-config";
 import { getUSDCSymbol, getUSDTSymbol } from "@/repository/token/token-repository";
-import { Box, Card, InputAdornment, MenuItem, TextField, Typography } from "@mui/material";
 import { useCallback, useEffect, useState } from "react";
 import { toast } from "sonner";
 
@@ -16,8 +14,6 @@ export default function AmountInformationComponent({
     onAmountValueChange,
     onTokenCodeChange,
 }: AmountInformationComponentProps) {
-    const theme = themeConfig;
-
     const [isLoading, setLoading] = useState<boolean>(false);
 
     const [tokenCodeList, setTokenCodeList] = useState<
@@ -71,201 +67,84 @@ export default function AmountInformationComponent({
     }, []);
 
     return (
-        <Card
-            sx={{
-                bgcolor: theme.colors.secondaryBgColors,
-                borderRadius: "30px",
-                border: "1px solid",
-                borderColor: theme.colors.thirdBgColors,
-                width: "100%",
-                maxWidth: "1000px",
-                padding: { xs: "25px 20px", sm: "35px" },
-            }}
-        >
-            <Typography
-                variant="h1"
-                color={theme.colors.white}
-                fontWeight={600}
-                sx={{ fontSize: { xs: 16, sm: 18, md: 25 } }}
-            >
+        <div className="bg-background-secondary border border-background-third rounded-[30px] w-full max-w-[1000px] px-5 py-[25px] sm:p-[35px] transition-all duration-300 hover:border-primary">
+            <h2 className="text-white font-semibold text-[16px] sm:text-[18px] md:text-[25px]">
                 Financial Information
-            </Typography>
-            <Box height={10} />
-            <Typography
-                variant="body1"
-                color={theme.colors.thirdBgColors}
-                fontWeight={600}
-                sx={{ fontSize: { xs: 16, sm: 18, md: 15 } }}
-            >
+            </h2>
+            <div className="h-[10px]" />
+            <p className="text-background-third font-semibold text-[16px] sm:text-[18px] md:text-[15px]">
                 Input information about the financial aspect for start investment
-            </Typography>
-            <Box height={30} />
+            </p>
+            <div className="h-[30px]" />
 
             {isLoading === true ? (
-                <LoadingScreen
-                    primaryBgActive={true}
-                    sx={{
-                        paddingTop: "20px",
-                        paddingBottom: "20px",
-                    }}
-                />
+                <div className="py-[20px]">
+                    <LoadingScreen primaryBgActive={true} />
+                </div>
             ) : (
                 <>
-                    <Box display="flex" flexDirection="column" flex={1}>
-                        <Typography
-                            variant="body1"
-                            color={theme.colors.white}
-                            fontWeight={600}
-                            sx={{ fontSize: { xs: 16, sm: 18, md: 15 } }}
+                    <div className="flex flex-col flex-1">
+                        <label 
+                            htmlFor="token-code"
+                            className="text-white font-semibold text-[16px] sm:text-[18px] md:text-[15px] mb-5 block"
                         >
                             Choose Token
-                        </Typography>
-                        <Box height={20} />
-                        <TextField
-                            id="token-code"
-                            select
-                            defaultValue="USDT"
-                            variant="outlined"
-                            onChange={(e) => {
-                                setTokenCode(e.target.value);
-                                onTokenCodeChange?.(e.target.value);
-                            }}
-                            fullWidth
-                            SelectProps={{
-                                MenuProps: {
-                                    PaperProps: {
-                                        sx: {
-                                            backgroundColor: theme.colors.secondaryBgColors,
-                                            borderRadius: "15px",
-                                        },
-                                    },
-                                },
-                            }}
-                            sx={{
-                                "& .MuiOutlinedInput-root": {
-                                    backgroundColor: theme.colors.bgColors,
-                                    borderRadius: "25px",
-                                    "&:hover fieldset": {
-                                        borderColor: theme.colors.primaryColors,
-                                    },
-                                    "&.Mui-focused fieldset": {
-                                        borderColor: theme.colors.primaryColors,
-                                    },
-                                },
-                                "& .MuiInputLabel-root": {
-                                    color: "gray",
-                                },
-                                "& .MuiInputLabel-root.Mui-focused": {
-                                    color: theme.colors.white,
-                                },
-                                "& .MuiInputBase-input,  & input": {
-                                    color: theme.colors.white,
-                                },
-                                "& .MuiSelect-icon": {
-                                    color: theme.colors.white,
-                                },
-                            }}
-                        >
-                            {tokenCodeList.map((data) => (
-                                <MenuItem
-                                    key={data.value}
-                                    value={data.value}
-                                    sx={{
-                                        color: theme.colors.white,
-                                        "&:hover": {
-                                            backgroundColor: theme.colors.thirdBgColors,
-                                        },
-                                        "&.Mui-selected": {
-                                            backgroundColor: theme.colors.primaryColors + "08",
-                                            color: theme.colors.primaryColors,
-                                            "&:hover": {
-                                                backgroundColor: theme.colors.primaryColors + "14",
-                                            },
-                                        },
-                                    }}
-                                >
-                                    {data.label}
-                                </MenuItem>
-                            ))}
-                        </TextField>
-                    </Box>
-                    <Box height={50} />
-                    <Box
-                        display="flex"
-                        flexDirection="row"
-                        alignItems="flex-start"
-                        margin="0 auto"
-                        gap={3}
-                        width="100%"
-                    >
-                        {/* Category Column */}
-                        <Box display="flex" flexDirection="column" flex={1}>
-                            <Typography
-                                variant="body1"
-                                color={theme.colors.white}
-                                fontWeight={600}
-                                sx={{ fontSize: { xs: 16, sm: 18, md: 15 } }}
+                        </label>
+                        <div className="relative">
+                            <select
+                                id="token-code"
+                                defaultValue="USDT"
+                                onChange={(e) => {
+                                    setTokenCode(e.target.value);
+                                    onTokenCodeChange?.(e.target.value);
+                                }}
+                                className="w-full bg-background border border-background-third rounded-[25px] px-4 py-3.5 text-white appearance-none focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors cursor-pointer"
+                            >
+                                {tokenCodeList.map((data) => (
+                                    <option key={data.value} value={data.value} className="bg-background-secondary text-white">
+                                        {data.label}
+                                    </option>
+                                ))}
+                            </select>
+                            <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-white">
+                                <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                    <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="h-[50px]" />
+
+                    <div className="flex flex-row items-start mx-auto gap-3 w-full">
+                        <div className="flex flex-col flex-1">
+                            <label 
+                                htmlFor="amount-value"
+                                className="text-white font-semibold text-[16px] sm:text-[18px] md:text-[15px] mb-5 block"
                             >
                                 Amount
-                            </Typography>
-                            <Box height={20} />
-                            <TextField
-                                id="amount-value"
-                                type="number"
-                                placeholder="Input Amount"
-                                value={amountValue ?? ""}
-                                onChange={(e) => {
-                                    const newValue = e.target.value;
-                                    onAmountValueChange?.(newValue);
-                                }}
-                                variant="outlined"
-                                fullWidth
-                                slotProps={{
-                                    input: {
-                                        startAdornment: (
-                                            <InputAdornment
-                                                position="start"
-                                                sx={{
-                                                    "& .MuiTypography-root": {
-                                                        color: theme.colors.white,
-                                                    },
-                                                }}
-                                            >
-                                                {tokenCode}
-                                            </InputAdornment>
-                                        ),
-                                    },
-                                }}
-                                sx={{
-                                    "& .MuiOutlinedInput-root": {
-                                        backgroundColor: theme.colors.bgColors,
-                                        borderRadius: "25px",
-                                        "&:hover fieldset": {
-                                            borderColor: theme.colors.primaryColors,
-                                        },
-                                        "&.Mui-focused fieldset": {
-                                            borderColor: theme.colors.primaryColors,
-                                        },
-                                    },
-                                    "& .MuiInputLabel-root": {
-                                        color: "gray",
-                                    },
-                                    "& .MuiInputLabel-root.Mui-focused": {
-                                        color: theme.colors.white,
-                                    },
-                                    "& .MuiInputBase-input::placeholder": {
-                                        color: theme.colors.thirdBgColors,
-                                    },
-                                    "& .MuiInputBase-input": {
-                                        color: theme.colors.white,
-                                    },
-                                }}
-                            />
-                        </Box>
-                    </Box>
+                            </label>
+                            
+                            <div className="relative flex items-center">
+                                <div className="absolute left-4 text-white font-medium">
+                                    {tokenCode}
+                                </div>
+                                <input
+                                    id="amount-value"
+                                    type="number"
+                                    placeholder="Input Amount"
+                                    value={amountValue ?? ""}
+                                    onChange={(e) => {
+                                        const newValue = e.target.value;
+                                        onAmountValueChange?.(newValue);
+                                    }}
+                                    className="w-full bg-background border border-background-third rounded-[25px] py-3.5 pl-16 pr-4 text-white placeholder:text-background-third focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors"
+                                />
+                            </div>
+                        </div>
+                    </div>
                 </>
             )}
-        </Card>
+        </div>
     );
-
 }

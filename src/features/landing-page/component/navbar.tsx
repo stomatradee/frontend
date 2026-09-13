@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import { AppBar, Toolbar, Box, Button, Stack } from "@mui/material";
 
 interface NavItem {
     label: string;
@@ -24,26 +23,14 @@ export default function Navbar({
     handleNavItemClick,
 }: NavbarProps) {
     return (
-        <AppBar
-            position="fixed"
-            elevation={0}
-            sx={{
-                backgroundColor: "rgba(10, 10, 10, 0.7)",
-                backdropFilter: "blur(12px)",
-                borderBottom: "1px solid rgba(255, 255, 255, 0.05)",
-            }}
+        <header
+            className="fixed top-0 left-0 right-0 z-50 bg-[#0a0a0aB3] backdrop-blur-md border-b border-white/5"
         >
-            <Toolbar
-                sx={{
-                    justifyContent: "space-between",
-                    px: { xs: 3, lg: 8 },
-                    py: 1,
-                }}
-            >
+            <div className="flex justify-between items-center px-6 lg:px-32 py-2 min-h-[64px]">
                 {/* Logo */}
-                <Box
+                <div
                     onClick={() => handleNavItemClick("/")}
-                    sx={{ cursor: "pointer", display: "flex", alignItems: "center" }}
+                    className="cursor-pointer flex items-center"
                 >
                     <Image
                         src={logoSrc}
@@ -51,61 +38,32 @@ export default function Navbar({
                         width={160}
                         height={40}
                         priority
-                        style={{ height: 32, width: "auto", objectFit: "contain" }}
+                        className="h-8 w-auto object-contain"
                     />
-                </Box>
+                </div>
 
                 {/* Navigation Links */}
-                <Stack
-                    direction="row"
-                    spacing={4}
-                    sx={{ display: { xs: "none", md: "flex" } }}
-                >
+                <div className="hidden md:flex flex-row gap-8">
                     {navItems.map((item) => (
-                        <Button
+                        <button
                             key={item.href}
                             onClick={() => handleNavItemClick(item.href)}
-                            sx={{
-                                color: "rgba(255, 255, 255, 0.7)",
-                                fontSize: "0.875rem",
-                                fontWeight: 500,
-                                textTransform: "none",
-                                "&:hover": {
-                                    color: "var(--primary-colors)",
-                                    backgroundColor: "transparent",
-                                },
-                                transition: "color 0.3s",
-                            }}
+                            className="text-white/70 text-sm font-medium hover:text-primary hover:bg-transparent transition-colors duration-300"
                         >
                             {item.label}
-                        </Button>
+                        </button>
                     ))}
-                </Stack>
+                </div>
 
                 {/* CTA Button */}
-                <Button
+                <button
                     onClick={handleConnectWallet}
-                    variant="outlined"
-                    sx={{
-                        borderRadius: "9999px",
-                        borderColor: "var(--primary-colors)",
-                        color: "var(--primary-colors)",
-                        fontWeight: 600,
-                        fontSize: "0.875rem",
-                        textTransform: "none",
-                        px: 3,
-                        py: 0.75,
-                        "&:hover": {
-                            backgroundColor: "var(--primary-colors)",
-                            borderColor: "var(--primary-colors)",
-                            color: "#0A0A0A",
-                        },
-                        transition: "all 0.3s",
-                    }}
+                    className="rounded-full border border-primary text-primary font-semibold text-sm px-6 py-2 hover:bg-primary hover:text-background transition-all duration-300"
                 >
                     {ctaLabel}
-                </Button>
-            </Toolbar>
-        </AppBar>
+                </button>
+            </div>
+        </header>
     );
 }
+

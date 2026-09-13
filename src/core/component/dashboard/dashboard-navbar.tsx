@@ -1,7 +1,5 @@
 "use client";
 
-import { AppBar, Toolbar, Button, Box } from "@mui/material";
-import { themeConfig } from "@/core/config/theme-config";
 import { SIDEBAR_WIDTH } from "./dashboard-sidebar";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { useAccount } from "wagmi";
@@ -14,8 +12,6 @@ export interface DashboardNavbarProps {
 export default function DashboardNavbar({
   handleDisconnect,
 }: DashboardNavbarProps) {
-  const theme = themeConfig;
-
   const { status } = useAccount();
   const wasConnected = useRef(false);
 
@@ -31,19 +27,13 @@ export default function DashboardNavbar({
   }, [status, handleDisconnect]);
 
   return (
-    <AppBar
-      position="fixed"
-      elevation={0}
-      sx={{
+    <header
+      className="fixed top-0 right-0 z-40 bg-background border-b border-background-secondary"
+      style={{
         width: `calc(100% - ${SIDEBAR_WIDTH}px)`,
-        ml: `${SIDEBAR_WIDTH}px`,
-        backgroundColor: theme.colors.bgColors,
-        borderBottom: `1px solid ${theme.colors.secondaryBgColors}`,
       }}
     >
-      <Toolbar
-        sx={{ justifyContent: "flex-end", minHeight: "56px !important" }}
-      >
+      <div className="flex justify-end items-center px-6 min-h-[56px]">
         <ConnectButton.Custom>
           {({
             openConnectModal,
@@ -55,59 +45,28 @@ export default function DashboardNavbar({
             const connected = mounted && account && chain;
 
             return (
-              <Box>
+              <div>
                 {connected ? (
-                  <Button
+                  <button
                     onClick={() => openAccountModal()}
-                    variant="outlined"
-                    sx={{
-                      borderRadius: "9999px",
-                      borderColor: theme.colors.primaryColors,
-                      color: theme.colors.primaryColors,
-                      fontWeight: 600,
-                      textTransform: "none",
-                      fontSize: "0.85rem",
-                      px: 3,
-                      py: 0.8,
-                      "&:hover": {
-                        backgroundColor: theme.colors.primaryColors,
-                        borderColor: theme.colors.primaryColors,
-                        color: theme.colors.bgColors,
-                      },
-                      transition: "all 0.3s ease",
-                    }}
+                    className="rounded-full border border-primary text-primary font-semibold text-[0.85rem] px-6 py-2 hover:bg-primary hover:text-background transition-all duration-300"
                   >
                     {account.displayName}
-                  </Button>
+                  </button>
                 ) : (
-                  <Button
+                  <button
                     onClick={openConnectModal}
-                    variant="outlined"
-                    sx={{
-                      borderRadius: "9999px",
-                      borderColor: theme.colors.primaryColors,
-                      color: theme.colors.primaryColors,
-                      fontWeight: 600,
-                      textTransform: "none",
-                      fontSize: "0.85rem",
-                      px: 3,
-                      py: 0.8,
-                      "&:hover": {
-                        backgroundColor: theme.colors.primaryColors,
-                        borderColor: theme.colors.primaryColors,
-                        color: theme.colors.bgColors,
-                      },
-                      transition: "all 0.3s ease",
-                    }}
+                    className="rounded-full border border-primary text-primary font-semibold text-[0.85rem] px-6 py-2 hover:bg-primary hover:text-background transition-all duration-300"
                   >
                     Connect Wallet
-                  </Button>
+                  </button>
                 )}
-              </Box>
+              </div>
             );
           }}
         </ConnectButton.Custom>
-      </Toolbar>
-    </AppBar>
+      </div>
+    </header>
   );
 }
+

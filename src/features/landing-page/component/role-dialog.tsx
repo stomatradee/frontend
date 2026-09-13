@@ -1,5 +1,4 @@
 "use client";
-import { Dialog, DialogContent, DialogContentText, DialogTitle, List, ListItemButton, ListItemText } from "@mui/material";
 
 interface RoleDialogProps {
     open: boolean;
@@ -8,71 +7,45 @@ interface RoleDialogProps {
 }
 
 export default function RoleDialog({ open, handleCloseRoleDialog, handleRoleSelected }: RoleDialogProps) {
+    if (!open) return null;
+
     return (
-        <Dialog 
-            open={open} 
-            onClose={handleCloseRoleDialog}
-            PaperProps={{
-                sx: {
-                    bgcolor: 'var(--secondary-bg-colors)',
-                    color: 'var(--white)',
-                    borderRadius: '16px',
-                    border: '1px solid var(--third-bg-colors)',
-                    minWidth: { xs: '90vw', sm: '400px' },
-                }
-            }}
-        >
-            <DialogTitle sx={{ textAlign: 'center', pb: 1, fontWeight: 'bold' }}>
-                Select Your Role
-            </DialogTitle>
-            <DialogContent>
-                <DialogContentText sx={{ color: '#a3a3a3', textAlign: 'center', mb: 2 }}>
-                    Please select your role to connect wallet
-                </DialogContentText>
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
+            <div className="relative w-full max-w-[400px] rounded-2xl border border-background-third bg-background-secondary p-6 shadow-xl">
+                {/* Close Overlay (Optional: click outside to close) */}
+                <div 
+                    className="fixed inset-0 -z-10" 
+                    onClick={handleCloseRoleDialog}
+                />
+
+                <div className="text-center pb-2 font-bold text-lg text-white">
+                    Select Your Role
+                </div>
                 
-                <List sx={{ pt: 0, display: 'flex', flexDirection: 'column', gap: 1.5 }}>
-                    <ListItemButton 
+                <div className="text-[#a3a3a3] text-center mb-4 text-sm">
+                    Please select your role to connect wallet
+                </div>
+                
+                <div className="flex flex-col gap-3">
+                    <button 
                         onClick={() => handleRoleSelected("collector")}
-                        sx={{
-                            bgcolor: 'var(--bg-colors)',
-                            border: '1px solid var(--third-bg-colors)',
-                            borderRadius: '12px',
-                            py: 1.5,
-                            '&:hover': {
-                                borderColor: 'var(--primary-colors)',
-                                bgcolor: 'rgba(44, 255, 158, 0.05)',
-                            }
-                        }}
+                        className="w-full rounded-xl border border-background-third bg-background py-3 hover:border-primary hover:bg-[rgba(44,255,158,0.05)] transition-colors"
                     >
-                        <ListItemText 
-                            primary="Collector" 
-                            slotProps={{ primary: {
-                                sx: { fontWeight: 500, textAlign: 'center', color: 'var(--white)' }
-                            }}} 
-                        />
-                    </ListItemButton>
-                    <ListItemButton 
+                        <span className="font-medium text-white text-center">
+                            Collector
+                        </span>
+                    </button>
+                    
+                    <button 
                         onClick={() => handleRoleSelected("investor")}
-                        sx={{
-                            bgcolor: 'var(--bg-colors)',
-                            border: '1px solid var(--third-bg-colors)',
-                            borderRadius: '12px',
-                            py: 1.5,
-                            '&:hover': {
-                                borderColor: 'var(--primary-colors)',
-                                bgcolor: 'rgba(44, 255, 158, 0.05)',
-                            }
-                        }}
+                        className="w-full rounded-xl border border-background-third bg-background py-3 hover:border-primary hover:bg-[rgba(44,255,158,0.05)] transition-colors"
                     >
-                        <ListItemText 
-                            primary="Investor" 
-                            slotProps={{ primary: {
-                                sx: { fontWeight: 500, textAlign: 'center', color: 'var(--white)' }
-                            }}} 
-                        />
-                    </ListItemButton>
-                </List>
-            </DialogContent>
-        </Dialog>
+                        <span className="font-medium text-white text-center">
+                            Investor
+                        </span>
+                    </button>
+                </div>
+            </div>
+        </div>
     );
 }

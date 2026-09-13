@@ -1,7 +1,5 @@
-import { Box, Card, Typography } from "@mui/material";
-import { themeConfig } from "../config/theme-config";
 import { useState } from "react";
-import CloudUploadIcon from "@mui/icons-material/CloudUpload";
+import { Icon } from "@iconify/react";
 import UploadFileRepository from "@/repository/upload-file/uplolad-file-repository";
 import { UploadFileRequestModel } from "@/repository/upload-file/model/upload-file-model";
 import { LoadingScreen } from "./loading-component";
@@ -18,10 +16,7 @@ export default function UploadFileComponent({
   description,
   onCIDChange,
 }: UploadFileComponentProps) {
-  const theme = themeConfig;
-
   const [isLoading, setLoading] = useState<boolean>(false);
-
   const [file, setFile] = useState<File | null>(null);
 
   const handleFile = (file: File) => {
@@ -69,61 +64,25 @@ export default function UploadFileComponent({
   };
 
   return (
-    <Card
-      sx={{
-        bgcolor: theme.colors.secondaryBgColors,
-        borderRadius: "30px",
-        border: "1px solid",
-        borderColor: theme.colors.thirdBgColors,
-        width: "100%",
-        maxWidth: "1000px",
-        padding: { xs: "25px 20px", sm: "35px" },
-      }}
-    >
-      <Typography
-        variant="h1"
-        color={theme.colors.white}
-        fontWeight={600}
-        sx={{ fontSize: { xs: 16, sm: 18, md: 25 } }}
-      >
+    <div className="bg-background-secondary rounded-[30px] border border-background-third w-full max-w-[1000px] px-5 py-[25px] sm:p-[35px]">
+      <h1 className="text-white font-semibold text-[16px] sm:text-[18px] md:text-[25px]">
         {title ?? "Title"}
-      </Typography>
-      <Box height={10} />
-      <Typography
-        variant="body1"
-        color={theme.colors.thirdBgColors}
-        fontWeight={600}
-        sx={{ fontSize: { xs: 16, sm: 18, md: 15 } }}
-      >
+      </h1>
+      <div className="h-[10px]" />
+      <p className="text-background-third font-semibold text-[16px] sm:text-[18px] md:text-[15px]">
         {description ?? "Description"}
-      </Typography>
-      <Box height={30} />
+      </p>
+      <div className="h-[30px]" />
       <label>
-        <Box
+        <div
           onDrop={handleDrop}
           onDragOver={handleDragOver}
-          sx={{
-            border: `2px dashed ${theme.colors.primaryColors}`,
-            borderRadius: 3,
-            p: 6,
-            textAlign: "center",
-            cursor: "pointer",
-            backgroundColor: "#0b0f0c",
-            color: "#fff",
-            transition: "0.3s",
-            "&:hover": {
-              backgroundColor: "#111",
-            },
-          }}
+          className="border-2 border-dashed border-primary rounded-xl p-6 text-center cursor-pointer bg-[#0b0f0c] text-white transition-colors duration-300 hover:bg-[#111]"
         >
           {isLoading === true ? (
-            <LoadingScreen
-              primaryBgActive={true}
-              sx={{
-                paddingTop: "20px",
-                paddingBottom: "20px",
-              }}
-            />
+            <div className="py-5">
+              <LoadingScreen primaryBgActive={true} />
+            </div>
           ) : (
             <>
               {/* Hidden input */}
@@ -139,52 +98,35 @@ export default function UploadFileComponent({
               />
 
               {/* Icon */}
-              <Box
-                sx={{
-                  width: 60,
-                  height: 60,
-                  borderRadius: "50%",
-                  backgroundColor: "#1b5e20",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  mx: "auto",
-                  mb: 2,
-                }}
-              >
-                <CloudUploadIcon />
-              </Box>
+              <div className="w-[60px] h-[60px] rounded-full bg-[#1b5e20] flex items-center justify-center mx-auto mb-4">
+                <Icon icon="material-symbols:cloud-upload" className="text-white text-2xl" />
+              </div>
 
               {/* Text */}
-              <Typography fontWeight={500}>
+              <p className="font-medium">
                 Click to upload or drag and drop
-              </Typography>
+              </p>
 
-              <Typography variant="body2" color="gray" mt={1}>
+              <p className="text-sm text-gray-500 mt-2">
                 SVG, PNG, JPG or GIF (max. 800x400px)
-              </Typography>
+              </p>
 
               {/* Preview */}
               {file && (
-                <Box
-                  mt={3}
-                  display="flex"
-                  flexDirection="column"
-                  alignItems="center"
-                >
-                  <Typography variant="body2">{file.name}</Typography>
+                <div className="mt-6 flex flex-col items-center">
+                  <p className="text-sm">{file.name}</p>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={URL.createObjectURL(file)}
                     alt="preview"
-                    style={{ marginTop: 10, maxWidth: "100%", maxHeight: 200 }}
+                    className="mt-2.5 max-w-full max-h-[200px]"
                   />
-                </Box>
+                </div>
               )}
             </>
           )}
-        </Box>
+        </div>
       </label>
-    </Card>
+    </div>
   );
 }

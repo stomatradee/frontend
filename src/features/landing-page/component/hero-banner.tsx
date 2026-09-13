@@ -1,8 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { Box, Typography, Button, Stack, Chip } from "@mui/material";
-import NorthEastIcon from "@mui/icons-material/NorthEast";
+import { Icon } from "@iconify/react";
 
 interface HeroBannerProps {
     badgeText: string;
@@ -28,33 +27,21 @@ export default function HeroBanner({
     handleLearnMore,
 }: HeroBannerProps) {
     return (
-        <Box
-            component="section"
-            sx={{
-                position: "relative",
-                width: "100%",
-                minHeight: "100vh",
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                justifyContent: "center",
-                overflow: "hidden",
-            }}
-        >
+        <section className="relative w-full min-h-screen flex flex-col items-center justify-center overflow-hidden">
             {/* Background Image - Mobile */}
-            <Box sx={{ display: { xs: "block", md: "none" }, position: "absolute", inset: 0, zIndex: 0 }}>
+            <div className="block md:hidden absolute inset-0 z-0">
                 <Image
                     src={mobileBackgroundImage}
                     alt="Banner Background"
                     fill
                     priority
-                    style={{ objectPosition: "center" }}
+                    style={{ objectPosition: "center", objectFit: "cover" }}
                     sizes="100vw"
                 />
-            </Box>
+            </div>
 
             {/* Background Image - Desktop */}
-            <Box sx={{ display: { xs: "none", md: "block" }, position: "absolute", inset: 0, zIndex: 0 }}>
+            <div className="hidden md:block absolute inset-0 z-0">
                 <Image
                     src={desktopBackgroundImage}
                     alt="Banner Background"
@@ -63,145 +50,51 @@ export default function HeroBanner({
                     style={{ objectFit: "cover", objectPosition: "center" }}
                     sizes="100vw"
                 />
-            </Box>
+            </div>
 
             {/* Gradient Overlay */}
-            <Box
-                sx={{
-                    position: "absolute",
-                    inset: 0,
-                    zIndex: 1,
-                    background: "linear-gradient(to bottom, rgba(10,10,10,0.4), transparent, #0A0A0A)",
-                }}
-            />
+            <div className="absolute inset-0 z-1 bg-gradient-to-b from-[#0a0a0a66] via-transparent to-[#0A0A0A]" />
 
             {/* Content */}
-            <Stack
-                alignItems="center"
-                spacing={3}
-                sx={{
-                    position: "relative",
-                    zIndex: 10,
-                    textAlign: "center",
-                    px: 3,
-                    pt: 12,
-                    pb: 8,
-                    maxWidth: "56rem",
-                    mx: "auto",
-                }}
-            >
+            <div className="relative z-10 text-center px-6 pt-48 pb-32 max-w-4xl mx-auto flex flex-col items-center gap-6">
                 {/* Announcement Badge */}
-                <Box
-                    sx={{
-                        display: "flex",
-                        alignItems: "center",
-                        gap: 1,
-                        borderRadius: "9999px",
-                        border: "1px solid rgba(255,255,255,0.1)",
-                        backgroundColor: "rgba(255,255,255,0.05)",
-                        backdropFilter: "blur(4px)",
-                        px: 2.5,
-                        py: 1,
-                    }}
-                >
-                    <Chip
-                        label="NOW"
-                        size="small"
-                        sx={{
-                            backgroundColor: "var(--primary-colors)",
-                            color: "#0A0A0A",
-                            fontWeight: 700,
-                            fontSize: "10px",
-                            height: "auto",
-                            letterSpacing: "0.05em",
-                            "& .MuiChip-label": { px: 1, py: 0.25 },
-                        }}
-                    />
-                    <Typography
-                        variant="body2"
-                        sx={{ color: "rgba(255,255,255,0.8)", fontWeight: 500 }}
-                    >
+                <div className="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm px-2.5 py-1">
+                    <span className="bg-primary text-[#0A0A0A] font-bold text-[10px] tracking-wider px-2 py-0.5 rounded-full">
+                        NOW
+                    </span>
+                    <span className="text-white/80 font-medium text-sm">
                         {badgeText}
-                    </Typography>
-                </Box>
+                    </span>
+                </div>
 
                 {/* Main Heading */}
-                <Typography
-                    variant="h1"
-                    sx={{
-                        fontSize: { xs: "2.25rem", sm: "3rem", lg: "3.75rem" },
-                        fontWeight: 700,
-                        lineHeight: 1.1,
-                        letterSpacing: "-0.02em",
-                        color: "white",
-                    }}
-                >
+                <h1 className="text-[2.25rem] sm:text-[3rem] lg:text-[3.75rem] font-bold leading-[1.1] tracking-tight text-white">
                     {heading}
-                </Typography>
+                </h1>
 
                 {/* Subheading */}
-                <Typography
-                    variant="body1"
-                    sx={{
-                        fontSize: { xs: "1rem", sm: "1.125rem" },
-                        color: "rgba(255,255,255,0.5)",
-                        maxWidth: "36rem",
-                        fontWeight: 300,
-                    }}
-                >
+                <p className="text-[1rem] sm:text-[1.125rem] text-white/50 max-w-2xl font-light">
                     {subheading}
-                </Typography>
+                </p>
 
                 {/* CTA Buttons */}
-                <Stack direction="row" spacing={2} sx={{ mt: 2 }}>
-                    <Button
+                <div className="flex flex-row gap-4 mt-2">
+                    <button
                         onClick={handleConnectWallet}
-                        variant="outlined"
-                        endIcon={<NorthEastIcon sx={{ fontSize: 16 }} />}
-                        sx={{
-                            borderRadius: "9999px",
-                            borderColor: "var(--primary-colors)",
-                            backgroundColor: "rgba(44,255,158,0.1)",
-                            color: "var(--primary-colors)",
-                            fontWeight: 600,
-                            fontSize: "0.875rem",
-                            textTransform: "none",
-                            px: 3.5,
-                            py: 1.25,
-                            "&:hover": {
-                                backgroundColor: "var(--primary-colors)",
-                                borderColor: "var(--primary-colors)",
-                                color: "#0A0A0A",
-                            },
-                            transition: "all 0.3s",
-                        }}
+                        className="flex items-center gap-2 rounded-full border border-primary bg-[rgba(44,255,158,0.1)] text-primary font-semibold text-sm px-6 py-3 hover:bg-primary hover:text-[#0A0A0A] transition-all duration-300"
                     >
                         {primaryButtonLabel}
-                    </Button>
-                    <Button
+                        <Icon icon="mdi:arrow-top-right" className="text-base" />
+                    </button>
+                    <button
                         onClick={handleLearnMore}
-                        variant="outlined"
-                        sx={{
-                            borderRadius: "9999px",
-                            borderColor: "rgba(255,255,255,0.2)",
-                            backgroundColor: "rgba(255,255,255,0.05)",
-                            color: "white",
-                            fontWeight: 600,
-                            fontSize: "0.875rem",
-                            textTransform: "none",
-                            px: 3.5,
-                            py: 1.25,
-                            "&:hover": {
-                                backgroundColor: "rgba(255,255,255,0.1)",
-                                borderColor: "rgba(255,255,255,0.3)",
-                            },
-                            transition: "all 0.3s",
-                        }}
+                        className="rounded-full border border-white/20 bg-white/5 text-white font-semibold text-sm px-6 py-3 hover:bg-white/10 hover:border-white/30 transition-all duration-300"
                     >
                         {secondaryButtonLabel}
-                    </Button>
-                </Stack>
-            </Stack>
-        </Box>
+                    </button>
+                </div>
+            </div>
+        </section>
     );
 }
+

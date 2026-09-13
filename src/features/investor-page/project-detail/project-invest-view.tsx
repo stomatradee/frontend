@@ -1,8 +1,5 @@
 "use client";
 
-
-import { themeConfig } from "@/core/config/theme-config";
-import { AppBar, Box, Card, CardContent, CardMedia, Chip, IconButton, LinearProgress, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
 import UseProjectInvest from "./hooks/use-project-invest";
 import { LoadingScreen } from "@/core/component/loading-component";
 import Image from "next/image";
@@ -13,19 +10,13 @@ import EmptyAssetComponent from "@/core/component/empty-asset-component";
 import AmountInformationComponent from "./component/amount-information-component";
 
 export default function ProjectInvestView() {
-    const theme = themeConfig;
     const { data, isLoading, isPayLoading, amountValue, methods, address, handleAmountValueChange, handleTokenCodeChange, onInvest } = UseProjectInvest();
 
     if (isLoading) {
         return (
-            <Box
-                display="flex"
-                justifyContent="center"
-                alignItems="center"
-                minHeight="100vh"
-            >
+            <div className="flex justify-center items-center min-h-screen">
                 <LoadingScreen />
-            </Box>
+            </div>
         );
     }
 
@@ -46,492 +37,261 @@ export default function ProjectInvestView() {
         navigator.clipboard.writeText(address);
     };
 
-    // Shared card sx
-    const cardSx = {
-        backgroundColor: theme.colors.secondaryBgColors,
-        border: `1px solid ${theme.colors.thirdBgColors}`,
-        borderRadius: "30px",
-        transition: "all 0.3s ease",
-        "&:hover": {
-            borderColor: theme.colors.primaryColors,
-            boxShadow: `0 8px 24px rgba(44, 255, 158, 0.15)`,
-        },
-    };
+    const cardClass = "bg-background-secondary border border-background-third rounded-[30px] transition-all duration-300 hover:border-primary hover:shadow-[0_8px_24px_rgba(44,255,158,0.15)]";
 
     return (
         <>
-            <AppBar
-                sx={{
-                    backgroundColor: themeConfig.colors.bgColors,
-                    padding: "20px 30px",
-                    flexDirection: "row",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                }}
-            >
+            <header className="bg-background px-[30px] py-[20px] flex flex-row items-center justify-between">
                 <Image
                     src={imageConfig.logo.stomatradeLogo}
                     alt="Stomatrade"
                     width={200}
                     height={60}
-                    style={{ width: "200px", height: "auto" }}
+                    className="w-[200px] h-auto"
                 />
 
-                <Box display="flex" alignItems="center" gap="4px">
+                <div className="flex items-center gap-1">
                     <Image
                         src={imageConfig.icon.investorProfileIcon}
                         alt="Profile Icon"
                         width={40}
                         height={40}
-                        style={{ borderRadius: "20%" }}
+                        className="rounded-[20%]"
                     />
-                    <Box width={10} />
-                    <Typography
-                        fontSize={16}
-                        fontWeight={700}
-                        color={theme.colors.white}
-                        sx={{ fontFamily: "monospace" }}
-                    >
+                    <div className="w-[10px]" />
+                    <span className="text-white font-bold text-[16px] font-mono">
                         {truncateAddress(address ?? "0x0")}
-                    </Typography>
-                    <IconButton
-                        size="small"
+                    </span>
+                    <button
                         onClick={() => handleCopyAddress(address ?? "0x0")}
-                        sx={{
-                            color: theme.colors.thirdBgColors,
-                            padding: "2px",
-                            transition: "all 0.3s ease",
-                            "&:hover": { color: theme.colors.primaryColors },
-                        }}
+                        className="text-background-third p-[2px] transition-all duration-300 hover:text-primary rounded-full hover:bg-white/5 ml-1"
                     >
                         <Icon icon="mdi:content-copy" width={16} />
-                    </IconButton>
-                </Box>
-            </AppBar>
-            <Box
-                display="flex"
-                flexDirection="column"
-                padding={{ xs: "100px 20px 40px", md: "10px" }}
-                paddingTop={{ md: "121px" }}
-                paddingBottom={{ md: "121px" }}
-                margin="0 auto"
-                maxWidth="900px"
-                width="100%"
-                gap="20px"
-            >
+                    </button>
+                </div>
+            </header>
+            <div className="flex flex-col pt-[100px] px-5 pb-10 md:py-[121px] md:px-[10px] mx-auto max-w-[900px] w-full gap-[20px]">
                 {/* Page Header */}
-                <Box textAlign="center" marginBottom="8px">
-                    <Typography
-                        variant="h1"
-                        color={theme.colors.white}
-                        fontWeight={600}
-                        sx={{ fontSize: { xs: 16, sm: 18, md: 30 } }}
-                    >
+                <div className="text-center mb-2">
+                    <h1 className="text-white font-semibold text-[16px] sm:text-[18px] md:text-[30px]">
                         Start Investment In {project.metadata?.assetName} Project
-                    </Typography>
-                    <Box height={10} />
-                    <Typography
-                        variant="body1"
-                        color={theme.colors.thirdBgColors}
-                        fontWeight={600}
-                        sx={{ fontSize: { xs: 16, sm: 18, md: 15 } }}
-                    >
+                    </h1>
+                    <div className="h-[10px]" />
+                    <p className="text-background-third font-semibold text-[16px] sm:text-[18px] md:text-[15px]">
                         Make your first contribution to support this project
-                    </Typography>
-                    <Box height={30} />
-                </Box>
+                    </p>
+                    <div className="h-[30px]" />
+                </div>
 
                 {/* Image Card */}
-                <Card sx={{ ...cardSx, overflow: "hidden" }}>
-                    <CardMedia
-                        sx={{
-                            height: { xs: 250, sm: 350, md: 400 },
-                            backgroundColor: theme.colors.thirdBgColors, // Fallback background color
-                        }}
-                        image={project.metadata?.imageCID ? `https://gateway.pinata.cloud/ipfs/${project.metadata.imageCID}` : "https://placehold.co/800x400?text=No+Image"}
+                <div className={`${cardClass} overflow-hidden`}>
+                    <div 
+                        className="h-[250px] sm:h-[350px] md:h-[400px] bg-background-third bg-cover bg-center"
+                        style={{ backgroundImage: `url(${project.metadata?.imageCID ? `https://gateway.pinata.cloud/ipfs/${project.metadata.imageCID}` : "https://placehold.co/800x400?text=No+Image"})` }}
                         title={project.metadata?.assetName ?? "Project Image"}
                     />
-                </Card>
+                </div>
 
                 {/* Asset Title Card */}
-                <Card sx={{ ...cardSx, padding: { xs: "16px 20px", sm: "20px 28px" } }}>
-                    <Box
-                        display="flex"
-                        alignItems="center"
-                        justifyContent="space-between"
-                        flexWrap="wrap"
-                        gap="12px"
-                    >
-                        <Typography
-                            color={theme.colors.white}
-                            fontWeight={700}
-                            sx={{ fontSize: { xs: 18, sm: 22, md: 26 } }}
-                        >
+                <div className={`${cardClass} py-4 px-5 sm:py-5 sm:px-7`}>
+                    <div className="flex items-center justify-between flex-wrap gap-3">
+                        <h2 className="text-white font-bold text-[18px] sm:text-[22px] md:text-[26px]">
                             {project.metadata?.assetName ?? project.commodityType}
-                        </Typography>
-                        <Chip
-                            label={project.statusLabel.toUpperCase()}
-                            size="small"
-                            sx={{
-                                backgroundColor: theme.colors.fourGreenColors,
-                                color: theme.colors.primaryColors,
-                                fontWeight: 700,
-                                fontSize: 11,
-                                letterSpacing: "0.5px",
-                            }}
-                        />
-                    </Box>
-                </Card>
+                        </h2>
+                        <span className="bg-primary/20 text-primary font-bold text-[11px] tracking-[0.5px] px-[8px] py-[4px] rounded-full uppercase">
+                            {project.statusLabel}
+                        </span>
+                    </div>
+                </div>
 
                 {/* Project Details + Funding Progress Row */}
-                <Box
-                    display="grid"
-                    gridTemplateColumns={{ xs: "1fr", md: "1.5fr 1fr" }}
-                    gap="20px"
-                >
+                <div className="grid grid-cols-1 md:grid-cols-[1.5fr_1fr] gap-[20px]">
                     {/* Project Details Card */}
-                    <Card sx={cardSx}>
-                        <CardContent sx={{ padding: "24px" }}>
-                            <Box
-                                display="flex"
-                                justifyContent="space-between"
-                                alignItems="center"
-                                marginBottom="20px"
-                            >
-                                <Typography
-                                    color={theme.colors.white}
-                                    fontWeight={700}
-                                    fontSize={18}
-                                >
+                    <div className={cardClass}>
+                        <div className="p-6">
+                            <div className="flex justify-between items-center mb-5">
+                                <h3 className="text-white font-bold text-[18px]">
                                     Project Details
-                                </Typography>
-                                <Chip
-                                    label={project.collateralVerified ? "Verified" : "Unverified"}
-                                    size="small"
-                                    sx={{
-                                        backgroundColor: project.collateralVerified
-                                            ? theme.colors.fourGreenColors
-                                            : theme.colors.thirdBgColors,
-                                        color: project.collateralVerified
-                                            ? theme.colors.primaryColors
-                                            : theme.colors.white,
-                                        fontWeight: 600,
-                                        fontSize: 11,
-                                    }}
-                                />
-                            </Box>
+                                </h3>
+                                <span className={`font-semibold text-[11px] px-[8px] py-[4px] rounded-full ${project.collateralVerified ? 'bg-primary/20 text-primary' : 'bg-background-third text-white'}`}>
+                                    {project.collateralVerified ? "Verified" : "Unverified"}
+                                </span>
+                            </div>
 
-                            <Box
-                                display="grid"
-                                gridTemplateColumns={{ xs: "1fr 1fr", sm: "1fr 1fr 1fr 1fr" }}
-                                gap="12px"
-                            >
+                            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                                 <InfoPill
                                     label="Commodity Type"
                                     value={project.commodityType}
-                                    theme={theme}
                                     icon="mdi:leaf"
                                 />
                                 <InfoPill
                                     label="Volume"
                                     value={`${project.volumeKg} Kg`}
-                                    theme={theme}
                                 />
                                 <InfoPill
                                     label="Collateral Value"
                                     value={`$${project.collateralValueUSD.toFixed(2)}`}
-                                    theme={theme}
                                 />
                                 <InfoPill
                                     label="Max Funding"
                                     value={`$${project.maxFundingUSD.toFixed(2)}`}
-                                    theme={theme}
                                 />
-                            </Box>
-                        </CardContent>
-                    </Card>
+                            </div>
+                        </div>
+                    </div>
 
                     {/* Funding Progress Card */}
-                    <Card sx={cardSx}>
-                        <CardContent sx={{ padding: "24px" }}>
-                            <Typography
-                                color={theme.colors.white}
-                                fontWeight={700}
-                                fontSize={18}
-                                marginBottom="20px"
-                            >
+                    <div className={cardClass}>
+                        <div className="p-6">
+                            <h3 className="text-white font-bold text-[18px] mb-5">
                                 Funding Progress
-                            </Typography>
+                            </h3>
 
                             {/* Progress Bar */}
-                            <Box marginBottom="20px">
-                                <Typography
-                                    fontSize={13}
-                                    fontWeight={600}
-                                    color={theme.colors.primaryColors}
-                                    marginBottom="8px"
-                                >
+                            <div className="mb-5">
+                                <p className="text-primary font-semibold text-[13px] mb-2">
                                     {project.fundingProgress}%
-                                </Typography>
-                                <LinearProgress
-                                    variant="determinate"
-                                    value={project.fundingProgress}
-                                    sx={{
-                                        height: 6,
-                                        borderRadius: 3,
-                                        backgroundColor: theme.colors.thirdBgColors,
-                                        "& .MuiLinearProgress-bar": {
-                                            borderRadius: 3,
-                                            background: `linear-gradient(90deg, ${theme.colors.secondaryColors}, ${theme.colors.primaryColors})`,
-                                        },
-                                    }}
-                                />
-                            </Box>
+                                </p>
+                                <div className="h-[6px] rounded-full bg-background-third overflow-hidden">
+                                    <div 
+                                        className="h-full rounded-full bg-gradient-to-r from-secondary to-primary"
+                                        style={{ width: `${project.fundingProgress}%` }}
+                                    />
+                                </div>
+                            </div>
 
                             {/* Funding Stats */}
-                            <Box display="flex" flexDirection="column" gap="10px">
-                                <Box display="flex" justifyContent="space-between">
-                                    <Typography fontSize={12} color={theme.colors.thirdBgColors}>
-                                        Total Funded
-                                    </Typography>
-                                    <Typography
-                                        fontSize={12}
-                                        fontWeight={600}
-                                        color={theme.colors.white}
-                                    >
+                            <div className="flex flex-col gap-2.5">
+                                <div className="flex justify-between">
+                                    <span className="text-[12px] text-background-third">Total Funded</span>
+                                    <span className="text-[12px] font-semibold text-white">
                                         ${project.totalFundedUSD.toLocaleString()}
-                                    </Typography>
-                                </Box>
-                                <Box display="flex" justifyContent="space-between">
-                                    <Typography fontSize={12} color={theme.colors.thirdBgColors}>
-                                        Investor Count
-                                    </Typography>
-                                    <Typography
-                                        fontSize={12}
-                                        fontWeight={600}
-                                        color={theme.colors.white}
-                                    >
+                                    </span>
+                                </div>
+                                <div className="flex justify-between">
+                                    <span className="text-[12px] text-background-third">Investor Count</span>
+                                    <span className="text-[12px] font-semibold text-white">
                                         {project.investorCount}
-                                    </Typography>
-                                </Box>
-                            </Box>
-                        </CardContent>
-                    </Card>
-                </Box>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
                 {/* Collector Information Card */}
-                <Card sx={cardSx}>
-                    <CardContent sx={{ padding: "24px" }}>
-                        <Typography
-                            color={theme.colors.white}
-                            fontWeight={700}
-                            fontSize={18}
-                            marginBottom="20px"
-                        >
+                <div className={cardClass}>
+                    <div className="p-6">
+                        <h3 className="text-white font-bold text-[18px] mb-5">
                             Collector Information
-                        </Typography>
+                        </h3>
 
-                        <Box
-                            display="grid"
-                            gridTemplateColumns={{ xs: "1fr", sm: "1fr 1fr 1fr" }}
-                            gap="20px"
-                            alignItems="flex-start"
-                        >
+                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 items-start">
                             {/* Collector Address */}
-                            <Box>
-                                <Typography
-                                    fontSize={11}
-                                    color={theme.colors.thirdBgColors}
-                                    marginBottom="4px"
-                                >
+                            <div>
+                                <p className="text-[11px] text-background-third mb-1">
                                     Collector Address
-                                </Typography>
-                                <Box display="flex" alignItems="center" gap="4px">
-                                    <Typography
-                                        fontSize={16}
-                                        fontWeight={700}
-                                        color={theme.colors.white}
-                                        sx={{ fontFamily: "monospace" }}
-                                    >
+                                </p>
+                                <div className="flex items-center gap-1">
+                                    <span className="text-[16px] font-bold text-white font-mono">
                                         {truncateAddress(collector.address)}
-                                    </Typography>
-                                    <IconButton
-                                        size="small"
+                                    </span>
+                                    <button
                                         onClick={() => handleCopyAddress(collector.address)}
-                                        sx={{
-                                            color: theme.colors.thirdBgColors,
-                                            padding: "2px",
-                                            transition: "all 0.3s ease",
-                                            "&:hover": { color: theme.colors.primaryColors },
-                                        }}
+                                        className="text-background-third p-[2px] transition-all duration-300 hover:text-primary rounded-full hover:bg-white/5"
                                     >
                                         <Icon icon="mdi:content-copy" width={16} />
-                                    </IconButton>
-                                </Box>
-                            </Box>
+                                    </button>
+                                </div>
+                            </div>
 
                             {/* Project Count */}
-                            <Box>
-                                <Typography
-                                    fontSize={11}
-                                    color={theme.colors.thirdBgColors}
-                                    marginBottom="4px"
-                                >
+                            <div>
+                                <p className="text-[11px] text-background-third mb-1">
                                     Project Count
-                                </Typography>
-                                <Typography
-                                    fontSize={16}
-                                    fontWeight={700}
-                                    color={theme.colors.white}
-                                >
+                                </p>
+                                <p className="text-[16px] font-bold text-white">
                                     {collector.projectCount}
-                                </Typography>
-                            </Box>
+                                </p>
+                            </div>
 
                             {/* Verification Status */}
-                            <Box>
-                                <Typography
-                                    fontSize={11}
-                                    color={theme.colors.thirdBgColors}
-                                    marginBottom="4px"
-                                >
+                            <div>
+                                <p className="text-[11px] text-background-third mb-1">
                                     Verification Status
-                                </Typography>
-                                <Chip
-                                    icon={
-                                        <Icon
-                                            icon={
-                                                collector.isBlacklisted
-                                                    ? "mdi:close-circle"
-                                                    : "mdi:check-circle"
-                                            }
-                                            width={16}
-                                            color={
-                                                collector.isBlacklisted
-                                                    ? "#FF4444"
-                                                    : theme.colors.primaryColors
-                                            }
-                                        />
-                                    }
-                                    label={collector.isBlacklisted ? "Blacklisted" : "Verified"}
-                                    size="small"
-                                    sx={{
-                                        backgroundColor: collector.isBlacklisted
-                                            ? "#3D0000"
-                                            : theme.colors.fourGreenColors,
-                                        color: collector.isBlacklisted
-                                            ? "#FF4444"
-                                            : theme.colors.primaryColors,
-                                        fontWeight: 600,
-                                        fontSize: 12,
-                                        border: `1px solid ${collector.isBlacklisted
-                                            ? "#FF4444"
-                                            : theme.colors.primaryColors
-                                            }`,
-                                    }}
-                                />
-                            </Box>
-                        </Box>
-                    </CardContent>
-                </Card>
+                                </p>
+                                <div 
+                                    className={`inline-flex items-center gap-1 px-2 py-1 rounded-full text-[12px] font-semibold border ${
+                                        collector.isBlacklisted 
+                                        ? 'bg-[#3D0000] text-[#FF4444] border-[#FF4444]' 
+                                        : 'bg-primary/20 text-primary border-primary'
+                                    }`}
+                                >
+                                    <Icon 
+                                        icon={collector.isBlacklisted ? "mdi:close-circle" : "mdi:check-circle"}
+                                        width={16}
+                                    />
+                                    <span>{collector.isBlacklisted ? "Blacklisted" : "Verified"}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
                 {/* Recent Investments Card */}
-                <Card sx={cardSx}>
-                    <CardContent sx={{ padding: "24px" }}>
-                        <Typography
-                            color={theme.colors.white}
-                            fontWeight={700}
-                            fontSize={18}
-                            marginBottom="20px"
-                        >
+                <div className={cardClass}>
+                    <div className="p-6">
+                        <h3 className="text-white font-bold text-[18px] mb-5">
                             Recent Investments
-                        </Typography>
+                        </h3>
 
-                        <TableContainer>
-                            <Table size="small">
-                                <TableHead>
-                                    <TableRow>
+                        <div className="overflow-x-auto">
+                            <table className="w-full text-left border-collapse">
+                                <thead>
+                                    <tr>
                                         {["Investor", "Amount ($)", "Share (%)"].map((header) => (
-                                            <TableCell
+                                            <th
                                                 key={header}
-                                                sx={{
-                                                    color: theme.colors.white,
-                                                    backgroundColor: theme.colors.bgColors,
-                                                    borderColor: theme.colors.thirdBgColors,
-                                                    fontSize: 12,
-                                                    fontWeight: 600,
-                                                    paddingY: "12px",
-                                                }}
+                                                className="text-white bg-background border-b border-background-third text-[12px] font-semibold py-3 px-4"
                                             >
                                                 {header}
-                                            </TableCell>
+                                            </th>
                                         ))}
-                                    </TableRow>
-                                </TableHead>
-                                <TableBody>
+                                    </tr>
+                                </thead>
+                                <tbody>
                                     {investments.length === 0 ? (
-                                        <TableRow>
-                                            <TableCell
+                                        <tr>
+                                            <td
                                                 colSpan={3}
-                                                sx={{
-                                                    color: theme.colors.thirdBgColors,
-                                                    borderColor: theme.colors.thirdBgColors,
-                                                    textAlign: "center",
-                                                    paddingY: "24px",
-                                                    fontSize: 14,
-                                                }}
+                                                className="text-background-third border-b border-background-third text-center py-6 text-[14px]"
                                             >
                                                 No recent investments yet
-                                            </TableCell>
-                                        </TableRow>
+                                            </td>
+                                        </tr>
                                     ) : (
                                         investments.map((inv, index) => (
-                                            <TableRow
+                                            <tr
                                                 key={index}
-                                                sx={{
-                                                    transition: "all 0.2s ease",
-                                                    "&:hover": {
-                                                        backgroundColor: `${theme.colors.thirdBgColors}22`,
-                                                    },
-                                                }}
+                                                className="transition-all duration-200 hover:bg-background-third/20 border-b border-background-third last:border-0"
                                             >
-                                                <TableCell
-                                                    sx={{
-                                                        color: theme.colors.primaryColors,
-                                                        borderColor: theme.colors.thirdBgColors,
-                                                        fontSize: 13,
-                                                        fontFamily: "monospace",
-                                                    }}
-                                                >
+                                                <td className="text-primary text-[13px] font-mono py-3 px-4">
                                                     {truncateAddress(inv.investor)}
-                                                </TableCell>
-                                                <TableCell
-                                                    sx={{
-                                                        color: theme.colors.white,
-                                                        borderColor: theme.colors.thirdBgColors,
-                                                        fontSize: 13,
-                                                    }}
-                                                >
+                                                </td>
+                                                <td className="text-white text-[13px] py-3 px-4">
                                                     ${inv.amountUSD.toLocaleString()}
-                                                </TableCell>
-                                                <TableCell
-                                                    sx={{
-                                                        color: theme.colors.thirdColors,
-                                                        borderColor: theme.colors.thirdBgColors,
-                                                        fontSize: 13,
-                                                        fontWeight: 600,
-                                                    }}
-                                                >
+                                                </td>
+                                                <td className="text-secondary font-semibold text-[13px] py-3 px-4">
                                                     {inv.sharePercent}%
-                                                </TableCell>
-                                            </TableRow>
+                                                </td>
+                                            </tr>
                                         ))
                                     )}
-                                </TableBody>
-                            </Table>
-                        </TableContainer>
-                    </CardContent>
-                </Card>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
 
                 <AmountInformationComponent
                     amountValue={amountValue}
@@ -547,7 +307,7 @@ export default function ProjectInvestView() {
                     onSubmit={onInvest}
                     disabled={!methods.formState.isValid}
                 />
-            </Box>
+            </div>
         </>
     );
 }
@@ -555,39 +315,23 @@ export default function ProjectInvestView() {
 type InfoPillProps = {
     label: string;
     value: string;
-    theme: typeof themeConfig;
     icon?: string;
 };
 
-function InfoPill({ label, value, theme, icon }: InfoPillProps) {
+function InfoPill({ label, value, icon }: InfoPillProps) {
     return (
-        <Box
-            sx={{
-                backgroundColor: theme.colors.bgColors,
-                border: `1px solid ${theme.colors.thirdBgColors}`,
-                borderRadius: "12px",
-                padding: "12px 14px",
-                transition: "all 0.3s ease",
-                "&:hover": {
-                    borderColor: theme.colors.primaryColors,
-                },
-            }}
-        >
-            <Typography
-                fontSize={10}
-                color={theme.colors.thirdBgColors}
-                marginBottom="6px"
-            >
+        <div className="bg-background border border-background-third rounded-[12px] p-3 transition-all duration-300 hover:border-primary">
+            <p className="text-[10px] text-background-third mb-1.5">
                 {label}
-            </Typography>
-            <Box display="flex" alignItems="center" gap="6px">
+            </p>
+            <div className="flex items-center gap-1.5">
                 {icon && (
-                    <Icon icon={icon} width={16} color={theme.colors.primaryColors} />
+                    <Icon icon={icon} width={16} className="text-primary" />
                 )}
-                <Typography fontSize={14} fontWeight={700} color={theme.colors.white}>
+                <span className="text-[14px] font-bold text-white">
                     {value}
-                </Typography>
-            </Box>
-        </Box>
+                </span>
+            </div>
+        </div>
     );
 }

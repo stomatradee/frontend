@@ -1,14 +1,5 @@
 "use client";
 
-import {
-  Box,
-  Card,
-  InputAdornment,
-  MenuItem,
-  TextField,
-  Typography,
-} from "@mui/material";
-import { themeConfig } from "@/core/config/theme-config";
 import { useCallback, useEffect, useState } from "react";
 import { LoadingScreen } from "@/core/component/loading-component";
 import {
@@ -32,8 +23,6 @@ export default function FinancialInformationComponent({
   onFundingPriceChange,
   onTokenCodeChange,
 }: FinancialInformationComponentProps) {
-  const theme = themeConfig;
-
   const [isLoading, setLoading] = useState<boolean>(false);
 
   const [tokenCodeList, setTokenCodeList] = useState<
@@ -96,365 +85,96 @@ export default function FinancialInformationComponent({
   );
 
   return (
-    <Card
-      sx={{
-        bgcolor: theme.colors.secondaryBgColors,
-        borderRadius: "30px",
-        border: "1px solid",
-        borderColor: theme.colors.thirdBgColors,
-        width: "100%",
-        maxWidth: "1000px",
-        padding: { xs: "25px 20px", sm: "35px" },
-      }}
-    >
-      <Typography
-        variant="h1"
-        color={theme.colors.white}
-        fontWeight={600}
-        sx={{ fontSize: { xs: 16, sm: 18, md: 25 } }}
-      >
+    <div className="bg-background-secondary rounded-[30px] border border-background-third w-full max-w-[1000px] px-5 py-[25px] sm:p-[35px]">
+      <h1 className="text-white font-semibold text-[16px] sm:text-[18px] md:text-[25px]">
         Financial Information
-      </Typography>
-      <Box height={10} />
-      <Typography
-        variant="body1"
-        color={theme.colors.thirdBgColors}
-        fontWeight={600}
-        sx={{ fontSize: { xs: 16, sm: 18, md: 15 } }}
-      >
+      </h1>
+      <div className="h-[10px]" />
+      <p className="text-background-third font-semibold text-[16px] sm:text-[18px] md:text-[15px]">
         Input information about the financial aspect of the asset
-      </Typography>
-      <Box height={30} />
+      </p>
+      <div className="h-[30px]" />
 
       {isLoading === true ? (
-        <LoadingScreen
-          primaryBgActive={true}
-          sx={{
-            paddingTop: "20px",
-            paddingBottom: "20px",
-          }}
-        />
+        <div className="py-5">
+          <LoadingScreen primaryBgActive={true} />
+        </div>
       ) : (
         <>
-          <Box display="flex" flexDirection="column" flex={1}>
-            <Typography
-              variant="body1"
-              color={theme.colors.white}
-              fontWeight={600}
-              sx={{ fontSize: { xs: 16, sm: 18, md: 15 } }}
-            >
+          <div className="flex flex-col flex-1 w-full">
+            <label className="text-white font-semibold text-[16px] sm:text-[18px] md:text-[15px]">
               Choose Token
-            </Typography>
-            <Box height={20} />
-            <TextField
-              id="token-code"
-              select
+            </label>
+            <div className="h-[20px]" />
+            <select
               defaultValue="USDT"
-              variant="outlined"
               onChange={(e) => {
                 setTokenCode(e.target.value);
                 onTokenCodeChange?.(e.target.value);
               }}
-              fullWidth
-              SelectProps={{
-                MenuProps: {
-                  PaperProps: {
-                    sx: {
-                      backgroundColor: theme.colors.secondaryBgColors,
-                      borderRadius: "15px",
-                    },
-                  },
-                },
-              }}
-              sx={{
-                "& .MuiOutlinedInput-root": {
-                  backgroundColor: theme.colors.bgColors,
-                  borderRadius: "25px",
-                  "&:hover fieldset": {
-                    borderColor: theme.colors.primaryColors,
-                  },
-                  "&.Mui-focused fieldset": {
-                    borderColor: theme.colors.primaryColors,
-                  },
-                },
-                "& .MuiInputLabel-root": {
-                  color: "gray",
-                },
-                "& .MuiInputLabel-root.Mui-focused": {
-                  color: theme.colors.white,
-                },
-                "& .MuiInputBase-input,  & input": {
-                  color: theme.colors.white,
-                },
-                "& .MuiSelect-icon": {
-                  color: theme.colors.white,
-                },
+              className="w-full bg-background border border-background-third rounded-[25px] text-white px-4 py-3 sm:py-4 focus:outline-none focus:border-primary transition-colors appearance-none"
+              style={{
+                backgroundImage: `url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23FFFFFF%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E")`,
+                backgroundRepeat: 'no-repeat',
+                backgroundPosition: 'right 1rem top 50%',
+                backgroundSize: '0.65rem auto'
               }}
             >
               {tokenCodeList.map((data) => (
-                <MenuItem
-                  key={data.value}
-                  value={data.value}
-                  sx={{
-                    color: theme.colors.white,
-                    "&:hover": {
-                      backgroundColor: theme.colors.thirdBgColors,
-                    },
-                    "&.Mui-selected": {
-                      backgroundColor: theme.colors.primaryColors + "08",
-                      color: theme.colors.primaryColors,
-                      "&:hover": {
-                        backgroundColor: theme.colors.primaryColors + "14",
-                      },
-                    },
-                  }}
-                >
+                <option key={data.value} value={data.value} className="bg-background-secondary text-white">
                   {data.label}
-                </MenuItem>
+                </option>
               ))}
-            </TextField>
-          </Box>
-          <Box height={50} />
-          <Box
-            display="flex"
-            flexDirection="row"
-            alignItems="flex-start"
-            margin="0 auto"
-            gap={3}
-            width="100%"
-          >
-            {/* Category Column */}
-            <Box display="flex" flexDirection="column" flex={1}>
-              <Typography
-                variant="body1"
-                color={theme.colors.white}
-                fontWeight={600}
-                sx={{ fontSize: { xs: 16, sm: 18, md: 15 } }}
-              >
+            </select>
+          </div>
+          <div className="h-[50px]" />
+          <div className="flex flex-col sm:flex-row items-start mx-auto gap-5 sm:gap-8 w-full">
+            {/* Asset Price Column */}
+            <div className="flex flex-col flex-1 w-full">
+              <label className="text-white font-semibold text-[16px] sm:text-[18px] md:text-[15px]">
                 Asset Price
-              </Typography>
-              <Box height={20} />
-              <TextField
-                id="asset-price"
-                type="number"
-                placeholder="Input Asset Price"
-                value={assetPriceValue ?? ""}
-                onChange={(e) => {
-                  const newValue = e.target.value;
-                  onAssetPriceChange?.(newValue);
-                  calculateFundingPrice(newValue);
-                }}
-                variant="outlined"
-                fullWidth
-                slotProps={{
-                  input: {
-                    startAdornment: (
-                      <InputAdornment
-                        position="start"
-                        sx={{
-                          "& .MuiTypography-root": {
-                            color: theme.colors.white,
-                          },
-                        }}
-                      >
-                        {tokenCode}
-                      </InputAdornment>
-                    ),
-                  },
-                }}
-                sx={{
-                  "& .MuiOutlinedInput-root": {
-                    backgroundColor: theme.colors.bgColors,
-                    borderRadius: "25px",
-                    "&:hover fieldset": {
-                      borderColor: theme.colors.primaryColors,
-                    },
-                    "&.Mui-focused fieldset": {
-                      borderColor: theme.colors.primaryColors,
-                    },
-                  },
-                  "& .MuiInputLabel-root": {
-                    color: "gray",
-                  },
-                  "& .MuiInputLabel-root.Mui-focused": {
-                    color: theme.colors.white,
-                  },
-                  "& .MuiInputBase-input::placeholder": {
-                    color: theme.colors.thirdBgColors,
-                  },
-                  "& .MuiInputBase-input": {
-                    color: theme.colors.white,
-                  },
-                }}
-              />
-            </Box>
+              </label>
+              <div className="h-[20px]" />
+              <div className="relative w-full">
+                <div className="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none">
+                  <span className="text-white">{tokenCode}</span>
+                </div>
+                <input
+                  type="number"
+                  placeholder="Input Asset Price"
+                  value={assetPriceValue ?? ""}
+                  onChange={(e) => {
+                    const newValue = e.target.value;
+                    onAssetPriceChange?.(newValue);
+                    calculateFundingPrice(newValue);
+                  }}
+                  className="w-full bg-background border border-background-third rounded-[25px] text-white px-4 py-3 sm:py-4 focus:outline-none focus:border-primary transition-colors placeholder:text-background-third pl-16"
+                />
+              </div>
+            </div>
 
-            {/* Quantity Column */}
-            <Box display="flex" flexDirection="column" flex={1}>
-              <Typography
-                variant="body1"
-                color={theme.colors.white}
-                fontWeight={600}
-                sx={{ fontSize: { xs: 16, sm: 18, md: 15 } }}
-              >
+            {/* Funding Price Column */}
+            <div className="flex flex-col flex-1 w-full">
+              <label className="text-white font-semibold text-[16px] sm:text-[18px] md:text-[15px]">
                 Funding Price
-              </Typography>
-              <Box height={20} />
-              <TextField
-                id="funding-price"
-                type="number"
-                placeholder="Input Funding Price"
-                value={fundingPriceValue ?? ""}
-                onChange={(e) => onFundingPriceChange?.(e.target.value)}
-                variant="outlined"
-                fullWidth
-                slotProps={{
-                  input: {
-                    startAdornment: (
-                      <InputAdornment
-                        position="start"
-                        sx={{
-                          "& .MuiTypography-root": {
-                            color: theme.colors.white,
-                          },
-                        }}
-                      >
-                        {tokenCode}
-                      </InputAdornment>
-                    ),
-                  },
-                }}
-                sx={{
-                  "& .MuiOutlinedInput-root": {
-                    backgroundColor: theme.colors.bgColors,
-                    borderRadius: "25px",
-                    "&:hover fieldset": {
-                      borderColor: theme.colors.primaryColors,
-                    },
-                    "&.Mui-focused fieldset": {
-                      borderColor: theme.colors.primaryColors,
-                    },
-                  },
-                  "& .MuiInputLabel-root": {
-                    color: "gray",
-                  },
-                  "& .MuiInputLabel-root.Mui-focused": {
-                    color: theme.colors.white,
-                  },
-                  "& .MuiInputBase-input::placeholder": {
-                    color: theme.colors.thirdBgColors,
-                  },
-                  "& .MuiInputBase-input": {
-                    color: theme.colors.white,
-                  },
-                }}
-              />
-            </Box>
-          </Box>
-          {/* <Box height={50} /> */}
-          <Box
-          // // display="flex"
-          // // flexDirection="row"
-          // // alignItems="flex-start"
-          // // margin="0 auto"
-          // // gap={3}
-          // width="100%"
-          >
-            {/* Category Column */}
-            {/* <Box display="flex" flexDirection="column" flex={1}>
-              <Typography
-                variant="body1"
-                color={theme.colors.white}
-                fontWeight={600}
-                sx={{ fontSize: { xs: 16, sm: 18, md: 15 } }}
-              >
-                Return Rate (%)
-              </Typography>
-              <Box height={20} />
-              <TextField
-                id="return-rate"
-                type="number"
-                placeholder="Input Return Rate"
-                value={rateValue ?? ""}
-                onChange={(e) => onRateValueChange?.(e.target.value)}
-                variant="outlined"
-                fullWidth
-                slotProps={{
-                  input: {
-                    endAdornment: (
-                      <InputAdornment
-                        position="end"
-                        sx={{
-                          "& .MuiTypography-root": {
-                            color: theme.colors.white,
-                          },
-                        }}
-                      >
-                        %
-                      </InputAdornment>
-                    ),
-                  },
-                }}
-                sx={{
-                  "& .MuiOutlinedInput-root": {
-                    backgroundColor: theme.colors.bgColors,
-                    borderRadius: "25px",
-                    "&:hover fieldset": {
-                      borderColor: theme.colors.primaryColors,
-                    },
-                    "&.Mui-focused fieldset": {
-                      borderColor: theme.colors.primaryColors,
-                    },
-                  },
-                  "& .MuiInputLabel-root": {
-                    color: "gray",
-                  },
-                  "& .MuiInputLabel-root.Mui-focused": {
-                    color: theme.colors.white,
-                  },
-                  "& .MuiInputBase-input::placeholder": {
-                    color: theme.colors.thirdBgColors,
-                  },
-                  "& .MuiInputBase-input": {
-                    color: theme.colors.white,
-                  },
-                }}
-              />
-            </Box> */}
-
-            {/* Quantity Column */}
-            {/* <Box display="flex" flexDirection="column" flex={1}>
-              <Typography
-                variant="body1"
-                color={theme.colors.white}
-                fontWeight={600}
-                sx={{ fontSize: { xs: 16, sm: 18, md: 15 } }}
-              >
-                Investment Status
-              </Typography>
-              <Box height={20} />
-              <Switch
-                checked={investmentStatus ?? false}
-                onChange={(e) => onInvestmentStatusChange?.(e.target.checked)}
-                sx={{
-                  "& .MuiSwitch-switchBase.Mui-checked": {
-                    color: theme.colors.primaryColors,
-                  },
-                  "& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track": {
-                    backgroundColor: theme.colors.primaryColors,
-                  },
-                  "& .MuiSwitch-switchBase": {
-                    color: theme.colors.white,
-                  },
-                  "& .MuiSwitch-track": {
-                    backgroundColor: theme.colors.thirdBgColors,
-                  },
-                }}
-              />
-            </Box> */}
-          </Box>
+              </label>
+              <div className="h-[20px]" />
+              <div className="relative w-full">
+                <div className="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none">
+                  <span className="text-white">{tokenCode}</span>
+                </div>
+                <input
+                  type="number"
+                  placeholder="Input Funding Price"
+                  value={fundingPriceValue ?? ""}
+                  onChange={(e) => onFundingPriceChange?.(e.target.value)}
+                  className="w-full bg-background border border-background-third rounded-[25px] text-white px-4 py-3 sm:py-4 focus:outline-none focus:border-primary transition-colors placeholder:text-background-third pl-16"
+                />
+              </div>
+            </div>
+          </div>
         </>
       )}
-    </Card>
+    </div>
   );
 }

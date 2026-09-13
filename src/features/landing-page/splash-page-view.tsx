@@ -1,6 +1,5 @@
 import { LoadingScreen } from "@/core/component/loading-component";
 import { imageConfig } from "@/core/config/images-config";
-import { Box } from "@mui/material";
 import Image from "next/image";
 import { useMemo } from "react";
 
@@ -10,32 +9,15 @@ export default function SplashPageView() {
   }, []);
 
   return (
-    <Box
-      sx={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        minHeight: "100vh",
-      }}
-    >
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
+    <div className="flex justify-center items-center min-h-screen">
+      <div className="flex flex-col justify-center items-center">
         <Image src={iconImg} alt="Stomatrade" width={300} height={300} />
-        <Box sx={{ height: 20 }} />
-        <LoadingScreen
-          primaryBgActive={true}
-          sx={{
-            paddingTop: "20px",
-            paddingBottom: "20px",
-          }}
-        />
-      </Box>
-    </Box>
+        <div className="h-5" />
+        <div className="py-5">
+          <LoadingScreen primaryBgActive={true} />
+        </div>
+      </div>
+    </div>
   );
 }
+

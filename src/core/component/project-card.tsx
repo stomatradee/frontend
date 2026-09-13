@@ -1,14 +1,3 @@
-import {
-  Box,
-  Card,
-  CardContent,
-  CardMedia,
-  Chip,
-  LinearProgress,
-  Typography,
-} from "@mui/material";
-import { themeConfig } from "../config/theme-config";
-
 interface ProjectCardProps {
   id: string;
   imageCID: string;
@@ -38,153 +27,91 @@ export default function ProjectCard({
   createdAt,
   handleNavigateToProjectDetail,
 }: ProjectCardProps) {
-  const theme = themeConfig;
+  const imageUrl = imageCID ? `https://gateway.pinata.cloud/ipfs/${imageCID}` : "https://placehold.co/400x140?text=No+Image";
 
   return (
-    <Card
+    <div
       onClick={() => {
         handleNavigateToProjectDetail(id);
       }}
       key={id}
-      sx={{
-        width: "250px",
-        backgroundColor: theme.colors.secondaryBgColors,
-        border: `1px solid ${theme.colors.thirdBgColors}`,
-        borderRadius: "12px",
-        transition: "all 0.3s ease",
-        "&:hover": {
-          borderColor: theme.colors.primaryColors,
-          transform: "translateY(-4px)",
-          boxShadow: `0 8px 24px rgba(44, 255, 158, 0.15)`,
-          cursor: "pointer",
-        },
-      }}
+      className="w-[250px] bg-background-secondary border border-background-third rounded-xl transition-all duration-300 hover:border-primary hover:-translate-y-1 hover:shadow-[0_8px_24px_rgba(44,255,158,0.15)] cursor-pointer overflow-hidden"
     >
-      <CardMedia
-        sx={{
-          height: 140,
-          backgroundColor: theme.colors.thirdBgColors, // Fallback background color
-        }}
-        image={imageCID ? `https://gateway.pinata.cloud/ipfs/${imageCID}` : "https://placehold.co/400x140?text=No+Image"}
+      <div 
+        className="h-[140px] bg-background-third w-full bg-cover bg-center"
+        style={{ backgroundImage: `url(${imageUrl})` }}
         title={assetName || "Project Image"}
       />
-      <CardContent sx={{ padding: "20px" }}>
+      
+      <div className="p-5">
         {/* Header: Commodity + Status */}
-        <Box
-          display="flex"
-          justifyContent="space-between"
-          alignItems="center"
-          marginBottom="16px"
-        >
-          <Typography
-            fontWeight={700}
-            fontSize={18}
-            color={theme.colors.white}
-            sx={{ textTransform: "capitalize" }}
-          >
+        <div className="flex justify-between items-center mb-4">
+          <h2 className="font-bold text-[18px] text-foreground capitalize">
             {assetName ?? "-"}
-          </Typography>
-          <Chip
-            label={statusLabel}
-            size="small"
-            sx={{
-              backgroundColor: theme.colors.fourGreenColors,
-              color: theme.colors.primaryColors,
-              fontWeight: 600,
-              fontSize: 11,
-            }}
-          />
-        </Box>
+          </h2>
+          <span className="inline-flex items-center px-2 py-1 bg-primary-dark text-primary font-semibold text-[11px] rounded-full">
+            {statusLabel}
+          </span>
+        </div>
 
         {/* Funding Progress */}
-        <Box marginBottom="16px">
-          <Box display="flex" justifyContent="space-between" marginBottom="6px">
-            <Typography fontSize={12} color={theme.colors.thirdBgColors}>
+        <div className="mb-4">
+          <div className="flex justify-between mb-1.5">
+            <p className="text-[12px] text-[#8e8e8e]">
               Funding Progress
-            </Typography>
-            <Typography
-              fontSize={12}
-              fontWeight={600}
-              color={theme.colors.primaryColors}
-            >
+            </p>
+            <p className="text-[12px] font-semibold text-primary">
               {fundingProgress ?? "0"}%
-            </Typography>
-          </Box>
-          <LinearProgress
-            variant="determinate"
-            value={fundingProgress}
-            sx={{
-              height: 6,
-              borderRadius: 3,
-              backgroundColor: theme.colors.thirdBgColors,
-              "& .MuiLinearProgress-bar": {
-                borderRadius: 3,
-                background: `linear-gradient(90deg, ${theme.colors.secondaryColors}, ${theme.colors.primaryColors})`,
-              },
-            }}
-          />
-          <Typography
-            fontSize={11}
-            color={theme.colors.thirdBgColors}
-            marginTop="4px"
-          >
-            ${totalFundedUSD.toLocaleString() ?? "0"} / $
-            {maxFundingUSD.toLocaleString() ?? "0"}
-          </Typography>
-        </Box>
+            </p>
+          </div>
+          <div className="h-1.5 rounded-full bg-background-third w-full overflow-hidden">
+            <div 
+              className="h-full rounded-full bg-gradient-to-r from-primary-secondary to-primary"
+              style={{ width: `${fundingProgress ?? 0}%` }}
+            />
+          </div>
+          <p className="text-[11px] text-[#8e8e8e] mt-1">
+            ${totalFundedUSD?.toLocaleString() ?? "0"} / ${maxFundingUSD?.toLocaleString() ?? "0"}
+          </p>
+        </div>
 
         {/* Stats Grid */}
-        <Box display="grid" gridTemplateColumns="1fr 1fr" gap="12px">
-          <Box>
-            <Typography fontSize={11} color={theme.colors.thirdBgColors}>
+        <div className="grid grid-cols-2 gap-3">
+          <div>
+            <p className="text-[11px] text-[#8e8e8e]">
               Price/Kg
-            </Typography>
-            <Typography
-              fontSize={14}
-              fontWeight={600}
-              color={theme.colors.white}
-            >
+            </p>
+            <p className="text-[14px] font-semibold text-foreground">
               ${pricePerKg ?? "0"}
-            </Typography>
-          </Box>
-          <Box>
-            <Typography fontSize={11} color={theme.colors.thirdBgColors}>
+            </p>
+          </div>
+          <div>
+            <p className="text-[11px] text-[#8e8e8e]">
               Return Rate
-            </Typography>
-            <Typography
-              fontSize={14}
-              fontWeight={600}
-              color={theme.colors.thirdColors}
-            >
+            </p>
+            <p className="text-[14px] font-semibold text-primary-third">
               {returnRate ?? "0"}%
-            </Typography>
-          </Box>
-          <Box>
-            <Typography fontSize={11} color={theme.colors.thirdBgColors}>
+            </p>
+          </div>
+          <div>
+            <p className="text-[11px] text-[#8e8e8e]">
               Investors
-            </Typography>
-            <Typography
-              fontSize={14}
-              fontWeight={600}
-              color={theme.colors.white}
-            >
+            </p>
+            <p className="text-[14px] font-semibold text-foreground">
               {investorCount ?? "0"}
-            </Typography>
-          </Box>
-          <Box>
-            <Typography fontSize={11} color={theme.colors.thirdBgColors}>
+            </p>
+          </div>
+          <div>
+            <p className="text-[11px] text-[#8e8e8e]">
               Delivery Date
-            </Typography>
-            <Typography
-              fontSize={14}
-              fontWeight={600}
-              color={theme.colors.white}
-            >
+            </p>
+            <p className="text-[14px] font-semibold text-foreground">
               {new Date(createdAt * 1000).toLocaleDateString() ?? "-"}
-            </Typography>
-          </Box>
-        </Box>
-      </CardContent>
-    </Card>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }
+

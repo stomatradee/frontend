@@ -1,7 +1,5 @@
-
 import Image from "next/image";
-import { Box, Typography, Button, Stack } from "@mui/material";
-import NorthEastIcon from "@mui/icons-material/NorthEast";
+import { Icon } from "@iconify/react";
 
 interface GreenFutureBannerProps {
     heading: string;
@@ -20,107 +18,47 @@ export default function GreenFutureBanner({
     ctaButton,
 }: GreenFutureBannerProps) {
     return (
-        <Box
-            sx={{
-                position: "relative",
-                width: "100%",
-                overflow: "hidden",
-                py: { xs: 12, lg: 18 },
-                px: { xs: 3, lg: 8 },
-            }}
-        >
+        <div className="relative w-full overflow-hidden py-24 lg:py-36 px-6 lg:px-32">
             {/* Background Image */}
             {backgroundImage && (
                 <Image
                     src={backgroundImage}
                     alt=""
                     fill
-                    style={{
-                        objectFit: "cover",
-                        objectPosition: "center",
-                        zIndex: 0,
-                    }}
+                    className="object-cover object-center z-0"
                     sizes="100vw"
                 />
             )}
 
             {/* Dark overlay */}
-            <Box
-                sx={{
-                    position: "absolute",
-                    inset: 0,
-                    zIndex: 1,
-                    backgroundColor: "rgba(10,10,10,0.5)",
-                }}
-            />
+            <div className="absolute inset-0 z-[1] bg-black/50" />
 
             {/* Content */}
-            <Stack
-                alignItems="center"
-                spacing={3}
-                sx={{
-                    position: "relative",
-                    zIndex: 2,
-                    textAlign: "center",
-                    maxWidth: "48rem",
-                    mx: "auto",
-                }}
-            >
+            <div className="relative z-[2] flex flex-col items-center gap-6 text-center max-w-3xl mx-auto">
                 {/* Heading */}
-                <Typography
-                    variant="h2"
-                    sx={{
-                        fontSize: { xs: "2rem", sm: "2.5rem", lg: "3.25rem" },
-                        fontWeight: 700,
-                        fontStyle: "italic",
-                        lineHeight: 1.15,
-                        color: "white",
-                    }}
-                >
+                <h2 className="text-[2rem] sm:text-[2.5rem] lg:text-[3.25rem] font-bold italic leading-[1.15] text-white">
                     {heading}
-                </Typography>
+                </h2>
 
                 {/* Description */}
                 {description && (
-                    <Typography
-                        variant="body1"
-                        sx={{
-                            fontSize: { xs: "0.875rem", sm: "1rem" },
-                            color: "rgba(255,255,255,0.6)",
-                            fontWeight: 300,
-                            lineHeight: 1.7,
-                            maxWidth: "40rem",
-                        }}
-                    >
+                    <p className="text-[0.875rem] sm:text-[1rem] text-white/60 font-light leading-relaxed max-w-2xl">
                         {description}
-                    </Typography>
+                    </p>
                 )}
 
                 {/* CTA Button */}
                 {ctaButton && (
-                    <Button
-                        variant="outlined"
+                    <button
                         onClick={ctaButton.onClick}
-                        endIcon={<NorthEastIcon sx={{ fontSize: 16 }} />}
-                        sx={{
-                            borderColor: "rgba(255,255,255,0.3)",
-                            color: "white",
-                            fontWeight: 600,
-                            fontSize: "0.875rem",
-                            px: 4,
-                            py: 1.5,
-                            borderRadius: "0.5rem",
-                            textTransform: "none",
-                            "&:hover": {
-                                borderColor: "rgba(255,255,255,0.6)",
-                                backgroundColor: "rgba(255,255,255,0.05)",
-                            },
-                        }}
+                        className="flex items-center justify-center gap-2 border border-white/30 text-white font-semibold text-sm px-8 py-3 rounded-lg hover:border-white/60 hover:bg-white/5 transition-colors"
                     >
                         {ctaButton.label}
-                    </Button>
+                        <Icon icon="mdi:arrow-top-right" className="text-base" />
+                    </button>
                 )}
-            </Stack>
-        </Box>
+            </div>
+        </div>
     );
 }
+

@@ -18,7 +18,6 @@ export const metadata: Metadata = {
   description: "Stomatrade RWA-Fi for a Faster Agriculture Economy",
 };
 
-import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
 import { Toaster } from "sonner";
 
 export default function RootLayout({
@@ -31,12 +30,10 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <AppRouterCacheProvider>
-          <Providers>
-            {children}
-            <Toaster position="top-center" richColors />
-          </Providers>
-        </AppRouterCacheProvider>
+        <Providers>
+          {children}
+          <Toaster position="top-center" richColors />
+        </Providers>
       </body>
     </html>
   );

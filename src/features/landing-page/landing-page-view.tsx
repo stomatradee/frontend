@@ -1,6 +1,5 @@
 "use client";
 
-import { Box, Grid } from "@mui/material";
 import Navbar from "./component/navbar";
 import HeroBanner from "./component/hero-banner";
 import StatCard from "./component/stat-card";
@@ -43,15 +42,9 @@ export default function LandingPageView() {
   }
 
   return (
-      <Box
-        sx={{
-          position: "relative",
-          minHeight: "100vh",
-          backgroundColor: "var(--bg-colors)",
-        }}
-      >
+      <div className="relative min-h-screen bg-background">
         {/* Banner Section */}
-        <Box component="section" id="banner">
+        <section id="banner">
           {/* Navbar */}
           <Navbar
             logoSrc={logoSrc}
@@ -75,18 +68,10 @@ export default function LandingPageView() {
           />
 
           {/* Stats */}
-          <Box
-            sx={{
-              position: "relative",
-              zIndex: 10,
-              mt: -8,
-              px: { xs: 3, lg: 8 },
-              pb: 8,
-            }}
-          >
-            <Grid container spacing={2} sx={{ maxWidth: "72rem", mx: "auto" }}>
+          <div className="relative z-10 -mt-32 px-6 lg:px-32 pb-32">
+            <div className="flex flex-wrap -mx-4 max-w-7xl mx-auto">
               {statCards.map((card) => (
-                <Grid key={card.title} size={{ xs: 12, sm: 6, lg: 4 }}>
+                <div key={card.title} className="w-full sm:w-1/2 lg:w-1/3 px-4 mb-4">
                   <StatCard
                     title={card.title}
                     value={card.value}
@@ -96,22 +81,18 @@ export default function LandingPageView() {
                     ctaImage={card.ctaImage}
                     handleSustainabilityClick={handleSustainabilityClick}
                   />
-                </Grid>
+                </div>
               ))}
-            </Grid>
-          </Box>
-        </Box>
+            </div>
+          </div>
+        </section>
 
         {/* Solving Problem Section */}
-        <Box
-          component="section"
+        <section
           id="solving-problem"
-          sx={{
-            px: { xs: 3, lg: 8 },
-            py: { xs: 8, lg: 12 },
-          }}
+          className="px-6 lg:px-32 py-32 lg:py-48"
         >
-          <Box sx={{ maxWidth: "72rem", mx: "auto" }}>
+          <div className="max-w-7xl mx-auto">
             {/* Section Header */}
             <SectionHeader
               logoSrc={solvingProblemData.header.logoSrc}
@@ -120,24 +101,39 @@ export default function LandingPageView() {
             />
 
             {/* Bento Grid */}
-            <Grid container spacing={2}>
-              {solvingProblemData.bentoCards.map((card) => (
-                <Grid key={card.id} size={card.gridSize}>
-                  <BentoCard
-                    title={card.title}
-                    description={card.description}
-                    imageSrc={card.imageSrc}
-                    badgeText={card.badgeText}
-                    // size={card.size}
-                  />
-                </Grid>
-              ))}
-            </Grid>
-          </Box>
-        </Box>
+            <div className="flex flex-wrap -mx-4">
+              {solvingProblemData.bentoCards.map((card) => {
+                // Approximate grid sizes based on typical 12-column grid
+                let widthClass = "w-full";
+                const gridSize = card.gridSize as any;
+                const xs = gridSize?.xs;
+                const sm = gridSize?.sm;
+                const md = gridSize?.md;
+                const lg = gridSize?.lg;
+                
+                if (lg === 4 || md === 4) widthClass = "w-full md:w-1/3";
+                else if (lg === 8 || md === 8) widthClass = "w-full md:w-2/3";
+                else if (lg === 6 || md === 6) widthClass = "w-full md:w-1/2";
+                else if (sm === 6) widthClass = "w-full sm:w-1/2";
+
+                return (
+                  <div key={card.id} className={`${widthClass} px-4 mb-8`}>
+                    <BentoCard
+                      title={card.title}
+                      description={card.description}
+                      imageSrc={card.imageSrc}
+                      badgeText={card.badgeText}
+                      // size={card.size}
+                    />
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </section>
 
         {/* Growth with Stomatrade Section */}
-        <Box component="section" id="growth-with-stomatrade">
+        <section id="growth-with-stomatrade">
           <CtaBanner
             badgeText={growthData.badgeText}
             heading={growthData.heading}
@@ -149,10 +145,10 @@ export default function LandingPageView() {
             handleConnectWallet={handleConnectWallet}
             handleWhatIsStomatrade={handleWhatIsStomatrade}
           />
-        </Box>
+        </section>
 
         {/* Footer Section */}
-        <Box component="section" id="footer">
+        <section id="footer">
           <Footer
             newsletterHeading={footerData.newsletter.heading}
             newsletterPrivacyText={footerData.newsletter.privacyText}
@@ -166,13 +162,14 @@ export default function LandingPageView() {
             legalLinks={footerData.legalLinks}
             handleSignUp={handleSignUp}
           />
-        </Box>
+        </section>
 
         <RoleDialog 
           open={open} 
           handleCloseRoleDialog={handleCloseRoleDialog}
           handleRoleSelected={handleRoleSelected}
         />
-      </Box>
+      </div>
   );
 }
+

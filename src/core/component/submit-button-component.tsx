@@ -1,5 +1,3 @@
-import { Box, Button, Card, Typography } from "@mui/material";
-import { themeConfig } from "@/core/config/theme-config";
 import { LoadingScreen } from "@/core/component/loading-component";
 
 type SubmitButtonComponentProps = {
@@ -19,89 +17,37 @@ export default function SubmitButtonComponent({
   disabled,
   isLoading,
 }: SubmitButtonComponentProps) {
-  const theme = themeConfig;
   return (
-    <Card
-      sx={{
-        bgcolor: theme.colors.secondaryBgColors,
-        borderRadius: "30px",
-        border: "1px solid",
-        borderColor: theme.colors.thirdBgColors,
-        width: "100%",
-        maxWidth: "1000px",
-        padding: { xs: "25px 20px", sm: "35px" },
-      }}
-    >
+    <div className="bg-background-secondary rounded-[30px] border border-background-third w-full max-w-[1000px] p-[25px_20px] sm:p-[35px]">
       {isLoading === true ? (
-        <LoadingScreen
-          primaryBgActive={true}
-          sx={{
-            paddingTop: "20px",
-            paddingBottom: "20px",
-          }}
-        />
+        <div className="py-5">
+          <LoadingScreen primaryBgActive={true} />
+        </div>
       ) : (
-        <Box
-          display="flex"
-          flexDirection={{ xs: "column", sm: "row" }}
-          alignItems={{ xs: "flex-start", sm: "center" }}
-          gap={{ xs: 3, sm: 0 }}
-        >
-          <Box
-            display="flex"
-            flexDirection="column"
-            sx={{
-              flexGrow: 1,
-              width: "100%",
-            }}
-          >
-            <Typography
-              variant="h3"
-              color={theme.colors.white}
-              fontWeight={600}
-              sx={{ fontSize: { xs: 16, sm: 18, md: 20 } }}
-            >
+        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 sm:gap-0">
+          <div className="flex flex-col flex-grow w-full">
+            <h3 className="text-foreground font-semibold text-[16px] sm:text-[18px] md:text-[20px]">
               {title ?? "Submit Your Profile?"}
-            </Typography>
-            <Box height={10} />
-            <Typography
-              variant="body1"
-              color={theme.colors.thirdBgColors}
-              fontWeight={600}
-              sx={{ fontSize: { xs: 16, sm: 18, md: 15 } }}
-            >
+            </h3>
+            <div className="h-2.5" />
+            <p className="text-background-third font-semibold text-[16px] sm:text-[18px] md:text-[15px]">
               {description ?? "Press the right button to submit your profile"}
-            </Typography>
-          </Box>
-          <Button
+            </p>
+          </div>
+          <button
             onClick={onSubmit}
-            variant="outlined"
             disabled={disabled ?? false}
-            sx={{
-              width: { xs: "100%", sm: "200px" },
-              borderRadius: "9999px",
-              borderColor: "var(--primary-colors)",
-              color: "var(--primary-colors)",
-              fontWeight: 600,
-              textTransform: "none",
-              fontSize: { xs: "0.85rem", md: "0.95rem" },
-              py: { xs: "8px", md: "9px" },
-              "&:hover": {
-                backgroundColor: "var(--primary-colors)",
-                borderColor: "var(--primary-colors)",
-                color: "#0A0A0A",
-              },
-              "&.Mui-disabled": {
-                color: theme.colors.thirdBgColors,
-                borderColor: theme.colors.thirdBgColors,
-              },
-              transition: "all 0.3s",
-            }}
+            className={`w-full sm:w-[200px] rounded-full border font-semibold text-[0.85rem] md:text-[0.95rem] py-2 md:py-[9px] transition-all duration-300 ${
+              disabled
+                ? "border-background-third text-background-third cursor-not-allowed"
+                : "border-primary text-primary hover:bg-primary hover:border-primary hover:text-[#0A0A0A]"
+            }`}
           >
             {buttonTitle}
-          </Button>
-        </Box>
+          </button>
+        </div>
       )}
-    </Card>
+    </div>
   );
 }
+

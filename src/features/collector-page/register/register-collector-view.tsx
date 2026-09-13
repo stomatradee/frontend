@@ -1,9 +1,7 @@
 "use client";
 
-import { AppBar, Box, Typography } from "@mui/material";
 import Image from "next/image";
 import InputComponent from "../../../core/component/input-component";
-import { themeConfig } from "@/core/config/theme-config";
 import { useCallback, useState } from "react";
 import z from "zod";
 import { imageConfig } from "@/core/config/images-config";
@@ -15,8 +13,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { RegisterRequestModel } from "@/repository/collector-profile/register/model/register-model";
 
 export default function RegisterCollectorView() {
-  const theme = themeConfig;
-
   const [fullname, setFullname] = useState<string>("");
   const [phoneNumber, setPhoneNumber] = useState<string>("");
   const [residenceId, setResidenceId] = useState<string>("");
@@ -60,51 +56,27 @@ export default function RegisterCollectorView() {
 
   return (
     <>
-      <AppBar
-        sx={{
-          backgroundColor: theme.colors.bgColors,
-          padding: "20px 30px",
-        }}
-      >
+      <header className="bg-background px-[30px] py-[20px]">
         <Image
           src={imageConfig.logo.stomatradeLogo}
           alt="Stomatrade"
           width={200}
           height={60}
-          style={{ width: "200px", height: "auto" }}
+          className="w-[200px] h-auto"
         />
-      </AppBar>
+      </header>
       <Form methods={methods} onSubmit={onSubmit}>
-        <Box
-          display="flex"
-          flexDirection="column"
-          justifyContent="center"
-          alignItems="center"
-          minHeight="100vh"
-          padding={{ xs: "100px 20px 40px", md: "121px" }}
-          width="100%"
-          maxWidth="1200px"
-          margin="0 auto"
-        >
-          <Typography
-            variant="h1"
-            color={theme.colors.white}
-            fontWeight={600}
-            sx={{ fontSize: { xs: 16, sm: 18, md: 30 } }}
-          >
+        <div className="flex flex-col justify-center items-center min-h-screen pt-[100px] px-5 pb-10 md:py-[121px] w-full max-w-[1200px] mx-auto">
+          <h1 className="text-white font-semibold text-[16px] sm:text-[18px] md:text-[30px]">
             Complete Your Profile
-          </Typography>
-          <Box height={10} />
-          <Typography
-            variant="body1"
-            color={theme.colors.thirdBgColors}
-            fontWeight={600}
-            sx={{ fontSize: { xs: 16, sm: 18, md: 15 } }}
-          >
+          </h1>
+          <div className="h-[10px]" />
+          <p className="text-background-third font-semibold text-[16px] sm:text-[18px] md:text-[15px]">
             Please complete your profile to get started collector&apos;s
             platform
-          </Typography>
-          <Box height={30} />
+          </p>
+          <div className="h-[30px]" />
+          
           <InputComponent
             title={"Collectors Name"}
             description={"Please input collectors name"}
@@ -116,7 +88,8 @@ export default function RegisterCollectorView() {
               methods.setValue("fullname", value, { shouldValidate: true });
             }}
           />
-          <Box height={30} />
+          <div className="h-[30px]" />
+          
           <InputComponent
             title={"Phone Number"}
             inputType={"number"}
@@ -129,7 +102,8 @@ export default function RegisterCollectorView() {
               methods.setValue("phoneNumber", value, { shouldValidate: true });
             }}
           />
-          <Box height={30} />
+          <div className="h-[30px]" />
+          
           <InputComponent
             title={"Residence ID"}
             inputType={"number"}
@@ -142,7 +116,8 @@ export default function RegisterCollectorView() {
               methods.setValue("residenceId", value, { shouldValidate: true });
             }}
           />
-          <Box height={30} />
+          <div className="h-[30px]" />
+          
           <InputComponent
             title={"Company Name"}
             description={"Please input company name"}
@@ -154,7 +129,8 @@ export default function RegisterCollectorView() {
               methods.setValue("companyName", value, { shouldValidate: true });
             }}
           />
-          <Box height={30} />
+          <div className="h-[30px]" />
+          
           <InputComponent
             title={"Company Address"}
             description={"Please input company address"}
@@ -168,13 +144,14 @@ export default function RegisterCollectorView() {
               });
             }}
           />
-          <Box height={30} />
+          <div className="h-[30px]" />
+          
           <SubmitButtonComponent
             onSubmit={onSubmit}
             disabled={!methods.formState.isValid}
             isLoading={isLoading}
           />
-        </Box>
+        </div>
       </Form>
     </>
   );

@@ -1,72 +1,48 @@
-import type { Theme, SxProps } from "@mui/material/styles";
-import type { LinearProgressProps } from "@mui/material/LinearProgress";
+"use client";
 
-import { Fragment } from "react";
-
-import Portal from "@mui/material/Portal";
-import { styled } from "@mui/material/styles";
-import LinearProgress from "@mui/material/LinearProgress";
-import { themeConfig } from "@/core/config/theme-config";
+import { Fragment, useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 
 export type LoadingScreenProps = React.ComponentProps<"div"> & {
   portal?: boolean;
   primaryBgActive?: boolean;
-  sx?: SxProps<Theme>;
-  slots?: {
-    progress?: React.ReactNode;
-  };
-  slotsProps?: {
-    progress?: LinearProgressProps;
-  };
 };
 
 export function LoadingScreen({
   portal,
-  slots,
-  slotsProps,
-  sx,
   primaryBgActive,
+  className = "",
   ...other
 }: LoadingScreenProps) {
-  const PortalWrapper = portal ? Portal : Fragment;
+  const [mounted, setMounted] = useState(false);
 
-  return (
-    <PortalWrapper>
-      <LoadingContent sx={sx} {...other}>
-        {slots?.progress ?? (
-          <LinearProgress
-            sx={[
-              {
-                width: 1,
-                maxWidth: 360,
-                backgroundColor: primaryBgActive
-                  ? themeConfig.colors.bgColors
-                  : themeConfig.colors.secondaryBgColors,
-                "& .MuiLinearProgress-bar": {
-                  backgroundColor: themeConfig.colors.primaryColors,
-                },
-              },
-              ...(Array.isArray(slotsProps?.progress?.sx)
-                ? slotsProps.progress.sx
-                : [slotsProps?.progress?.sx]),
-            ]}
-            {...slotsProps?.progress}
-          />
-        )}
-      </LoadingContent>
-    </PortalWrapper>
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const content = (
+    <div
+      className={`flex-grow w-full flex min-h-full items-center justify-center px-10 ${className}`}
+      {...other}
+    >
+      <div 
+        className={`w-full max-w-[360px] h-1.5 overflow-hidden rounded-full ${
+          primaryBgActive ? 'bg-background' : 'bg-background-secondary'
+        }`}
+      >
+        <div className="h-full bg-primary rounded-full animate-[progress_2s_ease-in-out_infinite] w-1/2 origin-left" />
+      </div>
+    </div>
   );
+
+  if (portal && mounted) {
+    return createPortal(content, document.body);
+  }
+
+  if (portal && !mounted) {
+    return null;
+  }
+
+  return content;
 }
 
-// ----------------------------------------------------------------------
-
-const LoadingContent = styled("div")(({ theme }) => ({
-  flexGrow: 1,
-  width: "100%",
-  display: "flex",
-  minHeight: "100%",
-  alignItems: "center",
-  justifyContent: "center",
-  paddingLeft: theme.spacing(5),
-  paddingRight: theme.spacing(5),
-}));
