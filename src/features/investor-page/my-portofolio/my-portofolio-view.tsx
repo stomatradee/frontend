@@ -16,10 +16,12 @@ export default function MyPortofolioView() {
   if (isLoading) {
     return (
       <Box
-        display="flex"
-        justifyContent="center"
-        alignItems="center"
-        minHeight="100vh"
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          minHeight: "100vh",
+        }}
       >
         <LoadingScreen />
       </Box>
@@ -28,16 +30,20 @@ export default function MyPortofolioView() {
 
   return (
     <Box
-      display="flex"
-      flexDirection="column"
-      padding={{ xs: "100px 20px 40px", md: "20px" }}
-      margin="0 auto"
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        padding: { xs: "100px 20px 40px", md: "20px" },
+        margin: "0 auto",
+      }}
     >
       <Typography
         variant="h1"
         color={theme.colors.white}
-        fontWeight={600}
-        sx={{ fontSize: { xs: 16, sm: 18, md: 25 } }}
+        sx={{
+          fontWeight: 600,
+          fontSize: { xs: 16, sm: 18, md: 25 },
+        }}
       >
         My Portofolio
       </Typography>
@@ -45,7 +51,7 @@ export default function MyPortofolioView() {
       {!data?.projects?.length ? (
         <EmptyAssetComponent title="No Portofolio Found" image={imageConfig.icon.confusedIconRich} />
       ) : (
-        <Box paddingTop="32px">
+        <Box sx={{ paddingTop: "32px" }}>
           <Grid container spacing={2}>
             {data.projects.map((project) => (
               <Grid key={project.id}>
