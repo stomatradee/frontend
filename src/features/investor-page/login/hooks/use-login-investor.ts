@@ -28,22 +28,6 @@ export function useLoginInvestor() {
                 replaceRoute(routes.investor.registerProfile);
             }
 
-
-
-            // const data: RegisterStatusRequestModel = {
-            //     contractAddress: address as `0x${string}`,
-            // };
-
-            // const result = await GetRegisterProfilStatus(data);
-
-            // console.log("result: ", result);
-
-            // if (result === true) {
-            // replaceRoute(routes.investor.dashboard);
-            // } else {
-            //     replaceRoute(routes.collector.registerProfile);
-            // }
-
             setLoading(false);
         },
         [replaceRoute],

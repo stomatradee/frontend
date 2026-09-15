@@ -5,9 +5,7 @@ import HeroBanner from "./component/hero-banner";
 import StatCard from "./component/stat-card";
 import SectionHeader from "./component/section-header";
 import BentoCard from "./component/bento-card";
-import CtaBanner from "./component/cta-banner";
 import Footer from "./component/footer";
-import RoleDialog from "./component/role-dialog";
 
 import { landingPageData } from "./constants/landing-page-data";
 import { useLandingPage } from "./hooks/use-landing-page";
@@ -19,22 +17,15 @@ export default function LandingPageView() {
     statCards,
     heroBannerData,
     solvingProblemData,
-    growthData,
     footerData,
     logoSrc,
   } = landingPageData;
 
   const {
     isSplashScreen,
-    open,
     handleNavItemClick,
     handleConnectWallet,
-    handleCloseRoleDialog,
-    // handleRoleSelected,
     handleLearnMore,
-    handleSustainabilityClick,
-    handleWhatIsStomatrade,
-    handleSignUp,
   } = useLandingPage();
 
   if (isSplashScreen) {
@@ -79,7 +70,7 @@ export default function LandingPageView() {
                   variant={card.variant}
                   ctaLabel={card.ctaLabel}
                   ctaImage={card.ctaImage}
-                  handleSustainabilityClick={handleSustainabilityClick}
+                  handleSustainabilityClick={() => { }}
                 />
               </div>
             ))}
@@ -115,21 +106,6 @@ export default function LandingPageView() {
         </div>
       </section>
 
-      {/* Growth with Stomatrade Section */}
-      {/* <section id="growth-with-stomatrade">
-        <CtaBanner
-          badgeText={growthData.badgeText}
-          heading={growthData.heading}
-          description={growthData.description}
-          mobileBackgroundImage={growthData.mobileBackgroundImage}
-          desktopBackgroundImage={growthData.desktopBackgroundImage}
-          primaryButtonLabel="Connect Wallet"
-          secondaryButtonLabel="What is Stomatrade"
-          handleConnectWallet={handleConnectWallet}
-          handleWhatIsStomatrade={handleWhatIsStomatrade}
-        />
-      </section> */}
-
       {/* Footer Section */}
       <section id="footer">
         <Footer
@@ -146,12 +122,6 @@ export default function LandingPageView() {
           handleConnectWallet={handleConnectWallet}
         />
       </section>
-
-      {/* <RoleDialog
-        open={open}
-        handleCloseRoleDialog={handleCloseRoleDialog}
-        handleRoleSelected={handleRoleSelected}
-      /> */}
     </div>
   );
 }

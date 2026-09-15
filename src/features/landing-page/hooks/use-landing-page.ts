@@ -1,7 +1,6 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { imageConfig } from "@/core/config/images-config";
 import { useNavigationUtils } from "@/core/hooks/use-navigation-utils";
 import { routes } from "@/core/config/routes";
 import { ProfileInvestorRequestModel } from "@/repository/investor-profile/profile/model/profile-investor-model";
@@ -47,44 +46,12 @@ export function useLandingPage() {
         setOpen(false);
     }, []);
 
-    // const handleRoleSelected = useCallback((role: "collector" | "investor") => {
-    //     setOpen(false);
-
-    //     // if (role == "collector") {
-    //     //     pushRoute(routes.collector.login)
-    //     // } else {
-    //     //     pushRoute(routes.investor.login)
-    //     // }
-
-    // }, [pushRoute]);
-
     const handleLearnMore = useCallback(() => {
         const discoverSection = document.querySelector("#discover");
         if (discoverSection) {
             discoverSection.scrollIntoView({ behavior: "smooth" });
         }
     }, []);
-
-    const handleSustainabilityClick = useCallback(() => {
-        // TODO: Implement Sustainability CTA action
-        console.log("Sustainability clicked");
-    }, []);
-
-    const handleWhatIsStomatrade = useCallback(() => {
-        // TODO: Navigate to about/whitepaper page
-        console.log("What is Stomatrade clicked");
-    }, []);
-
-    const handleLearnAboutStomatrade = useCallback(() => {
-        // TODO: Navigate to about page
-        console.log("Learn about Stomatrade clicked");
-    }, []);
-
-    const handleSignUp = useCallback((email: string) => {
-        // TODO: Implement newsletter sign-up
-        console.log("Sign up with email:", email);
-    }, []);
-
 
     useEffect(() => {
         const timer = setTimeout(() => {
@@ -94,18 +61,11 @@ export function useLandingPage() {
     }, []);
 
     return {
-        // Data
         isSplashScreen,
         open,
-        // Handlers
         handleNavItemClick,
         handleConnectWallet,
         handleCloseRoleDialog,
-        // handleRoleSelected,
         handleLearnMore,
-        handleSustainabilityClick,
-        handleWhatIsStomatrade,
-        handleLearnAboutStomatrade,
-        handleSignUp,
     };
 }
