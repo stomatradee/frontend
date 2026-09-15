@@ -8,9 +8,9 @@ if (
   Object.defineProperty(global, "localStorage", {
     value: {
       getItem: () => null,
-      setItem: () => {},
-      removeItem: () => {},
-      clear: () => {},
+      setItem: () => { },
+      removeItem: () => { },
+      clear: () => { },
     },
     writable: true,
   });
@@ -46,13 +46,16 @@ const queryClient = new QueryClient();
 
 const myTheme = midnightTheme({
   accentColor: "var(--third-bg-colors)",
+  overlayBlur: "small"
 });
 
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
-        <RainbowKitProvider theme={myTheme}>{children}</RainbowKitProvider>
+        <RainbowKitProvider theme={myTheme} modalSize="compact">
+          {children}
+        </RainbowKitProvider>
       </QueryClientProvider>
     </WagmiProvider>
   );
