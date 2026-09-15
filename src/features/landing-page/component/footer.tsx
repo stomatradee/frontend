@@ -99,13 +99,13 @@ export default function Footer({
     return (
         <footer className="w-full">
             {/* ── Newsletter Section ── */}
-            <div className="relative overflow-hidden py-20 lg:py-48 px-6 lg:px-32">
+            <div className="relative overflow-hidden w-full flex items-center justify-center aspect-[4/3] md:aspect-[21/9] min-h-[400px] p-6 lg:px-32">
                 {/* Background */}
                 <Image
                     src={newsletterBgImage}
                     alt=""
                     fill
-                    className="object-cover object-top z-0"
+                    className="object-cover object-center z-0"
                     sizes="100vw"
                 />
 

@@ -71,7 +71,7 @@ export const landingPageData = {
         newsletter: {
             heading: "Let's connect and create a positive impact together.",
             privacyText: "At Stomatrade, we are deeply committed to protecting your privacy. Your personal information will never be shared without your consent. For more information, check out our Privacy Policy.",
-            bgImage: imageConfig.background.desktop.footerBgDesktop,
+            bgImage: imageConfig.background.desktop.bgDesktop,
         },
         brand: {
             description: "Our holistic approach integrates technology, sustainability, and community to create a future where agriculture works hand-in-hand with nature.",
