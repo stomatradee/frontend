@@ -1,8 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import { Icon } from "@iconify/react";
-import { Button } from "@/core/component/shadcn-ui/button";
 import { Badge } from "@/core/component/shadcn-ui/badge";
 import ButtonConnectWalletComponent from "@/core/component/button-connect-wallet-component";
 
@@ -14,7 +12,7 @@ interface HeroBannerProps {
     desktopBackgroundImage: string;
     primaryButtonLabel: string;
     secondaryButtonLabel: string;
-    handleConnectWallet: () => void;
+    handleConnectWallet: (address: string) => void;
     handleLearnMore: () => void;
 }
 
@@ -82,7 +80,7 @@ export default function HeroBanner({
 
                 {/* CTA Buttons */}
                 <div className="w-[180px] md:w-[220px]">
-                    <ButtonConnectWalletComponent />
+                    <ButtonConnectWalletComponent onConnectWalletClick={handleConnectWallet} />
                 </div>
             </div>
         </section>

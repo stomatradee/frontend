@@ -1,9 +1,22 @@
 import { Icon } from "@iconify/react";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { Button } from "@/core/component/shadcn-ui/button";
+import { useConnection } from "wagmi";
 
-export default function ButtonConnectWalletComponent() {
+interface ButtonConnectWalletComponentProps {
+    onConnectWalletClick: (address: string) => void;
+}
+
+export default function ButtonConnectWalletComponent({ onConnectWalletClick }: ButtonConnectWalletComponentProps) {
+
+    const { isConnected, address } = useConnection();
+
+    useEffect(() => {
+        if (isConnected) {
+            onConnectWalletClick(address ?? "");
+        }
+    }, [isConnected, address, onConnectWalletClick]);
 
     const pageMemo = useMemo(
         () => ({

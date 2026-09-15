@@ -4,13 +4,12 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { imageConfig } from "@/core/config/images-config";
 import { useNavigationUtils } from "@/core/hooks/use-navigation-utils";
 import { routes } from "@/core/config/routes";
+import { ProfileInvestorRequestModel } from "@/repository/investor-profile/profile/model/profile-investor-model";
+import { GetInvestorProfileRepository } from "@/repository/investor-profile/profile/profile-investor-repository";
 
 export function useLandingPage() {
-
-
-
     const [open, setOpen] = useState(false);
-    const { pushRoute } = useNavigationUtils();
+    const { replaceRoute } = useNavigationUtils();
     const [isSplashScreen, setIsSplashScreen] = useState<boolean>(true);
 
     // --- Handler functions ---
@@ -21,25 +20,43 @@ export function useLandingPage() {
         }
     }, []);
 
-    const handleConnectWallet = useCallback(() => {
-        // setOpen(true);
-        pushRoute(routes.investor.login)
-    }, []);
+    const handleConnectWallet = useCallback(async (address: string) => {
+        console.log(address);
+
+        setIsSplashScreen(true);
+
+        const data: ProfileInvestorRequestModel = {
+            contractAddress: address as `0x${string}`,
+            role: "investor",
+        };
+
+        const result = await GetInvestorProfileRepository(data);
+
+        console.log("result: ", result);
+
+        setIsSplashScreen(false)
+
+        if (result !== null) {
+            replaceRoute(routes.investor.dashboard);
+        } else {
+            replaceRoute(routes.investor.registerProfile);
+        }
+    }, [replaceRoute]);
 
     const handleCloseRoleDialog = useCallback(() => {
         setOpen(false);
     }, []);
 
-    const handleRoleSelected = useCallback((role: "collector" | "investor") => {
-        setOpen(false);
+    // const handleRoleSelected = useCallback((role: "collector" | "investor") => {
+    //     setOpen(false);
 
-        // if (role == "collector") {
-        //     pushRoute(routes.collector.login)
-        // } else {
-        //     pushRoute(routes.investor.login)
-        // }
+    //     // if (role == "collector") {
+    //     //     pushRoute(routes.collector.login)
+    //     // } else {
+    //     //     pushRoute(routes.investor.login)
+    //     // }
 
-    }, [pushRoute]);
+    // }, [pushRoute]);
 
     const handleLearnMore = useCallback(() => {
         const discoverSection = document.querySelector("#discover");
@@ -84,7 +101,7 @@ export function useLandingPage() {
         handleNavItemClick,
         handleConnectWallet,
         handleCloseRoleDialog,
-        handleRoleSelected,
+        // handleRoleSelected,
         handleLearnMore,
         handleSustainabilityClick,
         handleWhatIsStomatrade,

@@ -1,7 +1,5 @@
 "use client";
 
-import { Button } from "@/core/component/shadcn-ui/button";
-
 import Navbar from "./component/navbar";
 import HeroBanner from "./component/hero-banner";
 import StatCard from "./component/stat-card";
@@ -32,7 +30,7 @@ export default function LandingPageView() {
     handleNavItemClick,
     handleConnectWallet,
     handleCloseRoleDialog,
-    handleRoleSelected,
+    // handleRoleSelected,
     handleLearnMore,
     handleSustainabilityClick,
     handleWhatIsStomatrade,
@@ -145,14 +143,15 @@ export default function LandingPageView() {
           contactItems={footerData.contactItems}
           copyrightText={footerData.copyrightText}
           legalLinks={footerData.legalLinks}
+          handleConnectWallet={handleConnectWallet}
         />
       </section>
 
-      <RoleDialog
+      {/* <RoleDialog
         open={open}
         handleCloseRoleDialog={handleCloseRoleDialog}
         handleRoleSelected={handleRoleSelected}
-      />
+      /> */}
     </div>
   );
 }

@@ -2,7 +2,7 @@
 
 import { SIDEBAR_WIDTH } from "./dashboard-sidebar";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
-import { useAccount } from "wagmi";
+import { useConnection } from "wagmi";
 import { useEffect, useRef } from "react";
 
 export interface DashboardNavbarProps {
@@ -12,7 +12,7 @@ export interface DashboardNavbarProps {
 export default function DashboardNavbar({
   handleDisconnect,
 }: DashboardNavbarProps) {
-  const { status } = useAccount();
+  const { status } = useConnection();
   const wasConnected = useRef(false);
 
   useEffect(() => {

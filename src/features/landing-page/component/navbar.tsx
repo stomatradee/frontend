@@ -13,7 +13,7 @@ interface NavbarProps {
     logoSrc: string;
     navItems: NavItem[];
     ctaLabel: string;
-    handleConnectWallet: () => void;
+    handleConnectWallet: (address: string) => void;
     handleNavItemClick: (href: string) => void;
 }
 
@@ -60,7 +60,7 @@ export default function Navbar({
 
                 {/* CTA Button */}
                 <div className="w-[150px] md:w-[180px]">
-                    <ButtonConnectWalletComponent />
+                    <ButtonConnectWalletComponent onConnectWalletClick={handleConnectWallet} />
                 </div>
             </div>
         </header>

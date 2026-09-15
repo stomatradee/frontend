@@ -23,6 +23,8 @@ interface SocialLink {
 }
 
 interface FooterProps {
+    handleConnectWallet: (address: string) => void;
+
     // Newsletter
     newsletterHeading: string;
     newsletterPrivacyText: string;
@@ -82,6 +84,7 @@ export default function Footer({
     contactItems,
     copyrightText,
     legalLinks,
+    handleConnectWallet
 }: FooterProps) {
 
     return (
@@ -105,7 +108,7 @@ export default function Footer({
 
                     {/* Connect Wallet Button */}
                     <div className="w-[180px] md:w-[220px]">
-                        <ButtonConnectWalletComponent />
+                        <ButtonConnectWalletComponent onConnectWalletClick={handleConnectWallet} />
                     </div>
 
                     <p className="text-white/40 text-[0.7rem] leading-relaxed max-w-sm">
