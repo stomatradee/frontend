@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { Button } from "@/core/component/shadcn-ui/button";
 
 interface NavItem {
     label: string;
@@ -43,25 +44,27 @@ export default function Navbar({
                 </div>
 
                 {/* Navigation Links */}
-                <div className="hidden md:flex flex-row gap-8">
+                <div className="hidden md:flex flex-row gap-2">
                     {navItems.map((item) => (
-                        <button
+                        <Button
                             key={item.href}
                             onClick={() => handleNavItemClick(item.href)}
-                            className="text-white/70 text-sm font-medium hover:text-primary hover:bg-transparent transition-colors duration-300"
+                            variant="ghost"
+                            className="text-white/70 font-medium hover:text-primary hover:bg-transparent"
                         >
                             {item.label}
-                        </button>
+                        </Button>
                     ))}
                 </div>
 
                 {/* CTA Button */}
-                <button
+                <Button
                     onClick={handleConnectWallet}
-                    className="rounded-full border border-primary text-primary font-semibold text-sm px-6 py-2 hover:bg-primary hover:text-background transition-all duration-300"
+                    variant="outline"
+                    className="rounded-full border-primary text-primary font-semibold px-6 hover:bg-primary hover:text-background"
                 >
                     {ctaLabel}
-                </button>
+                </Button>
             </div>
         </header>
     );

@@ -2,6 +2,8 @@
 
 import Image from "next/image";
 import { Icon } from "@iconify/react";
+import { Button } from "@/core/component/shadcn-ui/button";
+import { Badge } from "@/core/component/shadcn-ui/badge";
 
 interface HeroBannerProps {
     badgeText: string;
@@ -59,9 +61,9 @@ export default function HeroBanner({
             <div className="relative z-10 text-center px-6 pt-48 pb-32 max-w-4xl mx-auto flex flex-col items-center gap-6">
                 {/* Announcement Badge */}
                 <div className="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm px-2.5 py-1">
-                    <span className="bg-primary text-[#0A0A0A] font-bold text-[10px] tracking-wider px-2 py-0.5 rounded-full">
+                    <Badge variant="default" className="text-[10px] tracking-wider px-2 py-0.5">
                         NOW
-                    </span>
+                    </Badge>
                     <span className="text-white/80 font-medium text-sm">
                         {badgeText}
                     </span>
@@ -79,19 +81,23 @@ export default function HeroBanner({
 
                 {/* CTA Buttons */}
                 <div className="flex flex-row gap-4 mt-2">
-                    <button
+                    <Button
                         onClick={handleConnectWallet}
-                        className="flex items-center gap-2 rounded-full border border-primary bg-[rgba(44,255,158,0.1)] text-primary font-semibold text-sm px-6 py-3 hover:bg-primary hover:text-[#0A0A0A] transition-all duration-300"
+                        variant="default"
+                        size="lg"
+                        className="bg-[rgba(44,255,158,0.1)] text-primary border border-primary hover:bg-primary hover:text-[#0A0A0A] font-semibold px-6 flex gap-2 rounded-full"
                     >
                         {primaryButtonLabel}
                         <Icon icon="mdi:arrow-top-right" className="text-base" />
-                    </button>
-                    <button
+                    </Button>
+                    <Button
                         onClick={handleLearnMore}
-                        className="rounded-full border border-white/20 bg-white/5 text-white font-semibold text-sm px-6 py-3 hover:bg-white/10 hover:border-white/30 transition-all duration-300"
+                        variant="outline"
+                        size="lg"
+                        className="rounded-full bg-white/5 border-white/20 text-white font-semibold px-6 hover:bg-white/10 hover:border-white/30"
                     >
                         {secondaryButtonLabel}
-                    </button>
+                    </Button>
                 </div>
             </div>
         </section>

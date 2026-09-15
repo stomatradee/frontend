@@ -1,4 +1,6 @@
 import Image from "next/image";
+import { Card, CardContent } from "@/core/component/shadcn-ui/card";
+import { Badge } from "@/core/component/shadcn-ui/badge";
 
 interface BentoCardProps {
     title: string;
@@ -26,9 +28,9 @@ export default function BentoCard({
         "min-h-[260px]";
 
     return (
-        <div
+        <Card
             onClick={onClick}
-            className={`relative flex flex-col justify-end overflow-hidden rounded-2xl border border-white/10 bg-background-secondary p-6 ${minHeightClass} transition-all duration-300 ${isClickable ? 'cursor-pointer hover:border-white/15 hover:-translate-y-0.5' : 'cursor-default'}`}
+            className={`relative flex flex-col justify-end overflow-hidden ${minHeightClass} transition-all duration-300 border-border/50 bg-card ${isClickable ? 'cursor-pointer hover:border-border hover:-translate-y-0.5' : 'cursor-default'}`}
         >
             {/* Background Image */}
             {imageSrc && (
@@ -42,12 +44,12 @@ export default function BentoCard({
             )}
 
             {/* Content */}
-            <div className="relative z-[2] flex flex-col gap-2 mt-auto">
+            <CardContent className="relative z-[2] flex flex-col gap-2 mt-auto p-6">
                 {/* Badge */}
                 {badgeText && (
-                    <span className="w-fit bg-primary text-[#0A0A0A] font-bold text-[10px] tracking-wider mb-2 px-3 py-1 rounded-full">
+                    <Badge variant="default" className="w-fit mb-2 text-[10px] tracking-wider px-3 py-0.5">
                         {badgeText}
-                    </span>
+                    </Badge>
                 )}
 
                 {/* Highlight value */}
@@ -58,18 +60,18 @@ export default function BentoCard({
                 )}
 
                 {/* Title */}
-                <h6 className="text-[1rem] sm:text-[1.125rem] font-bold text-white leading-tight">
+                <h6 className="text-[1rem] sm:text-[1.125rem] font-bold text-foreground leading-tight">
                     {title}
                 </h6>
 
                 {/* Description */}
                 {description && (
-                    <p className="text-white/50 text-[0.75rem] leading-relaxed font-light">
+                    <p className="text-muted-foreground text-[0.75rem] leading-relaxed font-light">
                         {description}
                     </p>
                 )}
-            </div>
-        </div>
+            </CardContent>
+        </Card>
     );
 }
 

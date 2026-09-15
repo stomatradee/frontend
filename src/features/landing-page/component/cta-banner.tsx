@@ -2,6 +2,8 @@
 
 import Image from "next/image";
 import { Icon } from "@iconify/react";
+import { Button } from "@/core/component/shadcn-ui/button";
+import { Badge } from "@/core/component/shadcn-ui/badge";
 
 interface CtaBannerProps {
     badgeText?: string;
@@ -27,7 +29,7 @@ export default function CtaBanner({
     handleWhatIsStomatrade,
 }: CtaBannerProps) {
     return (
-        <div className="relative w-full overflow-hidden flex items-center justify-center py-24 lg:py-48 px-6 lg:px-32">
+        <div className="relative w-full overflow-hidden flex items-center justify-center aspect-[4/3] md:aspect-[21/9] min-h-[400px] p-6 lg:px-32">
             {/* Background Image - Mobile */}
             {mobileBackgroundImage && (
                 <div className="block md:hidden absolute inset-0 z-0">
@@ -58,19 +60,19 @@ export default function CtaBanner({
             <div className="relative z-[2] flex flex-col items-center gap-6 text-center max-w-3xl mx-auto">
                 {/* Badge */}
                 {badgeText && (
-                    <span className="border border-primary text-primary font-semibold text-xs px-4 py-1.5 rounded-full">
+                    <Badge variant="outline" className="border-primary text-primary font-semibold text-xs px-4 py-1">
                         {badgeText}
-                    </span>
+                    </Badge>
                 )}
 
                 {/* Heading */}
-                <h2 className="text-[1.75rem] sm:text-[2.25rem] lg:text-[3rem] font-bold leading-[1.15] text-white">
+                <h2 className="text-[1.75rem] sm:text-[2.25rem] lg:text-[3rem] font-bold leading-[1.15] text-foreground">
                     {heading}
                 </h2>
 
                 {/* Description */}
                 {description && (
-                    <p className="text-[0.875rem] sm:text-[1rem] text-white/60 font-light leading-relaxed max-w-2xl">
+                    <p className="text-[0.875rem] sm:text-[1rem] text-muted-foreground font-light leading-relaxed max-w-2xl">
                         {description}
                     </p>
                 )}
@@ -79,22 +81,26 @@ export default function CtaBanner({
                 {(primaryButtonLabel || secondaryButtonLabel) && (
                     <div className="flex flex-col sm:flex-row gap-4 pt-2">
                         {primaryButtonLabel && (
-                            <button
+                            <Button
                                 onClick={handleConnectWallet}
-                                className="bg-primary text-[#0A0A0A] font-bold text-sm px-8 py-3 rounded-lg hover:bg-[#4CFDB3] transition-colors"
+                                variant="default"
+                                size="lg"
+                                className="font-bold px-8"
                             >
                                 {primaryButtonLabel}
-                            </button>
+                            </Button>
                         )}
 
                         {secondaryButtonLabel && (
-                            <button
+                            <Button
                                 onClick={handleWhatIsStomatrade}
-                                className="flex items-center justify-center gap-2 border border-white/30 text-white font-semibold text-sm px-8 py-3 rounded-lg hover:border-white/60 hover:bg-white/5 transition-colors"
+                                variant="outline"
+                                size="lg"
+                                className="font-semibold px-8 flex gap-2"
                             >
                                 {secondaryButtonLabel}
                                 <Icon icon="mdi:arrow-top-right" className="text-base" />
-                            </button>
+                            </Button>
                         )}
                     </div>
                 )}

@@ -13,7 +13,7 @@ export default function SplashPageView() {
       <div className="flex flex-col justify-center items-center">
         <Image src={iconImg} alt="Stomatrade" width={300} height={300} />
         <div className="h-5" />
-        <div className="py-5">
+        <div className="py-5 w-full max-w-sm">
           <LoadingScreen primaryBgActive={true} />
         </div>
       </div>

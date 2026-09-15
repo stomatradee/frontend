@@ -2,6 +2,8 @@
 
 import Image from "next/image";
 import { Icon } from "@iconify/react";
+import { Card, CardContent } from "@/core/component/shadcn-ui/card";
+import { Button } from "@/core/component/shadcn-ui/button";
 
 interface StatCardProps {
     title: string;
@@ -24,7 +26,7 @@ export default function StatCard({
 }: StatCardProps) {
     if (variant === "featured") {
         return (
-            <div className="relative flex flex-col justify-between overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-[#0069234D] to-[#0A0A0A] p-6 min-h-[180px]">
+            <Card className="relative flex flex-col justify-between overflow-hidden border-border/50 bg-gradient-to-br from-[#0069234D] to-[#0A0A0A] min-h-[180px]">
                 {/* Background Image */}
                 {ctaImage && (
                     <Image
@@ -36,39 +38,41 @@ export default function StatCard({
                     />
                 )}
 
-                <div className="relative z-10 flex flex-col gap-3.5">
+                <CardContent className="relative z-10 flex flex-col gap-3.5 p-6 h-full justify-end">
                     <h6 className="text-[1.125rem] sm:text-[1.25rem] font-bold text-primary leading-tight">
                         {title}
                     </h6>
 
                     {ctaLabel && (
-                        <button
+                        <Button
                             onClick={handleSustainabilityClick}
-                            className="w-fit flex items-center gap-1 rounded-full border border-white/20 bg-white/5 text-white font-medium text-xs px-4 py-1 hover:bg-white/10 hover:border-white/30 transition-all duration-300"
+                            variant="outline"
+                            size="sm"
+                            className="w-fit flex items-center gap-1 rounded-full border-white/20 bg-white/5 text-white font-medium hover:bg-white/10 hover:border-white/30"
                         >
                             {ctaLabel}
                             <Icon icon="mdi:arrow-top-right" className="text-[12px]" />
-                        </button>
+                        </Button>
                     )}
-                </div>
-            </div>
+                </CardContent>
+            </Card>
         );
     }
 
     return (
-        <div className="flex flex-col justify-center gap-2.5 rounded-2xl border border-white/10 bg-background-secondary p-6 min-h-[180px]">
-            <span className="text-white/40 text-xs tracking-widest font-medium uppercase">
+        <Card className="flex flex-col justify-center gap-2.5 border-border/50 bg-card p-6 min-h-[180px]">
+            <span className="text-muted-foreground text-xs tracking-widest font-medium uppercase">
                 {title}
             </span>
             <div className="flex items-baseline gap-2">
                 <h3 className="text-[1.875rem] sm:text-[2.25rem] font-bold text-primary">
                     {value}
                 </h3>
-                <span className="text-white/60 font-light text-sm">
+                <span className="text-muted-foreground font-light text-sm">
                     {description}
                 </span>
             </div>
-        </div>
+        </Card>
     );
 }
 

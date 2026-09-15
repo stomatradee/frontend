@@ -1,6 +1,8 @@
 "use client";
 
 import Image from "next/image";
+import { Input } from "@/core/component/shadcn-ui/input";
+import { Button } from "@/core/component/shadcn-ui/button";
 
 // --- Type definitions ---
 interface FooterLinkColumn {
@@ -118,19 +120,20 @@ export default function Footer({
                         onSubmit={handleSubmit}
                         className="flex flex-row gap-2 w-full max-w-md"
                     >
-                        <input
+                        <Input
                             name="email"
                             type="email"
                             placeholder="Enter a valid email address"
-                            className="w-full bg-white/10 rounded-lg text-white text-sm px-4 py-2.5 border border-white/20 focus:outline-none focus:border-primary hover:border-white/40 transition-colors placeholder-white/40"
+                            className="w-full bg-white/10 text-white border-white/20 focus-visible:ring-primary hover:border-white/40 transition-colors placeholder:text-white/40"
                             required
                         />
-                        <button
+                        <Button
                             type="submit"
-                            className="bg-primary text-[#0A0A0A] font-bold text-sm px-6 py-2.5 rounded-lg whitespace-nowrap hover:bg-[#4CFDB3] transition-colors"
+                            variant="default"
+                            className="font-bold px-6 whitespace-nowrap"
                         >
                             Sign up
-                        </button>
+                        </Button>
                     </form>
 
                     <p className="text-white/40 text-[0.7rem] leading-relaxed max-w-sm">

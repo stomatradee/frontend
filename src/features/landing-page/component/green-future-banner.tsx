@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Icon } from "@iconify/react";
+import { Button } from "@/core/component/shadcn-ui/button";
 
 interface GreenFutureBannerProps {
     heading: string;
@@ -49,13 +50,15 @@ export default function GreenFutureBanner({
 
                 {/* CTA Button */}
                 {ctaButton && (
-                    <button
+                    <Button
                         onClick={ctaButton.onClick}
-                        className="flex items-center justify-center gap-2 border border-white/30 text-white font-semibold text-sm px-8 py-3 rounded-lg hover:border-white/60 hover:bg-white/5 transition-colors"
+                        variant="outline"
+                        size="lg"
+                        className="font-semibold px-8 flex gap-2"
                     >
                         {ctaButton.label}
                         <Icon icon="mdi:arrow-top-right" className="text-base" />
-                    </button>
+                    </Button>
                 )}
             </div>
         </div>

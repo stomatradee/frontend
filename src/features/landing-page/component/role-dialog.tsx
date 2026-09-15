@@ -1,5 +1,8 @@
 "use client";
 
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/core/component/shadcn-ui/dialog";
+import { Button } from "@/core/component/shadcn-ui/button";
+
 interface RoleDialogProps {
     open: boolean;
     handleCloseRoleDialog: () => void;
@@ -7,45 +10,42 @@ interface RoleDialogProps {
 }
 
 export default function RoleDialog({ open, handleCloseRoleDialog, handleRoleSelected }: RoleDialogProps) {
-    if (!open) return null;
-
     return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
-            <div className="relative w-full max-w-[400px] rounded-2xl border border-background-third bg-background-secondary p-6 shadow-xl">
-                {/* Close Overlay (Optional: click outside to close) */}
-                <div 
-                    className="fixed inset-0 -z-10" 
-                    onClick={handleCloseRoleDialog}
-                />
-
-                <div className="text-center pb-2 font-bold text-lg text-white">
-                    Select Your Role
-                </div>
+        <Dialog open={open} onOpenChange={(isOpen) => !isOpen && handleCloseRoleDialog()}>
+            <DialogContent className="sm:max-w-[400px] bg-card border-border/50">
+                <DialogHeader>
+                    <DialogTitle className="text-center font-bold text-lg text-foreground">
+                        Select Your Role
+                    </DialogTitle>
+                    <DialogDescription className="text-center text-sm text-muted-foreground">
+                        Please select your role to connect wallet
+                    </DialogDescription>
+                </DialogHeader>
                 
-                <div className="text-[#a3a3a3] text-center mb-4 text-sm">
-                    Please select your role to connect wallet
-                </div>
-                
-                <div className="flex flex-col gap-3">
-                    <button 
+                <div className="flex flex-col gap-3 mt-4">
+                    <Button 
                         onClick={() => handleRoleSelected("collector")}
-                        className="w-full rounded-xl border border-background-third bg-background py-3 hover:border-primary hover:bg-[rgba(44,255,158,0.05)] transition-colors"
+                        variant="outline"
+                        size="lg"
+                        className="w-full justify-center bg-background border-border/50 hover:border-primary hover:bg-[rgba(44,255,158,0.05)] transition-colors"
                     >
-                        <span className="font-medium text-white text-center">
+                        <span className="font-medium text-foreground">
                             Collector
                         </span>
-                    </button>
+                    </Button>
                     
-                    <button 
+                    <Button 
                         onClick={() => handleRoleSelected("investor")}
-                        className="w-full rounded-xl border border-background-third bg-background py-3 hover:border-primary hover:bg-[rgba(44,255,158,0.05)] transition-colors"
+                        variant="outline"
+                        size="lg"
+                        className="w-full justify-center bg-background border-border/50 hover:border-primary hover:bg-[rgba(44,255,158,0.05)] transition-colors"
                     >
-                        <span className="font-medium text-white text-center">
+                        <span className="font-medium text-foreground">
                             Investor
                         </span>
-                    </button>
+                    </Button>
                 </div>
-            </div>
-        </div>
+            </DialogContent>
+        </Dialog>
     );
 }

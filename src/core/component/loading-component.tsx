@@ -1,7 +1,8 @@
 "use client";
 
-import { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import { createPortal } from "react-dom";
+import { Progress, ProgressTrack, ProgressIndicator } from "@/core/component/shadcn-ui/progress";
 
 export type LoadingScreenProps = React.ComponentProps<"div"> & {
   portal?: boolean;
@@ -25,13 +26,11 @@ export function LoadingScreen({
       className={`flex-grow w-full flex min-h-full items-center justify-center px-10 ${className}`}
       {...other}
     >
-      <div 
-        className={`w-full max-w-[360px] h-1.5 overflow-hidden rounded-full ${
-          primaryBgActive ? 'bg-background' : 'bg-background-secondary'
-        }`}
-      >
-        <div className="h-full bg-primary rounded-full animate-[progress_2s_ease-in-out_infinite] w-1/2 origin-left" />
-      </div>
+      <Progress value={null} className="w-full max-w-[360px] flex-nowrap">
+        <ProgressTrack className={`h-1.5 ${primaryBgActive ? 'bg-background' : 'bg-background-secondary'}`}>
+          <ProgressIndicator className="w-1/2 origin-left animate-progress" />
+        </ProgressTrack>
+      </Progress>
     </div>
   );
 

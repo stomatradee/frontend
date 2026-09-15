@@ -27,13 +27,13 @@ export default function SectionHeader({
             )}
 
             {/* Main Heading */}
-            <h2 className="text-[1.875rem] sm:text-[2.5rem] lg:text-[3rem] font-bold leading-[1.15] text-white max-w-3xl">
+            <h2 className="text-[1.875rem] sm:text-[2.5rem] lg:text-[3rem] font-bold leading-[1.15] text-foreground max-w-3xl">
                 {heading}
             </h2>
 
             {/* Subheading */}
             {subheading && (
-                <p className="text-[0.875rem] sm:text-[1rem] text-white/50 font-light italic">
+                <p className="text-[0.875rem] sm:text-[1rem] text-muted-foreground font-light italic">
                     {subheading}
                 </p>
             )}
