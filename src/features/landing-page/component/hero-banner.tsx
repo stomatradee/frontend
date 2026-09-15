@@ -4,6 +4,7 @@ import Image from "next/image";
 import { Icon } from "@iconify/react";
 import { Button } from "@/core/component/shadcn-ui/button";
 import { Badge } from "@/core/component/shadcn-ui/badge";
+import ButtonConnectWalletComponent from "@/core/component/button-connect-wallet-component";
 
 interface HeroBannerProps {
     badgeText: string;
@@ -80,24 +81,8 @@ export default function HeroBanner({
                 </p>
 
                 {/* CTA Buttons */}
-                <div className="flex flex-row gap-4 mt-2">
-                    <Button
-                        onClick={handleConnectWallet}
-                        variant="default"
-                        size="lg"
-                        className="bg-[rgba(44,255,158,0.1)] text-primary border border-primary hover:bg-primary hover:text-[#0A0A0A] font-semibold px-6 flex gap-2 rounded-full"
-                    >
-                        {primaryButtonLabel}
-                        <Icon icon="mdi:arrow-top-right" className="text-base" />
-                    </Button>
-                    <Button
-                        onClick={handleLearnMore}
-                        variant="outline"
-                        size="lg"
-                        className="rounded-full bg-white/5 border-white/20 text-white font-semibold px-6 hover:bg-white/10 hover:border-white/30"
-                    >
-                        {secondaryButtonLabel}
-                    </Button>
+                <div className="w-[180px] md:w-[220px]">
+                    <ButtonConnectWalletComponent />
                 </div>
             </div>
         </section>

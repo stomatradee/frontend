@@ -145,7 +145,6 @@ export default function LandingPageView() {
           contactItems={footerData.contactItems}
           copyrightText={footerData.copyrightText}
           legalLinks={footerData.legalLinks}
-          handleSignUp={handleSignUp}
         />
       </section>
 

@@ -1,8 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { Input } from "@/core/component/shadcn-ui/input";
 import { Button } from "@/core/component/shadcn-ui/button";
+import ButtonConnectWalletComponent from "@/core/component/button-connect-wallet-component";
 
 // --- Type definitions ---
 interface FooterLinkColumn {
@@ -40,7 +40,6 @@ interface FooterProps {
     // Bottom bar
     copyrightText: string;
     legalLinks: { label: string; href: string }[];
-    handleSignUp: (email: string) => void;
 }
 
 // --- Social icon SVGs ---
@@ -83,18 +82,7 @@ export default function Footer({
     contactItems,
     copyrightText,
     legalLinks,
-    handleSignUp,
 }: FooterProps) {
-
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        const form = e.currentTarget;
-        const emailInput = form.elements.namedItem("email") as HTMLInputElement;
-        if (emailInput?.value) {
-            handleSignUp(emailInput.value);
-            emailInput.value = "";
-        }
-    };
 
     return (
         <footer className="w-full">
@@ -115,26 +103,10 @@ export default function Footer({
                         {newsletterHeading}
                     </h4>
 
-                    {/* Email Form */}
-                    <form
-                        onSubmit={handleSubmit}
-                        className="flex flex-row gap-2 w-full max-w-md"
-                    >
-                        <Input
-                            name="email"
-                            type="email"
-                            placeholder="Enter a valid email address"
-                            className="w-full bg-white/10 text-white border-white/20 focus-visible:ring-primary hover:border-white/40 transition-colors placeholder:text-white/40"
-                            required
-                        />
-                        <Button
-                            type="submit"
-                            variant="default"
-                            className="font-bold px-6 whitespace-nowrap"
-                        >
-                            Sign up
-                        </Button>
-                    </form>
+                    {/* Connect Wallet Button */}
+                    <div className="w-[180px] md:w-[220px]">
+                        <ButtonConnectWalletComponent />
+                    </div>
 
                     <p className="text-white/40 text-[0.7rem] leading-relaxed max-w-sm">
                         {newsletterPrivacyText}

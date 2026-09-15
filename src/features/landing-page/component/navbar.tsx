@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { Button } from "@/core/component/shadcn-ui/button";
+import ButtonConnectWalletComponent from "@/core/component/button-connect-wallet-component";
 
 interface NavItem {
     label: string;
@@ -58,13 +59,9 @@ export default function Navbar({
                 </div>
 
                 {/* CTA Button */}
-                <Button
-                    onClick={handleConnectWallet}
-                    variant="outline"
-                    className="rounded-full border-primary text-primary font-semibold px-6 hover:bg-primary hover:text-background"
-                >
-                    {ctaLabel}
-                </Button>
+                <div className="w-[150px] md:w-[180px]">
+                    <ButtonConnectWalletComponent />
+                </div>
             </div>
         </header>
     );
