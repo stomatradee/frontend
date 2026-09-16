@@ -40,7 +40,7 @@ export function useLandingPage() {
         } else {
             replaceRoute(routes.investor.registerProfile);
         }
-    }, [replaceRoute]);
+    }, [replaceRoute, setIsSplashScreen]);
 
     const handleCloseRoleDialog = useCallback(() => {
         setOpen(false);
