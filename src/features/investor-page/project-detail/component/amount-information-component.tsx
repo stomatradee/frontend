@@ -2,6 +2,10 @@ import { LoadingScreen } from "@/core/component/loading-component";
 import { getUSDCSymbol, getUSDTSymbol } from "@/repository/token/token-repository";
 import { useCallback, useEffect, useState } from "react";
 import { toast } from "sonner";
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/core/component/shadcn-ui/card";
+import { Label } from "@/core/component/shadcn-ui/label";
+import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/core/component/shadcn-ui/select";
+import { Input } from "@/core/component/shadcn-ui/input";
 
 type AmountInformationComponentProps = {
     amountValue?: string;
@@ -67,69 +71,63 @@ export default function AmountInformationComponent({
     }, []);
 
     return (
-        <div className="bg-background-secondary border border-background-third rounded-[30px] w-full max-w-[1000px] px-5 py-[25px] sm:p-[35px] transition-all duration-300 hover:border-primary">
-            <h2 className="text-white font-semibold text-[16px] sm:text-[18px] md:text-[25px]">
-                Financial Information
-            </h2>
-            <div className="h-[10px]" />
-            <p className="text-background-third font-semibold text-[16px] sm:text-[18px] md:text-[15px]">
-                Input information about the financial aspect for start investment
-            </p>
-            <div className="h-[30px]" />
+        <Card className="bg-background-secondary border-background-third w-full max-w-[1000px] transition-all duration-300 hover:border-primary mx-auto sm:mx-0 rounded-[30px] border">
+            <CardHeader className="px-5 pt-[25px] sm:px-[35px] sm:pt-[35px]">
+                <CardTitle className="text-white font-semibold text-[16px] sm:text-[18px] md:text-[25px]">
+                    Financial Information
+                </CardTitle>
+                <CardDescription className="text-background-third font-semibold text-[16px] sm:text-[18px] md:text-[15px] pt-[10px]">
+                    Input information about the financial aspect for start investment
+                </CardDescription>
+            </CardHeader>
 
-            {isLoading === true ? (
-                <div className="py-[20px]">
-                    <LoadingScreen primaryBgActive={true} />
-                </div>
-            ) : (
-                <>
-                    <div className="flex flex-col flex-1">
-                        <label 
-                            htmlFor="token-code"
-                            className="text-white font-semibold text-[16px] sm:text-[18px] md:text-[15px] mb-5 block"
-                        >
-                            Choose Token
-                        </label>
-                        <div className="relative">
-                            <select
-                                id="token-code"
-                                defaultValue="USDT"
-                                onChange={(e) => {
-                                    setTokenCode(e.target.value);
-                                    onTokenCodeChange?.(e.target.value);
-                                }}
-                                className="w-full bg-background border border-background-third rounded-[25px] px-4 py-3.5 text-white appearance-none focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors cursor-pointer"
-                            >
-                                {tokenCodeList.map((data) => (
-                                    <option key={data.value} value={data.value} className="bg-background-secondary text-white">
-                                        {data.label}
-                                    </option>
-                                ))}
-                            </select>
-                            <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-white">
-                                <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                    <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
-                                </svg>
-                            </div>
-                        </div>
+            <CardContent className="px-5 pb-[25px] sm:px-[35px] sm:pb-[35px]">
+                {isLoading === true ? (
+                    <div className="py-[20px]">
+                        <LoadingScreen primaryBgActive={true} />
                     </div>
+                ) : (
+                    <div className="flex flex-col gap-[30px]">
+                        <div className="flex flex-col gap-3">
+                            <Label 
+                                htmlFor="token-code"
+                                className="text-white font-semibold text-[16px] sm:text-[18px] md:text-[15px]"
+                            >
+                                Choose Token
+                            </Label>
+                            <Select
+                                value={tokenCode}
+                                onValueChange={(value) => {
+                                    setTokenCode(value || "");
+                                    onTokenCodeChange?.(value || "");
+                                }}
+                            >
+                                <SelectTrigger id="token-code" className="w-full bg-background border-background-third rounded-[25px] px-4 h-12 text-white focus:ring-1 focus:ring-primary focus:border-primary outline-none">
+                                    <SelectValue placeholder="Select Token" />
+                                </SelectTrigger>
+                                <SelectContent className="bg-background-secondary border-background-third text-white">
+                                    {tokenCodeList.map((data) => (
+                                        <SelectItem key={data.value} value={data.value} className="focus:bg-primary/20 focus:text-primary">
+                                            {data.label}
+                                        </SelectItem>
+                                    ))}
+                                </SelectContent>
+                            </Select>
+                        </div>
 
-                    <div className="h-[50px]" />
-
-                    <div className="flex flex-row items-start mx-auto gap-3 w-full">
-                        <div className="flex flex-col flex-1">
-                            <label 
+                        <div className="flex flex-col gap-3">
+                            <Label 
                                 htmlFor="amount-value"
-                                className="text-white font-semibold text-[16px] sm:text-[18px] md:text-[15px] mb-5 block"
+                                className="text-white font-semibold text-[16px] sm:text-[18px] md:text-[15px]"
                             >
                                 Amount
-                            </label>
+                            </Label>
                             
                             <div className="relative flex items-center">
-                                <div className="absolute left-4 text-white font-medium">
+                                <div className="absolute left-4 text-white font-medium z-10 pointer-events-none">
                                     {tokenCode}
                                 </div>
-                                <input
+                                <Input
                                     id="amount-value"
                                     type="number"
                                     placeholder="Input Amount"
@@ -138,13 +136,13 @@ export default function AmountInformationComponent({
                                         const newValue = e.target.value;
                                         onAmountValueChange?.(newValue);
                                     }}
-                                    className="w-full bg-background border border-background-third rounded-[25px] py-3.5 pl-16 pr-4 text-white placeholder:text-background-third focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors"
+                                    className="w-full bg-background border-background-third rounded-[25px] h-12 pl-[60px] pr-4 text-white placeholder:text-background-third focus-visible:ring-1 focus-visible:ring-primary focus-visible:border-primary focus-visible:ring-offset-0"
                                 />
                             </div>
                         </div>
                     </div>
-                </>
-            )}
-        </div>
+                )}
+            </CardContent>
+        </Card>
     );
 }

@@ -8,6 +8,16 @@ import { Icon } from "@iconify/react";
 import SubmitButtonComponent from "@/core/component/submit-button-component";
 import EmptyAssetComponent from "@/core/component/empty-asset-component";
 import AmountInformationComponent from "./component/amount-information-component";
+import { Card, CardContent } from "@/core/component/shadcn-ui/card";
+import { Badge } from "@/core/component/shadcn-ui/badge";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/core/component/shadcn-ui/table";
 
 export default function ProjectInvestView() {
     const { data, isLoading, isPayLoading, amountValue, methods, address, handleAmountValueChange, handleTokenCodeChange, onInvest } = UseProjectInvest();
@@ -37,7 +47,7 @@ export default function ProjectInvestView() {
         navigator.clipboard.writeText(address);
     };
 
-    const cardClass = "bg-background-secondary border border-background-third rounded-[30px] transition-all duration-300 hover:border-primary hover:shadow-[0_8px_24px_rgba(44,255,158,0.15)]";
+    const cardClass = "bg-background-secondary border-background-third rounded-[30px] transition-all duration-300 hover:border-primary hover:shadow-[0_8px_24px_rgba(44,255,158,0.15)]";
 
     return (
         <>
@@ -84,38 +94,40 @@ export default function ProjectInvestView() {
                 </div>
 
                 {/* Image Card */}
-                <div className={`${cardClass} overflow-hidden`}>
+                <Card className={`${cardClass} overflow-hidden border-none`}>
                     <div 
-                        className="h-[250px] sm:h-[350px] md:h-[400px] bg-background-third bg-cover bg-center"
+                        className="h-[250px] sm:h-[350px] md:h-[400px] bg-background-third bg-cover bg-center w-full"
                         style={{ backgroundImage: `url(${project.metadata?.imageCID ? `https://gateway.pinata.cloud/ipfs/${project.metadata.imageCID}` : "https://placehold.co/800x400?text=No+Image"})` }}
                         title={project.metadata?.assetName ?? "Project Image"}
                     />
-                </div>
+                </Card>
 
                 {/* Asset Title Card */}
-                <div className={`${cardClass} py-4 px-5 sm:py-5 sm:px-7`}>
-                    <div className="flex items-center justify-between flex-wrap gap-3">
-                        <h2 className="text-white font-bold text-[18px] sm:text-[22px] md:text-[26px]">
-                            {project.metadata?.assetName ?? project.commodityType}
-                        </h2>
-                        <span className="bg-primary/20 text-primary font-bold text-[11px] tracking-[0.5px] px-[8px] py-[4px] rounded-full uppercase">
-                            {project.statusLabel}
-                        </span>
-                    </div>
-                </div>
+                <Card className={cardClass}>
+                    <CardContent className="py-4 px-5 sm:py-5 sm:px-7">
+                        <div className="flex items-center justify-between flex-wrap gap-3">
+                            <h2 className="text-white font-bold text-[18px] sm:text-[22px] md:text-[26px]">
+                                {project.metadata?.assetName ?? project.commodityType}
+                            </h2>
+                            <Badge variant="outline" className="bg-primary/20 text-primary font-bold text-[11px] tracking-[0.5px] px-[8px] py-[4px] rounded-full uppercase border-none">
+                                {project.statusLabel}
+                            </Badge>
+                        </div>
+                    </CardContent>
+                </Card>
 
                 {/* Project Details + Funding Progress Row */}
                 <div className="grid grid-cols-1 md:grid-cols-[1.5fr_1fr] gap-[20px]">
                     {/* Project Details Card */}
-                    <div className={cardClass}>
-                        <div className="p-6">
+                    <Card className={cardClass}>
+                        <CardContent className="p-6">
                             <div className="flex justify-between items-center mb-5">
                                 <h3 className="text-white font-bold text-[18px]">
                                     Project Details
                                 </h3>
-                                <span className={`font-semibold text-[11px] px-[8px] py-[4px] rounded-full ${project.collateralVerified ? 'bg-primary/20 text-primary' : 'bg-background-third text-white'}`}>
+                                <Badge variant="outline" className={`font-semibold text-[11px] px-[8px] py-[4px] rounded-full border-none ${project.collateralVerified ? 'bg-primary/20 text-primary' : 'bg-background-third text-white'}`}>
                                     {project.collateralVerified ? "Verified" : "Unverified"}
-                                </span>
+                                </Badge>
                             </div>
 
                             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
@@ -137,12 +149,12 @@ export default function ProjectInvestView() {
                                     value={`$${project.maxFundingUSD.toFixed(2)}`}
                                 />
                             </div>
-                        </div>
-                    </div>
+                        </CardContent>
+                    </Card>
 
                     {/* Funding Progress Card */}
-                    <div className={cardClass}>
-                        <div className="p-6">
+                    <Card className={cardClass}>
+                        <CardContent className="p-6">
                             <h3 className="text-white font-bold text-[18px] mb-5">
                                 Funding Progress
                             </h3>
@@ -175,13 +187,13 @@ export default function ProjectInvestView() {
                                     </span>
                                 </div>
                             </div>
-                        </div>
-                    </div>
+                        </CardContent>
+                    </Card>
                 </div>
 
                 {/* Collector Information Card */}
-                <div className={cardClass}>
-                    <div className="p-6">
+                <Card className={cardClass}>
+                    <CardContent className="p-6">
                         <h3 className="text-white font-bold text-[18px] mb-5">
                             Collector Information
                         </h3>
@@ -235,63 +247,63 @@ export default function ProjectInvestView() {
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
+                    </CardContent>
+                </Card>
 
                 {/* Recent Investments Card */}
-                <div className={cardClass}>
-                    <div className="p-6">
+                <Card className={cardClass}>
+                    <CardContent className="p-6">
                         <h3 className="text-white font-bold text-[18px] mb-5">
                             Recent Investments
                         </h3>
 
                         <div className="overflow-x-auto">
-                            <table className="w-full text-left border-collapse">
-                                <thead>
-                                    <tr>
+                            <Table>
+                                <TableHeader>
+                                    <TableRow className="border-b border-background-third hover:bg-transparent">
                                         {["Investor", "Amount ($)", "Share (%)"].map((header) => (
-                                            <th
+                                            <TableHead
                                                 key={header}
-                                                className="text-white bg-background border-b border-background-third text-[12px] font-semibold py-3 px-4"
+                                                className="text-white font-semibold"
                                             >
                                                 {header}
-                                            </th>
+                                            </TableHead>
                                         ))}
-                                    </tr>
-                                </thead>
-                                <tbody>
+                                    </TableRow>
+                                </TableHeader>
+                                <TableBody>
                                     {investments.length === 0 ? (
-                                        <tr>
-                                            <td
+                                        <TableRow className="border-b border-background-third hover:bg-transparent">
+                                            <TableCell
                                                 colSpan={3}
-                                                className="text-background-third border-b border-background-third text-center py-6 text-[14px]"
+                                                className="text-background-third text-center py-6 text-[14px]"
                                             >
                                                 No recent investments yet
-                                            </td>
-                                        </tr>
+                                            </TableCell>
+                                        </TableRow>
                                     ) : (
                                         investments.map((inv, index) => (
-                                            <tr
+                                            <TableRow
                                                 key={index}
-                                                className="transition-all duration-200 hover:bg-background-third/20 border-b border-background-third last:border-0"
+                                                className="border-b border-background-third hover:bg-background-third/20 transition-all duration-200"
                                             >
-                                                <td className="text-primary text-[13px] font-mono py-3 px-4">
+                                                <TableCell className="text-primary text-[13px] font-mono">
                                                     {truncateAddress(inv.investor)}
-                                                </td>
-                                                <td className="text-white text-[13px] py-3 px-4">
+                                                </TableCell>
+                                                <TableCell className="text-white text-[13px]">
                                                     ${inv.amountUSD.toLocaleString()}
-                                                </td>
-                                                <td className="text-secondary font-semibold text-[13px] py-3 px-4">
+                                                </TableCell>
+                                                <TableCell className="text-secondary font-semibold text-[13px]">
                                                     {inv.sharePercent}%
-                                                </td>
-                                            </tr>
+                                                </TableCell>
+                                            </TableRow>
                                         ))
                                     )}
-                                </tbody>
-                            </table>
+                                </TableBody>
+                            </Table>
                         </div>
-                    </div>
-                </div>
+                    </CardContent>
+                </Card>
 
                 <AmountInformationComponent
                     amountValue={amountValue}
@@ -320,18 +332,20 @@ type InfoPillProps = {
 
 function InfoPill({ label, value, icon }: InfoPillProps) {
     return (
-        <div className="bg-background border border-background-third rounded-[12px] p-3 transition-all duration-300 hover:border-primary">
-            <p className="text-[10px] text-background-third mb-1.5">
-                {label}
-            </p>
-            <div className="flex items-center gap-1.5">
-                {icon && (
-                    <Icon icon={icon} width={16} className="text-primary" />
-                )}
-                <span className="text-[14px] font-bold text-white">
-                    {value}
-                </span>
-            </div>
-        </div>
+        <Card className="bg-background border-background-third rounded-[12px] transition-all duration-300 hover:border-primary">
+            <CardContent className="p-3">
+                <p className="text-[10px] text-background-third mb-1.5">
+                    {label}
+                </p>
+                <div className="flex items-center gap-1.5">
+                    {icon && (
+                        <Icon icon={icon} width={16} className="text-primary" />
+                    )}
+                    <span className="text-[14px] font-bold text-white">
+                        {value}
+                    </span>
+                </div>
+            </CardContent>
+        </Card>
     );
 }

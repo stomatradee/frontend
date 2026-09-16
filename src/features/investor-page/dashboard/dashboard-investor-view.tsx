@@ -23,7 +23,7 @@ export default function DashboardInvestorView({
         <DashboardNavbar handleDisconnect={handleDisconnectWallet} />
 
         {/* Page Content */}
-        <div className="pt-[82px] px-8 pb-6 text-white">
+        <div className="pt-[82px] px-8 pb-6 text-foreground">
           {children}
         </div>
       </main>

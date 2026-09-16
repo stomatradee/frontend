@@ -19,7 +19,7 @@ export default function ProjectListView() {
 
   return (
     <div className="flex flex-col pt-[100px] px-5 pb-10 md:pt-5 mx-auto">
-      <h1 className="text-white font-semibold text-[16px] sm:text-[18px] md:text-[25px]">
+      <h1 className="text-foreground font-semibold text-[16px] sm:text-[18px] md:text-[25px]">
         All Asset
       </h1>
 
