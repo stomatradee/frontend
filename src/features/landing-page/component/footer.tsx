@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import { Button } from "@/core/component/shadcn-ui/button";
 import ButtonConnectWalletComponent from "@/core/component/button-connect-wallet-component";
 
 // --- Type definitions ---

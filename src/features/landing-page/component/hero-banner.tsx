@@ -22,10 +22,7 @@ export default function HeroBanner({
     subheading,
     mobileBackgroundImage,
     desktopBackgroundImage,
-    primaryButtonLabel,
-    secondaryButtonLabel,
     handleConnectWallet,
-    handleLearnMore,
 }: HeroBannerProps) {
     return (
         <section className="relative w-full min-h-screen flex flex-col items-center justify-center overflow-hidden">

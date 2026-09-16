@@ -20,7 +20,6 @@ interface NavbarProps {
 export default function Navbar({
     logoSrc,
     navItems,
-    ctaLabel,
     handleConnectWallet,
     handleNavItemClick,
 }: NavbarProps) {

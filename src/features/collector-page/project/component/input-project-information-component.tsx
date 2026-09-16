@@ -22,7 +22,6 @@ type InputProjectInformationComponentProps = {
 export default function InputProjectInformationComponent({
   title,
   description,
-  label,
   quantityValue,
   fundingDurationValue,
   repaymentDurationValue,

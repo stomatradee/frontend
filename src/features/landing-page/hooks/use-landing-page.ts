@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useNavigationUtils } from "@/core/hooks/use-navigation-utils";
 import { routes } from "@/core/config/routes";
 import { ProfileInvestorRequestModel } from "@/repository/investor-profile/profile/model/profile-investor-model";
