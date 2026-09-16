@@ -11,18 +11,17 @@ export default function EmptyAssetComponent({
   image = imageConfig.icon.confusedIcon,
 }: EmptyAssetComponentProps) {
   return (
-    <div className="flex flex-col justify-center items-center pt-[90px]">
+    <div className="flex flex-col justify-center items-center py-20 text-center">
       <Image
         src={image}
-        alt="Profile Icon"
+        alt="Empty Asset Icon"
         width={150}
         height={150}
+        className="opacity-90 mb-8"
       />
-      <div className="h-[30px]" />
-      <p className="text-foreground font-semibold text-[16px] sm:text-[18px] md:text-[15px]">
+      <h3 className="text-foreground font-semibold text-lg md:text-base tracking-tight">
         {title}
-      </p>
-      <div className="h-[30px]" />
+      </h3>
     </div>
   );
 }

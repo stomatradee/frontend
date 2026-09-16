@@ -1,4 +1,7 @@
 import { HTMLInputTypeAttribute } from "react";
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/core/component/shadcn-ui/card";
+import { Input } from "@/core/component/shadcn-ui/input";
+import { Label } from "@/core/component/shadcn-ui/label";
 
 type InputComponentProps = {
   title: string;
@@ -20,33 +23,32 @@ export default function InputComponent({
   onChange,
 }: InputComponentProps) {
   return (
-    <div className="bg-background-secondary rounded-[30px] border border-background-third w-full max-w-[1000px] p-[25px_20px] sm:p-[35px]">
-      <h1 className="text-foreground font-semibold text-[16px] sm:text-[18px] md:text-[25px]">
-        {title ?? "Title"}
-      </h1>
-      <div className="h-2.5" />
-      <p className="text-background-third font-semibold text-[16px] sm:text-[18px] md:text-[15px]">
-        {description ?? "Description"}
-      </p>
-      <div className="h-[30px]" />
+    <Card className="w-full max-w-[1000px] bg-background-secondary border-background-third">
+      <CardHeader className="px-5 pt-6 pb-2 sm:p-8 sm:pb-4">
+        <CardTitle className="text-lg sm:text-xl md:text-2xl text-foreground">
+          {title ?? "Title"}
+        </CardTitle>
+        <CardDescription className="text-base font-medium text-muted-foreground">
+          {description ?? "Description"}
+        </CardDescription>
+      </CardHeader>
       
-      <div className="relative w-full">
-        <label 
-          htmlFor={label} 
-          className="block text-gray-500 mb-2 font-medium"
-        >
-          {label ?? "Input label"}
-        </label>
-        <input
-          id={label}
-          type={inputType ?? "text"}
-          placeholder={placeholder ?? "Input placeholder"}
-          value={value ?? ""}
-          onChange={(e) => onChange(e.target.value)}
-          className="w-full bg-background text-foreground rounded-[25px] border border-background-third px-4 py-3 sm:py-4 focus:outline-none focus:border-primary hover:border-primary transition-colors placeholder-background-third"
-        />
-      </div>
-    </div>
+      <CardContent className="px-5 pb-6 pt-2 sm:px-8 sm:pb-8">
+        <div className="grid w-full items-center gap-3">
+          <Label htmlFor={label} className="text-muted-foreground font-medium text-sm">
+            {label ?? "Input label"}
+          </Label>
+          <Input
+            id={label}
+            type={inputType ?? "text"}
+            placeholder={placeholder ?? "Input placeholder"}
+            value={value ?? ""}
+            onChange={(e) => onChange(e.target.value)}
+            className="h-12 sm:h-14 rounded-xl px-4 bg-background border-background-third text-foreground placeholder:text-muted-foreground focus-visible:ring-primary focus-visible:border-primary transition-colors text-base"
+          />
+        </div>
+      </CardContent>
+    </Card>
   );
 }
 

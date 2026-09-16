@@ -1,5 +1,6 @@
 "use client";
 
+// NOT USE FOR NOW
 import LoginPageComponent from "@/core/component/login-page-component";
 import { useLoginInvestor } from "./hooks/use-login-investor";
 

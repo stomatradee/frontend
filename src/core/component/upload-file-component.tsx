@@ -4,6 +4,7 @@ import UploadFileRepository from "@/repository/upload-file/uplolad-file-reposito
 import { UploadFileRequestModel } from "@/repository/upload-file/model/upload-file-model";
 import { LoadingScreen } from "./loading-component";
 import { toast } from "sonner";
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/core/component/shadcn-ui/card";
 
 type UploadFileComponentProps = {
   title?: string;
@@ -64,69 +65,72 @@ export default function UploadFileComponent({
   };
 
   return (
-    <div className="bg-background-secondary rounded-[30px] border border-background-third w-full max-w-[1000px] px-5 py-[25px] sm:p-[35px]">
-      <h1 className="text-white font-semibold text-[16px] sm:text-[18px] md:text-[25px]">
-        {title ?? "Title"}
-      </h1>
-      <div className="h-[10px]" />
-      <p className="text-background-third font-semibold text-[16px] sm:text-[18px] md:text-[15px]">
-        {description ?? "Description"}
-      </p>
-      <div className="h-[30px]" />
-      <label>
-        <div
-          onDrop={handleDrop}
-          onDragOver={handleDragOver}
-          className="border-2 border-dashed border-primary rounded-xl p-6 text-center cursor-pointer bg-[#0b0f0c] text-white transition-colors duration-300 hover:bg-[#111]"
-        >
-          {isLoading === true ? (
-            <div className="py-5">
-              <LoadingScreen primaryBgActive={true} />
-            </div>
-          ) : (
-            <>
-              {/* Hidden input */}
-              <input
-                hidden
-                type="file"
-                accept="image/*"
-                onChange={(e) => {
-                  if (e.target.files?.[0]) {
-                    handleFile(e.target.files[0]);
-                  }
-                }}
-              />
-
-              {/* Icon */}
-              <div className="w-[60px] h-[60px] rounded-full bg-[#1b5e20] flex items-center justify-center mx-auto mb-4">
-                <Icon icon="material-symbols:cloud-upload" className="text-white text-2xl" />
+    <Card className="w-full max-w-[1000px] bg-background-secondary border-background-third">
+      <CardHeader className="px-5 pt-6 pb-2 sm:p-8 sm:pb-4">
+        <CardTitle className="text-lg sm:text-xl md:text-2xl text-foreground">
+          {title ?? "Title"}
+        </CardTitle>
+        <CardDescription className="text-base font-medium text-muted-foreground">
+          {description ?? "Description"}
+        </CardDescription>
+      </CardHeader>
+      
+      <CardContent className="px-5 pb-6 pt-2 sm:px-8 sm:pb-8">
+        <label>
+          <div
+            onDrop={handleDrop}
+            onDragOver={handleDragOver}
+            className="border-2 border-dashed border-primary/50 hover:border-primary rounded-xl p-8 text-center cursor-pointer bg-black/40 text-foreground transition-all duration-300 hover:bg-black/60"
+          >
+            {isLoading === true ? (
+              <div className="py-8">
+                <LoadingScreen primaryBgActive={true} />
               </div>
+            ) : (
+              <div className="flex flex-col items-center justify-center">
+                {/* Hidden input */}
+                <input
+                  hidden
+                  type="file"
+                  accept="image/*"
+                  onChange={(e) => {
+                    if (e.target.files?.[0]) {
+                      handleFile(e.target.files[0]);
+                    }
+                  }}
+                />
 
-              {/* Text */}
-              <p className="font-medium">
-                Click to upload or drag and drop
-              </p>
-
-              <p className="text-sm text-gray-500 mt-2">
-                SVG, PNG, JPG or GIF (max. 800x400px)
-              </p>
-
-              {/* Preview */}
-              {file && (
-                <div className="mt-6 flex flex-col items-center">
-                  <p className="text-sm">{file.name}</p>
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={URL.createObjectURL(file)}
-                    alt="preview"
-                    className="mt-2.5 max-w-full max-h-[200px]"
-                  />
+                {/* Icon */}
+                <div className="w-16 h-16 rounded-full bg-primary-dark/30 flex items-center justify-center mb-4">
+                  <Icon icon="material-symbols:cloud-upload" className="text-primary text-3xl" />
                 </div>
-              )}
-            </>
-          )}
-        </div>
-      </label>
-    </div>
+
+                {/* Text */}
+                <p className="font-semibold text-lg text-foreground">
+                  Click to upload or drag and drop
+                </p>
+
+                <p className="text-sm text-muted-foreground mt-2">
+                  SVG, PNG, JPG or GIF (max. 800x400px)
+                </p>
+
+                {/* Preview */}
+                {file && (
+                  <div className="mt-8 flex flex-col items-center">
+                    <p className="text-sm font-medium mb-3 text-muted-foreground">{file.name}</p>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={URL.createObjectURL(file)}
+                      alt="preview"
+                      className="max-w-full max-h-[200px] rounded-lg border border-border shadow-sm object-contain"
+                    />
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+        </label>
+      </CardContent>
+    </Card>
   );
 }

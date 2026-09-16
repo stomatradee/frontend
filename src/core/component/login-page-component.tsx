@@ -1,5 +1,6 @@
 "use client";
 
+// NOT USE FOR NOW
 import { useEffect, useMemo } from "react";
 import { imageConfig } from "@/core/config/images-config";
 import { Icon } from "@iconify/react";

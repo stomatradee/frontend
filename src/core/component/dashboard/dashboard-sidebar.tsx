@@ -7,6 +7,7 @@ import { useAccount } from "wagmi";
 import { usePathname, useRouter } from "next/navigation";
 import { routes } from "@/core/config/routes";
 import Image from "next/image";
+import { Button } from "@/core/component/shadcn-ui/button";
 
 export const SIDEBAR_WIDTH = 220;
 
@@ -69,7 +70,7 @@ export default function DashboardSidebar({
 
   return (
     <div
-      className="shrink-0 bg-background border-r border-background-secondary text-white pt-4 fixed top-0 bottom-0 left-0 z-20 hidden md:block"
+      className="shrink-0 bg-background border-r border-border text-foreground pt-4 fixed top-0 bottom-0 left-0 z-20 hidden md:block"
       style={{ width: SIDEBAR_WIDTH }}
     >
       <div className="flex items-center gap-2 px-4 pb-6">
@@ -104,28 +105,28 @@ export default function DashboardSidebar({
         <div className="flex items-center gap-[6px] px-4 pb-6">
           {role === "collector" ? (
             <>
-              <div className="w-9 h-9 flex items-center justify-center rounded-full bg-background-secondary text-[14px]">
+              <div className="w-9 h-9 flex items-center justify-center rounded-full bg-muted text-[14px]">
                 CP
               </div>
               <div className="w-[120px]">
-                <p className="text-white text-[13px] font-semibold leading-[1.3]">
+                <p className="text-foreground text-[13px] font-semibold leading-[1.3]">
                   Collector Pro
                 </p>
-                <p className="text-white text-[11px] w-full block truncate">
+                <p className="text-muted-foreground text-[11px] w-full block truncate">
                   {address}
                 </p>
               </div>
             </>
           ) : (
             <>
-              <div className="w-9 h-9 flex items-center justify-center rounded-full bg-background-secondary text-[14px]">
+              <div className="w-9 h-9 flex items-center justify-center rounded-full bg-muted text-[14px]">
                 IP
               </div>
               <div className="w-[120px]">
-                <p className="text-white text-[13px] font-semibold leading-[1.3]">
+                <p className="text-foreground text-[13px] font-semibold leading-[1.3]">
                   Investor Pro
                 </p>
-                <p className="text-white text-[11px] w-full block truncate">
+                <p className="text-muted-foreground text-[11px] w-full block truncate">
                   {address}
                 </p>
               </div>
@@ -135,7 +136,7 @@ export default function DashboardSidebar({
       </div>
 
       {/* Navigation Items */}
-      <ul className="px-2">
+      <nav className="px-3 flex flex-col gap-1">
         {navItems.map((item) => {
           // Check if current pathname starts with item path
           // Using exact match for generic paths, or startsWith for nested paths
@@ -144,35 +145,22 @@ export default function DashboardSidebar({
             (pathname?.startsWith(item.path + "/") ?? false);
 
           return (
-            <li
+            <Button
               key={item.path}
-              onClick={() => router.push(item.path)}
-              className={`rounded-lg mb-1 px-3 py-2 flex items-center cursor-pointer border-l-4 transition-all duration-200 ease-in-out ${
-                isActive
-                  ? "border-primary bg-primary-transparent text-primary"
-                  : "border-transparent text-white hover:bg-background-secondary"
+              variant={isActive ? "secondary" : "ghost"}
+              className={`w-full justify-start h-10 px-3 ${
+                isActive ? "bg-primary/20 text-primary hover:bg-primary/30" : "text-muted-foreground hover:text-foreground"
               }`}
+              onClick={() => router.push(item.path)}
             >
-              <div
-                className={`min-w-[36px] flex justify-start items-center ${
-                  isActive ? "text-primary" : "text-white"
-                }`}
-              >
-                <Icon icon={item.icon} className="text-[20px]" />
-              </div>
-              <div className="flex-1 min-w-0">
-                <span
-                  className={`text-[13px] block truncate ${
-                    isActive ? "font-semibold" : "font-normal"
-                  }`}
-                >
-                  {item.label}
-                </span>
-              </div>
-            </li>
+              <Icon icon={item.icon} className="mr-3 h-5 w-5" />
+              <span className={isActive ? "font-semibold" : "font-normal"}>
+                {item.label}
+              </span>
+            </Button>
           );
         })}
-      </ul>
+      </nav>
     </div>
   );
 }
