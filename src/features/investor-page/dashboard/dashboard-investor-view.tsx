@@ -18,7 +18,7 @@ export default function DashboardInvestorView({
       <DashboardSidebar role={ROLE.INVESTOR} />
 
       {/* Main Content Area */}
-      <main className="flex-grow bg-background min-h-screen">
+      <main className="flex-grow bg-background min-h-screen md:ml-[220px]">
         {/* Navbar */}
         <DashboardNavbar handleDisconnect={handleDisconnectWallet} />
 

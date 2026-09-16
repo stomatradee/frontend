@@ -55,7 +55,7 @@ export default function DashboardSidebar({
               path: routes.investor.myPortofolio(),
             },
             {
-              label: "Asset List",
+              label: "Project List",
               icon: "material-symbols:format-list-bulleted",
               path: routes.investor.projectList(),
             },
