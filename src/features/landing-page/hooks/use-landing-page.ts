@@ -22,25 +22,27 @@ export function useLandingPage() {
     const handleConnectWallet = useCallback(async (address: string) => {
         console.log(address);
 
-        setIsSplashScreen(true);
+        replaceRoute(routes.investor.dashboard);
 
-        const data: ProfileInvestorRequestModel = {
-            contractAddress: address as `0x${string}`,
-            role: "investor",
-        };
+        // setIsSplashScreen(true);
 
-        const result = await GetInvestorProfileRepository(data);
+        // const data: ProfileInvestorRequestModel = {
+        //     contractAddress: address as `0x${string}`,
+        //     role: "investor",
+        // };
 
-        console.log("result: ", result);
+        // const result = await GetInvestorProfileRepository(data);
 
-        setIsSplashScreen(false)
+        // console.log("result: ", result);
 
-        if (result !== null) {
-            replaceRoute(routes.investor.dashboard);
-        } else {
-            replaceRoute(routes.investor.registerProfile);
-        }
-    }, [replaceRoute]);
+        // setIsSplashScreen(false)
+
+        // if (result !== null) {
+        //     replaceRoute(routes.investor.dashboard);
+        // } else {
+        //     replaceRoute(routes.investor.registerProfile);
+        // }
+    }, []);
 
     const handleCloseRoleDialog = useCallback(() => {
         setOpen(false);
