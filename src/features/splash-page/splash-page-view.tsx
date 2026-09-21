@@ -14,11 +14,18 @@ export default function SplashPageView() {
   }, []);
 
   return (
-    <div className="flex justify-center items-center min-h-screen">
-      <div className="flex flex-col justify-center items-center">
-        <Image src={iconImg} alt="Stomatrade" width={300} height={300} />
-        <div className="h-5" />
-        <div className="py-5 w-full max-w-sm">
+    <div className="flex justify-center items-center min-h-screen px-6 bg-background">
+      <div className="flex flex-col justify-center items-center w-full max-w-md">
+        <Image
+          src={iconImg}
+          alt="Stomatrade"
+          width={300}
+          height={300}
+          className="w-40 h-auto sm:w-56 md:w-[300px] transition-all duration-300"
+          priority
+        />
+        <div className="h-6 sm:h-8" />
+        <div className="w-full max-w-[200px] sm:max-w-xs md:max-w-sm py-4 sm:py-5">
           <LoadingScreen primaryBgActive={true} />
         </div>
       </div>
