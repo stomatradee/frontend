@@ -1,9 +1,14 @@
+"use client";
+
 import { LoadingScreen } from "@/core/component/loading-component";
 import { imageConfig } from "@/core/config/images-config";
 import Image from "next/image";
 import { useMemo } from "react";
+import { useSplashScreen } from "./hooks/use-splash-screen";
 
 export default function SplashPageView() {
+  useSplashScreen();
+
   const iconImg = useMemo(() => {
     return imageConfig.logo.stomatradeLogo;
   }, []);
@@ -20,4 +25,3 @@ export default function SplashPageView() {
     </div>
   );
 }
-

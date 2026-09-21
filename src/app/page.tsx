@@ -1,4 +1,4 @@
-import LandingPageView from "@/features/landing-page/landing-page-view";
+import SplashPageView from "@/features/splash-page/splash-page-view";
 
 export default function Home() {
   // return (
@@ -63,5 +63,5 @@ export default function Home() {
   //   </div>
   // );
 
-  return <LandingPageView/> 
+  return <SplashPageView />;
 }

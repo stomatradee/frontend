@@ -23,7 +23,8 @@ const INVESTOR = {
 }
 
 export const routes = {
-    landingPage: () => "/",
+    splashPage: () => "/",
+    landingPage: () => "/landing",
     collector: {
         dashboard: () => COLLECTOR.DASHBOARD,
         login: () => COLLECTOR.LOGIN,

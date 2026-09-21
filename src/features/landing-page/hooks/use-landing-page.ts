@@ -9,7 +9,6 @@ import { GetInvestorProfileRepository } from "@/repository/investor-profile/prof
 export function useLandingPage() {
     const [open, setOpen] = useState(false);
     const { replaceRoute } = useNavigationUtils();
-    const [isSplashScreen, setIsSplashScreen] = useState<boolean>(true);
 
     // --- Handler functions ---
     const handleNavItemClick = useCallback((href: string) => {
@@ -55,15 +54,7 @@ export function useLandingPage() {
         }
     }, []);
 
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            setIsSplashScreen(false);
-        }, 2000);
-        return () => clearTimeout(timer);
-    }, []);
-
     return {
-        isSplashScreen,
         open,
         handleNavItemClick,
         handleConnectWallet,

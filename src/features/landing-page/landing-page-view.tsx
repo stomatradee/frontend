@@ -9,7 +9,7 @@ import Footer from "./component/footer";
 
 import { landingPageData } from "./constants/landing-page-data";
 import { useLandingPage } from "./hooks/use-landing-page";
-import SplashPageView from "./splash-page-view";
+import SplashPageView from "../splash-page/splash-page-view";
 
 export default function LandingPageView() {
   const {
@@ -21,16 +21,8 @@ export default function LandingPageView() {
     logoSrc,
   } = landingPageData;
 
-  const {
-    isSplashScreen,
-    handleNavItemClick,
-    handleConnectWallet,
-    handleLearnMore,
-  } = useLandingPage();
-
-  if (isSplashScreen) {
-    return <SplashPageView />;
-  }
+  const { handleNavItemClick, handleConnectWallet, handleLearnMore } =
+    useLandingPage();
 
   return (
     <div className="relative min-h-screen bg-background">
@@ -62,7 +54,10 @@ export default function LandingPageView() {
         <div className="relative z-10 -mt-32 px-6 lg:px-32 pb-32">
           <div className="flex flex-wrap -mx-4 max-w-7xl mx-auto">
             {statCards.map((card) => (
-              <div key={card.title} className="w-full sm:w-1/2 lg:w-1/3 px-2 mb-4">
+              <div
+                key={card.title}
+                className="w-full sm:w-1/2 lg:w-1/3 px-2 mb-4"
+              >
                 <StatCard
                   title={card.title}
                   value={card.value}
@@ -70,7 +65,7 @@ export default function LandingPageView() {
                   variant={card.variant}
                   ctaLabel={card.ctaLabel}
                   ctaImage={card.ctaImage}
-                  handleSustainabilityClick={() => { }}
+                  handleSustainabilityClick={() => {}}
                 />
               </div>
             ))}
@@ -79,10 +74,7 @@ export default function LandingPageView() {
       </section>
 
       {/* Solving Problem Section */}
-      <section
-        id="solving-problem"
-        className="px-6 lg:px-32 pb-10"
-      >
+      <section id="solving-problem" className="px-6 lg:px-32 pb-10">
         <div className="max-w-7xl mx-auto">
           {/* Section Header */}
           <SectionHeader
@@ -125,4 +117,3 @@ export default function LandingPageView() {
     </div>
   );
 }
-
